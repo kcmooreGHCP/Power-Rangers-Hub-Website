@@ -369,53 +369,57 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
     <div class="section-head">
       <span class="label label-teal">Live role views</span>
       <h2>What each leader sees when they open their hub</h2>
-      <p>Click any role to see the working prototype. Store 1392, District 201, Region 200 — real store names, real data structure.</p>
+      <p>Click any role to see the working prototype. Store 1392 · Ontario Mills, District 339 West, Region 400 West — real store names, real data structure.</p>
     </div>
     <div class="role-grid" style="margin-bottom:28px">
       <div class="role-card role-sm" onclick="showDemo('sm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
         <span class="role-tag">Store Manager</span>
         <h3 style="margin-top:10px">Your store. Your map. Your plan.</h3>
-        <p>Store-specific floorset, open-to-close checklist, promotions, DM/RM announcements, and MSI assortment access.</p>
+        <p>Store-specific visual direction, close-to-open checklist, promotions, DM/RM announcements, and MSI assortment access.</p>
         <ul class="role-features">
-          <li>August floorset + PINK back-to-campus</li>
-          <li>Open-to-close daily checklist (real tasks)</li>
+          <li>August Floorset + Back-to-Campus</li>
+          <li>Close-to-open daily checklist (real tasks)</li>
           <li>Promotion calendar with timing + proof</li>
-          <li>Business Now communications from HO</li>
+          <li>Business Now communications from Home Office</li>
           <li>Ask a question → routed automatically</li>
         </ul>
+        <div style="margin-top:14px"><a href="tools/store-ops/store.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Store 1392 →</a></div>
       </div>
       <div class="role-card role-dm" onclick="showDemo('dm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
         <span class="role-tag">District Manager</span>
         <h3 style="margin-top:10px">Know who needs you — now.</h3>
-        <p>Real-time store readiness, open support flags, workload forecast, and exception escalation without waiting for weekly calls.</p>
+        <p>Live store readiness across all your stores, open support flags, DM Inspection items, and escalation to region without waiting for weekly calls.</p>
         <ul class="role-features">
-          <li>District 201 — 12 stores, live readiness %</li>
+          <li>District 339 West — 11 stores, live readiness</li>
           <li>Flag stores at risk before launch day</li>
           <li>See open qualifier questions by store</li>
           <li>Route escalations upstream with one click</li>
         </ul>
+        <div style="margin-top:14px"><a href="tools/store-ops/district.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open District 339 →</a></div>
       </div>
       <div class="role-card role-rm" onclick="showDemo('rm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
         <span class="role-tag">Regional Manager</span>
-        <h3 style="margin-top:10px">See patterns. Route problems.</h3>
-        <p>Region 200 — 175 stores, 19 districts. Repeating issues detected with source support. No more weekly report delays.</p>
+        <h3 style="margin-top:10px">See the whole picture. Act with precision.</h3>
+        <p>Region 400 West — all districts, all stores. Field questions categorized by source and owner. No more delayed weekly reports.</p>
         <ul class="role-features">
-          <li>Region 200 West — fleet health dashboard</li>
-          <li>Repeating patterns (3 found this cycle)</li>
-          <li>8 open field questions — categorized</li>
-          <li>Route upstream with owner accountability</li>
+          <li>Region 400 West — fleet readiness dashboard</li>
+          <li>Field questions surfaced with owner accountability</li>
+          <li>Stores needing DM support — flagged in real time</li>
+          <li>Route issues upstream with one click</li>
         </ul>
+        <div style="margin-top:14px"><a href="tools/store-ops/region.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Region 400 →</a></div>
       </div>
       <div class="role-card role-hq" onclick="showDemo('ho'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
         <span class="role-tag">Home Office</span>
         <h3 style="margin-top:10px">Build. Govern. Publish.</h3>
         <p>Publishing queue, cross-functional partner intake, approval workflow, and field intelligence — all in one governed hub.</p>
         <ul class="role-features">
-          <li>Aug 19–22 cycle: 6 releases in queue</li>
+          <li>August cycle: 6 releases in the publishing queue</li>
           <li>Partner deliverable tracking (6 teams)</li>
           <li>3 pending approvals: OPS, Merch, Finance</li>
           <li>Business Now communications register</li>
         </ul>
+        <div style="margin-top:14px"><a href="tools/store-ops/SET_LOOP_MASTER.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Home Office →</a></div>
       </div>
     </div>
 
@@ -428,8 +432,8 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       </div>
       <div class="demo-tabs">
         <div class="demo-tab active" onclick="showDemo('sm')">🏪 Store — 1392 Ontario Mills</div>
-        <div class="demo-tab" onclick="showDemo('dm')">📋 District — 201 West</div>
-        <div class="demo-tab" onclick="showDemo('rm')">🗺️ Region — 200 West</div>
+        <div class="demo-tab" onclick="showDemo('dm')">📋 District — 339 West</div>
+        <div class="demo-tab" onclick="showDemo('rm')">🗺️ Region — 400 West</div>
         <div class="demo-tab" onclick="showDemo('ho')">🏢 Home Office</div>
       </div>
 
@@ -438,8 +442,8 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
         <div class="store-header">
           <div>
             <div class="store-name">Store 1392 · Ontario Mills</div>
-            <div class="store-meta">West Region · District 201 · VSS Full · VS + PINK + PINK Beauty</div>
-            <div class="store-meta" style="margin-top:4px;font-size:11px;opacity:.7">August 19, 2026 floorset cycle · 18 hrs estimated · Checklist 3 of 7 complete</div>
+            <div class="store-meta">West Region · District 339 · VS Full + PINK · Tier 6b</div>
+            <div class="store-meta" style="margin-top:4px;font-size:11px;opacity:.7">August launch · 18 hrs estimated · Checklist 3 of 7 complete</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
             <div class="store-badge">🟢 On Track<br><small style="font-size:10px;opacity:.8">Launch Aug 22</small></div>
@@ -452,30 +456,30 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
           <div class="release-item">
             <span class="ri-status status-ready">✓ Ready</span>
             <div class="ri-type">Visual Direction</div>
-            <div class="ri-title">VS August Floorset · VSL 2–4</div>
+            <div class="ri-title">VS August Floorset · Visual Direction</div>
             <div class="ri-detail">18 hrs · Fixture map, zone placement, and approved surface guide for your store layout. 14 fixtures affected.</div>
-            <a class="ri-action" href="#roles">Open store map →</a>
+            <a class="ri-action" href="tools/store-ops/store.html" target="_blank">Open visual direction →</a>
           </div>
           <div class="release-item">
             <span class="ri-status status-ready">✓ Ready</span>
             <div class="ri-type">PINK Direction</div>
-            <div class="ri-title">Back-to-Campus · PINK VSL 1</div>
-            <div class="ri-detail">14 hrs · Back-to-campus floorset with exact cabinet placement for your store tier. 6 fixtures.</div>
-            <a class="ri-action" href="#roles">Open PINK guide →</a>
+            <div class="ri-title">Back-to-Campus · PINK</div>
+            <div class="ri-detail">14 hrs · Back-to-campus visual direction with exact cabinet placement for your store. 6 fixtures.</div>
+            <a class="ri-action" href="tools/store-ops/store.html" target="_blank">Open PINK guide →</a>
           </div>
           <div class="release-item">
             <span class="ri-status status-pending">⏳ Pending</span>
             <div class="ri-type">Promotion</div>
             <div class="ri-title">VSB Fragrance Feature Event</div>
-            <div class="ri-detail">6 hrs · Install testers, signage, and product story cards. Owner: Marketing / Beauty. Due Aug 17.</div>
-            <a class="ri-action" href="#roles">Track question →</a>
+            <div class="ri-detail">6 hrs · Install testers, signage, and product story cards. Owner: Marketing / Beauty. Action required.</div>
+            <a class="ri-action" href="tools/store-ops/notifications.html" target="_blank">View in Business Now →</a>
           </div>
           <div class="release-item">
             <span class="ri-status status-new">New</span>
             <div class="ri-type">Required Read</div>
-            <div class="ri-title">Weekend Readiness · Aug 22–24</div>
+            <div class="ri-title">Weekend Readiness Update</div>
             <div class="ri-detail">Close-to-open checklist + floor readiness priorities for the August long weekend. Personalized for your store.</div>
-            <a class="ri-action" href="#roles">View communication →</a>
+            <a class="ri-action" href="tools/store-ops/communications.html" target="_blank">View communication →</a>
           </div>
         </div>
 
@@ -521,70 +525,71 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <div class="demo-content" id="demo-dm">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px">
           <div>
-            <div style="font-size:19px;font-weight:900">District 201 · West Region</div>
-            <div style="color:var(--muted);font-size:12px;margin-top:3px">August Floorset Cycle · 12 stores · 2 need attention</div>
+            <div style="font-size:19px;font-weight:900">District 339 · West Region</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:3px">August Floorset · 11 stores · 2 need attention</div>
           </div>
           <div style="display:flex;gap:10px">
-            <div style="text-align:center;padding:10px 16px;background:#f0fdf4;border-radius:12px"><div style="font-size:20px;font-weight:900;color:var(--green)">10</div><div style="font-size:11px;color:var(--muted)">On track</div></div>
+            <div style="text-align:center;padding:10px 16px;background:#f0fdf4;border-radius:12px"><div style="font-size:20px;font-weight:900;color:var(--green)">9</div><div style="font-size:11px;color:var(--muted)">On track</div></div>
             <div style="text-align:center;padding:10px 16px;background:#fef3c7;border-radius:12px"><div style="font-size:20px;font-weight:900;color:#d97706">2</div><div style="font-size:11px;color:var(--muted)">Need support</div></div>
             <div style="text-align:center;padding:10px 16px;background:#fef2f2;border-radius:12px"><div style="font-size:20px;font-weight:900;color:var(--red)">0</div><div style="font-size:11px;color:var(--muted)">Blocked</div></div>
           </div>
         </div>
         <div class="dm-stores">
           <div class="dm-store-row">
-            <div><div class="dm-store-name">1392 · Ontario Mills</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 1a</div></div>
+            <div><div class="dm-store-name">1392 · Ontario Mills</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 6b</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:85%"></div></div>
             <div class="dm-pct" style="color:var(--green)">85%</div><div>🟢</div>
           </div>
           <div class="dm-store-row">
-            <div><div class="dm-store-name">1244 · Brea Mall</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 2a</div></div>
+            <div><div class="dm-store-name">0409 · Santa Anita Fashion Park</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 6b</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:78%"></div></div>
             <div class="dm-pct" style="color:var(--green)">78%</div><div>🟢</div>
           </div>
           <div class="dm-store-row" style="background:#fffbeb;border-color:#fcd34d">
-            <div><div class="dm-store-name">1577 · Westfield Topanga</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 3b · Qualifier question open</div></div>
+            <div><div class="dm-store-name">0545 · The Plaza At West Covina</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 6b · Qualifier question open</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:42%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div>
             <div class="dm-pct" style="color:#d97706">42%</div><div>⚠️</div>
           </div>
           <div class="dm-store-row">
-            <div><div class="dm-store-name">1683 · Del Amo Fashion Center</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 2b</div></div>
+            <div><div class="dm-store-name">1327 · Victoria Gardens</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 6b</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:92%"></div></div>
             <div class="dm-pct" style="color:var(--green)">92%</div><div>🟢</div>
           </div>
           <div class="dm-store-row" style="background:#fffbeb;border-color:#fcd34d">
-            <div><div class="dm-store-name">1802 · South Coast Plaza</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 1b · Pending asset confirm</div></div>
+            <div><div class="dm-store-name">0503 · Montclair</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 5b · Pending asset confirm</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:35%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div>
             <div class="dm-pct" style="color:#d97706">35%</div><div>⚠️</div>
           </div>
           <div class="dm-store-row">
-            <div><div class="dm-store-name">1158 · Glendale Galleria</div><div style="font-size:11px;color:var(--muted)">VSS Full · Tier 2a</div></div>
+            <div><div class="dm-store-name">0578 · Montebello Town</div><div style="font-size:11px;color:var(--muted)">VS Full · Tier 6b</div></div>
             <div class="dm-bar"><div class="dm-bar-fill" style="width:88%"></div></div>
             <div class="dm-pct" style="color:var(--green)">88%</div><div>🟢</div>
           </div>
         </div>
         <div style="margin-top:14px;padding:12px 16px;background:#ede9fe;border-radius:12px;font-size:13px;font-weight:700;color:var(--brand)">
-          💡 2 stores need proactive support before Aug 22. Click any row to see the blocker and owner.
+          💡 2 stores need proactive support before launch day. <a href="tools/store-ops/district.html" target="_blank" style="color:var(--brand);text-decoration:underline">Open full district view →</a>
         </div>
       </div>
 
       <!-- RM VIEW -->
       <div class="demo-content" id="demo-rm">
         <div style="margin-bottom:18px">
-          <div style="font-size:19px;font-weight:900">Region 200 · West</div>
-          <div style="color:var(--muted);font-size:12px;margin-top:3px">175 stores · 19 districts · August floorset cycle in progress</div>
+          <div style="font-size:19px;font-weight:900">Region 400 · West</div>
+          <div style="color:var(--muted);font-size:12px;margin-top:3px">Multiple districts · August launch in progress</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
           <div style="background:#f0fdf4;border-radius:12px;padding:16px;text-align:center"><div style="font-size:26px;font-weight:900;color:var(--green)">148</div><div style="font-size:11px;color:var(--muted)">Stores on track</div></div>
           <div style="background:#fef3c7;border-radius:12px;padding:16px;text-align:center"><div style="font-size:26px;font-weight:900;color:#d97706">19</div><div style="font-size:11px;color:var(--muted)">Need DM support</div></div>
           <div style="background:#fef2f2;border-radius:12px;padding:16px;text-align:center"><div style="font-size:26px;font-weight:900;color:var(--red)">8</div><div style="font-size:11px;color:var(--muted)">Open questions</div></div>
-          <div style="background:#ede9fe;border-radius:12px;padding:16px;text-align:center"><div style="font-size:26px;font-weight:900;color:var(--brand)">3</div><div style="font-size:11px;color:var(--muted)">Repeating patterns</div></div>
+          <div style="background:#ede9fe;border-radius:12px;padding:16px;text-align:center"><div style="font-size:26px;font-weight:900;color:var(--brand)">3</div><div style="font-size:11px;color:var(--muted)">Issues to route</div></div>
         </div>
         <div style="border:2px solid #fcd34d;background:#fffbeb;border-radius:14px;padding:18px">
-          <div style="font-weight:900;font-size:14px;margin-bottom:12px">⚡ Repeating patterns this cycle (source-supported)</div>
-          <div class="rm-pattern"><span style="font-size:18px">📦</span><div><div style="font-weight:800;font-size:13px">VSB Fragrance qualifier confusion · 11 stores</div><div style="font-size:12px;color:var(--muted)">Stores asking the same qualifier question across 4 districts. Source: Merchandising. Route upstream before next release.</div></div><a href="#roles" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Route →</a></div>
-          <div class="rm-pattern"><span style="font-size:18px">🗂️</span><div><div style="font-weight:800;font-size:13px">PINK cabinet asset missing for Tier 5–6 · 8 stores</div><div style="font-size:12px;color:var(--muted)">Back-to-campus guide doesn't include Tier 5/6 cabinet instructions. Asset owner: PINK Visual. Expected Aug 20.</div></div><a href="#roles" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Track →</a></div>
-          <div class="rm-pattern"><span style="font-size:18px">⏰</span><div><div style="font-weight:800;font-size:13px">Selldown translation timing · 5 stores asking same question</div><div style="font-size:12px;color:var(--muted)">Stores need clearer timing rules for selldown-to-floorset transition. 3rd cycle this has come up. Needs permanent SOP fix.</div></div><a href="#roles" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Flag SOP →</a></div>
+          <div style="font-weight:900;font-size:14px;margin-bottom:12px">⚡ Field questions requiring upstream action</div>
+          <div class="rm-pattern"><span style="font-size:18px">📦</span><div><div style="font-weight:800;font-size:13px">VSB Fragrance Feature Event — qualifier question · 11 stores</div><div style="font-size:12px;color:var(--muted)">Stores asking the same qualifier question across 4 districts. Source: Merchandising. Route upstream before next launch.</div></div><a href="tools/store-ops/region.html" target="_blank" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Route →</a></div>
+          <div class="rm-pattern"><span style="font-size:18px">🗂️</span><div><div style="font-weight:800;font-size:13px">Back-to-Campus — PINK cabinet direction missing for smaller stores · 8 stores</div><div style="font-size:12px;color:var(--muted)">Back-to-Campus guide doesn't include cabinet placement for smaller store footprints. Asset owner: PINK Visual. Expected Aug 20.</div></div><a href="tools/store-ops/region.html" target="_blank" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Track →</a></div>
+          <div class="rm-pattern"><span style="font-size:18px">⏰</span><div><div style="font-weight:800;font-size:13px">Selldown transition timing — stores asking same question · 5 stores</div><div style="font-size:12px;color:var(--muted)">Stores need clearer timing direction for the selldown-to-floorset transition. Third time this has come up. Needs a permanent fix in the SET Guide.</div></div><a href="tools/store-ops/region.html" target="_blank" style="margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand);background:#ede9fe;padding:5px 9px;border-radius:6px;text-decoration:none">Flag for guide →</a></div>
         </div>
+        <div style="margin-top:12px;text-align:right"><a href="tools/store-ops/region.html" target="_blank" style="font-size:12px;font-weight:700;color:var(--brand);text-decoration:none;background:#ede9fe;padding:6px 14px;border-radius:8px">Open full Region 400 view →</a></div>
       </div>
 
       <!-- HO VIEW -->
@@ -707,10 +712,10 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
         <p>Cross-functional teams submit inputs: Visual, Merch, Marketing, Supply Chain, Field Enablement</p>
         <span class="wstep-link">Open tool →</span>
       </a>
-      <a class="wstep" href="tools/store-ops/calendar.html" target="_blank" title="Open Asset Prep / Calendar">
+      <a class="wstep" href="tools/store-ops/asset-prep.html" target="_blank" title="Open Asset Prep">
         <div class="wstep-num">2</div>
         <h4>Asset Prep</h4>
-        <p>Normalize and align approved assets to brand standards. Calendar-driven scheduling.</p>
+        <p>Normalize and align partner-submitted assets to brand standards before the SET Guide build begins.</p>
         <span class="wstep-link">Open tool →</span>
       </a>
       <a class="wstep active" href="tools/store-ops/daily-operations.html" target="_blank" title="Open Cycle Intake">
