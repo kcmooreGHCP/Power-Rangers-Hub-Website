@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SET + SET Loop | VP Presentation — Store Operations Intelligence</title>
+<style>
+:root{
+  --ink:#0d0f1a;--muted:#5a6178;--brand:#5b21b6;--brand2:#7c3aed;
+  --teal:#0d9488;--pink:#db2777;--gold:#d97706;--green:#059669;
+  --red:#dc2626;--line:#e5e7eb;--paper:#f8f7fc;--card:#fff;
+  --shadow:0 4px 24px rgba(91,33,182,.10)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:15px/1.6 "Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper)}
+
+/* NAV */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:2px solid var(--brand);box-shadow:0 2px 16px rgba(91,33,182,.08)}
+.nav{height:64px;display:flex;align-items:center;gap:16px;max-width:1280px;margin:auto;padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px;letter-spacing:-.5px;text-decoration:none;color:var(--ink)}
+.logo-badge{background:linear-gradient(135deg,var(--brand),var(--pink));color:#fff;border-radius:10px;padding:6px 11px;font-size:13px;font-weight:900;letter-spacing:.5px}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:600;font-size:13px;padding:7px 13px;border-radius:8px;transition:.15s}
+.nav-links a:hover,.nav-links a.active{background:#ede9fe;color:var(--brand)}
+.nav-cta{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff!important;border-radius:9px;padding:8px 16px!important;font-weight:700!important}
+.nav-cta:hover{opacity:.88;background:linear-gradient(135deg,var(--brand),var(--brand2))!important}
+
+/* LAYOUT */
+.wrap{max-width:1280px;margin:auto;padding:0 24px}
+.section{padding:72px 0}
+.section-sm{padding:48px 0}
+.section-head{margin-bottom:40px}
+.section-head h2{font-size:36px;letter-spacing:-1px;font-weight:900}
+.section-head p{color:var(--muted);font-size:17px;margin-top:8px;max-width:680px}
+.label{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:14px}
+.label-purple{background:#ede9fe;color:#5b21b6}
+.label-teal{background:#ccfbf1;color:#065f46}
+.label-pink{background:#fce7f3;color:#9d174d}
+.label-gold{background:#fef3c7;color:#92400e}
+
+/* HERO */
+.hero{padding:80px 0 60px;background:linear-gradient(135deg,#1e0a3c 0%,#2e1065 40%,#1a2744 100%);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(139,92,246,.3) 0,transparent 60%),radial-gradient(circle at 10% 80%,rgba(13,148,136,.2) 0,transparent 50%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:20px}
+.hero h1{font-size:clamp(38px,5vw,60px);line-height:.96;letter-spacing:-2.5px;font-weight:900;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(90deg,#a78bfa,#f472b6,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{font-size:18px;color:rgba(255,255,255,.8);max-width:520px;margin-bottom:32px}
+.hero-stats{display:flex;gap:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15)}
+.hero-stats div b{display:block;font-size:28px;font-weight:900}
+.hero-stats div span{font-size:13px;color:rgba(255,255,255,.65)}
+
+/* PROBLEM CARD */
+.problem-band{background:#1e1030;color:#fff;border-radius:24px;padding:40px;position:relative;overflow:hidden}
+.problem-band::after{content:"TODAY";position:absolute;right:24px;top:20px;font-size:11px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.2)}
+.vs-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px}
+.vs-card h3{font-size:15px;font-weight:800;margin-bottom:16px;color:rgba(255,255,255,.9)}
+.vs-card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.vs-card ul li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)}
+.vs-card ul li::before{content:"";flex-shrink:0;width:8px;height:8px;border-radius:50%;margin-top:5px}
+.pain li::before{background:#ef4444}
+.gain li::before{background:#34d399}
+.timeline-flow{display:flex;align-items:center;gap:0;margin-top:20px}
+.tflow-step{background:rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;font-size:12px;font-weight:700;text-align:center;flex:1}
+.tflow-step small{display:block;font-weight:500;color:rgba(255,255,255,.6);font-size:11px;margin-top:2px}
+.tflow-step.highlight{background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(13,148,136,.4));border:1px solid rgba(139,92,246,.5)}
+.tflow-arrow{color:rgba(255,255,255,.3);font-size:18px;padding:0 6px;flex-shrink:0}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cards-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow);transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(91,33,182,.14)}
+.card-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;font-size:24px;margin-bottom:18px}
+.card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14px;line-height:1.5}
+.card-tag{display:inline-block;margin-top:14px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.5px}
+
+/* ROI TABLE */
+.roi-table{width:100%;border-collapse:collapse;font-size:14px}
+.roi-table th{text-align:left;padding:12px 16px;background:#ede9fe;color:var(--brand);font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.roi-table td{padding:13px 16px;border-bottom:1px solid var(--line)}
+.roi-table tr:last-child td{border-bottom:none}
+.roi-table tr:hover td{background:#faf8ff}
+.roi-table .highlight-row td{background:#f0fdf4;font-weight:700;color:var(--green)}
+.num{font-weight:800;font-family:monospace;font-size:15px}
+
+/* ROLE HUBS */
+.role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.role-card{border-radius:20px;padding:28px;color:#fff;text-decoration:none;display:block;transition:.2s;position:relative;overflow:hidden}
+.role-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.role-card::after{content:"→";position:absolute;bottom:20px;right:20px;font-size:22px;opacity:.5}
+.role-hq{background:linear-gradient(135deg,#1e0a3c,#5b21b6)}
+.role-rm{background:linear-gradient(135deg,#065f46,#0d9488)}
+.role-dm{background:linear-gradient(135deg,#0c4a6e,#0284c7)}
+.role-sm{background:linear-gradient(135deg,#831843,#db2777)}
+.role-card h3{font-size:20px;font-weight:900;margin-bottom:8px}
+.role-card p{font-size:13px;opacity:.85;line-height:1.4;margin-bottom:20px}
+.role-card .role-tag{background:rgba(255,255,255,.2);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;display:inline-block}
+
+/* WORKFLOW */
+.workflow-steps{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;position:relative}
+.workflow-steps::before{content:"";position:absolute;top:40px;left:40px;right:40px;height:2px;background:linear-gradient(90deg,var(--brand),var(--teal));z-index:0}
+.wstep{position:relative;z-index:1;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;transition:.2s;cursor:default}
+.wstep:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+.wstep.active{border-color:var(--brand);background:#faf8ff}
+.wstep-num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:15px;margin:0 auto 10px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+.wstep h4{font-size:12px;font-weight:800;margin-bottom:4px}
+.wstep p{font-size:11px;color:var(--muted);line-height:1.3}
+
+/* DEMO SECTION */
+.demo-frame{background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(91,33,182,.12)}
+.demo-bar{background:#1e0a3c;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.demo-bar span{width:12px;height:12px;border-radius:50%;display:inline-block}
+.demo-bar .dot-r{background:#ef4444}
+.demo-bar .dot-y{background:#f59e0b}
+.demo-bar .dot-g{background:#10b981}
+.demo-url{flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,.7);font-family:monospace;margin:0 12px}
+.demo-content{padding:32px;display:none}
+.demo-content.active{display:block}
+.demo-tabs{display:flex;gap:8px;padding:16px 20px 0;background:#faf8ff;border-bottom:1px solid var(--line)}
+.demo-tab{padding:9px 16px;border-radius:10px 10px 0 0;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);transition:.15s}
+.demo-tab.active{background:var(--card);color:var(--brand);border-bottom:2px solid var(--card);margin-bottom:-1px}
+.demo-tab:hover{color:var(--brand)}
+
+/* STORE DEMO */
+.store-header{background:linear-gradient(135deg,#831843,#db2777);color:#fff;border-radius:16px;padding:24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.store-name{font-size:22px;font-weight:900}
+.store-meta{font-size:13px;opacity:.85;margin-top:4px}
+.store-badge{background:rgba(255,255,255,.2);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;text-align:center}
+.release-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.release-item{border:1.5px solid var(--line);border-radius:14px;padding:18px;position:relative}
+.release-item .ri-status{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px}
+.status-ready{background:#d1fae5;color:#065f46}
+.status-pending{background:#fef3c7;color:#92400e}
+.status-new{background:#ede9fe;color:#5b21b6}
+.ri-type{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
+.ri-title{font-size:15px;font-weight:800;margin-bottom:4px}
+.ri-detail{font-size:13px;color:var(--muted)}
+.ri-action{margin-top:12px;display:inline-block;font-size:12px;font-weight:700;color:var(--brand);text-decoration:none;padding:5px 10px;background:#ede9fe;border-radius:7px}
+
+/* DM DEMO */
+.dm-stores{display:flex;flex-direction:column;gap:10px}
+.dm-store-row{display:flex;align-items:center;gap:16px;padding:14px 18px;background:var(--card);border:1.5px solid var(--line);border-radius:12px}
+.dm-store-name{font-weight:800;font-size:14px;flex:1}
+.dm-store-num{font-size:12px;color:var(--muted)}
+.dm-bar{flex:2;height:8px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.dm-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--teal))}
+.dm-pct{font-size:13px;font-weight:800;width:40px;text-align:right}
+.dm-flag{font-size:18px}
+
+/* COST */
+.cost-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cost-box{border-radius:20px;padding:28px}
+.cost-before{background:#fef2f2;border:2px solid #fecaca}
+.cost-after{background:#f0fdf4;border:2px solid #bbf7d0}
+.cost-box h3{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.cost-metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.cost-metric:last-child{border-bottom:none}
+.cost-metric .label-txt{font-size:13px;color:var(--muted)}
+.cost-metric .val{font-size:16px;font-weight:900}
+.cost-before .val{color:var(--red)}
+.cost-after .val{color:var(--green)}
+.savings-banner{background:linear-gradient(135deg,#1e0a3c,#2e1065);color:#fff;border-radius:20px;padding:36px;text-align:center;margin-top:24px}
+.savings-banner h3{font-size:44px;font-weight:900;letter-spacing:-2px;margin-bottom:6px}
+.savings-banner p{color:rgba(255,255,255,.75);font-size:16px}
+
+/* SECURITY */
+.security-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sec-card{border-radius:16px;padding:22px;border:1.5px solid var(--line);background:var(--card)}
+.sec-card h4{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-card p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* PILOT */
+.pilot-row{display:flex;gap:20px;align-items:stretch}
+.pilot-timeline{flex:1}
+.pilot-step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.pilot-step:last-child{border-bottom:none}
+.pilot-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;display:grid;place-items:center;font-weight:900;font-size:14px;flex-shrink:0}
+.pilot-text h4{font-size:14px;font-weight:800;margin-bottom:3px}
+.pilot-text p{font-size:13px;color:var(--muted)}
+.pilot-ask{flex:0 0 300px;background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#fff;border-radius:20px;padding:28px}
+.pilot-ask h3{font-size:18px;font-weight:900;margin-bottom:16px}
+.pilot-ask ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.pilot-ask ul li{font-size:14px;display:flex;gap:10px;align-items:flex-start;opacity:.9}
+.pilot-ask ul li::before{content:"✓";font-weight:900;color:#34d399;flex-shrink:0}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,var(--brand),#2e1065,#0d9488);color:#fff;border-radius:28px;padding:56px;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.08) 0,transparent 60%)}
+.cta-band h2{font-size:44px;font-weight:900;letter-spacing:-2px;position:relative}
+.cta-band p{color:rgba(255,255,255,.8);font-size:18px;margin:12px 0 36px;position:relative}
+.btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn{display:inline-block;padding:14px 28px;border-radius:12px;font-weight:800;font-size:15px;text-decoration:none;transition:.15s;border:none;cursor:pointer}
+.btn-white{background:#fff;color:var(--brand)}
+.btn-white:hover{background:#ede9fe}
+.btn-outline{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-outline:hover{background:rgba(255,255,255,.2)}
+
+/* FOOTER */
+footer{padding:32px 0;border-top:1px solid var(--line);margin-top:64px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}
+.footer-logo{font-weight:900;color:var(--ink)}
+
+/* UTIL */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mt-24{margin-top:24px}
+.highlight-number{font-size:48px;font-weight:900;letter-spacing:-2px;color:var(--brand)}
+.divider{border:none;border-top:1px solid var(--line);margin:40px 0}
+
+@media(max-width:900px){
+  .hero-grid,.grid-2,.cards,.cards-4,.role-grid,.cost-compare,.security-grid{grid-template-columns:1fr}
+  .workflow-steps{grid-template-columns:repeat(4,1fr)}
+  .workflow-steps::before{display:none}
+  .pilot-row{flex-direction:column}
+  .hero h1{font-size:38px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topbar">
+  <div class="nav">
+    <a class="logo" href="#home">
+      <span class="logo-badge">SET</span>
+      <span>SET + SET Loop</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#solution">The Solution</a>
+      <a href="#demo">Live Demo</a>
+      <a href="#roi">Business Case</a>
+      <a href="#security">Security</a>
+      <a href="#pilot">Pilot Plan</a>
+      <a href="#ask" class="nav-cta">The Ask →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">⚡ VP of Store Operations Briefing · August 21, 2026</div>
+        <h1>The field deserves <span>better information.</span><br>So does the business.</h1>
+        <p class="hero-lead">SET + SET Loop is a governed, role-based intelligence platform that gives every store, district, and regional leader exactly the information they need — when they need it — without 3rd-party bottlenecks or communication breakdowns.</p>
+        <div class="btn-group" style="justify-content:flex-start;margin-top:28px">
+          <a href="#demo" class="btn btn-white">See it in action</a>
+          <a href="#roi" class="btn btn-outline">See the business case</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>798</b><span>VS&amp;Co stores</span></div>
+          <div><b>4 brands</b><span>VS · VSB · PINK · PINK Beauty</span></div>
+          <div><b>1 platform</b><span>Store → HO, governed</span></div>
+          <div><b>0 new licenses</b><span>Built on M365 you own</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="problem-band">
+          <h3 style="font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px">Current release flow</h3>
+          <div class="timeline-flow">
+            <div class="tflow-step"><b>HO builds</b><small>1–2 wks</small></div>
+            <div class="tflow-arrow">→</div>
+            <div class="tflow-step"><b>3rd party apps</b><small>Translates</small></div>
+            <div class="tflow-arrow">→</div>
+            <div class="tflow-step"><b>Field receives</b><small>Generic</small></div>
+            <div class="tflow-arrow">→</div>
+            <div class="tflow-step"><b>Questions</b><small>Email/call</small></div>
+            <div class="tflow-arrow">→</div>
+            <div class="tflow-step highlight"><b>Delay</b><small>Rework</small></div>
+          </div>
+          <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="vs-card">
+              <h3>❌ Current state</h3>
+              <ul class="pain">
+                <li>Information leaves HO and loses context</li>
+                <li>3rd-party apps create cost and security risk</li>
+                <li>Field gets generic docs — not store-specific</li>
+                <li>Questions go to email, get lost or delayed</li>
+                <li>RM feedback arrives weekly — too slow to act</li>
+                <li>Inventory, tiering, qualifiers disconnected</li>
+              </ul>
+            </div>
+            <div class="vs-card">
+              <h3>✅ SET + SET Loop</h3>
+              <ul class="gain">
+                <li>Store-specific release — exact fixture, zone, date</li>
+                <li>Built on SharePoint + Power Automate you own</li>
+                <li>Every role sees exactly what they need</li>
+                <li>Questions route to owners with audit trail</li>
+                <li>Real-time pattern tracking across field</li>
+                <li>Inventory, tiering, qualifiers linked and governed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-pink">The real cost of the current model</span>
+      <h2>What's breaking down — and why it matters</h2>
+      <p>Releases are working. But information quality erodes every time it passes through an external system or gets delivered generically to the field.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background:#fef2f2">⏱️</div>
+        <h3>1–2 weeks to build one release</h3>
+        <p>From the ops walk through to field delivery, a single floorset takes 1–2 weeks. That's before questions, corrections, and exceptions — which restart the clock.</p>
+        <span class="card-tag" style="background:#fef2f2;color:#dc2626">Time cost</span>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#fff7ed">📡</div>
+        <h3>3rd-party apps that cost and limit</h3>
+        <p>Every external tool — Smartsheet, external PDFs, email chains — creates a licensing cost, a security surface, and a translation layer where context is lost.</p>
+        <span class="card-tag" style="background:#fff7ed;color:#d97706">Platform risk</span>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#faf5ff">🗺️</div>
+        <h3>Generic releases for unique stores</h3>
+        <p>Store 1392 (Ontario Mills) and Store 111 (Holyoke Mall) are structurally different. Today, both receive the same guide. Adjustments happen manually — by the store.</p>
+        <span class="card-tag" style="background:#faf5ff;color:#7c3aed">Quality cost</span>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#f0fdf4">❓</div>
+        <h3>Questions go to email — and wait</h3>
+        <p>When a Store Manager needs clarity on a fixture, promo, or inventory qualifier, it goes to email. There is no audit trail, no routing logic, no response SLA.</p>
+        <span class="card-tag" style="background:#f0fdf4;color:#059669">Field intelligence lost</span>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#eff6ff">📊</div>
+        <h3>RM feedback arrives weekly — too late</h3>
+        <p>Regional Managers capture field patterns through weekly reports. By the time leadership sees a repeating issue, multiple releases have already been impacted.</p>
+        <span class="card-tag" style="background:#eff6ff;color:#1d4ed8">Signal latency</span>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#fdf4ff">🔗</div>
+        <h3>Inventory, tiering, qualifiers disconnected</h3>
+        <p>Field teams need to cross-reference multiple sources to understand what qualifies a fixture, what's in stock, and what the translation rules are. Each source is separate.</p>
+        <span class="card-tag" style="background:#fdf4ff;color:#a21caf">Integration gap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" class="section" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-purple">The solution</span>
+      <h2>One governed platform. Every role connected.</h2>
+      <p>SET builds the approved release. SET Loop keeps every role — Store, District, Region, Home Office — connected to the same work with the view and return path they need.</p>
+    </div>
+
+    <!-- Workflow -->
+    <div class="workflow-steps">
+      <div class="wstep">
+        <div class="wstep-num">1</div>
+        <h4>Partner Intake</h4>
+        <p>Cross-functional updates, source inputs, and asset contributions</p>
+      </div>
+      <div class="wstep">
+        <div class="wstep-num">2</div>
+        <h4>Asset Prep</h4>
+        <p>Normalize and align approved assets to brand standards</p>
+      </div>
+      <div class="wstep active">
+        <div class="wstep-num">3</div>
+        <h4>Cycle Intake</h4>
+        <p>Select active brand (VS, PINK) and execution window</p>
+      </div>
+      <div class="wstep active">
+        <div class="wstep-num">4</div>
+        <h4>Floorset Factory</h4>
+        <p>Build store-specific release shell for exact fixture + zone</p>
+      </div>
+      <div class="wstep active">
+        <div class="wstep-num">5</div>
+        <h4>Live Mapping</h4>
+        <p>Place approved assets into fixture connector zones</p>
+      </div>
+      <div class="wstep">
+        <div class="wstep-num">6</div>
+        <h4>Publish + Govern</h4>
+        <p>Owner-approved release reaches exact stores and roles</p>
+      </div>
+      <div class="wstep">
+        <div class="wstep-num">7</div>
+        <h4>SET Loop</h4>
+        <p>Questions, evidence, and exceptions return to accountable owners</p>
+      </div>
+    </div>
+
+    <div class="mt-24">
+      <div class="role-grid">
+        <a class="role-card role-hq" href="#demo">
+          <span class="role-tag">Home Office</span>
+          <h3 style="margin-top:12px">Build. Govern. Publish.</h3>
+          <p>Release calendar, approval queue, field intelligence dashboard, and team metrics — all in one governed hub.</p>
+        </a>
+        <a class="role-card role-rm" href="#demo">
+          <span class="role-tag">Regional Manager</span>
+          <h3 style="margin-top:12px">See patterns. Route problems.</h3>
+          <p>Identify repeating issues across districts with source-supported evidence. Route the upstream question — not just the symptom.</p>
+        </a>
+        <a class="role-card role-dm" href="#demo">
+          <span class="role-tag">District Manager</span>
+          <h3 style="margin-top:12px">Know who needs you.</h3>
+          <p>Store readiness, support flags, escalations, and workload forecast — without waiting for a weekly call to find out.</p>
+        </a>
+        <a class="role-card role-sm" href="#demo">
+          <span class="role-tag">Store Manager</span>
+          <h3 style="margin-top:12px">Your store. Your map. Your plan.</h3>
+          <p>Store-specific floorset, exact fixture direction, and a clear path to ask questions and get answers — not email a chain.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section id="demo" class="section" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-teal">Live prototype</span>
+      <h2>See it from each role</h2>
+      <p>This is a working prototype. Click the tabs below to switch roles and see what each leader sees when they open their hub.</p>
+    </div>
+
+    <div class="demo-frame">
+      <div class="demo-bar">
+        <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+        <div class="demo-url">vscocorp.sharepoint.com/sites/Co-PilotPowerRangersHub</div>
+        <span style="color:rgba(255,255,255,.5);font-size:12px">SET + SET Loop</span>
+      </div>
+      <div class="demo-tabs">
+        <div class="demo-tab active" onclick="showDemo('sm')">🏪 Store Manager</div>
+        <div class="demo-tab" onclick="showDemo('dm')">📋 District Manager</div>
+        <div class="demo-tab" onclick="showDemo('rm')">🗺️ Regional Manager</div>
+        <div class="demo-tab" onclick="showDemo('ho')">🏢 Home Office</div>
+      </div>
+
+      <!-- STORE MANAGER VIEW -->
+      <div class="demo-content active" id="demo-sm">
+        <div class="store-header">
+          <div>
+            <div class="store-name">Store 1392 · Ontario Mills</div>
+            <div class="store-meta">West Region · District 201 · VSS Full · VS + PINK + PINK Beauty</div>
+            <div class="store-meta" style="margin-top:6px;font-size:12px;opacity:.7">August 19, 2026 floorset cycle active · 18 hrs estimated · Checklist 3 of 7 complete</div>
+          </div>
+          <div>
+            <div class="store-badge">🟢 On Track<br><small style="font-size:11px;opacity:.8">Launch in 4 days</small></div>
+          </div>
+        </div>
+        <div class="release-grid">
+          <div class="release-item">
+            <span class="ri-status status-ready">✓ Ready</span>
+            <div class="ri-type">Visual Direction</div>
+            <div class="ri-title">VS August Floorset · VSL 2–4</div>
+            <div class="ri-detail">Fixture map, zone placement, and approved surface guide for your exact store layout. 14 fixtures affected.</div>
+            <a class="ri-action" href="#demo">Open store map →</a>
+          </div>
+          <div class="release-item">
+            <span class="ri-status status-ready">✓ Ready</span>
+            <div class="ri-type">PINK Direction</div>
+            <div class="ri-title">Back-to-Campus · PINK VSL 1</div>
+            <div class="ri-detail">Back-to-campus floorset with exact cabinet placement for your store tier. 6 fixtures included.</div>
+            <a class="ri-action" href="#demo">Open PINK guide →</a>
+          </div>
+          <div class="release-item">
+            <span class="ri-status status-pending">⏳ Pending</span>
+            <div class="ri-type">Inventory Context</div>
+            <div class="ri-title">Qualifier check · VSB Fragrance</div>
+            <div class="ri-detail">Fragrance qualifier rules for this tier and region. Owner: Merchandising. Response expected by Aug 21.</div>
+            <a class="ri-action" href="#demo">Track this question →</a>
+          </div>
+          <div class="release-item">
+            <span class="ri-status status-new">New</span>
+            <div class="ri-type">Communication</div>
+            <div class="ri-title">Weekend Readiness · Aug 22–24</div>
+            <div class="ri-detail">Close-to-open checklist + floor readiness priorities for the August long weekend. Personalized for your store.</div>
+            <a class="ri-action" href="#demo">View communication →</a>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:#f0fdf4;border-radius:12px;display:flex;align-items:center;gap:14px">
+          <span style="font-size:28px">💬</span>
+          <div>
+            <div style="font-weight:800;font-size:14px">Have a question? It goes to the right person automatically.</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:3px">No email chains. Your question is categorized, routed to the accountable owner, and tracked until answered.</div>
+          </div>
+          <a class="btn btn-white" href="#demo" style="color:var(--green);background:#dcfce7;flex-shrink:0;padding:10px 16px;font-size:13px">Ask a question →</a>
+        </div>
+      </div>
+
+      <!-- DM VIEW -->
+      <div class="demo-content" id="demo-dm">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <div>
+            <div style="font-size:20px;font-weight:900">District 201 · West Region</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:4px">August Floorset Cycle · 12 stores · 2 need attention</div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <div style="text-align:center;padding:12px 18px;background:#f0fdf4;border-radius:12px">
+              <div style="font-size:22px;font-weight:900;color:var(--green)">10</div>
+              <div style="font-size:12px;color:var(--muted)">On track</div>
+            </div>
+            <div style="text-align:center;padding:12px 18px;background:#fef3c7;border-radius:12px">
+              <div style="font-size:22px;font-weight:900;color:#d97706">2</div>
+              <div style="font-size:12px;color:var(--muted)">Need support</div>
+            </div>
+            <div style="text-align:center;padding:12px 18px;background:#fef2f2;border-radius:12px">
+              <div style="font-size:22px;font-weight:900;color:var(--red)">0</div>
+              <div style="font-size:12px;color:var(--muted)">Blocked</div>
+            </div>
+          </div>
+        </div>
+        <div class="dm-stores">
+          <div class="dm-store-row">
+            <div><div class="dm-store-name">1392 · Ontario Mills</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 1a</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:85%"></div></div>
+            <div class="dm-pct" style="color:var(--green)">85%</div>
+            <div class="dm-flag">🟢</div>
+          </div>
+          <div class="dm-store-row">
+            <div><div class="dm-store-name">1244 · Brea Mall</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 2a</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:78%"></div></div>
+            <div class="dm-pct" style="color:var(--green)">78%</div>
+            <div class="dm-flag">🟢</div>
+          </div>
+          <div class="dm-store-row" style="background:#fef3c7;border-color:#fcd34d">
+            <div><div class="dm-store-name">1577 · Westfield Topanga</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 3b · Qualifier question open</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:42%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div>
+            <div class="dm-pct" style="color:#d97706">42%</div>
+            <div class="dm-flag">⚠️</div>
+          </div>
+          <div class="dm-store-row">
+            <div><div class="dm-store-name">1683 · Del Amo Fashion Center</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 2b</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:92%"></div></div>
+            <div class="dm-pct" style="color:var(--green)">92%</div>
+            <div class="dm-flag">🟢</div>
+          </div>
+          <div class="dm-store-row" style="background:#fef3c7;border-color:#fcd34d">
+            <div><div class="dm-store-name">1802 · South Coast Plaza</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 1b · Pending asset confirmation</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:35%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div>
+            <div class="dm-pct" style="color:#d97706">35%</div>
+            <div class="dm-flag">⚠️</div>
+          </div>
+          <div class="dm-store-row">
+            <div><div class="dm-store-name">1158 · Glendale Galleria</div><div class="dm-store-num" style="color:var(--muted);font-size:12px">VSS Full · Tier 2a</div></div>
+            <div class="dm-bar"><div class="dm-bar-fill" style="width:88%"></div></div>
+            <div class="dm-pct" style="color:var(--green)">88%</div>
+            <div class="dm-flag">🟢</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:14px 18px;background:#ede9fe;border-radius:12px;font-size:13px;font-weight:700;color:var(--brand)">
+          💡 2 stores need proactive support before Aug 22. Click any row to see the exact blocker and owner.
+        </div>
+      </div>
+
+      <!-- RM VIEW -->
+      <div class="demo-content" id="demo-rm">
+        <div style="margin-bottom:20px">
+          <div style="font-size:20px;font-weight:900">Region 200 · West</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:4px">175 stores · 19 districts · August floorset cycle in progress</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
+          <div style="background:#f0fdf4;border-radius:14px;padding:18px;text-align:center">
+            <div style="font-size:28px;font-weight:900;color:var(--green)">148</div>
+            <div style="font-size:12px;color:var(--muted)">Stores on track</div>
+          </div>
+          <div style="background:#fef3c7;border-radius:14px;padding:18px;text-align:center">
+            <div style="font-size:28px;font-weight:900;color:#d97706">19</div>
+            <div style="font-size:12px;color:var(--muted)">Need DM support</div>
+          </div>
+          <div style="background:#fef2f2;border-radius:14px;padding:18px;text-align:center">
+            <div style="font-size:28px;font-weight:900;color:var(--red)">8</div>
+            <div style="font-size:12px;color:var(--muted)">Open questions</div>
+          </div>
+          <div style="background:#ede9fe;border-radius:14px;padding:18px;text-align:center">
+            <div style="font-size:28px;font-weight:900;color:var(--brand)">3</div>
+            <div style="font-size:12px;color:var(--muted)">Repeating patterns</div>
+          </div>
+        </div>
+        <div style="border:2px solid #fcd34d;background:#fffbeb;border-radius:16px;padding:20px">
+          <div style="font-weight:900;font-size:15px;margin-bottom:12px">⚡ Repeating patterns this cycle (source-supported)</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:#fff;border-radius:10px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+              <span style="font-size:20px">📦</span>
+              <div>
+                <div style="font-weight:800;font-size:14px">VSB Fragrance qualifier confusion · 11 stores</div>
+                <div style="font-size:13px;color:var(--muted)">Stores asking the same qualifier question across 4 districts. Source: Merchandising. Route this upstream before next release.</div>
+              </div>
+              <a class="ri-action" href="#demo" style="flex-shrink:0">Route upstream →</a>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+              <span style="font-size:20px">🗂️</span>
+              <div>
+                <div style="font-weight:800;font-size:14px">PINK cabinet asset missing for Tier 5–6 stores · 8 stores</div>
+                <div style="font-size:13px;color:var(--muted)">Back-to-campus guide doesn't include Tier 5/6 cabinet instructions. Asset owner: PINK Visual. Expected: Aug 20.</div>
+              </div>
+              <a class="ri-action" href="#demo" style="flex-shrink:0">Track owner →</a>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+              <span style="font-size:20px">⏰</span>
+              <div>
+                <div style="font-weight:800;font-size:14px">Selldown translation timing · 5 stores asking same question</div>
+                <div style="font-size:13px;color:var(--muted)">Stores need clearer timing rules for selldown-to-floorset transition. This is the 3rd cycle this has come up. Needs permanent fix.</div>
+              </div>
+              <a class="ri-action" href="#demo" style="flex-shrink:0">Flag for SOP →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HO VIEW -->
+      <div class="demo-content" id="demo-ho">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:24px">
+          <div style="background:linear-gradient(135deg,#1e0a3c,#5b21b6);color:#fff;border-radius:14px;padding:20px">
+            <div style="font-size:12px;opacity:.7;font-weight:700;letter-spacing:.5px;margin-bottom:8px">ACTIVE CYCLE</div>
+            <div style="font-size:18px;font-weight:900">August 19 VS Release</div>
+            <div style="font-size:13px;opacity:.8;margin-top:4px">798 stores · 4 brands · In progress</div>
+            <div style="margin-top:14px;background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px">🟢 On track for Aug 22 launch</div>
+          </div>
+          <div style="background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.5px;margin-bottom:8px">PENDING APPROVALS</div>
+            <div style="font-size:28px;font-weight:900;color:#d97706">3</div>
+            <div style="font-size:13px;color:var(--muted)">Waiting on: OPS · Merch · Finance</div>
+            <a class="ri-action" href="#demo" style="margin-top:10px">Review queue →</a>
+          </div>
+          <div style="background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.5px;margin-bottom:8px">FIELD QUESTIONS</div>
+            <div style="font-size:28px;font-weight:900;color:var(--brand)">8</div>
+            <div style="font-size:13px;color:var(--muted)">Open · 3 categorized as repeating</div>
+            <a class="ri-action" href="#demo" style="margin-top:10px">View all →</a>
+          </div>
+        </div>
+        <div style="background:var(--card);border:1.5px solid var(--line);border-radius:16px;overflow:hidden">
+          <div style="padding:16px 20px;background:#faf8ff;border-bottom:1px solid var(--line);font-weight:800;font-size:14px">Publishing queue · August 19–22 cycle</div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead><tr style="background:#f5f3ff"><th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.5px">Release</th><th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.5px">Brand</th><th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.5px">Stores</th><th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.5px">Launch</th><th style="text-align:left;padding:10px 16px;font-size:11px;font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.5px">Status</th></tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:12px 16px;font-weight:700">August Floorset</td><td style="padding:12px 16px">VS</td><td style="padding:12px 16px">798</td><td style="padding:12px 16px">Aug 22</td><td style="padding:12px 16px"><span style="background:#d1fae5;color:#065f46;padding:3px 9px;border-radius:6px;font-weight:700;font-size:12px">Published</span></td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:12px 16px;font-weight:700">Back-to-Campus</td><td style="padding:12px 16px">PINK</td><td style="padding:12px 16px">612</td><td style="padding:12px 16px">Aug 22</td><td style="padding:12px 16px"><span style="background:#d1fae5;color:#065f46;padding:3px 9px;border-radius:6px;font-weight:700;font-size:12px">Published</span></td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:12px 16px;font-weight:700">Weekend Comms</td><td style="padding:12px 16px">All</td><td style="padding:12px 16px">798</td><td style="padding:12px 16px">Aug 21</td><td style="padding:12px 16px"><span style="background:#fef3c7;color:#92400e;padding:3px 9px;border-radius:6px;font-weight:700;font-size:12px">Pending OPS</span></td></tr>
+              <tr><td style="padding:12px 16px;font-weight:700">Selldown Guide</td><td style="padding:12px 16px">VS + PINK</td><td style="padding:12px 16px">430</td><td style="padding:12px 16px">Aug 26</td><td style="padding:12px 16px"><span style="background:#ede9fe;color:#5b21b6;padding:3px 9px;border-radius:6px;font-weight:700;font-size:12px">In Review</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS CASE / ROI -->
+<section id="roi" class="section" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-gold">Business case</span>
+      <h2>The cost of the current model vs. what this changes</h2>
+      <p>VS&Co runs 798 stores across 4 brands with approximately 12–16 floorset releases per year. Here's what the math looks like.</p>
+    </div>
+
+    <div class="cost-compare">
+      <div class="cost-box cost-before">
+        <h3>❌ Current state cost (estimated)</h3>
+        <div class="cost-metric"><span class="label-txt">Time to build 1 floorset release</span><span class="val">10–14 days</span></div>
+        <div class="cost-metric"><span class="label-txt">Staff hours per release (HO team)</span><span class="val">~80–120 hrs</span></div>
+        <div class="cost-metric"><span class="label-txt">3rd-party tool licenses (annual est.)</span><span class="val">$40K–$120K</span></div>
+        <div class="cost-metric"><span class="label-txt">Field re-questions per release</span><span class="val">150–400 emails</span></div>
+        <div class="cost-metric"><span class="label-txt">Rework cycles per release</span><span class="val">2–4 rounds</span></div>
+        <div class="cost-metric"><span class="label-txt">Store-specific adaptation time (field)</span><span class="val">2–4 hrs/store</span></div>
+        <div class="cost-metric"><span class="label-txt">Annual total (12 releases × 798 stores)</span><span class="val">~$2.1M–$4.8M</span></div>
+      </div>
+      <div class="cost-box cost-after">
+        <h3>✅ SET + SET Loop (projected)</h3>
+        <div class="cost-metric"><span class="label-txt">Time to build 1 floorset release</span><span class="val">3–5 days</span></div>
+        <div class="cost-metric"><span class="label-txt">Staff hours per release (HO team)</span><span class="val">~30–50 hrs</span></div>
+        <div class="cost-metric"><span class="label-txt">3rd-party licenses replaced</span><span class="val">$0 (M365)</span></div>
+        <div class="cost-metric"><span class="label-txt">Field re-questions per release</span><span class="val">Tracked + routed</span></div>
+        <div class="cost-metric"><span class="label-txt">Rework cycles per release</span><span class="val">0–1 rounds</span></div>
+        <div class="cost-metric"><span class="label-txt">Store adaptation (auto store-specific)</span><span class="val">0 hrs</span></div>
+        <div class="cost-metric"><span class="label-txt">Annual total (projected)</span><span class="val">~$600K–$1.2M</span></div>
+      </div>
+    </div>
+
+    <div class="savings-banner">
+      <h3>$1.5M–$3.6M estimated annual savings</h3>
+      <p>Conservative estimate based on staff time reduction (60%), 3rd-party license elimination, and field rework reduction. Does not include store execution time-back or customer service improvement.</p>
+    </div>
+
+    <div class="cards mt-24" style="grid-template-columns:repeat(4,1fr)">
+      <div class="card" style="text-align:center">
+        <div class="highlight-number">65%</div>
+        <h3>Faster release builds</h3>
+        <p>10–14 days → 3–5 days. HO team gets time back for strategy and quality.</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="highlight-number">$0</div>
+        <h3>New licensing required</h3>
+        <p>Built entirely on SharePoint and Power Automate — tools VS&Co already owns and pays for.</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="highlight-number">100%</div>
+        <h3>Store-specific direction</h3>
+        <p>Every store gets their exact fixture map, zone assignment, and timing — not a generic guide.</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="highlight-number">798</div>
+        <h3>Stores on one platform</h3>
+        <p>VS, VSB, PINK, and PINK Beauty — all governed from one enterprise-grade platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="section" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-purple">Enterprise security</span>
+      <h2>Built on infrastructure you already control</h2>
+      <p>This is not a new platform. SET + SET Loop uses SharePoint, Power Automate, and Microsoft 365 — the same governed infrastructure your organization already manages, audits, and secures.</p>
+    </div>
+    <div class="security-grid">
+      <div class="sec-card">
+        <h4>🔐 Single Sign-On via Microsoft 365</h4>
+        <p>Every user authenticates through the same VS&Co Microsoft identity. No separate login, no 3rd-party credentials, no credential management overhead.</p>
+      </div>
+      <div class="sec-card">
+        <h4>🏢 Permission inheritance from SharePoint</h4>
+        <p>Role-based access controls inherit from your existing SharePoint permission structure. A Store Manager only sees their store's data — automatically, without custom code.</p>
+      </div>
+      <div class="sec-card">
+        <h4>🔒 No data leaves VS&Co infrastructure</h4>
+        <p>All data — releases, assets, store structures, questions, approvals — stays inside your Microsoft tenant. No 3rd-party storage, no external API dependencies for core data.</p>
+      </div>
+      <div class="sec-card">
+        <h4>📋 Full audit trail via Power Automate</h4>
+        <p>Every approval, every change, every question and response is logged automatically. Compliance, governance, and incident investigation have a complete record — without manual tracking.</p>
+      </div>
+      <div class="sec-card">
+        <h4>🌐 MicroStrategy dossier preserved</h4>
+        <p>Your existing MicroStrategy dossier (vsedwmsi.cloud.microstrategy.com) controls authentication, permissions, calculations, and data visibility. SET Loop adds role-specific pages — it doesn't replace your analytics infrastructure.</p>
+      </div>
+      <div class="sec-card">
+        <h4>⚡ Replaces external tool risk</h4>
+        <p>Every Smartsheet link, external PDF host, or 3rd-party portal replaced by SET Loop is a security surface eliminated. Fewer tools = smaller attack surface = lower compliance burden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT PLAN -->
+<section id="pilot" class="section" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-teal">Pilot plan</span>
+      <h2>5 stores. 1 cycle. 14 days to proof.</h2>
+      <p>We're not asking for a full rollout. We're asking for permission to prove it works with 5 pilot stores over one release cycle.</p>
+    </div>
+    <div class="pilot-row">
+      <div class="pilot-timeline">
+        <div class="pilot-step">
+          <div class="pilot-num">1</div>
+          <div class="pilot-text">
+            <h4>Week 1: Platform setup (Days 1–7)</h4>
+            <p>Create SharePoint lists (Cycles, Stores, Changes, Questions, Approvals). Build Power Automate flows. Create 4 role hub pages. Connect SET HTML to SharePoint data.</p>
+          </div>
+        </div>
+        <div class="pilot-step">
+          <div class="pilot-num">2</div>
+          <div class="pilot-text">
+            <h4>Week 2: Pilot store onboarding (Days 8–10)</h4>
+            <p>Onboard 5 stores (mix of tiers, regions). Load store-specific floorset data. Configure store-level permissions. Train Store Managers (30-min quickstart).</p>
+          </div>
+        </div>
+        <div class="pilot-step">
+          <div class="pilot-num">3</div>
+          <div class="pilot-text">
+            <h4>Week 2: Live cycle test (Days 10–14)</h4>
+            <p>Run one real release cycle through SET + SET Loop. Measure: time to find floorset, questions submitted, response time, rework needed. Collect store feedback.</p>
+          </div>
+        </div>
+        <div class="pilot-step">
+          <div class="pilot-num">4</div>
+          <div class="pilot-text">
+            <h4>End of Week 2: Results & decision</h4>
+            <p>Present results to leadership: time saved, quality improvement, field feedback. Decision: expand to all 798 stores or adjust and re-pilot.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pilot-ask">
+        <h3>What we're asking for</h3>
+        <ul>
+          <li>5 volunteer pilot stores (we'll select the right mix)</li>
+          <li>Permission to create pages on the Co-Pilot Power Rangers Hub SharePoint site</li>
+          <li>Access to Power Automate for flow creation (standard M365 license)</li>
+          <li>14 days to prove it works with real data</li>
+          <li>One release cycle to measure against current baseline</li>
+        </ul>
+        <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.12);border-radius:10px;font-size:13px;line-height:1.5">
+          <strong>No new budget required.</strong> Everything runs on M365 licenses already owned. The only investment is time — 14 days of focused pilot work.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="ask" class="section-sm">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>The field is ready for better.<br>So is the business.</h2>
+      <p>SET + SET Loop gives stores what they need, when they need it — and gives home office the visibility, governance, and time back to focus on what's next. 14 days. 5 stores. No new budget.</p>
+      <div class="btn-group">
+        <a href="#pilot" class="btn btn-white">See the pilot plan</a>
+        <a href="#demo" class="btn btn-outline">Back to the demo</a>
+        <a href="#roi" class="btn btn-outline">Business case recap</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">SET + SET Loop · Store Operations Intelligence · VS&amp;Co</div>
+      <div>Built by KC Moore · VP of Store Operations Briefing · August 21, 2026</div>
+      <div>Pilot-ready · Built on M365 · No new licenses</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function showDemo(role) {
+  document.querySelectorAll('.demo-content').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('demo-' + role).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Smooth active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
