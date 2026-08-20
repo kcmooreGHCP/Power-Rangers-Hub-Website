@@ -209,6 +209,24 @@ footer{padding:32px 0;border-top:1px solid var(--line);margin-top:64px}
 .highlight-number{font-size:48px;font-weight:900;letter-spacing:-2px;color:var(--brand)}
 .divider{border:none;border-top:1px solid var(--line);margin:40px 0}
 
+/* PRINT MODE */
+@media print{
+  .topbar,.btn-group,.demo-tabs,footer{display:none!important}
+  .section{padding:32px 0;page-break-inside:avoid}
+  .hero{padding:40px 0;background:#1e0a3c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .demo-content{display:block!important}
+  .demo-frame{box-shadow:none;border:1px solid #ccc}
+  .demo-bar{display:none}
+  .cards,.role-grid,.security-grid{grid-template-columns:repeat(2,1fr)!important}
+  .workflow-steps{grid-template-columns:repeat(4,1fr)!important}
+  .workflow-steps::before{display:none}
+  body{font-size:12px}
+  .section-head h2{font-size:24px}
+  .highlight-number{font-size:36px}
+  .savings-banner h3{font-size:32px}
+  a{text-decoration:none!important;color:inherit!important}
+}
+
 @media(max-width:900px){
   .hero-grid,.grid-2,.cards,.cards-4,.role-grid,.cost-compare,.security-grid{grid-template-columns:1fr}
   .workflow-steps{grid-template-columns:repeat(4,1fr)}
@@ -234,7 +252,7 @@ footer{padding:32px 0;border-top:1px solid var(--line);margin-top:64px}
       <a href="#roi">Business Case</a>
       <a href="#security">Security</a>
       <a href="#pilot">Pilot Plan</a>
-      <a href="#ask" class="nav-cta">The Ask →</a>
+      <a href="javascript:void(0)" onclick="copyShareLink()" class="nav-cta" id="share-btn">📋 Copy link →</a>
     </nav>
   </div>
 </header>
@@ -824,6 +842,7 @@ footer{padding:32px 0;border-top:1px solid var(--line);margin-top:64px}
         <a href="#pilot" class="btn btn-white">See the pilot plan</a>
         <a href="#demo" class="btn btn-outline">Back to the demo</a>
         <a href="#roi" class="btn btn-outline">Business case recap</a>
+        <a href="javascript:window.print()" class="btn btn-outline">🖨️ Save as PDF</a>
       </div>
     </div>
   </div>
@@ -834,7 +853,14 @@ footer{padding:32px 0;border-top:1px solid var(--line);margin-top:64px}
     <div class="footer-inner">
       <div class="footer-logo">SET + SET Loop · Store Operations Intelligence · VS&amp;Co</div>
       <div>Built by KC Moore · VP of Store Operations Briefing · August 21, 2026</div>
-      <div>Pilot-ready · Built on M365 · No new licenses</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span>Pilot-ready · Built on M365 · No new licenses</span>
+        <a href="https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html" 
+           target="_blank"
+           style="color:var(--brand);font-weight:700;font-size:12px;text-decoration:none;background:#ede9fe;padding:4px 10px;border-radius:6px">
+          🔗 Share this presentation
+        </a>
+      </div>
     </div>
   </div>
 </footer>
@@ -845,6 +871,18 @@ function showDemo(role) {
   document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('demo-' + role).classList.add('active');
   event.target.classList.add('active');
+}
+
+function copyShareLink() {
+  const url = 'https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('share-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Link copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }).catch(() => {
+    prompt('Copy this link:', url);
+  });
 }
 
 // Smooth active nav on scroll
