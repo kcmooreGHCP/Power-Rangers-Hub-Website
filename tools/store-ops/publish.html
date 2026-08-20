@@ -1,29 +1,146 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SET Loop | Publish + Govern</title>
-<style>:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--orange:#b65d00;--red:#b42318;--purple:#7c3aed}*{box-sizing:border-box}body{margin:0;background:#f7f2f4;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:20px 0}.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--pink);border-bottom:1px solid var(--line)}nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}nav a.active,nav a:hover{color:var(--pink);border-left-color:var(--pink);background:var(--blush)}.main{padding:28px}.h1{font-size:22px;font-weight:900;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 24px}.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}.kpi .label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:6px}.kpi .value{font-size:24px;font-weight:900}.kpi.good .value{color:var(--green)}.kpi.warn .value{color:var(--orange)}.kpi .sub{font-size:11px;color:var(--muted);margin-top:4px}.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}.ch{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:space-between}.cb{padding:16px 18px}.asset-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.asset-row:last-child{border-bottom:none}.ar-name{flex:1;font-size:13px;font-weight:600}.ar-sub{font-size:11px;color:var(--muted)}.ar-status{font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;flex-shrink:0}.status-live{background:#dcfce7;color:var(--green)}.status-review{background:#fff7ed;color:var(--orange)}.status-draft{background:#ede9fe;color:var(--purple)}.btn{background:var(--pink);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer}</style>
-</head><body>
-<div class="shell">
-<aside class="side"><div class="logo">SET Loop · Publish</div><nav><a href="SET_LOOP_MASTER.html">← Back to Hub</a><a href="#assets" class="active">Asset Status</a><a href="#publish">Publish Assets</a><a href="#govern">Governance Log</a></nav></aside>
-<main class="main">
-<h1 class="h1">Publish + Govern</h1>
-<p class="sub">Review, approve, and publish SET assets to the field. Track governance and version history.</p>
-<div class="kpi-row">
-<div class="kpi good"><div class="label">Live Assets</div><div class="value">12</div><div class="sub">RC12 cycle</div></div>
-<div class="kpi warn"><div class="label">Pending Review</div><div class="value">3</div><div class="sub">Awaiting approval</div></div>
-<div class="kpi"><div class="label">In Draft</div><div class="value">5</div><div class="sub">RC13 prep</div></div>
-<div class="kpi good"><div class="label">Field Reach</div><div class="value">100%</div><div class="sub">All 38 stores published</div></div>
-</div>
-<div class="card" id="assets"><div class="ch">📋 RC12 Asset Status <span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--blush);color:var(--pink)">20 assets</span></div><div class="cb">
-<div class="asset-row"><div class="ar-name">RC12 Floorset Guide — Full Version<div class="ar-sub">Visual Merch · PDF + HTML · Published Aug 15</div></div><span class="ar-status status-live">Live ✓</span></div>
-<div class="asset-row"><div class="ar-name">PINK Zone — Back to Campus Guide<div class="ar-sub">PINK Visual · PDF · Updated Aug 20</div></div><span class="ar-status status-live">Live ✓</span></div>
-<div class="asset-row"><div class="ar-name">VSB Luna Fragrance Launch SOP<div class="ar-sub">Fragrance · Launch Aug 28 · Qualifier updated</div></div><span class="ar-status status-review">Pending Review</span></div>
-<div class="asset-row"><div class="ar-name">Selldown Transition SOP — v2<div class="ar-sub">Store Operations · Revision in progress</div></div><span class="ar-status status-review">Pending Review</span></div>
-<div class="asset-row"><div class="ar-name">Semi-Annual Sale Signage Kit<div class="ar-sub">Marketing · All tiers · Through Aug 31</div></div><span class="ar-status status-live">Live ✓</span></div>
-<div class="asset-row"><div class="ar-name">RFID Tagging SOP — How-To<div class="ar-sub">Operations · New tool onboarding guide</div></div><span class="ar-status status-review">Pending Review</span></div>
-<div class="asset-row"><div class="ar-name">RC13 Floorset Guide — Draft<div class="ar-sub">Visual Merch · Due Sep 12</div></div><span class="ar-status status-draft">Draft</span></div>
-</div></div>
-<div class="card" id="publish"><div class="ch">📤 Publish Actions</div><div class="cb" style="display:flex;gap:10px;flex-wrap:wrap">
-<button class="btn">Approve + Publish Selected</button>
-<button style="background:#fff7ed;color:var(--orange);border:1px solid #fde68a;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer">Request Changes</button>
-<button style="background:#f7f2f4;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer">Export Governance Log</button>
-</div></div>
-</main></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publishing Queue · Home Office · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-bottom:1rem}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-pink{background:#fce4ec;color:#ad1457}
+    .pill-gray{background:#f5f5f5;color:#555}
+    .pub-row{display:flex;align-items:center;gap:1rem;padding:.85rem 0;border-bottom:1px solid #f5f5f5}
+    .pub-row:last-child{border-bottom:none}
+    .pub-icon{font-size:1.2rem;flex-shrink:0}
+    .pub-body{flex:1}
+    .pub-title{font-size:.88rem;font-weight:700;color:#11131a}
+    .pub-meta{font-size:.72rem;color:#888;margin-top:.2rem}
+    .tag-vs{background:#11131a;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
+    .tag-pink{background:#ed2d8b;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
+    .tag-vsb{background:#8e44ad;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
+    .tag-all{background:#555;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+      <a href="district.html">📋 District — 339 West</a>
+      <a href="region.html">🗺️ Region — 400 West</a>
+      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag">Home Office</div>
+    <h1>Publishing Queue</h1>
+    <div class="hero-sub">Store 1392 · Ontario Mills · Content published by Home Office</div>
+  </div>
+  <div class="container">
+    <div class="section-title">Published &amp; Scheduled Content</div>
+    <div class="card">
+      <div class="pub-row">
+        <div class="pub-icon">📐</div>
+        <div class="pub-body">
+          <div class="pub-title">August Floorset Launch</div>
+          <div class="pub-meta">Current launch · Visual Merchandising · 18 hrs</div>
+        </div>
+        <span class="tag-vs">VS</span>
+        <span class="pill pill-green">Published</span>
+      </div>
+      <div class="pub-row">
+        <div class="pub-icon">🌸</div>
+        <div class="pub-body">
+          <div class="pub-title">Fragrance Feature Event</div>
+          <div class="pub-meta">Current launch · Marketing/Beauty · 6 hrs</div>
+        </div>
+        <span class="tag-vsb">VSB</span>
+        <span class="pill pill-green">Published</span>
+      </div>
+      <div class="pub-row">
+        <div class="pub-icon">🎒</div>
+        <div class="pub-body">
+          <div class="pub-title">Back-to-Campus Floorset</div>
+          <div class="pub-meta">Current launch · PINK Visual · 14 hrs</div>
+        </div>
+        <span class="tag-pink">PINK</span>
+        <span class="pill pill-green">Published</span>
+      </div>
+      <div class="pub-row">
+        <div class="pub-icon">💄</div>
+        <div class="pub-body">
+          <div class="pub-title">PINK Beauty Launch Offer</div>
+          <div class="pub-meta">Current launch · PINK Beauty · 4 hrs</div>
+        </div>
+        <span class="tag-pink">PINK Beauty</span>
+        <span class="pill pill-green">Published</span>
+      </div>
+      <div class="pub-row">
+        <div class="pub-icon">📅</div>
+        <div class="pub-body">
+          <div class="pub-title">Weekend Readiness Update</div>
+          <div class="pub-meta">Operational · All stores</div>
+        </div>
+        <span class="tag-all">ALL</span>
+        <span class="pill pill-green">Published</span>
+      </div>
+      <div class="pub-row">
+        <div class="pub-icon">🎓</div>
+        <div class="pub-body">
+          <div class="pub-title">Service Ritual Refresher</div>
+          <div class="pub-meta">Field Enablement · Training · Scheduled for release</div>
+        </div>
+        <span class="tag-all">ALL</span>
+        <span class="pill pill-blue">Scheduled</span>
+      </div>
+    </div>
+
+    <div class="section-title">Publishing Standards</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:.75rem">SET Guide</div>
+        <div style="font-size:.82rem;color:#555;line-height:1.6">All training and ritual content is published through SET Guide. Field teams access via SET Map upon launch.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:.75rem">SET IRL</div>
+        <div style="font-size:.82rem;color:#555;line-height:1.6">Store-facing feedback and coaching observations are captured through SET IRL. DMs review before each visit.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:.75rem">SET Spotlight</div>
+        <div style="font-size:.82rem;color:#555;line-height:1.6">Recognition content is surfaced through SET Spotlight. Nominations submitted by store and DM leadership weekly.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem">
+      <a href="SET_LOOP_MASTER.html" style="display:inline-block;background:#ed2d8b;color:#fff;padding:.65rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.04em">← Back to Home Office</a>
+    </div>
+  </div>
+  <footer>
+    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
+  </footer>
+</body>
+</html>

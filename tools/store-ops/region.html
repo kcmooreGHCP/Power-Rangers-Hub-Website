@@ -1,196 +1,257 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SET Loop | Regional View</title>
-<style>
-:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--teal:#0891b2;--orange:#b65d00;--red:#b42318;--blue:#1d4ed8}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:#eff6ff;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}
-.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
-.side{background:#fff;border-right:1px solid var(--line);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
-.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--blue);letter-spacing:-.3px;border-bottom:1px solid var(--line)}
-.persona{padding:14px 20px 10px;font-size:12px;color:var(--muted)}
-.persona b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
-.region-badge{margin:0 20px 14px;background:#dbeafe;border:1px solid #93c5fd;border-radius:8px;padding:10px 12px}
-.region-badge .rnum{font-size:14px;font-weight:900;color:var(--blue)}
-.region-badge .rname{font-size:11px;color:var(--muted);margin-top:1px}
-nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}
-nav a:hover,nav a.active{color:var(--blue);border-left-color:var(--blue);background:#dbeafe}
-nav .section-label{padding:14px 20px 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
-.main{padding:24px}
-.page-header{margin-bottom:24px}
-.page-header h1{font-size:22px;font-weight:900;margin:0 0 4px}
-.page-header p{font-size:13px;color:var(--muted);margin:0}
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.kpi .label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.kpi .value{font-size:24px;font-weight:900;line-height:1}
-.kpi .sub{font-size:11px;color:var(--muted);margin-top:4px}
-.kpi.good .value{color:var(--green)}.kpi.warn .value{color:var(--orange)}.kpi.bad .value{color:var(--red)}.kpi.blue .value{color:var(--blue)}.kpi.teal .value{color:var(--teal)}
-.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}
-.card-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.card-head h2{font-size:14px;font-weight:800;margin:0}
-.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
-.badge-green{background:#dcfce7;color:var(--green)}.badge-warn{background:#fff7ed;color:var(--orange)}.badge-blue{background:#dbeafe;color:var(--blue)}
-.card-body{padding:16px 18px}
-.dist-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
-.dist-row:last-child{border-bottom:none}
-.dist-row:hover{background:#f0f7ff;margin:0 -18px;padding-left:18px;padding-right:18px}
-.dist-name{flex:1}
-.dist-name .name{font-size:13px;font-weight:700}
-.dist-name .dm{font-size:11px;color:var(--muted)}
-.dist-stores{font-size:11px;color:var(--muted);width:50px;text-align:center;flex-shrink:0}
-.dist-bar{flex:0 0 120px}
-.bar-wrap{height:7px;background:#e0e7ef;border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;border-radius:4px}
-.dist-pct{font-size:12px;font-weight:800;width:34px;text-align:right;flex-shrink:0}
-.dist-rank{font-size:11px;font-weight:700;width:28px;text-align:center;flex-shrink:0}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
-.trend-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
-.trend-card .tc-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:8px}
-.trend-card .tc-val{font-size:22px;font-weight:900}
-.trend-card .tc-sub{font-size:11px;color:var(--muted);margin-top:3px}
-.flag-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:flex-start}
-.flag-item:last-child{border-bottom:none}
-.flag-icon{font-size:18px;flex-shrink:0}
-.flag-body .title{font-size:13px;font-weight:700}
-.flag-body .detail{font-size:12px;color:var(--muted);margin-top:2px}
-.flag-body .scope{font-size:11px;color:var(--blue);font-weight:700;margin-top:3px}
-.action-btn{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:6px;text-decoration:none;background:#dbeafe;color:var(--blue);margin-top:4px}
-.action-btn:hover{background:var(--blue);color:#fff}
-@media(max-width:1000px){.shell{grid-template-columns:1fr}.side{display:none}.kpi-row{grid-template-columns:repeat(3,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Region 400 · West · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+    .badge{background:#1e2230;border:1px solid #333;border-radius:4px;padding:.35rem .75rem;font-size:.72rem;color:#ccc;letter-spacing:.06em}
+    .badge span{color:#ed2d8b;font-weight:700}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+    @media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-pink{background:#fce4ec;color:#ad1457}
+    .pill-gray{background:#f5f5f5;color:#555}
+    .item-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid #f5f5f5}
+    .item-row:last-child{border-bottom:none}
+    .item-icon{width:32px;height:32px;border-radius:6px;background:#f8f8f8;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .item-body{flex:1}
+    .item-title{font-size:.85rem;font-weight:600;color:#11131a}
+    .item-meta{font-size:.72rem;color:#888;margin-top:.2rem}
+    .progress-bar{background:#f0f0f0;border-radius:4px;height:6px;overflow:hidden;margin-top:.4rem}
+    .progress-fill{height:100%;border-radius:4px;background:#ed2d8b}
+    .ext-link{display:flex;align-items:center;gap:.6rem;padding:.55rem .75rem;border-radius:6px;background:#f8f8f8;font-size:.8rem;color:#11131a;text-decoration:none;border:1px solid #eee;transition:all .15s}
+    .ext-link:hover{background:#11131a;color:#fff;border-color:#11131a}
+    .ext-links{display:flex;flex-direction:column;gap:.5rem}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    th{background:#f8f8f8;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#888;padding:.7rem 1rem;text-align:left;border-bottom:2px solid #eee}
+    td{padding:.7rem 1rem;border-bottom:1px solid #f5f5f5;color:#11131a}
+    tr:last-child td{border-bottom:none}
+    .big-num{font-size:2rem;font-weight:700;color:#ed2d8b;line-height:1}
+    .big-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-top:.3rem}
+  </style>
 </head>
 <body>
-<div class="shell">
-  <aside class="side">
-    <div class="logo">VS&amp;Co SET Loop</div>
-    <div class="persona"><b>Regional View</b><small>Regional Manager</small></div>
-    <div class="region-badge">
-      <div class="rnum">Region 3 — East</div>
-      <div class="rname">RM: Jennifer Park · 4 districts · 38 stores</div>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+      <a href="district.html">📋 District — 339 West</a>
+      <a href="region.html">🗺️ Region — 400 West</a>
+      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
     </div>
-    <nav>
-      <div class="section-label">Overview</div>
-      <a href="#districts" class="active">District Rollup</a>
-      <a href="#flags">Escalated Flags</a>
-      <a href="#trends">Trends</a>
-      <a href="#broadcast">Broadcast</a>
-      <div class="section-label">Drill Down</div>
-      <a href="district.html">District 18 (Detail)</a>
-      <a href="store.html">Store 1392 (Detail)</a>
-      <div class="section-label">Tools</div>
-      <a href="#tools">Quick Links</a>
-    </nav>
-  </aside>
-  <main class="main">
-    <div class="page-header">
-      <h1>Region 3 · East 🌎</h1>
-      <p>RM: Jennifer Park · RC12 Floorset Week · Aug 23, 2025 · 4 districts · 38 stores</p>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag">Regional Manager View</div>
+    <h1>Region 400 · West</h1>
+    <div class="hero-sub">4 Districts · VS + PINK · California / Southwest</div>
+    <div class="hero-meta">
+      <div class="badge">Districts <span>4</span></div>
+      <div class="badge">Region <span>400 West</span></div>
+    </div>
+  </div>
+  <div class="container">
+
+    <!-- Region Summary KPIs -->
+    <div class="grid-4" style="margin-bottom:2rem">
+      <div class="card" style="text-align:center">
+        <div class="big-num">82%</div>
+        <div class="big-label">Avg Launch Readiness</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="big-num">7</div>
+        <div class="big-label">At-Risk Stores</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="big-num">4</div>
+        <div class="big-label">Districts</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="big-num">3</div>
+        <div class="big-label">Open Escalations</div>
+      </div>
     </div>
 
-    <div class="kpi-row">
-      <div class="kpi blue"><div class="label">Region Avg Progress</div><div class="value">68%</div><div class="sub">Checklist completion</div></div>
-      <div class="kpi good"><div class="label">Districts On Track</div><div class="value">3</div><div class="sub">of 4 districts</div></div>
-      <div class="kpi warn"><div class="label">Stores Flagged</div><div class="value">7</div><div class="sub">Need DM attention</div></div>
-      <div class="kpi teal"><div class="label">Photos Submitted</div><div class="value">61%</div><div class="sub">131 of 216 required</div></div>
-      <div class="kpi good"><div class="label">Region Rank</div><div class="value">#2</div><div class="sub">of 8 regions nationally</div></div>
-    </div>
-
-    <div class="grid-3">
-      <div class="trend-card"><div class="tc-label">🏆 Best District</div><div class="tc-val" style="color:var(--green)">District 22</div><div class="tc-sub">94% avg · 0 flags · DM: Marcus Lee</div></div>
-      <div class="trend-card"><div class="tc-label">⚠️ Needs Focus</div><div class="tc-val" style="color:var(--orange)">District 18</div><div class="tc-sub">71% avg · 3 flags · DM: Sarah Chen</div></div>
-      <div class="trend-card"><div class="tc-label">📸 Photo Leader</div><div class="tc-val" style="color:var(--teal)">District 22</div><div class="tc-sub">100% photo submission</div></div>
+    <!-- Districts -->
+    <div class="section-title">District Readiness</div>
+    <div class="card" style="margin-bottom:2rem;overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>District</th>
+            <th>Stores (examples)</th>
+            <th>Stores</th>
+            <th>Avg Readiness</th>
+            <th>Issues</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>335</strong></td>
+            <td>Beverly Center · Fashion Square Sherman Oaks · Glendale Galleria</td>
+            <td>9</td>
+            <td><div class="progress-bar"><div class="progress-fill" style="width:87%"></div></div><small>87%</small></td>
+            <td>1</td>
+            <td><span class="pill pill-green">On Track</span></td>
+          </tr>
+          <tr>
+            <td><strong>337</strong></td>
+            <td>Lakewood Center · Mainplace</td>
+            <td>7</td>
+            <td><div class="progress-bar"><div class="progress-fill" style="width:79%"></div></div><small>79%</small></td>
+            <td>2</td>
+            <td><span class="pill pill-yellow">Monitor</span></td>
+          </tr>
+          <tr>
+            <td><strong><a href="district.html" style="color:#ed2d8b;text-decoration:none">339</a></strong></td>
+            <td>Ontario Mills · Santa Anita Fashion Park · Victoria Gardens (11 stores)</td>
+            <td>11</td>
+            <td><div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div><small>83%</small></td>
+            <td>3</td>
+            <td><span class="pill pill-yellow">Monitor</span></td>
+          </tr>
+          <tr>
+            <td><strong>355</strong></td>
+            <td>Fashion Valley · University Towne Center · North County Fair</td>
+            <td>8</td>
+            <td><div class="progress-bar"><div class="progress-fill" style="width:91%"></div></div><small>91%</small></td>
+            <td>0</td>
+            <td><span class="pill pill-green">On Track</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="grid-2">
-      <div>
-        <div class="card" id="districts">
-          <div class="card-head">
-            <h2>📋 District Rollup — RC12 Progress</h2>
-            <div style="display:flex;gap:8px;align-items:center">
-              <span class="badge badge-blue">4 Districts</span>
-              <select style="font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--ink)"><option>All Districts</option><option>By Progress</option><option>By Flags</option></select>
-            </div>
+      <!-- Escalated Issues -->
+      <div class="card">
+        <div class="card-header"><span class="card-title">Escalated Issues — Region Level</span></div>
+        <div class="item-row">
+          <div class="item-icon">🎀</div>
+          <div class="item-body">
+            <div class="item-title">Very Sexy Anniversary Charm Reticket</div>
+            <div class="item-meta">Affected stores · Task in progress · D339, D337</div>
           </div>
-          <div class="card-body">
-            <div style="display:grid;grid-template-columns:auto 1fr auto auto auto;gap:0 8px;font-size:11px;font-weight:700;color:var(--muted);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px">
-              <span></span><span>District</span><span style="text-align:center">Stores</span><span style="width:120px;text-align:right">Progress</span><span style="width:34px;text-align:right">%</span>
-            </div>
-            <div class="dist-row" onclick="location.href='district.html'">
-              <div class="dist-rank" style="color:var(--green)">🥇</div>
-              <div class="dist-name"><div class="name">District 22 — Northern NJ</div><div class="dm">DM: Marcus Lee · 10 stores</div></div>
-              <div class="dist-stores">10 stores</div>
-              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:94%;background:var(--green)"></div></div></div>
-              <div class="dist-pct" style="color:var(--green)">94%</div>
-            </div>
-            <div class="dist-row" onclick="location.href='district.html'">
-              <div class="dist-rank" style="color:var(--teal)">🥈</div>
-              <div class="dist-name"><div class="name">District 31 — Greater Boston</div><div class="dm">DM: Aisha Thompson · 9 stores</div></div>
-              <div class="dist-stores">9 stores</div>
-              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:82%;background:var(--teal)"></div></div></div>
-              <div class="dist-pct" style="color:var(--teal)">82%</div>
-            </div>
-            <div class="dist-row" onclick="location.href='district.html'">
-              <div class="dist-rank" style="color:var(--blue)">3</div>
-              <div class="dist-name"><div class="name">District 18 — Mid-Atlantic</div><div class="dm">DM: Sarah Chen · 9 stores</div></div>
-              <div class="dist-stores">9 stores</div>
-              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:71%;background:var(--orange)"></div></div></div>
-              <div class="dist-pct" style="color:var(--orange)">71%</div>
-            </div>
-            <div class="dist-row" onclick="location.href='district.html'">
-              <div class="dist-rank" style="color:var(--muted)">4</div>
-              <div class="dist-name"><div class="name">District 44 — Upstate NY</div><div class="dm">DM: Carlos Rivera · 10 stores</div></div>
-              <div class="dist-stores">10 stores</div>
-              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:55%;background:var(--orange)"></div></div></div>
-              <div class="dist-pct" style="color:var(--orange)">55%</div>
-            </div>
-          </div>
+          <span class="pill pill-yellow">Task</span>
         </div>
-
-        <div class="card" id="broadcast">
-          <div class="card-head"><h2>📢 Broadcast to Region</h2></div>
-          <div class="card-body">
-            <div style="margin-bottom:10px"><textarea style="width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;resize:vertical;font-family:inherit;min-height:70px" placeholder="Message all 4 DMs or all 38 stores..."></textarea></div>
-            <div style="display:flex;gap:8px">
-              <button style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer">Send to All DMs</button>
-              <button style="background:#eff6ff;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer">All 38 Stores</button>
-            </div>
+        <div class="item-row">
+          <div class="item-icon">🌸</div>
+          <div class="item-body">
+            <div class="item-title">Fragrance Feature Qualifier Confusion</div>
+            <div class="item-meta">Customer-facing · Marketing clarification needed · D339</div>
           </div>
+          <span class="pill pill-red">Escalated</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📋</div>
+          <div class="item-body">
+            <div class="item-title">Pre-Holiday Roster Review Gaps</div>
+            <div class="item-meta">All districts · 3 stores past due · Deadline Aug 24</div>
+          </div>
+          <span class="pill pill-yellow">Due Aug 24</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📊</div>
+          <div class="item-body">
+            <div class="item-title">RFID Dashboard Update</div>
+            <div class="item-meta">Field leadership · Info distribution complete</div>
+          </div>
+          <span class="pill pill-green">Complete</span>
         </div>
       </div>
 
-      <div>
-        <div class="card" id="flags">
-          <div class="card-head"><h2>🚩 Escalated Flags — Region 3</h2><span class="badge badge-warn">5 Active</span></div>
-          <div class="card-body">
-            <div class="flag-item"><div class="flag-icon">📦</div><div class="flag-body"><div class="title">VSB Fragrance qualifier — region-wide gap</div><div class="detail">Same question across 11 stores in 3 districts. Upstream fix needed before RC13.</div><div class="scope">Districts 18, 31, 44 · Source: Merchandising</div><a class="action-btn" href="#">Escalate to HO →</a></div></div>
-            <div class="flag-item"><div class="flag-icon">🗂️</div><div class="flag-body"><div class="title">Tier 5/6 PINK cabinet asset gap</div><div class="detail">Asset not in guide. Affecting all Tier 5/6 stores region-wide.</div><div class="scope">All districts · 8 stores · PINK Visual team</div><a class="action-btn" href="#">Track Asset →</a></div></div>
-            <div class="flag-item"><div class="flag-icon">📸</div><div class="flag-body"><div class="title">District 44 photo completion at 28%</div><div class="detail">Significantly below region avg. DM escalation sent.</div><div class="scope">District 44 · 10 stores · 3 stores at 0%</div><a class="action-btn" href="#">Message DM →</a></div></div>
-            <div class="flag-item"><div class="flag-icon">⏰</div><div class="flag-body"><div class="title">Selldown SOP — 3rd cycle same issue</div><div class="detail">Stores consistently unclear on timing. Permanent SOP fix needed.</div><div class="scope">Districts 18, 44 · 8 stores</div><a class="action-btn" href="#">Flag SOP Team →</a></div></div>
-            <div class="flag-item"><div class="flag-icon">📊</div><div class="flag-body"><div class="title">Zero On Hand submissions overdue</div><div class="detail">6 stores haven't submitted ZOH reports for RC12 cycle.</div><div class="scope">Districts 18, 44</div><a class="action-btn" href="#">Review ZOH →</a></div></div>
+      <!-- Region Business Now -->
+      <div class="card">
+        <div class="card-header"><span class="card-title">Business Now — Region Priority</span></div>
+        <div class="item-row">
+          <div class="item-icon">📣</div>
+          <div class="item-body">
+            <div class="item-title">2026 Holiday Conference — Columbus</div>
+            <div class="item-meta">In Person · DMs confirmed · RM coordination</div>
           </div>
+          <span class="pill pill-blue">Info</span>
         </div>
-
-        <div class="card" id="tools">
-          <div class="card-head"><h2>⚡ Quick Tools</h2></div>
-          <div class="card-body">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank"><span style="font-size:20px">📊</span>MSI Library</a>
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://victoriassecret.apprissretailcloud.com/secure/cpf/auth/logon?lc=en-US" target="_blank"><span style="font-size:20px">📈</span>KPI Dashboard</a>
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://blueday.vscocorp.com/" target="_blank"><span style="font-size:20px">🔵</span>BlueDay</a>
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://intradayreporting.vscocorp.com/vss" target="_blank"><span style="font-size:20px">⏱</span>Intraday</a>
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank"><span style="font-size:20px">🔗</span>Intranet</a>
-              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="SET_LOOP_MASTER.html"><span style="font-size:20px">🔄</span>SET Loop</a>
-            </div>
+        <div class="item-row">
+          <div class="item-icon">🎉</div>
+          <div class="item-body">
+            <div class="item-title">Fall Bonus Card Program</div>
+            <div class="item-meta">US/Canada · All stores · Action required</div>
           </div>
+          <span class="pill pill-red">Action</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">🐾</div>
+          <div class="item-body">
+            <div class="item-title">PINK Friday Mystery Mini Dog GWP</div>
+            <div class="item-meta">PINK stores · DM Inspection in progress</div>
+          </div>
+          <span class="pill pill-pink">DM Inspect</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">💄</div>
+          <div class="item-body">
+            <div class="item-title">PINK Beauty Belt Update</div>
+            <div class="item-meta">PINK Beauty eligible · DM Inspection</div>
+          </div>
+          <span class="pill pill-pink">DM Inspect</span>
         </div>
       </div>
     </div>
-  </main>
-</div>
+
+    <!-- Navigation -->
+    <div class="section-title" style="margin-top:2rem">Navigation &amp; Tools</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ext-links">
+          <a class="ext-link" href="district.html">📋 District 339 View</a>
+          <a class="ext-link" href="store.html">🏪 Store 1392 View</a>
+          <a class="ext-link" href="SET_LOOP_MASTER.html">🏠 Home Office</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ext-links">
+          <a class="ext-link" href="https://vsstoresupplyorder.com/" target="_blank">📦 Supply Order</a>
+          <a class="ext-link" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank">📊 MicroStrategy</a>
+          <a class="ext-link" href="https://intradayreporting.vscocorp.com/vss" target="_blank">📈 Intraday Reporting</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ext-links">
+          <a class="ext-link" href="https://blueday.vscocorp.com/" target="_blank">🔵 Blue Day</a>
+          <a class="ext-link" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank">🏢 SharePoint DM Hub</a>
+          <a class="ext-link" href="partners.html">🤝 Partner Intake</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
+  </footer>
 </body>
 </html>

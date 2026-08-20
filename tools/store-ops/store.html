@@ -1,187 +1,288 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SET Loop | Store View</title>
-<style>
-:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--teal:#0891b2;--orange:#b65d00;--red:#b42318;--purple:#7c3aed}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:#f7f2f4;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}
-.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
-.side{background:#fff;border-right:1px solid var(--line);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
-.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--pink);letter-spacing:-.3px;border-bottom:1px solid var(--line)}
-.persona{padding:14px 20px 10px;font-size:12px;color:var(--muted)}
-.persona b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
-.store-badge{margin:0 20px 14px;background:var(--blush);border:1px solid #fbb6d4;border-radius:8px;padding:10px 12px}
-.store-badge .snum{font-size:18px;font-weight:900;color:var(--pink)}
-.store-badge .sname{font-size:11px;color:var(--muted);margin-top:1px}
-nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}
-nav a:hover,nav a.active{color:var(--pink);border-left-color:var(--pink);background:var(--blush)}
-nav .section-label{padding:14px 20px 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
-.main{padding:24px;overflow-y:auto}
-.page-header{margin-bottom:24px}
-.page-header h1{font-size:22px;font-weight:900;margin:0 0 4px}
-.page-header p{font-size:13px;color:var(--muted);margin:0}
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
-.kpi .label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.kpi .value{font-size:26px;font-weight:900;line-height:1}
-.kpi .sub{font-size:11px;color:var(--muted);margin-top:4px}
-.kpi.good .value{color:var(--green)}.kpi.warn .value{color:var(--orange)}.kpi.bad .value{color:var(--red)}.kpi.blue .value{color:var(--teal)}
-.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}
-.card-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.card-head h2{font-size:14px;font-weight:800;margin:0}
-.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
-.badge-green{background:#dcfce7;color:var(--green)}.badge-warn{background:#fff7ed;color:var(--orange)}.badge-red{background:#fee2e2;color:var(--red)}.badge-pink{background:var(--blush);color:var(--pink)}
-.card-body{padding:16px 18px}
-.checklist-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
-.checklist-item:last-child{border-bottom:none}
-.checklist-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--pink);cursor:pointer;flex-shrink:0}
-.checklist-item label{font-size:13px;cursor:pointer;flex:1}
-.checklist-item .tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;flex-shrink:0}
-.tag-open{background:#dbeafe;color:#1d4ed8}.tag-close{background:#ede9fe;color:var(--purple)}.tag-visual{background:var(--blush);color:var(--pink)}
-.progress-bar{height:8px;background:#f0e9ec;border-radius:4px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;background:var(--pink);border-radius:4px;transition:width .4s}
-.announcement{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
-.announcement:last-child{border-bottom:none}
-.ann-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.ann-body .from{font-size:10px;color:var(--muted);margin-bottom:2px}
-.ann-body .msg{font-size:13px;font-weight:600;margin-bottom:2px}
-.ann-body .time{font-size:10px;color:var(--muted)}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.photo-slot{aspect-ratio:1;background:#f7f2f4;border:2px dashed var(--line);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
-.photo-slot:hover{border-color:var(--pink);background:var(--blush)}
-.photo-slot span{font-size:22px}.photo-slot p{font-size:11px;color:var(--muted);margin:4px 0 0;text-align:center}
-.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tool-link{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;background:#f7f2f4;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);text-align:center;transition:.2s;font-size:12px;font-weight:700}
-.tool-link:hover{background:var(--blush);border-color:var(--pink);color:var(--pink)}
-.tool-link span{font-size:22px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}.kpi-row{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Store 1392 · Ontario Mills · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+    .badge{background:#1e2230;border:1px solid #333;border-radius:4px;padding:.35rem .75rem;font-size:.72rem;color:#ccc;letter-spacing:.06em}
+    .badge span{color:#ed2d8b;font-weight:700}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-pink{background:#fce4ec;color:#ad1457}
+    .pill-gray{background:#f5f5f5;color:#555}
+    .item-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid #f5f5f5}
+    .item-row:last-child{border-bottom:none}
+    .item-icon{width:32px;height:32px;border-radius:6px;background:#f8f8f8;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .item-body{flex:1}
+    .item-title{font-size:.85rem;font-weight:600;color:#11131a}
+    .item-meta{font-size:.72rem;color:#888;margin-top:.2rem}
+    .progress-bar{background:#f0f0f0;border-radius:4px;height:6px;overflow:hidden;margin-top:.4rem}
+    .progress-fill{height:100%;border-radius:4px;background:#ed2d8b}
+    .check-list{list-style:none}
+    .check-list li{display:flex;align-items:center;gap:.6rem;padding:.6rem 0;border-bottom:1px solid #f8f8f8;font-size:.85rem}
+    .check-list li:last-child{border-bottom:none}
+    .check-box{width:18px;height:18px;border-radius:3px;border:2px solid #ddd;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem}
+    .check-box.done{background:#ed2d8b;border-color:#ed2d8b;color:#fff}
+    .ext-link{display:flex;align-items:center;gap:.6rem;padding:.55rem .75rem;border-radius:6px;background:#f8f8f8;font-size:.8rem;color:#11131a;text-decoration:none;border:1px solid #eee;transition:all .15s}
+    .ext-link:hover{background:#11131a;color:#fff;border-color:#11131a}
+    .ext-links{display:flex;flex-direction:column;gap:.5rem}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+    .store-row{display:grid;grid-template-columns:80px 1fr 90px 80px 60px;gap:.75rem;align-items:center;padding:.7rem 0;border-bottom:1px solid #f5f5f5;font-size:.82rem}
+    .store-row:last-child{border-bottom:none}
+    .store-row-head{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#aaa;font-weight:700;padding:.5rem 0;border-bottom:2px solid #f0f0f0}
+    .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+    .dot-green{background:#4caf50}
+    .dot-yellow{background:#ff9800}
+    .dot-red{background:#f44336}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    th{background:#f8f8f8;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#888;padding:.7rem 1rem;text-align:left;border-bottom:2px solid #eee}
+    td{padding:.7rem 1rem;border-bottom:1px solid #f5f5f5;color:#11131a}
+    tr:last-child td{border-bottom:none}
+    .tag-vs{background:#11131a;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
+    .tag-pink{background:#ed2d8b;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
+    .tag-vsb{background:#8e44ad;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
+    .tag-all{background:#555;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
+  </style>
 </head>
 <body>
-<div class="shell">
-  <aside class="side">
-    <div class="logo">VS&amp;Co SET Loop</div>
-    <div class="persona"><b>Store View</b><small>Associate / SM / ASM</small></div>
-    <div class="store-badge">
-      <div class="snum">#1392</div>
-      <div class="sname">Victoria's Secret · Tyson's Corner</div>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+      <a href="district.html">📋 District — 339 West</a>
+      <a href="region.html">🗺️ Region — 400 West</a>
+      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
     </div>
-    <nav>
-      <div class="section-label">Today</div>
-      <a href="#checklist" class="active">Open/Close Checklist</a>
-      <a href="#floorset">Floorset Guide</a>
-      <a href="#announcements">Announcements</a>
-      <a href="#promotions">Promotions</a>
-      <div class="section-label">Tools</div>
-      <a href="#photo">Photo Share</a>
-      <a href="#tools">Quick Links</a>
-    </nav>
-  </aside>
-  <main class="main">
-    <div class="page-header">
-      <h1>Good morning, Store 1392 👋</h1>
-      <p>Tyson's Corner · Floorset Week · RC12 · Friday Aug 23, 2025</p>
+  </nav>
+  <div class="hero">
+    <div class="hero-tag">Store Leader View</div>
+    <h1>Store 1392 · Ontario Mills</h1>
+    <div class="hero-sub">Region 400 West · District 339 · VS Full + PINK · Tier 6b BOC</div>
+    <div class="hero-meta">
+      <div class="badge">Brand <span>VS + PINK</span></div>
+      <div class="badge">Tier <span>6b</span></div>
+      <div class="badge">District <span>339</span></div>
+      <div class="badge">Region <span>400 West</span></div>
     </div>
-    <div class="kpi-row">
-      <div class="kpi good">
-        <div class="label">Checklist Progress</div>
-        <div class="value" id="pct-val">74%</div>
-        <div class="progress-bar"><div class="progress-fill" id="pbar" style="width:74%"></div></div>
-        <div class="sub" id="pct-sub">17 of 23 tasks done</div>
+  </div>
+
+  <div class="container">
+
+    <!-- Active Promotions -->
+    <div class="section-title">Active Launches</div>
+    <div class="grid-3" style="margin-bottom:2rem">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">August Floorset</span>
+          <span class="tag-vs">VS</span>
+        </div>
+        <div class="item-title">August Floorset Launch</div>
+        <div class="item-meta" style="margin-top:.5rem">18 hrs · High Priority · Visual Merchandising</div>
+        <div class="progress-bar" style="margin-top:.75rem"><div class="progress-fill" style="width:72%"></div></div>
+        <div class="item-meta" style="margin-top:.3rem">72% complete</div>
+        <span class="pill pill-green" style="margin-top:.75rem">Published</span>
       </div>
-      <div class="kpi warn"><div class="label">Open ZOH Items</div><div class="value">3</div><div class="sub">Due by end of day</div></div>
-      <div class="kpi blue"><div class="label">New Announcements</div><div class="value">2</div><div class="sub">From DM + Home Office</div></div>
-      <div class="kpi good"><div class="label">Floorset Status</div><div class="value" style="font-size:14px;padding-top:4px">ON TRACK</div><div class="sub">Photo submission open</div></div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Fragrance Feature</span>
+          <span class="tag-vsb">VSB</span>
+        </div>
+        <div class="item-title">Fragrance Feature Event</div>
+        <div class="item-meta" style="margin-top:.5rem">6 hrs · High Priority · Marketing/Beauty</div>
+        <div class="progress-bar" style="margin-top:.75rem"><div class="progress-fill" style="width:55%"></div></div>
+        <div class="item-meta" style="margin-top:.3rem">55% complete</div>
+        <span class="pill pill-green" style="margin-top:.75rem">Published</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Back-to-Campus</span>
+          <span class="tag-pink">PINK</span>
+        </div>
+        <div class="item-title">Back-to-Campus Floorset</div>
+        <div class="item-meta" style="margin-top:.5rem">14 hrs · High Priority · PINK Visual</div>
+        <div class="progress-bar" style="margin-top:.75rem"><div class="progress-fill" style="width:88%"></div></div>
+        <div class="item-meta" style="margin-top:.3rem">88% complete</div>
+        <span class="pill pill-green" style="margin-top:.75rem">Published</span>
+      </div>
     </div>
+
     <div class="grid-2">
-      <div>
-        <div class="card" id="checklist">
-          <div class="card-head"><h2>📋 Open-to-Close Checklist</h2><span class="badge badge-warn">In Progress</span></div>
-          <div class="card-body">
-            <div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px">OPENING</div>
-            <div class="checklist-item"><input type="checkbox" id="c1" checked><label for="c1">Morning walk-through complete</label><span class="tag tag-open">Open</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c2" checked><label for="c2">Fixtures verified per SET guide</label><span class="tag tag-visual">Visual</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c3" checked><label for="c3">Promotions signage in place</label><span class="tag tag-open">Open</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Floorset photo submitted to DM</label><span class="tag tag-visual">Visual</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c5" checked><label for="c5">ZOH items reviewed</label><span class="tag tag-open">Open</span></div>
-            <div style="font-size:11px;font-weight:700;color:var(--muted);margin:14px 0 8px">MIDDAY</div>
-            <div class="checklist-item"><input type="checkbox" id="c6" checked><label for="c6">Recovery check — all zones</label><span class="tag tag-open">Open</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Selldown transition items moved</label><span class="tag tag-visual">Visual</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Fragrance qualifier verification</label><span class="tag tag-visual">Visual</span></div>
-            <div style="font-size:11px;font-weight:700;color:var(--muted);margin:14px 0 8px">CLOSING</div>
-            <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">End-of-day recovery complete</label><span class="tag tag-close">Close</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c10"><label for="c10">Loss prevention close walk</label><span class="tag tag-close">Close</span></div>
-            <div class="checklist-item"><input type="checkbox" id="c11"><label for="c11">Close report submitted</label><span class="tag tag-close">Close</span></div>
-          </div>
+
+      <!-- Business Now -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Business Now</span>
+          <a href="communications.html" style="font-size:.72rem;color:#ed2d8b;text-decoration:none">View all →</a>
         </div>
-        <div class="card" id="announcements">
-          <div class="card-head"><h2>📣 Announcements</h2><span class="badge badge-pink">2 New</span></div>
-          <div class="card-body">
-            <div class="announcement"><div class="ann-icon" style="background:#fff2f7">🏠</div><div class="ann-body"><div class="from">Home Office · Visual Merchandising</div><div class="msg">RC12 floorset guide updated — Tier 5/6 PINK cabinet instructions now live</div><div class="time">Today, 7:02 AM</div></div></div>
-            <div class="announcement"><div class="ann-icon" style="background:#ede9fe">👤</div><div class="ann-body"><div class="from">DM · Sarah Chen</div><div class="msg">Great photo submissions last week — Region is #2 in photo completion. Keep it up!</div><div class="time">Yesterday, 4:30 PM</div></div></div>
-            <div class="announcement"><div class="ann-icon" style="background:#dcfce7">📦</div><div class="ann-body"><div class="from">Home Office · Inventory</div><div class="msg">VSB Fragrance qualifier SOP updated — check SET guide for latest instructions</div><div class="time">Aug 21, 9:00 AM</div></div></div>
+        <div class="item-row">
+          <div class="item-icon">📬</div>
+          <div class="item-body">
+            <div class="item-title">Free VS Lace Mesh Tote GWP</div>
+            <div class="item-meta">VS Stores · Action Required · qualifying purchase</div>
           </div>
+          <span class="pill pill-red">Action</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📬</div>
+          <div class="item-body">
+            <div class="item-title">VS Bra Try-On Event</div>
+            <div class="item-meta">VS Stores · Action Required</div>
+          </div>
+          <span class="pill pill-red">Action</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📌</div>
+          <div class="item-body">
+            <div class="item-title">Very Sexy Anniversary Charm Push-Up Bra Reticket</div>
+            <div class="item-meta">Affected stores · Task</div>
+          </div>
+          <span class="pill pill-yellow">Task</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">🎉</div>
+          <div class="item-body">
+            <div class="item-title">Fall Bonus Card Program</div>
+            <div class="item-meta">US/Canada Stores · Action Required</div>
+          </div>
+          <span class="pill pill-red">Action</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📋</div>
+          <div class="item-body">
+            <div class="item-title">Pre-Holiday Roster Review</div>
+            <div class="item-meta">All Stores · Checklist due Aug 24</div>
+          </div>
+          <span class="pill pill-yellow">Due Aug 24</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">📣</div>
+          <div class="item-body">
+            <div class="item-title">2026 Holiday Conference — Columbus</div>
+            <div class="item-meta">In Person · DMs, Info</div>
+          </div>
+          <span class="pill pill-blue">Info</span>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">🐾</div>
+          <div class="item-body">
+            <div class="item-title">PINK Friday Mystery Mini Dog GWP</div>
+            <div class="item-meta">PINK Stores · DM Inspection</div>
+          </div>
+          <span class="pill pill-pink">PINK</span>
         </div>
       </div>
-      <div>
-        <div class="card" id="promotions">
-          <div class="card-head"><h2>🏷️ Active Promotions</h2><span class="badge badge-green">3 Live</span></div>
-          <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <div style="background:#fff2f7;border:1px solid #fbb6d4;border-radius:8px;padding:12px"><div style="font-weight:800;font-size:13px;color:var(--pink)">Semi-Annual Sale</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Ends Aug 31 · All zones — check SET guide for fixture configuration</div></div>
-              <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px"><div style="font-weight:800;font-size:13px;color:var(--green)">Buy 2 Get 1 Bra</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Ongoing · Bra zone · Signage kit #BRA-B2G1-RC12</div></div>
-              <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px"><div style="font-weight:800;font-size:13px;color:var(--orange)">Fragrance Launch — VSB Luna</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Aug 28 launch · Floor placement per guide pg. 14</div></div>
-            </div>
+
+      <!-- Checklist + Photo -->
+      <div style="display:flex;flex-direction:column;gap:1.5rem">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Daily Checklist</span>
+            <a href="checklist.html" style="font-size:.72rem;color:#ed2d8b;text-decoration:none">Full view →</a>
           </div>
+          <ul class="check-list">
+            <li><div class="check-box done">✓</div> Review notes / observations / email / Store Connect</li>
+            <li><div class="check-box done">✓</div> Review UKG Manage Timecards</li>
+            <li><div class="check-box done">✓</div> Post Daily Plan</li>
+            <li><div class="check-box">  </div> Open registers &amp; inspect pin pads</li>
+            <li><div class="check-box">  </div> Update promotions and marketing placement</li>
+            <li><div class="check-box">  </div> Walk sales floor and backroom for cleanliness</li>
+          </ul>
         </div>
-        <div class="card" id="photo">
-          <div class="card-head"><h2>📸 Photo Submission</h2><span class="badge badge-warn">2 of 4 done</span></div>
-          <div class="card-body">
-            <p style="font-size:12px;color:var(--muted);margin:0 0 12px">Submit floorset photos for RC12. DM reviews by 6 PM.</p>
-            <div class="photo-grid">
-              <div class="photo-slot" style="border-color:var(--green);background:#f0fdf4"><span>✅</span><p style="color:var(--green)">Bra Wall<br>Submitted</p></div>
-              <div class="photo-slot" style="border-color:var(--green);background:#f0fdf4"><span>✅</span><p style="color:var(--green)">Body Care<br>Submitted</p></div>
-              <div class="photo-slot"><span>📷</span><p>PINK Zone<br>Tap to add</p></div>
-              <div class="photo-slot"><span>📷</span><p>Entrance<br>Tap to add</p></div>
-              <div class="photo-slot"><span>📎</span><p>Attachment</p></div>
-              <div class="photo-slot"><span>💬</span><p>Notes</p></div>
-            </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Photo Inspections</span>
+            <a href="photo-inspection.html" style="font-size:.72rem;color:#ed2d8b;text-decoration:none">Submit →</a>
           </div>
-        </div>
-        <div class="card" id="tools">
-          <div class="card-head"><h2>⚡ Quick Tools</h2></div>
-          <div class="card-body">
-            <div class="tool-grid">
-              <a class="tool-link" href="https://vsstoresupplyorder.com/" target="_blank"><span>📦</span>Supply</a>
-              <a class="tool-link" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank"><span>📊</span>MSI</a>
-              <a class="tool-link" href="https://vss.archway.com/login" target="_blank"><span>🎨</span>Mktg</a>
-              <a class="tool-link" href="https://blueday.vscocorp.com/" target="_blank"><span>🔵</span>BlueDay</a>
-              <a class="tool-link" href="https://intradayreporting.vscocorp.com/vss" target="_blank"><span>📈</span>Intraday</a>
-              <a class="tool-link" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank"><span>🔗</span>Intranet</a>
-              <a class="tool-link" href="checklist.html"><span>✅</span>Checklist</a>
-              <a class="tool-link" href="SET_LOOP_MASTER.html"><span>🔄</span>SET Loop</a>
-              <a class="tool-link" href="communications.html"><span>📬</span>Messages</a>
+          <div class="item-row">
+            <div class="item-icon">📸</div>
+            <div class="item-body">
+              <div class="item-title">Panty Bars Overview 1–5</div>
+              <div class="item-meta">Due Thursday · OOB</div>
             </div>
+            <span class="pill pill-yellow">Pending</span>
+          </div>
+          <div class="item-row">
+            <div class="item-icon">📸</div>
+            <div class="item-body">
+              <div class="item-title">PINK Room 1–3 Overview</div>
+              <div class="item-meta">Due Thursday · OOB</div>
+            </div>
+            <span class="pill pill-yellow">Pending</span>
+          </div>
+          <div class="item-row">
+            <div class="item-icon">📸</div>
+            <div class="item-body">
+              <div class="item-title">Beauty Mist Collection Overview</div>
+              <div class="item-meta">Due Thursday · OOB</div>
+            </div>
+            <span class="pill pill-yellow">Pending</span>
           </div>
         </div>
       </div>
     </div>
-  </main>
-</div>
-<script>
-const checkboxes = document.querySelectorAll('.checklist-item input[type=checkbox]');
-function updateProgress(){
-  const done=[...checkboxes].filter(c=>c.checked).length;
-  const pct=Math.round(done/checkboxes.length*100);
-  document.getElementById('pbar').style.width=pct+'%';
-  document.getElementById('pct-val').textContent=pct+'%';
-  document.getElementById('pct-sub').textContent=done+' of '+checkboxes.length+' tasks done';
-}
-checkboxes.forEach(c=>c.addEventListener('change',updateProgress));
-</script>
+
+    <!-- Quick Tools -->
+    <div class="section-title" style="margin-top:2rem">Quick Tools</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem">Store Operations</div>
+        <div class="ext-links">
+          <a class="ext-link" href="checklist.html">📋 Close-to-Open Checklist</a>
+          <a class="ext-link" href="communications.html">💬 Communications</a>
+          <a class="ext-link" href="notifications.html">🔔 Notifications</a>
+          <a class="ext-link" href="photo-inspection.html">📸 Photo Inspection</a>
+          <a class="ext-link" href="set-loop-assortment.html">🗂️ SET Loop Assortment</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem">External Tools</div>
+        <div class="ext-links">
+          <a class="ext-link" href="https://vsstoresupplyorder.com/" target="_blank">📦 Supply Order</a>
+          <a class="ext-link" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank">📊 MicroStrategy Reports</a>
+          <a class="ext-link" href="https://blueday.vscocorp.com/" target="_blank">🔵 Blue Day</a>
+          <a class="ext-link" href="https://intradayreporting.vscocorp.com/vss" target="_blank">📈 Intraday Reporting</a>
+          <a class="ext-link" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank">🏢 SharePoint DM Hub</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem">Navigation</div>
+        <div class="ext-links">
+          <a class="ext-link" href="district.html">📋 District 339 View</a>
+          <a class="ext-link" href="region.html">🗺️ Region 400 View</a>
+          <a class="ext-link" href="SET_LOOP_MASTER.html">🏠 Home Office</a>
+          <a class="ext-link" href="calendar.html">📅 Field Calendar</a>
+          <a class="ext-link" href="partners.html">🤝 Partner Intake</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
+  </footer>
 </body>
 </html>

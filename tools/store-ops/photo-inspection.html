@@ -1,19 +1,161 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SET Loop | Photo Inspection</title>
-<style>:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--orange:#b65d00}*{box-sizing:border-box}body{margin:0;background:#f7f2f4;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:20px 0}.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--pink);border-bottom:1px solid var(--line)}nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}nav a.active,nav a:hover{color:var(--pink);border-left-color:var(--pink);background:var(--blush)}.main{padding:28px}.h1{font-size:22px;font-weight:900;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 24px}.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}.ch{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:space-between}.cb{padding:18px}.upload-zone{border:2px dashed var(--line);border-radius:10px;padding:40px;text-align:center;cursor:pointer;transition:.2s}.upload-zone:hover{border-color:var(--pink);background:var(--blush)}.upload-zone span{font-size:36px;display:block;margin-bottom:8px}.upload-zone p{font-size:13px;color:var(--muted);margin:0}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.photo-slot{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:700;text-align:center;padding:8px}.slot-done{background:#f0fdf4;border:2px solid var(--green);color:var(--green)}.slot-pend{background:#f7f2f4;border:2px dashed var(--line);color:var(--muted);cursor:pointer}.slot-pend:hover{border-color:var(--pink);background:var(--blush)}.slot-review{background:#fff7ed;border:2px solid var(--orange);color:var(--orange)}.zone-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}.slot-icon{font-size:24px;margin-bottom:4px}</style>
-</head><body>
-<div class="shell">
-<aside class="side"><div class="logo">SET Loop · Photos</div><nav><a href="store.html">← Store Home</a><a href="#submit" class="active">Submit Photos</a><a href="#history">History</a></nav></aside>
-<main class="main">
-<h1 class="h1">Photo Inspection</h1>
-<p class="sub">Store 1392 · RC12 Floorset · Submit by 6 PM today · DM: Sarah Chen</p>
-<div class="card"><div class="ch">📸 RC12 Required Zones <span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--blush);color:var(--pink)">2 of 4 submitted</span></div><div class="cb" id="submit">
-<div class="photo-grid">
-<div class="slot-done photo-slot"><div class="slot-icon">✅</div><div class="zone-label">Bra Wall</div>Submitted · Aug 23 8:42 AM</div>
-<div class="slot-done photo-slot"><div class="slot-icon">✅</div><div class="zone-label">Body Care</div>Submitted · Aug 23 9:15 AM</div>
-<div class="slot-pend photo-slot"><div class="slot-icon">📷</div><div class="zone-label">PINK Zone</div>Tap to upload</div>
-<div class="slot-pend photo-slot"><div class="slot-icon">📷</div><div class="zone-label">Entrance</div>Tap to upload</div>
-</div>
-<div style="margin-top:18px"><div class="upload-zone"><span>📎</span><p>Drag & drop photos here, or tap to browse<br><small>JPG, PNG — max 10MB per photo</small></p></div></div>
-<div style="margin-top:14px;display:flex;gap:10px"><button style="background:var(--pink);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer">Submit to DM</button><button style="background:#f7f2f4;border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px;cursor:pointer">Save Draft</button></div>
-</div></div>
-</main></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Inspection · Store 1392 · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-bottom:1rem}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-pink{background:#fce4ec;color:#ad1457}
+    .photo-zone{border:2px dashed #e0e0e0;border-radius:10px;padding:1.5rem;text-align:center;transition:all .2s;cursor:pointer;background:#fafafa}
+    .photo-zone:hover{border-color:#ed2d8b;background:#fff0f7}
+    .photo-zone.submitted{border-color:#4caf50;border-style:solid;background:#f1f8e9}
+    .photo-zone-icon{font-size:2rem;margin-bottom:.5rem}
+    .photo-zone-title{font-size:.88rem;font-weight:700;color:#11131a}
+    .photo-zone-meta{font-size:.72rem;color:#888;margin-top:.3rem}
+    .photo-zone-btn{display:inline-block;background:#ed2d8b;color:#fff;border:none;padding:.5rem 1.25rem;border-radius:6px;font-size:.75rem;font-weight:700;letter-spacing:.04em;cursor:pointer;margin-top:.75rem}
+    .photo-zone.submitted .photo-zone-btn{background:#4caf50}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+      <a href="district.html">📋 District — 339 West</a>
+      <a href="region.html">🗺️ Region — 400 West</a>
+      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag">Visual Standards</div>
+    <h1>Photo Inspection</h1>
+    <div class="hero-sub">Store 1392 · Ontario Mills · All zones due Thursday by OOB</div>
+  </div>
+  <div class="container">
+    <div class="card" style="background:#fff8e1;border-color:#ffe082;margin-bottom:1.5rem">
+      <div style="font-size:.82rem;color:#795548;line-height:1.6"><strong>📸 Submission Reminder:</strong> All photo zones must be submitted by <strong>Thursday OOB</strong>. Photos must match current floorset standard. Walk each zone before photographing. If a zone is not to standard, correct before submitting.</div>
+    </div>
+
+    <div class="section-title">VS — Panty Bar Zones (1–5)</div>
+    <div class="grid-3" style="margin-bottom:2rem">
+      <div class="photo-zone" id="pz1" onclick="submit('pz1')">
+        <div class="photo-zone-icon">🩲</div>
+        <div class="photo-zone-title">Panty Bar Overview 1</div>
+        <div class="photo-zone-meta">Full bar view · Current floorset · VS</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pz2" onclick="submit('pz2')">
+        <div class="photo-zone-icon">🩲</div>
+        <div class="photo-zone-title">Panty Bar Overview 2</div>
+        <div class="photo-zone-meta">Full bar view · Current floorset · VS</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pz3" onclick="submit('pz3')">
+        <div class="photo-zone-icon">🩲</div>
+        <div class="photo-zone-title">Panty Bar Overview 3</div>
+        <div class="photo-zone-meta">Full bar view · Current floorset · VS</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pz4" onclick="submit('pz4')">
+        <div class="photo-zone-icon">🩲</div>
+        <div class="photo-zone-title">Panty Bar Overview 4</div>
+        <div class="photo-zone-meta">Full bar view · Current floorset · VS</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pz5" onclick="submit('pz5')">
+        <div class="photo-zone-icon">🩲</div>
+        <div class="photo-zone-title">Panty Bar Overview 5</div>
+        <div class="photo-zone-meta">Full bar view · Current floorset · VS</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+    </div>
+
+    <div class="section-title">PINK — Room Overviews (1–3)</div>
+    <div class="grid-3" style="margin-bottom:2rem">
+      <div class="photo-zone" id="pr1" onclick="submit('pr1')">
+        <div class="photo-zone-icon">🩷</div>
+        <div class="photo-zone-title">PINK Room 1 Overview</div>
+        <div class="photo-zone-meta">Full room view · Back-to-Campus set · PINK</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pr2" onclick="submit('pr2')">
+        <div class="photo-zone-icon">🩷</div>
+        <div class="photo-zone-title">PINK Room 2 Overview</div>
+        <div class="photo-zone-meta">Full room view · Back-to-Campus set · PINK</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+      <div class="photo-zone" id="pr3" onclick="submit('pr3')">
+        <div class="photo-zone-icon">🩷</div>
+        <div class="photo-zone-title">PINK Room 3 Overview</div>
+        <div class="photo-zone-meta">Full room view · Back-to-Campus set · PINK</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+    </div>
+
+    <div class="section-title">Beauty — Mist Collection</div>
+    <div class="grid-3" style="margin-bottom:2rem">
+      <div class="photo-zone" id="bm1" onclick="submit('bm1')">
+        <div class="photo-zone-icon">🌸</div>
+        <div class="photo-zone-title">Beauty Mist Collection Overview</div>
+        <div class="photo-zone-meta">Full display · Fragrance Feature Event · VSB</div>
+        <button class="photo-zone-btn">Submit Photo</button>
+      </div>
+    </div>
+
+    <div class="card" id="summary-card">
+      <div class="card-title" style="margin-bottom:.75rem">Submission Summary</div>
+      <div id="summary-text" style="font-size:.85rem;color:#555">0 of 9 zones submitted. All zones due Thursday by OOB.</div>
+      <div style="background:#f0f0f0;border-radius:4px;height:6px;margin-top:.75rem;overflow:hidden">
+        <div id="summary-bar" style="height:100%;width:0%;background:#ed2d8b;border-radius:4px;transition:width .3s"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem">
+      <a href="store.html" style="display:inline-block;background:#ed2d8b;color:#fff;padding:.65rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.04em">← Back to Store</a>
+    </div>
+  </div>
+  <script>
+    var submitted = {};
+    var total = 9;
+    function submit(id){
+      if(submitted[id]) return;
+      submitted[id] = true;
+      var el = document.getElementById(id);
+      el.classList.add('submitted');
+      el.querySelector('.photo-zone-btn').textContent = '✓ Submitted';
+      var count = Object.keys(submitted).length;
+      document.getElementById('summary-text').textContent = count + ' of ' + total + ' zones submitted.' + (count < total ? ' Continue submitting remaining zones.' : ' All zones submitted. ✓');
+      document.getElementById('summary-bar').style.width = Math.round(count/total*100) + '%';
+    }
+  </script>
+  <footer>
+    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
+  </footer>
+</body>
+</html>

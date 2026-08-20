@@ -1,45 +1,119 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SET Loop | Store Checklist</title>
-<style>:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--orange:#b65d00;--purple:#7c3aed;--blue:#1d4ed8}*{box-sizing:border-box}body{margin:0;background:#f7f2f4;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:20px 0}.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--pink);border-bottom:1px solid var(--line)}nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}nav a.active,nav a:hover{color:var(--pink);border-left-color:var(--pink);background:var(--blush)}.main{padding:28px}.h1{font-size:22px;font-weight:900;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 24px}.progress-bar{height:12px;background:#f0e9ec;border-radius:6px;overflow:hidden;margin:0 0 24px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),#7c3aed);border-radius:6px;transition:width .4s}.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}.ch{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:space-between}.cb{padding:10px 18px 18px}.section-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:12px 0 6px}.checklist-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.checklist-item:last-child{border-bottom:none}.checklist-item input{width:16px;height:16px;accent-color:var(--pink);cursor:pointer;flex-shrink:0}.checklist-item label{font-size:13px;cursor:pointer;flex:1}.tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;flex-shrink:0}.tag-open{background:#dbeafe;color:var(--blue)}.tag-close{background:#ede9fe;color:var(--purple)}.tag-visual{background:var(--blush);color:var(--pink)}.tag-inv{background:#dcfce7;color:var(--green)}.tag-safety{background:#fee2e2;color:#b42318}.stat{font-size:13px;font-weight:700;color:var(--pink)}</style>
-</head><body>
-<div class="shell">
-<aside class="side"><div class="logo">SET Loop · Checklist</div><nav><a href="store.html">← Store Home</a><a href="#checklist" class="active">Full Checklist</a><a href="#opening">Opening</a><a href="#midday">Midday</a><a href="#closing">Closing</a></nav></aside>
-<main class="main">
-<h1 class="h1">Open-to-Close Checklist</h1>
-<p class="sub">Store 1392 · Tyson's Corner · RC12 · Aug 23, 2025</p>
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><span id="stat-text" class="stat">17 of 23 complete (74%)</span></div>
-<div class="progress-bar"><div class="progress-fill" id="pbar" style="width:74%"></div></div>
-<div class="card" id="checklist"><div class="ch">📋 Today's Full Checklist <span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--blush);color:var(--pink)">RC12</span></div><div class="cb">
-<div class="section-label" id="opening">Opening Tasks</div>
-<div class="checklist-item"><input type="checkbox" id="c1" checked><label for="c1">Morning walk-through — all zones reviewed</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c2" checked><label for="c2">Fixtures verified per SET floorset guide</label><span class="tag tag-visual">Visual</span></div>
-<div class="checklist-item"><input type="checkbox" id="c3" checked><label for="c3">Promotional signage in correct positions</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c4" checked><label for="c4">Fitting rooms clean and stocked</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c5" checked><label for="c5">Cash wrap stocked and ready</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Floorset photo submitted to DM (RC12)</label><span class="tag tag-visual">Visual</span></div>
-<div class="checklist-item"><input type="checkbox" id="c7" checked><label for="c7">ZOH item list reviewed</label><span class="tag tag-inv">Inventory</span></div>
-<div class="checklist-item"><input type="checkbox" id="c8" checked><label for="c8">Team daily briefing complete</label><span class="tag tag-open">Open</span></div>
-<div class="section-label" id="midday">Midday Tasks</div>
-<div class="checklist-item"><input type="checkbox" id="c9" checked><label for="c9">Recovery check — all zones</label><span class="tag tag-visual">Visual</span></div>
-<div class="checklist-item"><input type="checkbox" id="c10" checked><label for="c10">Restock priority items identified</label><span class="tag tag-inv">Inventory</span></div>
-<div class="checklist-item"><input type="checkbox" id="c11"><label for="c11">Selldown transition items moved per guide</label><span class="tag tag-visual">Visual</span></div>
-<div class="checklist-item"><input type="checkbox" id="c12"><label for="c12">Fragrance qualifier verification complete</label><span class="tag tag-visual">Visual</span></div>
-<div class="checklist-item"><input type="checkbox" id="c13" checked><label for="c13">Returns processed and reshelved</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c14" checked><label for="c14">Associate coaching touchpoint</label><span class="tag tag-open">Open</span></div>
-<div class="checklist-item"><input type="checkbox" id="c15" checked><label for="c15">Promotions signage mid-day check</label><span class="tag tag-visual">Visual</span></div>
-<div class="section-label" id="closing">Closing Tasks</div>
-<div class="checklist-item"><input type="checkbox" id="c16"><label for="c16">End-of-day recovery — all zones complete</label><span class="tag tag-close">Close</span></div>
-<div class="checklist-item"><input type="checkbox" id="c17"><label for="c17">Fitting rooms final check</label><span class="tag tag-close">Close</span></div>
-<div class="checklist-item"><input type="checkbox" id="c18"><label for="c18">Backroom organized, receiving area clear</label><span class="tag tag-close">Close</span></div>
-<div class="checklist-item"><input type="checkbox" id="c19"><label for="c19">Loss prevention final walk complete</label><span class="tag tag-safety">Safety</span></div>
-<div class="checklist-item"><input type="checkbox" id="c20"><label for="c20">Daily ZOH updates submitted</label><span class="tag tag-inv">Inventory</span></div>
-<div class="checklist-item"><input type="checkbox" id="c21"><label for="c21">Close report submitted to DM</label><span class="tag tag-close">Close</span></div>
-<div class="checklist-item"><input type="checkbox" id="c22"><label for="c22">Alarm set / store secured</label><span class="tag tag-safety">Safety</span></div>
-<div class="checklist-item"><input type="checkbox" id="c23"><label for="c23">Next-day prep notes logged</label><span class="tag tag-close">Close</span></div>
-</div></div>
-</main></div>
-<script>
-const cbs=document.querySelectorAll('.checklist-item input');
-function upd(){const done=[...cbs].filter(c=>c.checked).length;const pct=Math.round(done/cbs.length*100);document.getElementById('pbar').style.width=pct+'%';document.getElementById('stat-text').textContent=done+' of '+cbs.length+' complete ('+pct+'%)';}
-cbs.forEach(c=>c.addEventListener('change',upd));
-</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checklist · Store 1392 · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-pink{background:#fce4ec;color:#ad1457}
+    .pill-gray{background:#f5f5f5;color:#555}
+    .check-group{margin-bottom:1.5rem}
+    .check-group-title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:.75rem;padding:.4rem .75rem;background:#fff0f7;border-left:3px solid #ed2d8b}
+    .check-list{list-style:none}
+    .check-list li{display:flex;align-items:center;gap:.75rem;padding:.65rem .5rem;border-bottom:1px solid #f8f8f8;font-size:.85rem;cursor:pointer}
+    .check-list li:last-child{border-bottom:none}
+    .check-list li:hover{background:#fafafa}
+    .check-box{width:20px;height:20px;border-radius:4px;border:2px solid #ddd;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:all .15s}
+    .check-box.done{background:#ed2d8b;border-color:#ed2d8b;color:#fff}
+    .check-label{flex:1}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+      <a href="district.html">📋 District — 339 West</a>
+      <a href="region.html">🗺️ Region — 400 West</a>
+      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag">Store Operations</div>
+    <h1>Close-to-Open Checklist</h1>
+    <div class="hero-sub">Store 1392 · Ontario Mills · VS + PINK</div>
+  </div>
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <div class="check-group">
+          <div class="check-group-title">🌅 Open</div>
+          <ul class="check-list">
+            <li onclick="toggle(this)"><div class="check-box done">✓</div><span class="check-label">Review notes / observations / email / Store Connect</span></li>
+            <li onclick="toggle(this)"><div class="check-box done">✓</div><span class="check-label">Review UKG Manage Timecards</span></li>
+            <li onclick="toggle(this)"><div class="check-box done">✓</div><span class="check-label">Post Daily Plan</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Open registers &amp; inspect pin pads</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Update promotions and marketing placement</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Walk sales floor and backroom for cleanliness</span></li>
+          </ul>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">🌇 Close</div>
+          <ul class="check-list">
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Fully recover each room to standard</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Close registers and validate end-of-day reporting</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Send notes for opening SLT</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="check-group">
+          <div class="check-group-title">🔄 All Day</div>
+          <ul class="check-list">
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Maintain cash wrap and fitting room standards</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Execute replenishment and standards pushes</span></li>
+          </ul>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">📅 Weekly</div>
+          <ul class="check-list">
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Submit supply / packaging / light bulb order</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Submit Zero On Hand</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Complete RFID Cycle Count</span></li>
+            <li onclick="toggle(this)"><div class="check-box"></div><span class="check-label">Complete Practice Peak and follow up</span></li>
+          </ul>
+        </div>
+        <div style="margin-top:1rem">
+          <a href="store.html" style="display:inline-block;background:#ed2d8b;color:#fff;padding:.65rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.04em">← Back to Store</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggle(li){
+      var box = li.querySelector('.check-box');
+      if(box.classList.contains('done')){box.classList.remove('done');box.textContent='';}
+      else{box.classList.add('done');box.textContent='✓';}
+    }
+  </script>
+  <footer>
+    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
+  </footer>
+</body>
+</html>
