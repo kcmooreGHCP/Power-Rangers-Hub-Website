@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SET Operations Studio — shared store, floorset, source, calendar, and workload context."
+    />
+    <title>SET Operations Studio</title>
+    <link rel="stylesheet" href="./assets/set-brand-system.css" />
+    <link rel="stylesheet" href="./assets/set-operations-studio.css" />
+  </head>
+  <body data-brand="set">
+    <a class="skip-link" href="#main">Skip to Operations Studio</a>
+
+    <header class="ops-header">
+      <a class="ops-lockup" href="./START_HERE.html" aria-label="Back to SET Resource Center">
+        <span class="ops-mark">SET</span>
+        <span>
+          <strong>Operations Studio</strong>
+          <small>Shared planning layer</small>
+        </span>
+      </a>
+      <nav aria-label="Operations Studio navigation">
+        <a href="#context">Context</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#sources">Sources</a>
+        <a href="#labor">Labor</a>
+        <a href="#tools">Tools</a>
+      </nav>
+      <span class="ops-status"><i></i> Local evidence</span>
+    </header>
+
+    <main id="main">
+      <section class="ops-hero">
+        <div>
+          <p class="ops-kicker">Shared SET operating view / v1.4.3</p>
+          <h1>One SET context.<br /><em>Source truth stays intact.</em></h1>
+          <p class="ops-lede">
+            Choose store, floorset, and brand once. Calendar, source coverage,
+            line lists, and workload scenarios stay aligned without changing source files.
+          </p>
+          <div class="hero-actions">
+            <a class="ops-button ops-button-primary" href="#context">Set the context <span>↘</span></a>
+            <a class="ops-button ops-button-quiet" href="./BEAUTY_STUDIO.html">Open Beauty pilot</a>
+          </div>
+        </div>
+        <aside class="hero-context" aria-label="Active context">
+          <p>Active working context</p>
+          <strong data-context-store>Choose store</strong>
+          <span data-context-name>Indexed local workspace</span>
+          <dl>
+            <div><dt>Floorset</dt><dd data-context-floorset>—</dd></div>
+            <div><dt>Brand</dt><dd data-context-brand>All brands</dd></div>
+            <div><dt>Sources</dt><dd data-context-source-count>0</dd></div>
+            <div><dt>Scan</dt><dd data-scan-state>Needs refresh</dd></div>
+          </dl>
+          <div class="first-look" aria-label="Shared operations snapshot">
+            <article>
+              <span>Calendar</span>
+              <strong data-preview-calendar>Refresh</strong>
+              <small>Shared date</small>
+            </article>
+            <article>
+              <span>Sources</span>
+              <strong data-preview-sources>0 candidates</strong>
+              <small>Context filtered</small>
+            </article>
+            <article>
+              <span>Labor</span>
+              <strong data-preview-labor>Scenario only</strong>
+              <small>No approval</small>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <aside class="truth-strip" aria-label="Operating boundaries">
+        <span><b>Indexed local</b> means found on this computer.</span>
+        <span><b>Context matched</b> means the store/floorset metadata aligns.</span>
+        <span><b>Approved</b> appears only when an indexed record explicitly carries that status.</span>
+        <span><b>Labor</b> below is a planning scenario—not payroll approval or transfer.</span>
+      </aside>
+
+      <section class="ops-section context-section" id="context">
+        <div class="section-heading">
+          <div>
+            <p class="ops-kicker">01 / exact context</p>
+            <h2>Choose once. Filter everything.</h2>
+          </div>
+          <p>
+            This selection changes only the view in this browser. It does not rename
+            folders, edit maps, approve a source, or write to RC12_9.
+          </p>
+        </div>
+
+        <form class="context-form" data-context-form>
+          <label>
+            Store
+            <select name="store" data-store-select>
+              <option value="">Choose indexed store</option>
+            </select>
+          </label>
+          <label>
+            Floorset / update
+            <select name="floorset" data-floorset-select></select>
+          </label>
+          <label>
+            Brand view
+            <select name="brand" data-brand-select>
+              <option value="all">All brands</option>
+              <option value="vs">Victoria's Secret</option>
+              <option value="beauty">Beauty</option>
+              <option value="pink">PINK</option>
+              <option value="pink-beauty">PINK Beauty</option>
+              <option value="vsx">VSX</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="context-metrics">
+          <article><span>Store folders</span><strong data-store-count>0</strong><small>Indexed locally</small></article>
+          <article><span>Context sources</span><strong data-source-count>0</strong><small data-source-scope>Choose a store</small></article>
+          <article><span>Line lists</span><strong data-line-list-count>0</strong><small>Context-filtered candidates</small></article>
+          <article><span>Maps</span><strong data-map-count>0</strong><small>Working/history candidates</small></article>
+          <article><span>Source pointers</span><strong data-pointer-count>0</strong><small>Finder-linked locations</small></article>
+        </div>
+      </section>
+
+      <section class="ops-section calendar-section" id="calendar">
+        <div class="section-heading">
+          <div>
+            <p class="ops-kicker">02 / shared calendar</p>
+            <h2>The SET calendar belongs to every brand.</h2>
+          </div>
+          <p>
+            Dates are loaded from the indexed workspace calendar when present.
+            Selecting a date updates source and workload context across this page.
+          </p>
+        </div>
+        <div class="calendar-summary">
+          <div><span>Selected event</span><strong data-calendar-title>—</strong></div>
+          <div><span>Effective date</span><strong data-calendar-date>—</strong></div>
+          <button class="ops-button ops-button-quiet" type="button" data-next-date>Next date →</button>
+        </div>
+        <div class="calendar-track" data-calendar-track role="list"></div>
+        <p class="source-footnote" data-calendar-source>
+          Calendar status will appear after the local index loads.
+        </p>
+      </section>
+
+      <section class="ops-section sources-section" id="sources">
+        <div class="section-heading">
+          <div>
+            <p class="ops-kicker">03 / source shelf</p>
+            <h2>Found, matched, and approved are different states.</h2>
+          </div>
+          <p>
+            Store-scoped files are excluded when they belong to another store.
+            Workspace-wide candidates remain visible and clearly labeled.
+          </p>
+        </div>
+
+        <div class="source-overview" data-source-overview></div>
+        <div class="source-detail">
+          <div class="source-detail-heading">
+            <div>
+              <span data-source-detail-kicker>Context source detail</span>
+              <h3 data-source-detail-title>Select a source group</h3>
+            </div>
+            <button type="button" data-clear-source-detail>Clear</button>
+          </div>
+          <div class="source-files" data-source-files>
+            <p>Choose a source card to inspect its context-matched local candidates.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ops-section labor-section" id="labor">
+        <div class="section-heading">
+          <div>
+            <p class="ops-kicker">04 / labor + payroll planning</p>
+            <h2>See the collision. Stage the conversation.</h2>
+          </div>
+          <p>
+            Enter planning hours for the selected store and date. These values are
+            not payroll records, approvals, commitments, or transfers.
+          </p>
+        </div>
+
+        <div class="scenario-warning">
+          <strong>Scenario only / no payroll action</strong>
+          <span>
+            Demand and scheduled hours are user-entered planning values unless an
+            explicitly approved workload source is loaded. Leaders and payroll/timekeeping
+            owners make every real staffing or transfer decision.
+          </span>
+        </div>
+
+        <div class="labor-layout">
+          <div class="labor-table-wrap">
+            <table class="labor-table">
+              <thead>
+                <tr>
+                  <th>Brand</th>
+                  <th>Demand hours</th>
+                  <th>Scheduled hours</th>
+                  <th>Planning gap</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody data-labor-rows></tbody>
+              <tfoot>
+                <tr>
+                  <th>Total</th>
+                  <td data-total-demand>0.0</td>
+                  <td data-total-scheduled>0.0</td>
+                  <td data-total-gap>0.0</td>
+                  <td>Scenario</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <aside class="labor-summary">
+            <p>Planning signal</p>
+            <strong data-labor-signal>Enter hours to model the day.</strong>
+            <span data-labor-detail>No source or approval is changed.</span>
+            <div class="labor-actions">
+              <button class="ops-button ops-button-primary" type="button" data-export-labor>
+                Download scenario CSV
+              </button>
+              <button class="ops-button ops-button-quiet" type="button" data-clear-labor>
+                Clear hours
+              </button>
+            </div>
+          </aside>
+        </div>
+
+        <div class="labor-rules">
+          <div>
+            <span>Indexed labor guidance</span>
+            <strong data-labor-rule-count>0 rules</strong>
+          </div>
+          <ul data-labor-rules>
+            <li>No indexed labor guidance is loaded. Use approved policy and accountable owners.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="ops-section tools-section" id="tools">
+        <div class="section-heading">
+          <div>
+            <p class="ops-kicker">05 / connected local tools</p>
+            <h2>Open the right proof from the right place.</h2>
+          </div>
+          <p>
+            Links open browser-safe indexed outputs or their containing folders.
+            Native authoring files remain Finder-only.
+          </p>
+        </div>
+        <div class="tool-grid" data-tool-grid></div>
+      </section>
+    </main>
+
+    <footer class="ops-footer">
+      <div>
+        <span class="ops-mark">SET</span>
+        <p>Shared context for store execution. Source systems retain their decision rights.</p>
+      </div>
+      <a href="./START_HERE.html">Back to Resource Center →</a>
+    </footer>
+
+    <div class="toast" data-toast hidden role="status" aria-live="polite"></div>
+
+    <script src="./data/resource-index.js"></script>
+    <script src="./assets/set-operations-studio.js"></script>
+  </body>
+</html>

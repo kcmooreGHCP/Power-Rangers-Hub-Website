@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SET Loop | Regional View</title>
+<style>
+:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--teal:#0891b2;--orange:#b65d00;--red:#b42318;--blue:#1d4ed8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#eff6ff;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.side{background:#fff;border-right:1px solid var(--line);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--blue);letter-spacing:-.3px;border-bottom:1px solid var(--line)}
+.persona{padding:14px 20px 10px;font-size:12px;color:var(--muted)}
+.persona b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
+.region-badge{margin:0 20px 14px;background:#dbeafe;border:1px solid #93c5fd;border-radius:8px;padding:10px 12px}
+.region-badge .rnum{font-size:14px;font-weight:900;color:var(--blue)}
+.region-badge .rname{font-size:11px;color:var(--muted);margin-top:1px}
+nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}
+nav a:hover,nav a.active{color:var(--blue);border-left-color:var(--blue);background:#dbeafe}
+nav .section-label{padding:14px 20px 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+.main{padding:24px}
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:22px;font-weight:900;margin:0 0 4px}
+.page-header p{font-size:13px;color:var(--muted);margin:0}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.kpi .value{font-size:24px;font-weight:900;line-height:1}
+.kpi .sub{font-size:11px;color:var(--muted);margin-top:4px}
+.kpi.good .value{color:var(--green)}.kpi.warn .value{color:var(--orange)}.kpi.bad .value{color:var(--red)}.kpi.blue .value{color:var(--blue)}.kpi.teal .value{color:var(--teal)}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}
+.card-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.card-head h2{font-size:14px;font-weight:800;margin:0}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+.badge-green{background:#dcfce7;color:var(--green)}.badge-warn{background:#fff7ed;color:var(--orange)}.badge-blue{background:#dbeafe;color:var(--blue)}
+.card-body{padding:16px 18px}
+.dist-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
+.dist-row:last-child{border-bottom:none}
+.dist-row:hover{background:#f0f7ff;margin:0 -18px;padding-left:18px;padding-right:18px}
+.dist-name{flex:1}
+.dist-name .name{font-size:13px;font-weight:700}
+.dist-name .dm{font-size:11px;color:var(--muted)}
+.dist-stores{font-size:11px;color:var(--muted);width:50px;text-align:center;flex-shrink:0}
+.dist-bar{flex:0 0 120px}
+.bar-wrap{height:7px;background:#e0e7ef;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.dist-pct{font-size:12px;font-weight:800;width:34px;text-align:right;flex-shrink:0}
+.dist-rank{font-size:11px;font-weight:700;width:28px;text-align:center;flex-shrink:0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+.trend-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.trend-card .tc-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+.trend-card .tc-val{font-size:22px;font-weight:900}
+.trend-card .tc-sub{font-size:11px;color:var(--muted);margin-top:3px}
+.flag-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.flag-item:last-child{border-bottom:none}
+.flag-icon{font-size:18px;flex-shrink:0}
+.flag-body .title{font-size:13px;font-weight:700}
+.flag-body .detail{font-size:12px;color:var(--muted);margin-top:2px}
+.flag-body .scope{font-size:11px;color:var(--blue);font-weight:700;margin-top:3px}
+.action-btn{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:6px;text-decoration:none;background:#dbeafe;color:var(--blue);margin-top:4px}
+.action-btn:hover{background:var(--blue);color:#fff}
+@media(max-width:1000px){.shell{grid-template-columns:1fr}.side{display:none}.kpi-row{grid-template-columns:repeat(3,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="logo">VS&amp;Co SET Loop</div>
+    <div class="persona"><b>Regional View</b><small>Regional Manager</small></div>
+    <div class="region-badge">
+      <div class="rnum">Region 3 — East</div>
+      <div class="rname">RM: Jennifer Park · 4 districts · 38 stores</div>
+    </div>
+    <nav>
+      <div class="section-label">Overview</div>
+      <a href="#districts" class="active">District Rollup</a>
+      <a href="#flags">Escalated Flags</a>
+      <a href="#trends">Trends</a>
+      <a href="#broadcast">Broadcast</a>
+      <div class="section-label">Drill Down</div>
+      <a href="district.html">District 18 (Detail)</a>
+      <a href="store.html">Store 1392 (Detail)</a>
+      <div class="section-label">Tools</div>
+      <a href="#tools">Quick Links</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <h1>Region 3 · East 🌎</h1>
+      <p>RM: Jennifer Park · RC12 Floorset Week · Aug 23, 2025 · 4 districts · 38 stores</p>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi blue"><div class="label">Region Avg Progress</div><div class="value">68%</div><div class="sub">Checklist completion</div></div>
+      <div class="kpi good"><div class="label">Districts On Track</div><div class="value">3</div><div class="sub">of 4 districts</div></div>
+      <div class="kpi warn"><div class="label">Stores Flagged</div><div class="value">7</div><div class="sub">Need DM attention</div></div>
+      <div class="kpi teal"><div class="label">Photos Submitted</div><div class="value">61%</div><div class="sub">131 of 216 required</div></div>
+      <div class="kpi good"><div class="label">Region Rank</div><div class="value">#2</div><div class="sub">of 8 regions nationally</div></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="trend-card"><div class="tc-label">🏆 Best District</div><div class="tc-val" style="color:var(--green)">District 22</div><div class="tc-sub">94% avg · 0 flags · DM: Marcus Lee</div></div>
+      <div class="trend-card"><div class="tc-label">⚠️ Needs Focus</div><div class="tc-val" style="color:var(--orange)">District 18</div><div class="tc-sub">71% avg · 3 flags · DM: Sarah Chen</div></div>
+      <div class="trend-card"><div class="tc-label">📸 Photo Leader</div><div class="tc-val" style="color:var(--teal)">District 22</div><div class="tc-sub">100% photo submission</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="card" id="districts">
+          <div class="card-head">
+            <h2>📋 District Rollup — RC12 Progress</h2>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span class="badge badge-blue">4 Districts</span>
+              <select style="font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--ink)"><option>All Districts</option><option>By Progress</option><option>By Flags</option></select>
+            </div>
+          </div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:auto 1fr auto auto auto;gap:0 8px;font-size:11px;font-weight:700;color:var(--muted);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px">
+              <span></span><span>District</span><span style="text-align:center">Stores</span><span style="width:120px;text-align:right">Progress</span><span style="width:34px;text-align:right">%</span>
+            </div>
+            <div class="dist-row" onclick="location.href='district.html'">
+              <div class="dist-rank" style="color:var(--green)">🥇</div>
+              <div class="dist-name"><div class="name">District 22 — Northern NJ</div><div class="dm">DM: Marcus Lee · 10 stores</div></div>
+              <div class="dist-stores">10 stores</div>
+              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:94%;background:var(--green)"></div></div></div>
+              <div class="dist-pct" style="color:var(--green)">94%</div>
+            </div>
+            <div class="dist-row" onclick="location.href='district.html'">
+              <div class="dist-rank" style="color:var(--teal)">🥈</div>
+              <div class="dist-name"><div class="name">District 31 — Greater Boston</div><div class="dm">DM: Aisha Thompson · 9 stores</div></div>
+              <div class="dist-stores">9 stores</div>
+              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:82%;background:var(--teal)"></div></div></div>
+              <div class="dist-pct" style="color:var(--teal)">82%</div>
+            </div>
+            <div class="dist-row" onclick="location.href='district.html'">
+              <div class="dist-rank" style="color:var(--blue)">3</div>
+              <div class="dist-name"><div class="name">District 18 — Mid-Atlantic</div><div class="dm">DM: Sarah Chen · 9 stores</div></div>
+              <div class="dist-stores">9 stores</div>
+              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:71%;background:var(--orange)"></div></div></div>
+              <div class="dist-pct" style="color:var(--orange)">71%</div>
+            </div>
+            <div class="dist-row" onclick="location.href='district.html'">
+              <div class="dist-rank" style="color:var(--muted)">4</div>
+              <div class="dist-name"><div class="name">District 44 — Upstate NY</div><div class="dm">DM: Carlos Rivera · 10 stores</div></div>
+              <div class="dist-stores">10 stores</div>
+              <div class="dist-bar"><div class="bar-wrap"><div class="bar-fill" style="width:55%;background:var(--orange)"></div></div></div>
+              <div class="dist-pct" style="color:var(--orange)">55%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="broadcast">
+          <div class="card-head"><h2>📢 Broadcast to Region</h2></div>
+          <div class="card-body">
+            <div style="margin-bottom:10px"><textarea style="width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;resize:vertical;font-family:inherit;min-height:70px" placeholder="Message all 4 DMs or all 38 stores..."></textarea></div>
+            <div style="display:flex;gap:8px">
+              <button style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer">Send to All DMs</button>
+              <button style="background:#eff6ff;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer">All 38 Stores</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" id="flags">
+          <div class="card-head"><h2>🚩 Escalated Flags — Region 3</h2><span class="badge badge-warn">5 Active</span></div>
+          <div class="card-body">
+            <div class="flag-item"><div class="flag-icon">📦</div><div class="flag-body"><div class="title">VSB Fragrance qualifier — region-wide gap</div><div class="detail">Same question across 11 stores in 3 districts. Upstream fix needed before RC13.</div><div class="scope">Districts 18, 31, 44 · Source: Merchandising</div><a class="action-btn" href="#">Escalate to HO →</a></div></div>
+            <div class="flag-item"><div class="flag-icon">🗂️</div><div class="flag-body"><div class="title">Tier 5/6 PINK cabinet asset gap</div><div class="detail">Asset not in guide. Affecting all Tier 5/6 stores region-wide.</div><div class="scope">All districts · 8 stores · PINK Visual team</div><a class="action-btn" href="#">Track Asset →</a></div></div>
+            <div class="flag-item"><div class="flag-icon">📸</div><div class="flag-body"><div class="title">District 44 photo completion at 28%</div><div class="detail">Significantly below region avg. DM escalation sent.</div><div class="scope">District 44 · 10 stores · 3 stores at 0%</div><a class="action-btn" href="#">Message DM →</a></div></div>
+            <div class="flag-item"><div class="flag-icon">⏰</div><div class="flag-body"><div class="title">Selldown SOP — 3rd cycle same issue</div><div class="detail">Stores consistently unclear on timing. Permanent SOP fix needed.</div><div class="scope">Districts 18, 44 · 8 stores</div><a class="action-btn" href="#">Flag SOP Team →</a></div></div>
+            <div class="flag-item"><div class="flag-icon">📊</div><div class="flag-body"><div class="title">Zero On Hand submissions overdue</div><div class="detail">6 stores haven't submitted ZOH reports for RC12 cycle.</div><div class="scope">Districts 18, 44</div><a class="action-btn" href="#">Review ZOH →</a></div></div>
+          </div>
+        </div>
+
+        <div class="card" id="tools">
+          <div class="card-head"><h2>⚡ Quick Tools</h2></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank"><span style="font-size:20px">📊</span>MSI Library</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://victoriassecret.apprissretailcloud.com/secure/cpf/auth/logon?lc=en-US" target="_blank"><span style="font-size:20px">📈</span>KPI Dashboard</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://blueday.vscocorp.com/" target="_blank"><span style="font-size:20px">🔵</span>BlueDay</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://intradayreporting.vscocorp.com/vss" target="_blank"><span style="font-size:20px">⏱</span>Intraday</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank"><span style="font-size:20px">🔗</span>Intranet</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#eff6ff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="SET_LOOP_MASTER.html"><span style="font-size:20px">🔄</span>SET Loop</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

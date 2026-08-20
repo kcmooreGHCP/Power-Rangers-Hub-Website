@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Beauty Studio — a local store-building and floorset planning prototype."
+    />
+    <title>Beauty Studio Prototype | SET</title>
+    <link rel="stylesheet" href="./assets/set-brand-system.css" />
+    <link rel="stylesheet" href="./assets/beauty-studio.css" />
+  </head>
+  <body data-brand="beauty">
+    <a class="skip-link" href="#main">Skip to Beauty workspace</a>
+
+    <header class="beauty-header">
+      <a class="back-link" href="./START_HERE.html" aria-label="Back to SET Resource Center">
+        <span aria-hidden="true">←</span>
+        <span>SET Resource Center</span>
+      </a>
+      <a class="beauty-lockup" href="#top" aria-label="Beauty Studio prototype home">
+        <span class="beauty-monogram">B</span>
+        <span>
+          <strong>Beauty Studio</strong>
+          <small>Local planning prototype</small>
+        </span>
+      </a>
+      <nav aria-label="Beauty workspace navigation">
+        <a href="#session">Build</a>
+        <a href="#movement">Movement</a>
+        <a href="#labor">Labor</a>
+        <a href="#handoff">Handoff</a>
+      </nav>
+      <span class="brand-status">Local prototype</span>
+    </header>
+
+    <main id="main">
+      <section class="beauty-hero" id="top">
+        <div class="beauty-hero-copy">
+          <p class="brand-kicker">Beauty / prototype-to-store studio</p>
+          <h1>Build the store before the team <em>touches the floor.</em></h1>
+          <p class="hero-lede">
+            Select tier and store candidates, load owner-supplied inputs, stage
+            movement, and review what the local planning logic can support before
+            any floorset decision is approved.
+          </p>
+          <div class="hero-actions">
+            <a class="beauty-button beauty-button-primary" href="#session">
+              Start a Beauty session
+              <span aria-hidden="true">↘</span>
+            </a>
+            <button class="beauty-button beauty-button-quiet" type="button" data-open-best-tool>
+              Browse current SET command folder
+            </button>
+          </div>
+          <div class="truth-note">
+            <strong>Current truth</strong>
+            <span>
+              This is a local planning and working layer. It does not authenticate users,
+              transfer payroll, publish to stores, or write back to Blue Yonder.
+            </span>
+          </div>
+        </div>
+
+        <aside class="pilot-snapshot" aria-label="Beauty prototype snapshot">
+          <div class="snapshot-top">
+            <span>Prototype workspace</span>
+            <b>Sources required</b>
+          </div>
+          <p class="snapshot-name">Beauty Studio</p>
+          <dl>
+            <div>
+              <dt>Store</dt>
+              <dd data-snapshot-store>Choose store</dd>
+            </div>
+            <div>
+              <dt>Floorset</dt>
+              <dd data-snapshot-floorset>Refresh calendar</dd>
+            </div>
+            <div>
+              <dt>Prototype candidate</dt>
+              <dd data-snapshot-prototype>Not selected</dd>
+            </div>
+            <div>
+              <dt>Workspace candidates</dt>
+              <dd data-source-coverage>0 / 9</dd>
+            </div>
+          </dl>
+          <div class="snapshot-orbit" aria-hidden="true"></div>
+        </aside>
+      </section>
+
+      <section class="pilot-boundary" aria-label="Prototype operating boundary">
+        <span><b>Available in this prototype</b> Local configuration, manual CSV intake, comparison logic, scenario staging, draft export</span>
+        <span><b>Requires approved evidence and owners</b> Prototype, capacity, assortment, time studies, ADA, payroll</span>
+        <span><b>Future platform</b> Identity, permissions, live integrations, approval routing</span>
+      </section>
+
+      <section class="beauty-section session-section" id="session">
+        <div class="section-heading">
+          <div>
+            <p class="brand-kicker">01 / configure the work</p>
+            <h2>Start from current supplied store evidence.</h2>
+          </div>
+          <p>
+            The tier prototype is the reusable intent. Current owner-approved
+            store-shell and fixture-history sources determine what can be
+            modeled for a location.
+          </p>
+        </div>
+
+        <div class="session-layout">
+          <form class="session-form" data-session-form>
+            <label>
+              Store
+              <select name="store" data-store-select>
+                <option value="">Choose indexed store</option>
+              </select>
+            </label>
+            <label>
+              Floorset / update
+              <select name="floorset" data-floorset-select></select>
+            </label>
+            <label>
+              Beauty tier
+              <select name="tier" data-tier-select>
+                <option value="">Choose tier</option>
+              </select>
+            </label>
+            <label>
+              Role storyboard (not access control)
+              <select name="role" data-role-select></select>
+            </label>
+            <label class="field-wide">
+              Working note
+              <textarea
+                name="note"
+                rows="3"
+                placeholder="Example: Beauty Room 1 — confirm fragrance launch and table integrations."
+              ></textarea>
+            </label>
+            <button class="beauty-button beauty-button-primary field-wide" type="submit">
+              Save session on this computer
+            </button>
+            <p class="form-footnote field-wide">
+              Configuration and the hours scenario save locally. Reload source files after reopening; the export records their provenance and gate state.
+            </p>
+          </form>
+
+          <article class="prototype-panel">
+            <div class="panel-heading">
+              <div>
+                <span>Indexed Beauty candidate</span>
+                <h3 data-prototype-title>No tier prototype selected</h3>
+              </div>
+              <span class="source-state" data-prototype-state>Needs source</span>
+            </div>
+            <div class="prototype-visual" aria-hidden="true">
+              <div class="proto-room proto-room-a"></div>
+              <div class="proto-room proto-room-b"></div>
+              <div class="proto-room proto-room-c"></div>
+              <span class="proto-fixture proto-fixture-a"></span>
+              <span class="proto-fixture proto-fixture-b"></span>
+              <span class="proto-fixture proto-fixture-c"></span>
+              <i></i>
+            </div>
+            <p data-prototype-path>
+              Add or index a Beauty tier prototype candidate in the SET workspace. A filename does not prove approval.
+            </p>
+            <div class="panel-actions">
+              <a class="beauty-button beauty-button-dark is-disabled" aria-disabled="true" tabindex="-1" data-open-prototype>
+                Open candidate
+              </a>
+              <button class="beauty-button beauty-button-quiet" type="button" data-open-source-kind="beauty-prototype">
+                Browse indexed prototypes
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <ol class="beauty-workflow" aria-label="Beauty build workflow">
+          <li class="is-active">
+            <span>01</span>
+            <div><b>Select store + tier</b><small>Select exact-store and tier candidates; owner approval is still required.</small></div>
+          </li>
+          <li>
+            <span>02</span>
+            <div><b>Validate architecture</b><small>Keep the Blue Yonder source locked beneath the visual translation.</small></div>
+          </li>
+          <li>
+            <span>03</span>
+            <div><b>Stage movement</b><small>Compare prior/current fixtures and move complete assemblies.</small></div>
+          </li>
+          <li>
+            <span>04</span>
+            <div><b>Layer Beauty inputs</b><small>Apply tier line list, marketing, capacity, and time studies.</small></div>
+          </li>
+          <li>
+            <span>05</span>
+            <div><b>QA + hand off</b><small>Record exceptions, supported hours, approvals, and next action.</small></div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="beauty-section source-section" id="sources">
+        <div class="section-heading">
+          <div>
+            <p class="brand-kicker">02 / source shelf</p>
+            <h2>One view of what is indexed as a candidate—and what is missing.</h2>
+          </div>
+          <p>
+            The workspace indexes likely files already on the computer as
+            candidates. The user can review them, then load store-scoped CSVs
+            into the local comparison engine.
+          </p>
+        </div>
+
+        <div class="source-grid" data-source-grid></div>
+
+        <div class="gate-card" role="status" aria-live="polite" data-gate-card>
+          <div>
+            <span>Draft release gate</span>
+            <strong data-gate-title>Configuration required</strong>
+          </div>
+          <ul data-gate-blockers>
+            <li>Choose an indexed store, floorset, tier, and source files.</li>
+          </ul>
+        </div>
+
+        <div class="import-strip">
+          <div>
+            <p class="brand-kicker">Local CSV intake</p>
+            <h3>Compare two map states without changing either file.</h3>
+            <p>
+              Load the prior and current connector exports. The files stay on this computer
+              and are read only for this session.
+            </p>
+          </div>
+          <div class="import-actions">
+            <label class="file-button">
+              <input type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" data-import-previous />
+              <span>Load prior map CSV</span>
+              <small data-previous-file>No file loaded</small>
+            </label>
+            <label class="file-button">
+              <input type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" data-import-current />
+              <span>Load current map CSV</span>
+              <small data-current-file>No file loaded</small>
+            </label>
+            <label class="file-button">
+              <input type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" data-import-workload />
+              <span>Load owner-supplied workload CSV</span>
+              <small data-workload-file>No file loaded</small>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="beauty-section movement-section" id="movement">
+        <div class="section-heading">
+          <div>
+            <p class="brand-kicker">03 / movement intelligence</p>
+            <h2>Know the move before assigning the hours.</h2>
+          </div>
+          <p>
+            The comparison uses the store + fixture key when available, separates new,
+            moved, changed, removed, and unchanged records, and never edits the source maps.
+          </p>
+        </div>
+
+        <div class="metric-grid">
+          <article><span>New</span><strong data-metric-new>0</strong><small>Current only</small></article>
+          <article><span>Moved</span><strong data-metric-moved>0</strong><small>Location changed</small></article>
+          <article><span>Changed</span><strong data-metric-changed>0</strong><small>Metadata changed</small></article>
+          <article><span>Removed</span><strong data-metric-removed>0</strong><small>Prior only</small></article>
+          <article><span>Unchanged</span><strong data-metric-unchanged>0</strong><small>No detected change</small></article>
+          <article class="metric-primary"><span>Supported work</span><strong data-metric-hours>0.0h</strong><small>From loaded source minutes only</small></article>
+        </div>
+
+        <div class="movement-layout">
+          <article class="change-table-card">
+            <div class="panel-heading">
+              <div>
+                <span>Connector comparison</span>
+                <h3>Store movement register</h3>
+              </div>
+              <select aria-label="Filter movement register" data-change-filter>
+                <option value="all">All changes</option>
+                <option value="new">New</option>
+                <option value="moved">Moved</option>
+                <option value="changed">Changed</option>
+                <option value="removed">Removed</option>
+                <option value="unchanged">Unchanged</option>
+              </select>
+            </div>
+            <div class="table-wrap" tabindex="0">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Status</th>
+                    <th scope="col">Fixture key</th>
+                    <th scope="col">Prior</th>
+                    <th scope="col">Current</th>
+                    <th scope="col">Supported minutes</th>
+                  </tr>
+                </thead>
+                <tbody data-change-rows>
+                  <tr class="empty-row">
+                    <td colspan="5">Load prior and current map CSVs to build the movement register.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <div class="stage-card">
+            <p class="brand-kicker">Recommended stage order</p>
+            <ol data-stage-order></ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="beauty-section labor-section" id="labor">
+        <div class="section-heading">
+          <div>
+            <p class="brand-kicker">04 / floorset + labor staging</p>
+            <h2>See the collision across side-by-side brands.</h2>
+          </div>
+          <p>
+            Enter planning demand and scheduled-hour inputs. These values are
+            user supplied; the planner calculates illustrative shortage and
+            overlap only. It does not transfer labor, validate policy, or approve
+            timekeeping.
+          </p>
+        </div>
+
+        <div class="calendar-and-role">
+          <article class="calendar-card">
+            <div class="panel-heading">
+              <div>
+                <span>Floorset calendar</span>
+                <h3 data-calendar-title>Refresh to load calendar</h3>
+              </div>
+              <button class="mini-button" type="button" data-calendar-next>Next date</button>
+            </div>
+            <div class="calendar-track" data-calendar-track></div>
+          </article>
+          <article class="role-card">
+            <span>Role storyboard / concept only</span>
+            <h3 data-role-title>Home office partner</h3>
+            <p data-role-scope>Assigned brand, floorset, and concept fleet view</p>
+            <ul data-role-permissions></ul>
+            <p class="role-boundary" data-role-boundary></p>
+          </article>
+        </div>
+
+        <div class="labor-planner">
+          <div class="labor-table-card">
+            <div class="panel-heading">
+              <div>
+                <span>Planning hours scenario</span>
+                <h3>Same-day brand workload</h3>
+              </div>
+              <button class="mini-button" type="button" data-clear-hours>Clear hours</button>
+            </div>
+            <div class="labor-rows" data-labor-rows></div>
+            <div class="labor-summary">
+              <div><span>Total demand</span><strong data-total-demand>0.0h</strong></div>
+              <div><span>Total scheduled</span><strong data-total-scheduled>0.0h</strong></div>
+              <div><span>Gross shortage</span><strong data-total-shortage>0.0h</strong></div>
+              <div><span>Illustrative overlap</span><strong data-potential-support>0.0h</strong></div>
+            </div>
+          </div>
+
+          <form class="support-card" data-support-form>
+            <p class="brand-kicker">Illustrative support-request draft</p>
+            <h3>Ask the partner store—with the right leaders in the loop.</h3>
+            <label>
+              Store / brand needing support
+              <select name="receivingBrand" data-receiving-brand></select>
+            </label>
+            <label>
+              Potential supporting brand
+              <select name="supportingBrand" data-supporting-brand></select>
+            </label>
+            <div class="split-fields">
+              <label>
+                Supporting store number
+                <input name="supportingStore" type="text" inputmode="numeric" pattern="[0-9]{3,5}" placeholder="Example: 1393" />
+              </label>
+              <label>
+                Location group to verify
+                <input name="locationGroup" type="text" placeholder="Example: Ontario Mills / side-by-side" />
+              </label>
+            </div>
+            <div class="split-fields">
+              <label>
+                Requested hours
+                <input name="hours" type="number" min="0" step="0.25" value="0" />
+              </label>
+              <label>
+                Date
+                <input name="date" type="date" />
+              </label>
+            </div>
+            <div class="split-fields">
+              <label>
+                Protected coverage hours
+                <input name="protectedCoverage" type="number" min="0" step="0.25" value="0" />
+              </label>
+              <label>
+                Other committed hours
+                <input name="otherCommitments" type="number" min="0" step="0.25" value="0" />
+              </label>
+            </div>
+            <label>
+              Work and skill needed
+              <textarea
+                name="work"
+                rows="3"
+                placeholder="Example: Beauty fixture movement and fragrance launch presentation."
+              ></textarea>
+            </label>
+            <label class="check-row">
+              <input name="sameMall" type="checkbox" />
+              <span>User confirms a same-mall or side-by-side relationship pending owner verification</span>
+            </label>
+            <label class="check-row">
+              <input name="skillReady" type="checkbox" />
+              <span>Supporting associate is trained for the requested work</span>
+            </label>
+            <button class="beauty-button beauty-button-dark" type="submit">
+              Build review draft
+            </button>
+            <div class="support-result" role="status" aria-live="polite" data-support-result>
+              Enter the request. Cross-store support stays pending until store leaders,
+              district leadership, and the payroll/timekeeping owner confirm the route.
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="beauty-section handoff-section" id="handoff">
+        <div class="handoff-card">
+          <div>
+            <p class="brand-kicker">05 / save the evidence</p>
+            <h2>Hand off the session, not another recap scavenger hunt.</h2>
+            <p>
+              Export the configured session, movement register, role boundary, hours scenario,
+              and approval request. The package is evidence for review—not automatic approval.
+            </p>
+          </div>
+          <div class="handoff-actions">
+            <button class="beauty-button beauty-button-primary" type="button" data-download-session>
+              Download session JSON
+            </button>
+            <button class="beauty-button beauty-button-light" type="button" data-download-movements>
+              Download movement CSV
+            </button>
+            <button class="beauty-button beauty-button-light" type="button" data-copy-ai>
+              Copy grounded AI prompt
+            </button>
+            <button class="beauty-button beauty-button-light" type="button" data-print>
+              Print prototype view
+            </button>
+          </div>
+        </div>
+
+        <div class="approval-path" role="region" aria-label="Cross-store support approval path">
+          <article><span>01</span><b>Requesting manager</b><small>Defines need, date, work, and impact.</small></article>
+          <i aria-hidden="true">→</i>
+          <article><span>02</span><b>Supporting manager</b><small>Confirms associate availability and skill.</small></article>
+          <i aria-hidden="true">→</i>
+          <article><span>03</span><b>District leader</b><small>Approves who, when, why, and store impact.</small></article>
+          <i aria-hidden="true">→</i>
+          <article><span>04</span><b>Payroll / next level</b><small>Confirms route; escalates when policy or scope requires.</small></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="beauty-footer">
+      <a href="./START_HERE.html">
+        <span class="beauty-monogram">B</span>
+        <span><strong>Beauty Studio</strong><small>Part of the SET local concept workspace</small></span>
+      </a>
+      <p>Owner-approved sources in. Exact-store draft out. Blockers stay visible between them.</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+
+    <div class="source-drawer" role="dialog" aria-modal="true" aria-labelledby="source-drawer-title" hidden data-source-drawer>
+      <div class="source-drawer-backdrop" data-close-source-drawer></div>
+      <section>
+        <div class="panel-heading">
+          <div>
+            <span>Indexed local files</span>
+            <h2 id="source-drawer-title" data-source-drawer-title>Source files</h2>
+          </div>
+          <button class="drawer-close" type="button" aria-label="Close indexed files" data-close-source-drawer>×</button>
+        </div>
+        <div class="drawer-files" data-source-drawer-files></div>
+      </section>
+    </div>
+
+    <div class="beauty-toast" role="status" aria-live="polite" hidden data-toast></div>
+
+    <script src="./data/resource-index.js"></script>
+    <script src="./assets/set-beauty-defaults.js"></script>
+    <script src="./assets/beauty-studio.js"></script>
+  </body>
+</html>

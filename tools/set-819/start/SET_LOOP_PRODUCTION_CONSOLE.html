@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SET Loop Production Master</title>
+    <link rel="stylesheet" href="./assets/set-loop-production-master.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to production controls</a>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">SET Loop / leadership production master</p>
+        <h1>Present it. Record it. Finish it.</h1>
+        <p class="hero-copy">
+          One controlled story for PowerPoint, the guided HTML, Clipchamp,
+          Premiere Pro, SharePoint, and the role-specific follow-up.
+        </p>
+        <div class="metrics" aria-label="Production summary">
+          <span class="metric">8 chapters</span>
+          <span class="metric">5:30 final runtime</span>
+          <span class="metric">3 leadership lenses</span>
+          <span class="metric">1 timing authority</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell" id="main">
+      <nav class="tabbar" aria-label="Production sections">
+        <button class="tab is-active" type="button" data-tab="present">Present</button>
+        <button class="tab" type="button" data-tab="record">Record</button>
+        <button class="tab" type="button" data-tab="edit">Edit</button>
+        <button class="tab" type="button" data-tab="roles">Role takeaway</button>
+        <button class="tab" type="button" data-tab="drone">Drone intake</button>
+      </nav>
+
+      <section class="panel is-active" data-panel="present">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Meeting path</p>
+            <h2>One reveal. No file hunting.</h2>
+          </div>
+          <p>
+            Slides establish the case. The guided experience makes it real.
+            Slide 10 asks for one owner-approved Beauty test.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="step-number">1</span>
+            <h3>Frame the decision</h3>
+            <p>
+              Present slides 1–8. Establish the execution gap, evidence
+              boundary, controlled test, and human approval boundary.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="step-number">2</span>
+            <h3>Make the reveal</h3>
+            <p>
+              Advance to “Now, let’s SET Loop.” Open the guided experience
+              directly from the slide.
+            </p>
+            <div class="button-row">
+              <a class="button" href="./SET_LOOP_LEADERSHIP_DEMO.html">
+                Open guided experience
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="step-number">3</span>
+            <h3>Show the same work three ways</h3>
+            <p>
+              Store sees action. Field sees support need. Home Office sees
+              readiness, exceptions, and governance.
+            </p>
+            <div class="button-row">
+              <a class="button-secondary" href="./SET_LOOP_ROLE_TAKEAWAYS.html">
+                Open role takeaway
+              </a>
+            </div>
+          </article>
+
+          <article class="card wide">
+            <span class="step-number">4</span>
+            <h3>Return to the decision</h3>
+            <p>
+              Use Command–Tab to return to PowerPoint, then advance to slide
+              10. Do not depend on a second copy of the deck opening from the
+              browser.
+            </p>
+            <p class="callout">
+              Ask: authorize one owner-approved Beauty floorset in one approved
+              test store, measured on time, clarity, exceptions, and rework.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="kicker">Run of show</p>
+            <h3>Use the prepared cue sheet</h3>
+            <p>
+              It contains the exact chapter clock, live-versus-recorded
+              boundary, narration, and backup path.
+            </p>
+            <div class="button-row">
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_MASTER_PRODUCTION_CUE_SHEET_V1_7.txt"
+              >
+                Open cue sheet
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="record" hidden>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Recording board</p>
+            <h2>Eight clips. Exact names. Done.</h2>
+          </div>
+          <p>
+            Record one clean clip per chapter. Each card tells you what to
+            show, where to open it, and the exact filename to use.
+          </p>
+        </div>
+
+        <div class="drop-zone" data-drop-zone>
+          <strong>Check a recording folder</strong>
+          <p>
+            Choose the production workspace below, or drag the complete folder
+            here. Nested chapter folders are checked too. Files stay on this
+            computer; the page only checks names and formats.
+          </p>
+          <input
+            type="file"
+            data-recording-input
+            webkitdirectory
+            directory
+            multiple
+            aria-label="Choose SET Loop recording folder"
+          />
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" data-recording-progress></div>
+          </div>
+          <p data-recording-summary>0 of 8 required chapter clips found.</p>
+          <div class="button-row">
+            <button class="button-quiet" type="button" data-download-check>
+              Download media check
+            </button>
+            <button class="button-quiet" type="button" data-clear-check>
+              Clear check
+            </button>
+          </div>
+        </div>
+
+        <div class="shot-toolbar" aria-label="Filter recording list">
+          <button class="mini-button" type="button" data-filter="all">All</button>
+          <button class="mini-button" type="button" data-filter="missing">Missing</button>
+          <button class="mini-button" type="button" data-filter="ready">Found</button>
+          <button class="mini-button" type="button" data-filter="optional">Optional</button>
+        </div>
+
+        <div class="shot-list" data-shot-list></div>
+      </section>
+
+      <section class="panel" data-panel="edit" hidden>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Editor-neutral handoff</p>
+            <h2>Choose the finishing editor first.</h2>
+          </div>
+          <p>
+            Clipchamp and Premiere do not share an editable timeline. Both can
+            use the same eight MP4s, WAV voiceover stems, graphics, and caption
+            master without renaming or rebuilding the source package.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card editor-choice">
+            <p class="kicker">Fastest finish</p>
+            <h3>Clipchamp</h3>
+            <ul>
+              <li>Import the complete media folder once.</li>
+              <li>Place the eight numbered clips in filename order.</li>
+              <li>Add matching chapter voiceover stems below them.</li>
+              <li>Generate captions after the voiceover timing is locked.</li>
+              <li>Export 1080p MP4.</li>
+            </ul>
+            <div class="button-row">
+              <a
+                class="button"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_CLIPCHAMP_BUILD_GUIDE_V1_7.txt"
+              >
+                Open Clipchamp guide
+              </a>
+            </div>
+          </article>
+
+          <article class="card editor-choice premiere">
+            <p class="kicker">Highest control</p>
+            <h3>Premiere Pro</h3>
+            <ul>
+              <li>Create a 1920×1080, 30 fps, 48 kHz sequence.</li>
+              <li>Import the same media folder without renaming files.</li>
+              <li>Use the edit map for exact chapter markers.</li>
+              <li>Import the supplied SRT as the caption track.</li>
+              <li>Finish color, audio, drone footage, and motion here.</li>
+            </ul>
+            <div class="button-row">
+              <a
+                class="button-secondary"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_PREMIERE_PRO_HANDOFF_V1_7.txt"
+              >
+                Open Premiere guide
+              </a>
+            </div>
+          </article>
+
+          <article class="card full">
+            <p class="kicker">Master timeline</p>
+            <h3>One clock for HTML, voiceover, captions, and edit</h3>
+            <div class="button-row">
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_MASTER_EDIT_MAP_V1_7.csv"
+              >
+                Download edit map CSV
+              </a>
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_MASTER_CAPTIONS_V1_7.srt"
+              >
+                Download SRT
+              </a>
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_MASTER_CAPTIONS_V1_7.vtt"
+              >
+                Download SharePoint VTT
+              </a>
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_MASTER_VOICEOVER_V1_7.txt"
+              >
+                Open voiceover
+              </a>
+            </div>
+            <div style="overflow-x: auto; margin-top: 1rem">
+              <table class="timeline">
+                <thead>
+                  <tr>
+                    <th>Start</th>
+                    <th>Chapter</th>
+                    <th>Duration</th>
+                    <th>Proof status</th>
+                    <th>Primary visual</th>
+                  </tr>
+                </thead>
+                <tbody data-timeline-body></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="roles" hidden>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Role-specific follow-up</p>
+            <h2>Three lenses on stage. Six packets afterward.</h2>
+          </div>
+          <p>
+            The live story stays simple. Store Team, Store Leadership,
+            DM/RM, Field Leadership, Field Visual, and Home Office detail live
+            in one clean follow-up—not six duplicate demos.
+          </p>
+        </div>
+        <div class="button-row">
+          <a class="button" href="./SET_LOOP_ROLE_TAKEAWAYS.html">
+            Open the role takeaway
+          </a>
+        </div>
+        <div class="role-lanes" style="margin-top: 1.5rem">
+          <article class="role-lane">
+            <span class="truth demo">Store lens</span>
+            <h3>What applies here?</h3>
+            <p>
+              Exact actions, approved direction, sequence, proof, and one
+              clear exception path.
+            </p>
+          </article>
+          <article class="role-lane">
+            <span class="truth demo">Field lens</span>
+            <h3>Where is support needed?</h3>
+            <p>
+              Readiness, blockers, store patterns, escalation, and focused
+              support without publishing authority.
+            </p>
+          </article>
+          <article class="role-lane">
+            <span class="truth next">Home Office lens</span>
+            <h3>What is ready, blocked, or changing?</h3>
+            <p>
+              Source lineage, mapping, approvals, exceptions, release, and
+              learning for the next launch.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="drone" hidden>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Reserved intake</p>
+            <h2>The drone footage gets one deliberate job.</h2>
+          </div>
+          <p>
+            It will not be forced into the cut until the source video,
+            Copilot version, script, and voiceover are reviewed together.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card wide">
+            <h3>Send these four items</h3>
+            <ol>
+              <li>Original drone video—not only Copilot’s export.</li>
+              <li>Copilot’s current edited version.</li>
+              <li>The script as text.</li>
+              <li>The voiceover as a separate audio file.</li>
+            </ol>
+            <p>
+              After review, the footage will be assigned either as a short
+              cold open or as the physical-store bridge into SET IRL. It will
+              not do both.
+            </p>
+          </article>
+          <article class="card">
+            <span class="truth next">Awaiting media</span>
+            <h3>Reserved filename</h3>
+            <p class="filename">SL_OPT_DRONE_CONTEXT.mp4</p>
+            <div class="button-row">
+              <a
+                class="button-quiet"
+                href="../00_CONTROL/RESOURCE_CENTER/VIDEO/SET_LOOP_DRONE_INTAKE_SPEC_V1_7.txt"
+              >
+                Open intake spec
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      SET Loop production master · controlled leadership proof · v1.7
+    </footer>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+    <script src="./assets/set-loop-production-master.js"></script>
+  </body>
+</html>

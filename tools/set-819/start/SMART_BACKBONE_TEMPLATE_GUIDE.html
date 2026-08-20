@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SET Loop RC12.11 Resource Center</title>
+<style>
+:root{--pink:#d91f64;--dark:#202124;--cream:#f7f1eb;--card:#fff;--muted:#6a625d;--green:#25835c;--blue:#2779a7}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--dark);line-height:1.45}.hero{padding:38px 6vw;background:linear-gradient(135deg,#8f0e43,#e04e81);color:white}.hero h1{font-size:38px;margin:0 0 8px}.hero p{max-width:940px;font-size:18px;margin:0}.nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;padding:12px 4vw;z-index:4;display:flex;flex-wrap:wrap;gap:8px}.nav a,.btn{display:inline-block;padding:9px 13px;border-radius:999px;text-decoration:none;border:1px solid #d9c9c2;color:#55142e;background:#fff;font-weight:bold}.wrap{max-width:1180px;margin:auto;padding:24px}.card{background:var(--card);border-radius:18px;padding:24px;margin:16px 0;box-shadow:0 8px 26px rgba(0,0,0,.07)}h2{margin-top:0;color:#8f0e43}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.step{border-left:5px solid var(--pink);padding:11px 14px;margin:10px 0;background:#fff8fa;border-radius:0 12px 12px 0}.code{font-family:Menlo,Consolas,monospace;background:#eee7e2;border-radius:6px;padding:2px 6px}.good{color:var(--green);font-weight:bold}.warn{color:#a13d00;font-weight:bold}.small{font-size:13px;color:var(--muted)}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #eadfd9;text-align:left;vertical-align:top}th{background:#fbf4f6}.flow{font-family:Menlo,monospace;white-space:pre-wrap;background:#202124;color:#fff;padding:18px;border-radius:14px}.tag{display:inline-block;border-radius:999px;padding:4px 9px;background:#f5d7e3;color:#7c1239;font-size:12px;font-weight:bold}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.two{grid-template-columns:1fr}.hero h1{font-size:30px}}</style></head>
+<body>
+<div class="hero"><h1>SET Loop RC12.11</h1><p><b>One front door. One locked store backbone. Reusable smart fixture templates. Floorset content changes; the physical store intelligence stays connected.</b></p></div>
+<div class="nav"><a href="#start">Start Here</a><a href="#backbone">Backbone</a><a href="#templates">Smart Templates</a><a href="#mapping">Map + Assets</a><a href="#publish">Guide + SET IRL</a><a href="#next">Next Floorset</a><a href="#tools">All Tools</a><a href="#folders">Folder Map</a></div>
+<div class="wrap">
+<section id="start" class="card"><h2>Do this first</h2>
+<div class="step"><b>1. Install once.</b> Quit InDesign and run <span class="code">INSTALL_RC12_11.command</span>. It updates the existing <span class="code">~/Documents/SET_819</span> workspace, backs up the current launcher/scripts, and preserves all maps, assets and outputs.</div>
+<div class="step"><b>2. Open the active file.</b> In InDesign: Window → Utilities → Scripts → User → SET_819 → <span class="code">00_START_SET_819.jsx</span>.</div>
+<div class="step"><b>3. Build in this order.</b> Store shell → align/lock → smart backbone/templates → map approved visuals → check store → choose publish scope → build Guide → SET IRL/VMA.</div>
+<p class="warn">Do not run old RC12.10 / 2C / 3C bridge scripts. RC12.11 absorbs the useful logic into one governed Smart Backbone + Template Manager.</p></section>
+
+<section id="backbone" class="card"><h2>The operating model</h2><div class="flow">LOCKED LINE MAP
+Walls, doors, columns and fixed architecture
+        +
+SMART SPACE BACKBONE
+Existing governed SET connectors enriched with fixture dimensions,
+Space Planning color, reusable template key, movability and export rules
+        +
+APPROVED PRESENTATION VISUALS
+PSD / PNG / CC Library asset attached to the physical connector
+        =
+STORE-SPECIFIC EXECUTION MAP
+        ↓
+TOC + DETAIL PAGES + CHANGE LOG + SET IRL + VMA</div>
+<div class="two"><div><h3>What stays locked</h3><p>Architecture, calibrated scale, Blue Yonder IDs, stable placement labels, fixed building elements.</p></div><div><h3>What can update</h3><p>Movable fixture status, mapped visual, collection/product story, action icons, line-list details, current floorset outcome.</p></div></div>
+<p><b>Rule:</b> Build the physical store once. Update the merchandise repeatedly. Learn from every floorset.</p></section>
+
+<section id="templates" class="card"><h2>The template unlock</h2>
+<p>The uploaded cookie-cutter script was a useful starter, but it required a manual Blue Yonder CSV and could create a second disconnected connector field. RC12.11 integrates the idea safely into the existing SET record.</p>
+<div class="grid">
+<div><span class="tag">Action 1</span><h3>Register / refresh Smart Backbone</h3><p>Automatically reads the current indexed store snapshot. It enriches every existing governed connector with a reusable template key, template class, front/back requirement, movability, Space Planning color and 1000px export rule. It does not move or duplicate the connector.</p></div>
+<div><span class="tag">Action 2</span><h3>Build reusable template library</h3><p>Creates a cumulative master library as more stores are registered. Surfaces, floor fixtures and forms receive equal FRONT/BACK holders. Cabinets receive one governed holder. IDMS snippets, INDD, PDF and CSV manifest are produced.</p></div>
+<div><span class="tag">Action 3</span><h3>Match assets to templates</h3><p>Reads the current Asset Index or automated CC Library catalog and creates an exact/review/unmatched report. SET does not silently guess or remap a file.</p></div></div>
+<h3>Where the intelligence lives</h3><table><tr><th>File / object</th><th>Purpose</th></tr>
+<tr><td><span class="code">SMART_FIXTURE_TEMPLATE_REGISTRY_&lt;store&gt;.csv</span></td><td>Store-specific connector-to-template crosswalk.</td></tr>
+<tr><td><span class="code">SMART_TEMPLATE_MASTER.csv</span></td><td>Cumulative reusable template library across stores.</td></tr>
+<tr><td>Connector Script Label</td><td>Readable room, zone, placement, fixture, template, dimensions, capacity, time and status.</td></tr>
+<tr><td>Connector hidden labels</td><td>Machine-readable IDs used by Match Board, Guide, line list, change log and SET IRL.</td></tr></table>
+</section>
+
+<section id="mapping" class="card"><h2>Map + connect approved visuals</h2>
+<div class="step"><b>Visual Map Mode:</b> Select the real map target, preview the asset and map it. Best for spatial thinkers.</div>
+<div class="step"><b>Match Board:</b> See connectors and assets side by side. Match one visual across a run or map selected 01→N.</div>
+<div class="step"><b>Automated CC Library:</b> Use 3B to auto-ingest the .cclib/.cclibs package. No staging document and no one-by-one drag/drop.</div>
+<div class="step"><b>Smart Template Manager:</b> Use 3C after alignment/lock and before large-scale mapping. The template definition remains attached when the presentation asset is mapped and normalized.</div>
+<p>Placement numbers such as <span class="code">S01</span>, <span class="code">FF30</span>, <span class="code">FM30</span> and <span class="code">C100</span> belong to the physical connector, not the image filename.</p></section>
+
+<section id="publish" class="card"><h2>Guide, line list, workload and SET IRL</h2>
+<table><tr><th>Connected source</th><th>Automatic output</th></tr>
+<tr><td>Smart connector + mapped visual</td><td>Store overview map, room/zone TOC, detail page and stable presentation identity.</td></tr>
+<tr><td>Smart template</td><td>Surface/front-back layout, fixture/form layout, cabinet-run layout and consistent image sizing.</td></tr>
+<tr><td>Asset Catalog + Line List</td><td>Style, choice, product, readiness and presentation usage without retyping.</td></tr>
+<tr><td>Base/unit time</td><td>Estimated execution work; payroll remains authoritative in UKG.</td></tr>
+<tr><td>Publish scope</td><td>Full Store, Changes Only, selected rooms/zones or selected presentations.</td></tr>
+<tr><td>SET IRL</td><td>Timer, fixture check, field note/photo, QR/link and actual-time learning.</td></tr></table>
+<p>Store-facing pages omit internal Blue Yonder IDs, technical connector status and support inventory unless the task requires them.</p></section>
+
+<section id="next" class="card"><h2>Move into the next floorset</h2>
+<div class="flow">SAVE AS NEXT FLOORSET
+        ↓
+Keep locked architecture + smart fixtures + template keys + scale
+        ↓
+Mark prior presentation visuals CARRYOVER REVIEW
+        ↓
+Replace / move / remove only what changed
+        ↓
+Generate WHAT'S CHANGING
+        ↓
+Build the next Guide + SET IRL experience</div>
+<p>For a new tier or prototype, use a true target INDD or indexed store shell. A concept copy of Tier 1 must remain clearly labeled as a concept—not proof of a real lower-tier footprint.</p></section>
+
+<section id="tools" class="card"><h2>All tools</h2><div class="grid">
+<a class="btn" href="../02_WORK/">Open Work Folder</a><a class="btn" href="../01_SOURCE/">Open Sources</a><a class="btn" href="../03_OUTPUT/">Open Outputs</a><a class="btn" href="../04_REPORTS/">Open Reports</a><a class="btn" href="../05_SET_IRL/02_APP/index.html">Open SET IRL</a><a class="btn" href="../03_LEADERSHIP/SET_LOOP_One_Page.pdf">Leadership One-Page</a><a class="btn" href="../03_LEADERSHIP/SET_LOOP_Deck.pdf">Leadership Deck</a><a class="btn" href="../04_PILOT/SET_LOOP_Pilot_SOP.pdf">Pilot SOP</a><a class="btn" href="../05_PROMPTS/SET_LOOP_Copilot_Prompt_Pack.pdf">Copilot Prompt Pack</a><a class="btn" href="../90_ARCHIVE/">Open Archive</a>
+</div><p class="small">Browser pages can open files and folders. InDesign automation must still run through the one SET launcher inside InDesign.</p></section>
+
+<section id="folders" class="card"><h2>Folder map</h2><div class="flow">~/Documents/SET_819
+├── 00_START        Resource Center + outside-InDesign commands
+├── 01_SOURCE       Current store data, asset catalogs, smart templates
+├── 02_WORK         Active map and Brand Guide INDD files
+├── 03_OUTPUT       Manifests, Guide PDFs, template-library outputs
+├── 03_LEADERSHIP   Proposal materials
+├── 04_PILOT        Pilot templates and SOP
+├── 04_REPORTS      QA, completion, match and audit reports
+├── 05_PROMPTS      Copilot prompt library
+├── 05_SET_IRL      Timer / feedback experience
+├── 06_INTAKE_TOOL  Guided partner intake
+├── TOOLS/RC12      Active InDesign engines
+└── 90_ARCHIVE      Installer backups and prior floorsets</div></section>
+
+<section class="card"><h2>Release status</h2><p><span class="good">Static validated:</span> cumulative launcher, fleet-index path, alignment, tier controls, CC Library auto-ingest, Smart Backbone registration, template library generation, asset-match report and installer structure.</p><p><span class="warn">Live proof still required:</span> register one current store, build the template library, map one asset after registration, rebuild the Guide, and confirm the template fields remain visible in Script Label and output.</p></section>
+</div></body></html>

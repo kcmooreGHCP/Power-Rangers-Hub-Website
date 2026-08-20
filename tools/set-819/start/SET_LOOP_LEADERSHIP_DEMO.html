@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SET Loop leadership guided tour — a five-and-a-half-minute, offline walkthrough of the working proof, SharePoint demonstration, and designed next state."
+    />
+    <title>SET Loop | Leadership Guided Tour</title>
+    <link rel="stylesheet" href="./assets/set-brand-system.css" />
+    <link rel="stylesheet" href="./assets/set-loop-leadership-demo.css" />
+    <script defer src="./assets/set-loop-leadership-demo.js"></script>
+  </head>
+  <body data-brand="set">
+    <a class="skip-link" href="#tour">Skip to guided tour</a>
+
+    <div class="reveal" data-reveal role="dialog" aria-modal="true" aria-labelledby="reveal-title">
+      <div class="reveal-orbit reveal-orbit-one" aria-hidden="true"></div>
+      <div class="reveal-orbit reveal-orbit-two" aria-hidden="true"></div>
+      <div class="reveal-inner">
+        <p class="reveal-kicker">VS&amp;Co Store Operations</p>
+        <div class="reveal-mark" aria-hidden="true">
+          <span>S</span><span>E</span><span>T</span>
+        </div>
+        <p class="reveal-loop">LOOP</p>
+        <h1 id="reveal-title">From direction to execution—and back again.</h1>
+        <p>
+          A 5:30 guided leadership story. Working proof is separated from the
+          SharePoint demonstration and the designed next state.
+        </p>
+        <div class="reveal-actions">
+          <button class="button button-primary" type="button" data-enter-tour autofocus>
+            Enter guided tour <span aria-hidden="true">→</span>
+          </button>
+          <button class="button button-ghost" type="button" data-enter-presenter>
+            Start presenter mode
+          </button>
+        </div>
+        <small>Use ← and → at any point. Nothing in this tour publishes or changes source files.</small>
+      </div>
+    </div>
+
+    <header class="tour-header">
+      <a class="tour-brand" href="./START_HERE.html" aria-label="Open SET Resource Center">
+        <span class="tour-brand-mark">SET</span>
+        <span>
+          <strong>Leadership Tour</strong>
+          <small>Store Execution Toolkit</small>
+        </span>
+      </a>
+
+      <div class="tour-controls">
+        <div class="role-switcher" role="group" aria-label="Preview role">
+          <span>View as</span>
+          <button type="button" class="is-active" data-role="store" aria-pressed="true">Store</button>
+          <button type="button" data-role="field" aria-pressed="false">DM–RM</button>
+          <button type="button" data-role="home" aria-pressed="false">Home Office</button>
+        </div>
+        <button class="icon-button" type="button" data-links-open aria-label="Set SharePoint demo links">
+          <span aria-hidden="true">↗</span>
+          <span class="control-label">Demo links</span>
+        </button>
+        <button class="icon-button" type="button" data-copy-narration>
+          <span aria-hidden="true">⎘</span>
+          <span class="control-label">Copy narration</span>
+        </button>
+        <button class="presenter-button" type="button" data-presenter aria-pressed="false">
+          <span class="presenter-dot" aria-hidden="true"></span>
+          <span data-presenter-label>Auto-play</span>
+        </button>
+      </div>
+    </header>
+
+    <aside class="chapter-rail" aria-label="Tour chapters">
+      <div class="rail-progress" aria-hidden="true"><span data-rail-progress></span></div>
+      <ol data-chapter-list>
+        <li>
+          <button type="button" data-go="0" aria-current="step">
+            <span>01</span><b>One Front Door</b><small>00:30</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="1">
+            <span>02</span><b>Field + Role Views</b><small>00:45</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="2">
+            <span>03</span><b>SET Operations</b><small>00:35</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="3">
+            <span>04</span><b>Beauty Studio</b><small>00:30</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="4">
+            <span>05</span><b>SET IRL</b><small>00:35</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="5">
+            <span>06</span><b>Floorset Factory</b><small>01:10</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="6">
+            <span>07</span><b>Release Gate</b><small>00:50</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-go="7">
+            <span>08</span><b>Enterprise Loop</b><small>00:35</small>
+          </button>
+        </li>
+      </ol>
+      <div class="rail-key" aria-label="Status key">
+        <span class="status status-local">WORKING LOCAL</span>
+        <span class="status status-sharepoint">SHAREPOINT DEMO</span>
+        <span class="status status-next">DESIGNED NEXT</span>
+      </div>
+    </aside>
+
+    <main id="tour" class="tour-stage" tabindex="-1">
+      <section
+        class="chapter is-active"
+        data-chapter="front-door"
+        data-duration="30"
+        aria-labelledby="chapter-front-door"
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>01 / 08</span>
+            <span class="status status-local">WORKING LOCAL</span>
+          </div>
+          <p class="eyebrow">The clean introduction</p>
+          <h2 id="chapter-front-door">One front door.<br /><em>Exact work, without the hunt.</em></h2>
+          <p class="chapter-lede">
+            SET Loop does not ask stores to learn the machinery behind the work.
+            It gives each role one place to enter, then routes the right store,
+            launch, tools, and proof.
+          </p>
+          <ul class="proof-list">
+            <li><b>Start once.</b> Resume the current store and floorset.</li>
+            <li><b>See the truth.</b> Working, demo, and next-state labels stay visible.</li>
+            <li><b>Keep authority intact.</b> Existing source files and approvals remain governed.</li>
+          </ul>
+          <div class="chapter-actions">
+            <a class="button button-dark" href="./START_HERE.html">Open Resource Center ↗</a>
+          </div>
+        </div>
+        <div class="chapter-visual front-door-visual" aria-label="SET Loop front door concept">
+          <div class="signal-line signal-one" aria-hidden="true"></div>
+          <div class="signal-line signal-two" aria-hidden="true"></div>
+          <div class="front-door-card">
+            <div class="mini-header">
+              <span class="mini-logo">SET</span>
+              <span>Resource Center</span>
+              <i></i>
+            </div>
+            <div class="mini-hero">
+              <small>YOUR WORKSPACE</small>
+              <h3>What needs attention now?</h3>
+              <div class="mini-search">Search store, launch, or guide <span>⌘K</span></div>
+            </div>
+            <div class="mini-grid">
+              <article><span>01</span><b>Open this week</b><small>Store-specific direction</small></article>
+              <article><span>02</span><b>Continue a build</b><small>Resume where the team paused</small></article>
+              <article><span>03</span><b>Review proof</b><small>See readiness and exceptions</small></article>
+            </div>
+          </div>
+          <div class="floating-note note-one"><span></span> One entry point</div>
+          <div class="floating-note note-two"><span></span> Role-aware routing</div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="field-connector"
+        data-duration="45"
+        aria-labelledby="chapter-field-connector"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>02 / 08</span>
+            <span class="status status-sharepoint">SHAREPOINT DEMO</span>
+          </div>
+          <p class="eyebrow">Field Connector + role views</p>
+          <h2 id="chapter-field-connector">One truth. The right altitude.</h2>
+          <p class="chapter-lede">
+            The same governed work becomes a targeted week for the store, a support
+            view for DM/RM leaders, and an exception view for Home Office.
+          </p>
+          <div class="truth-callout">
+            <b>Honest boundary</b>
+            <p>This is a demonstration site. Live source connections, access rules, and publishing require enterprise owners and approval.</p>
+          </div>
+          <div class="chapter-actions">
+            <button class="button button-dark" type="button" data-open-role-link>
+              <span data-role-link-label>Add Store demo link</span> ↗
+            </button>
+            <button class="text-button" type="button" data-links-open>Manage all three links</button>
+          </div>
+        </div>
+        <div class="chapter-visual connector-visual" aria-label="Field Connector weekly view demonstration">
+          <div class="connector-shell">
+            <aside>
+              <strong>VS&amp;Co<br />Store Ops</strong>
+              <nav aria-label="Demonstration view">
+                <span class="is-current">This week</span>
+                <span>Launches</span>
+                <span>Store guide</span>
+                <span>Proof</span>
+              </nav>
+              <small data-role-context-label>Store view</small>
+            </aside>
+            <div class="connector-main">
+              <div class="connector-top">
+                <div>
+                  <small>ONE SOURCE OF TRUTH</small>
+                  <h3 data-role-headline>My store. My week. Clear priorities.</h3>
+                </div>
+                <span class="demo-chip">DEMO</span>
+              </div>
+              <div class="week-strip">
+                <article><small>MON</small><b>Launch direction</b><span class="event-pink"></span></article>
+                <article><small>TUE</small><b>Beauty feature</b><span class="event-gold"></span></article>
+                <article><small>WED</small><b>Floorset actions</b><span class="event-lilac"></span></article>
+                <article><small>THU</small><b>Proof due</b><span class="event-blue"></span></article>
+              </div>
+              <div class="connector-bottom">
+                <article><span>01</span><b>Direction</b><small>Scoped to the selected role</small></article>
+                <article><span>02</span><b>Actions</b><small>Sequenced into the week</small></article>
+                <article><span>03</span><b>Visibility</b><small>Exceptions move back upstream</small></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="set-operations"
+        data-duration="35"
+        aria-labelledby="chapter-set-operations"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>03 / 08</span>
+            <span class="status status-local">WORKING LOCAL</span>
+          </div>
+          <p class="eyebrow">SET Operations Studio</p>
+          <h2 id="chapter-set-operations">Context once. Decisions stay accountable.</h2>
+          <p class="chapter-lede">
+            Store, floorset, calendar, source status, and workload signals move
+            together without turning a planning signal into an approval.
+          </p>
+          <div class="truth-callout">
+            <b>Clear authority</b>
+            <p>Found, matched, and approved remain different states. People—not the interface—approve labor and operating decisions.</p>
+          </div>
+          <div class="chapter-actions">
+            <a class="button button-dark" href="./SET_OPERATIONS_STUDIO.html">Open Operations Studio ↗</a>
+          </div>
+        </div>
+        <div class="chapter-visual roles-visual" aria-label="SET Operations Studio controls">
+          <div class="role-panels">
+            <article class="is-selected">
+              <header><span>1</span><div><b>Context</b><small>Select once</small></div></header>
+              <div class="role-screen">
+                <p>Store + floorset</p>
+                <strong>Exact working frame</strong>
+                <ul><li>Named store</li><li>Named launch</li><li>Named owner</li></ul>
+              </div>
+              <footer><span class="status status-local">WORKING LOCAL</span></footer>
+            </article>
+            <article>
+              <header><span>2</span><div><b>Source + calendar</b><small>Truth stays named</small></div></header>
+              <div class="role-screen">
+                <p>Found ≠ approved</p>
+                <strong>Show the gap</strong>
+                <ul><li>Source state</li><li>Timing collision</li><li>Accountable question</li></ul>
+              </div>
+              <footer><span class="status status-local">WORKING LOCAL</span></footer>
+            </article>
+            <article>
+              <header><span>3</span><div><b>Workload</b><small>Signal, not approval</small></div></header>
+              <div class="role-screen">
+                <p>Physical work</p>
+                <strong>Prepare the decision</strong>
+                <ul><li>Visible assumptions</li><li>Owner review</li><li>Decision rights intact</li></ul>
+              </div>
+              <footer><span class="status status-local">WORKING LOCAL</span></footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="beauty"
+        data-duration="30"
+        aria-labelledby="chapter-beauty"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>04 / 08</span>
+            <span class="status status-local">WORKING LOCAL PILOT</span>
+          </div>
+          <p class="eyebrow">Beauty Studio</p>
+          <h2 id="chapter-beauty">Prove the pattern in a focused pilot.</h2>
+          <p class="chapter-lede">
+            Beauty Studio is the clearest working example of the shared operating layer:
+            choose context once, bring direction and timing together, then carry the approved work forward.
+          </p>
+          <ul class="proof-list">
+            <li><b>Context first.</b> Store, launch, and brand establish the working frame.</li>
+            <li><b>Sources stay named.</b> Missing or unapproved information remains visible.</li>
+            <li><b>Scalable pattern.</b> The pilot informs shared SET behavior without claiming fleet readiness.</li>
+          </ul>
+          <div class="chapter-actions">
+            <a class="button button-dark" href="./BEAUTY_STUDIO.html">Open Beauty Studio ↗</a>
+          </div>
+        </div>
+        <div class="chapter-visual beauty-visual" aria-label="Beauty Studio workflow">
+          <div class="beauty-backdrop"></div>
+          <div class="beauty-card beauty-card-main">
+            <div class="beauty-card-top"><span>BEAUTY STUDIO</span><i></i></div>
+            <p>Active context</p>
+            <h3>Store → launch → direction</h3>
+            <div class="beauty-select"><span>Store</span><b>Selected pilot</b><i>⌄</i></div>
+            <div class="beauty-select"><span>Launch</span><b>Current floorset</b><i>⌄</i></div>
+            <button type="button" tabindex="-1">Continue with context</button>
+          </div>
+          <div class="beauty-card beauty-card-detail">
+            <small>NEXT</small>
+            <b>Review sources</b>
+            <span>Maps · timing · assets</span>
+          </div>
+          <div class="beauty-swatch swatch-one"></div>
+          <div class="beauty-swatch swatch-two"></div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="set-irl"
+        data-duration="35"
+        aria-labelledby="chapter-set-irl"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>05 / 08</span>
+            <span class="status status-next">DESIGNED NEXT</span>
+          </div>
+          <p class="eyebrow">SET IRL</p>
+          <h2 id="chapter-set-irl">The store is not the end of the process.</h2>
+          <p class="chapter-lede">
+            SET IRL closes the gap between “direction sent” and “execution understood.”
+            Store proof, practical friction, and local context become structured inputs—not side conversations.
+          </p>
+          <div class="truth-callout">
+            <b>Designed next</b>
+            <p>The interaction is defined here; enterprise capture, retention, routing, and analytics are not presented as live.</p>
+          </div>
+        </div>
+        <div class="chapter-visual irl-visual" aria-label="SET IRL feedback sequence">
+          <div class="irl-phone">
+            <div class="phone-top"><span>9:41</span><i></i></div>
+            <div class="phone-body">
+              <small>SET IRL / STORE PROOF</small>
+              <h3>Show what happened.</h3>
+              <div class="proof-frame">
+                <div class="proof-lines"></div>
+                <span>Drop approved proof here</span>
+              </div>
+              <div class="proof-question"><b>What changed?</b><span>Choose one</span></div>
+              <div class="proof-tags"><span>Complete</span><span>Blocked</span><span>Adapted</span></div>
+            </div>
+          </div>
+          <div class="irl-path">
+            <article><span>01</span><b>Execute</b><small>Use the exact store guide</small></article>
+            <article><span>02</span><b>Capture</b><small>Proof plus structured context</small></article>
+            <article><span>03</span><b>Learn</b><small>Route patterns into the next build</small></article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="factory"
+        data-duration="70"
+        aria-labelledby="chapter-factory"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>06 / 08</span>
+            <span class="status status-local">WORKING LOCAL</span>
+          </div>
+          <p class="eyebrow">Floorset Factory</p>
+          <h2 id="chapter-factory">Build visually. Keep the complexity underneath.</h2>
+          <p class="chapter-lede">
+            Home Office teams load the approved map and asset folders, position real fixture shapes,
+            attach images with simple names, then carry those assignments into the Brand Guide package.
+          </p>
+          <ol class="number-steps">
+            <li><span>1</span><div><b>Set up</b><small>Choose the store, launch, map, and folders.</small></div></li>
+            <li><span>2</span><div><b>Map assets</b><small>Drag, group, rename, and attach the right image.</small></div></li>
+            <li><span>3</span><div><b>Prepare BG</b><small>Package mapped images and governed details.</small></div></li>
+            <li><span>4</span><div><b>Review</b><small>Exceptions stay out of the store-facing guide.</small></div></li>
+          </ol>
+          <div class="chapter-actions">
+            <a class="button button-dark" href="./FLOORSET_FACTORY.html">Open Floorset Factory ↗</a>
+          </div>
+        </div>
+        <div class="chapter-visual factory-visual" aria-label="Floorset Factory visual mapping workbench">
+          <div class="factory-shell">
+            <div class="factory-toolbar">
+              <span><i></i> FLOORSET FACTORY</span>
+              <div><b>1 Set up</b><b class="is-current">2 Map assets</b><b>3 Prepare BG</b><b>4 Review</b></div>
+            </div>
+            <div class="factory-workbench">
+              <aside>
+                <small>ASSET FOLDERS</small>
+                <div class="folder is-open"><span>⌄</span><b>Room 1</b></div>
+                <div class="asset-thumb"><i class="asset-image one"></i><span>Cabinet 1</span></div>
+                <div class="asset-thumb"><i class="asset-image two"></i><span>Surface 2</span></div>
+                <div class="folder"><span>›</span><b>Room 2</b></div>
+                <div class="folder"><span>›</span><b>Forms</b></div>
+              </aside>
+              <div class="factory-map">
+                <div class="map-room room-a"></div>
+                <div class="map-room room-b"></div>
+                <div class="map-wall wall-a"></div>
+                <div class="map-wall wall-b"></div>
+                <div class="fixture cabinet-run"><span>Cabinet 1</span><i></i><i></i><i></i><i></i></div>
+                <div class="fixture round-table"><span>Round Table 1</span><i></i><i></i><i></i><i></i></div>
+                <div class="map-label label-a">ROOM 1</div>
+                <div class="map-label label-b">ROOM 2</div>
+                <div class="drag-cursor" aria-hidden="true"><span></span></div>
+              </div>
+              <aside class="factory-inspector">
+                <small>SELECTED FIXTURE</small>
+                <b>Cabinet 1</b>
+                <div class="inspector-preview asset-image one"></div>
+                <dl><div><dt>Image</dt><dd>Attached</dd></div><div><dt>Position</dt><dd>Confirmed</dd></div><div><dt>Details</dt><dd>Review</dd></div></dl>
+                <button type="button" tabindex="-1">Save + next</button>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="release"
+        data-duration="50"
+        aria-labelledby="chapter-release"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>07 / 08</span>
+            <span class="status status-local">WORKING CONTROL</span>
+          </div>
+          <p class="eyebrow">Brand Guide / Release Gate</p>
+          <h2 id="chapter-release">A release gate—not another handoff.</h2>
+          <p class="chapter-lede">
+            Mapped content becomes a populated working package. The release view reconciles
+            what was expected, what was placed, what was approved, and what still needs a decision.
+          </p>
+          <ul class="proof-list">
+            <li><b>Green is earned.</b> Image, placement, version, and approval must reconcile.</li>
+            <li><b>Exceptions stay visible.</b> Missing or conflicting work cannot quietly enter the store guide.</li>
+            <li><b>Store output stays clean.</b> Technical IDs and unresolved work remain in the admin layer.</li>
+          </ul>
+        </div>
+        <div class="chapter-visual release-visual" aria-label="Brand Guide review and release gate">
+          <div class="release-pages">
+            <article class="guide-page page-map">
+              <header><span>01</span><b>Store overview</b></header>
+              <div class="guide-map"><i></i><i></i><i></i><i></i></div>
+              <footer>Approved placement map</footer>
+            </article>
+            <article class="guide-page page-detail">
+              <header><span>02</span><b>Cabinet 1</b></header>
+              <div class="guide-image asset-image one"></div>
+              <div class="guide-copy"><i></i><i></i><i></i></div>
+              <footer>Store-facing direction</footer>
+            </article>
+          </div>
+          <div class="gate-card">
+            <div class="gate-top"><span>RELEASE GATE</span><b>Review required</b></div>
+            <div class="gate-row is-green"><i>✓</i><span><b>Mapped content</b><small>Image and fixture connected</small></span></div>
+            <div class="gate-row is-green"><i>✓</i><span><b>Working package</b><small>Populated pages generated</small></span></div>
+            <div class="gate-row is-amber"><i>!</i><span><b>Owner approval</b><small>Decision still required</small></span></div>
+            <button type="button" disabled>Release only when clear</button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="chapter"
+        data-chapter="enterprise"
+        data-duration="35"
+        aria-labelledby="chapter-enterprise"
+        hidden
+      >
+        <div class="chapter-copy">
+          <div class="chapter-meta">
+            <span>08 / 08</span>
+            <span class="status status-next">DESIGNED NEXT</span>
+          </div>
+          <p class="eyebrow">Enterprise Loop</p>
+          <h2 id="chapter-enterprise">The value is the loop.</h2>
+          <p class="chapter-lede">
+            SET Loop connects planning, building, execution, and learning without pretending
+            every system is integrated today. It establishes the operating model, proves the
+            local workflow, and makes the enterprise decisions explicit.
+          </p>
+          <div class="closing-statement">
+            <small>THE LEADERSHIP DECISION</small>
+            <p>Authorize one owner-approved Beauty floorset in one approved test store, measured on time, clarity, exceptions, and rework.</p>
+          </div>
+          <div class="chapter-actions">
+            <a class="button button-dark" href="./SET_LOOP_ROLE_TAKEAWAYS.html">Open role takeaway ↗</a>
+            <button class="text-button" type="button" data-copy-narration>Copy 5:30 narration</button>
+          </div>
+        </div>
+        <div class="chapter-visual loop-visual" aria-label="Animated SET enterprise loop">
+          <div class="loop-orbit">
+            <svg viewBox="0 0 600 600" aria-hidden="true">
+              <circle cx="300" cy="300" r="218"></circle>
+              <circle class="loop-progress" cx="300" cy="300" r="218"></circle>
+            </svg>
+            <div class="loop-center">
+              <span>SET</span>
+              <b>LOOP</b>
+              <small>Direction ↔ reality</small>
+            </div>
+            <article class="loop-node node-plan"><span>01</span><b>Plan</b><small>Governed source</small></article>
+            <article class="loop-node node-build"><span>02</span><b>Build</b><small>Visual factory</small></article>
+            <article class="loop-node node-set"><span>03</span><b>SET</b><small>Exact store work</small></article>
+            <article class="loop-node node-learn"><span>04</span><b>Learn</b><small>Proof + feedback</small></article>
+            <i class="orbit-pulse pulse-one"></i>
+            <i class="orbit-pulse pulse-two"></i>
+          </div>
+          <div class="loop-boundary">
+            <span class="status status-local">WORKING LOCAL</span>
+            <span class="arrow">→</span>
+            <span class="status status-sharepoint">SHAREPOINT DEMO</span>
+            <span class="arrow">→</span>
+            <span class="status status-next">DESIGNED NEXT</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="tour-footer">
+      <div class="chapter-time">
+        <span data-current-number>01</span>
+        <div>
+          <b data-current-title>One Front Door</b>
+          <small><span data-current-time>00:00</span> / 05:30</small>
+        </div>
+      </div>
+      <div class="footer-progress" aria-label="Tour progress">
+        <span data-footer-progress></span>
+      </div>
+      <div class="footer-actions">
+        <button type="button" data-previous disabled><span aria-hidden="true">←</span> Previous</button>
+        <button type="button" class="next-button" data-next>Next chapter <span aria-hidden="true">→</span></button>
+      </div>
+    </footer>
+
+    <dialog class="links-modal" data-links-modal aria-labelledby="links-title">
+      <form method="dialog" data-links-form>
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Optional demonstration links</p>
+            <h2 id="links-title">Connect the three role views.</h2>
+          </div>
+          <button type="button" class="modal-close" data-links-close aria-label="Close">×</button>
+        </div>
+        <p class="modal-intro">
+          Paste only the SharePoint pages you want to open during this demonstration.
+          Links stay in this browser’s local storage. They are not validated, published, or shared by this file.
+        </p>
+        <label>
+          <span><b>Store</b><small>What a store leader would see</small></span>
+          <input type="url" inputmode="url" name="store" placeholder="https://…sharepoint.com/…" autocomplete="off" />
+        </label>
+        <label>
+          <span><b>DM–RM</b><small>District and region leadership view</small></span>
+          <input type="url" inputmode="url" name="field" placeholder="https://…sharepoint.com/…" autocomplete="off" />
+        </label>
+        <label>
+          <span><b>Home Office</b><small>Build, governance, and visibility view</small></span>
+          <input type="url" inputmode="url" name="home" placeholder="https://…sharepoint.com/…" autocomplete="off" />
+        </label>
+        <p class="form-error" data-links-error role="alert"></p>
+        <div class="modal-actions">
+          <button type="button" class="text-button danger-button" data-clear-links>Clear saved links</button>
+          <button type="submit" class="button button-primary">Save demo links</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+  </body>
+</html>

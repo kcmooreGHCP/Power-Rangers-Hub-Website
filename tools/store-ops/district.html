@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SET Loop | District View</title>
+<style>
+:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--teal:#0891b2;--orange:#b65d00;--red:#b42318;--purple:#7c3aed}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#f3f0f8;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.side{background:#fff;border-right:1px solid var(--line);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{padding:0 20px 16px;font-size:15px;font-weight:900;color:var(--purple);letter-spacing:-.3px;border-bottom:1px solid var(--line)}
+.persona{padding:14px 20px 10px;font-size:12px;color:var(--muted)}
+.persona b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
+.dist-badge{margin:0 20px 14px;background:#ede9fe;border:1px solid #c4b5fd;border-radius:8px;padding:10px 12px}
+.dist-badge .dnum{font-size:15px;font-weight:900;color:var(--purple)}
+.dist-badge .dname{font-size:11px;color:var(--muted);margin-top:1px}
+nav a{display:block;padding:9px 20px;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent}
+nav a:hover,nav a.active{color:var(--purple);border-left-color:var(--purple);background:#ede9fe}
+nav .section-label{padding:14px 20px 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+.main{padding:24px}
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:22px;font-weight:900;margin:0 0 4px}
+.page-header p{font-size:13px;color:var(--muted);margin:0}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.kpi .label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.kpi .value{font-size:26px;font-weight:900;line-height:1}
+.kpi .sub{font-size:11px;color:var(--muted);margin-top:4px}
+.kpi.good .value{color:var(--green)}.kpi.warn .value{color:var(--orange)}.kpi.bad .value{color:var(--red)}.kpi.blue .value{color:var(--teal)}.kpi.purple .value{color:var(--purple)}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:20px}
+.card-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.card-head h2{font-size:14px;font-weight:800;margin:0}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+.badge-green{background:#dcfce7;color:var(--green)}.badge-warn{background:#fff7ed;color:var(--orange)}.badge-red{background:#fee2e2;color:var(--red)}.badge-purple{background:#ede9fe;color:var(--purple)}
+.card-body{padding:16px 18px}
+.store-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.store-row:last-child{border-bottom:none}
+.store-num{font-size:12px;font-weight:800;color:var(--purple);width:42px;flex-shrink:0}
+.store-name{flex:1;font-size:13px;font-weight:600}
+.store-loc{font-size:11px;color:var(--muted)}
+.store-bar{flex:0 0 100px}
+.bar-wrap{height:6px;background:#f0e9ec;border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.store-pct{font-size:11px;font-weight:700;width:32px;text-align:right;flex-shrink:0}
+.store-status{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;flex-shrink:0}
+.status-done{background:#dcfce7;color:var(--green)}.status-prog{background:#fff7ed;color:var(--orange)}.status-late{background:#fee2e2;color:var(--red)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pattern-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.pattern-item:last-child{border-bottom:none}
+.pattern-icon{font-size:18px;flex-shrink:0}
+.pattern-body .title{font-size:13px;font-weight:700}
+.pattern-body .detail{font-size:12px;color:var(--muted);margin-top:2px}
+.pattern-body .stores{font-size:11px;color:var(--purple);font-weight:700;margin-top:3px}
+.action-btn{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:6px;text-decoration:none;background:#ede9fe;color:var(--purple);margin-top:4px}
+.action-btn:hover{background:var(--purple);color:#fff}
+.photo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.photo-thumb{aspect-ratio:1;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--muted);text-align:center;padding:6px}
+.photo-thumb span{font-size:20px;margin-bottom:4px}
+.photo-thumb.done{border-color:var(--green);background:#f0fdf4;color:var(--green)}
+.photo-thumb.missing{border-color:var(--orange);background:#fffbeb;color:var(--orange)}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}.kpi-row{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="logo">VS&amp;Co SET Loop</div>
+    <div class="persona"><b>District View</b><small>District Manager</small></div>
+    <div class="dist-badge">
+      <div class="dnum">District 18 — Mid-Atlantic</div>
+      <div class="dname">DM: Sarah Chen · 9 stores</div>
+    </div>
+    <nav>
+      <div class="section-label">Overview</div>
+      <a href="#stores" class="active">Store Rollup</a>
+      <a href="#photos">Photo Review</a>
+      <a href="#patterns">Patterns & Flags</a>
+      <a href="#comms">Broadcast Message</a>
+      <div class="section-label">Tools</div>
+      <a href="#tools">Quick Links</a>
+      <a href="region.html">⬆ Region View</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <h1>District 18 · Mid-Atlantic 🗺️</h1>
+      <p>DM: Sarah Chen · RC12 Floorset Week · Aug 23, 2025</p>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi purple"><div class="label">District Avg Progress</div><div class="value">71%</div><div class="sub">Checklist completion</div></div>
+      <div class="kpi good"><div class="label">On Track</div><div class="value">6</div><div class="sub">of 9 stores</div></div>
+      <div class="kpi warn"><div class="label">Need Attention</div><div class="value">2</div><div class="sub">Checklist below 50%</div></div>
+      <div class="kpi blue"><div class="label">Photos Submitted</div><div class="value">34</div><div class="sub">of 54 required</div></div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card" id="stores">
+          <div class="card-head"><h2>🏪 Store Checklist Rollup</h2><span class="badge badge-purple">RC12 Live</span></div>
+          <div class="card-body">
+            <div class="store-row"><div class="store-num">#1392</div><div class="store-name">Tyson's Corner<div class="store-loc">Vienna, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:74%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">74%</div><div class="store-status status-prog">In Progress</div></div>
+            <div class="store-row"><div class="store-num">#1408</div><div class="store-name">Pentagon City<div class="store-loc">Arlington, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">100%</div><div class="store-status status-done">Done ✓</div></div>
+            <div class="store-row"><div class="store-num">#1445</div><div class="store-name">Potomac Mills<div class="store-loc">Woodbridge, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:88%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">88%</div><div class="store-status status-prog">In Progress</div></div>
+            <div class="store-row"><div class="store-num">#1521</div><div class="store-name">Montgomery Mall<div class="store-loc">Bethesda, MD</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:62%;background:var(--teal)"></div></div></div><div class="store-pct" style="color:var(--teal)">62%</div><div class="store-status status-prog">In Progress</div></div>
+            <div class="store-row"><div class="store-num">#1587</div><div class="store-name">Annapolis Mall<div class="store-loc">Annapolis, MD</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:45%;background:var(--orange)"></div></div></div><div class="store-pct" style="color:var(--orange)">45%</div><div class="store-status status-late">Needs Attn</div></div>
+            <div class="store-row"><div class="store-num">#1602</div><div class="store-name">Dulles Town Center<div class="store-loc">Lansdowne, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:93%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">93%</div><div class="store-status status-prog">In Progress</div></div>
+            <div class="store-row"><div class="store-num">#1638</div><div class="store-name">Fair Oaks Mall<div class="store-loc">Fairfax, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:38%;background:var(--red)"></div></div></div><div class="store-pct" style="color:var(--red)">38%</div><div class="store-status status-late">Needs Attn</div></div>
+            <div class="store-row"><div class="store-num">#1691</div><div class="store-name">Westfield Wheaton<div class="store-loc">Wheaton, MD</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">80%</div><div class="store-status status-prog">In Progress</div></div>
+            <div class="store-row"><div class="store-num">#1722</div><div class="store-name">Ballston Quarter<div class="store-loc">Arlington, VA</div></div><div class="store-bar"><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div></div><div class="store-pct" style="color:var(--green)">100%</div><div class="store-status status-done">Done ✓</div></div>
+          </div>
+        </div>
+
+        <div class="card" id="comms">
+          <div class="card-head"><h2>📢 Broadcast to District</h2></div>
+          <div class="card-body">
+            <div style="margin-bottom:10px"><textarea style="width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;resize:vertical;font-family:inherit;min-height:70px" placeholder="Type a message to all 9 stores in your district..."></textarea></div>
+            <div style="display:flex;gap:8px">
+              <button style="background:var(--purple);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer">Send to All Stores</button>
+              <button style="background:#f3f0f8;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer">Flag Stores (2)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" id="patterns">
+          <div class="card-head"><h2>🔍 Patterns & Flags</h2><span class="badge badge-warn">3 Active</span></div>
+          <div class="card-body">
+            <div class="pattern-item"><div class="pattern-icon">📦</div><div class="pattern-body"><div class="title">VSB Fragrance qualifier confusion</div><div class="detail">Stores asking same qualifier question across district. Upstream fix needed before next release.</div><div class="stores">Affecting: #1392, #1587, #1638, #1691</div><a class="action-btn" href="#">Route to Merch →</a></div></div>
+            <div class="pattern-item"><div class="pattern-icon">🗂️</div><div class="pattern-body"><div class="title">PINK cabinet asset missing — Tier 5/6</div><div class="detail">Back-to-campus guide doesn't include Tier 5/6 instructions. Asset owner: PINK Visual.</div><div class="stores">Affecting: #1587, #1638 (both Tier 5)</div><a class="action-btn" href="#">Track Asset →</a></div></div>
+            <div class="pattern-item"><div class="pattern-icon">⏰</div><div class="pattern-body"><div class="title">Selldown timing SOP gap</div><div class="detail">3rd cycle this has come up. Stores need clearer rules for selldown-to-floorset transition.</div><div class="stores">Affecting: #1445, #1521, #1587</div><a class="action-btn" href="#">Flag SOP →</a></div></div>
+          </div>
+        </div>
+
+        <div class="card" id="photos">
+          <div class="card-head"><h2>📸 Photo Submission Status</h2><span class="badge badge-warn">34 of 54</span></div>
+          <div class="card-body">
+            <p style="font-size:12px;color:var(--muted);margin:0 0 12px">RC12 photo review — due by 6 PM today</p>
+            <div class="photo-row">
+              <div class="photo-thumb done"><span>✅</span>#1408<br>Complete</div>
+              <div class="photo-thumb done"><span>✅</span>#1722<br>Complete</div>
+              <div class="photo-thumb done"><span>✅</span>#1602<br>4 of 4</div>
+              <div class="photo-thumb done"><span>✅</span>#1691<br>3 of 4</div>
+              <div class="photo-thumb"><span>📷</span>#1392<br>2 of 4</div>
+              <div class="photo-thumb"><span>📷</span>#1445<br>2 of 4</div>
+              <div class="photo-thumb missing"><span>⚠️</span>#1587<br>0 of 4</div>
+              <div class="photo-thumb missing"><span>⚠️</span>#1638<br>1 of 4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="tools">
+          <div class="card-head"><h2>⚡ Quick Tools</h2></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0d9/share" target="_blank"><span style="font-size:20px">📊</span>MSI Library</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://victoriassecret.apprissretailcloud.com/secure/cpf/auth/logon?lc=en-US" target="_blank"><span style="font-size:20px">📈</span>KPI Dashboard</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://blueday.vscocorp.com/" target="_blank"><span style="font-size:20px">🔵</span>BlueDay</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://intradayreporting.vscocorp.com/vss" target="_blank"><span style="font-size:20px">⏱</span>Intraday</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank"><span style="font-size:20px">🔗</span>Intranet</a>
+              <a style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;background:#f3f0f8;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:11px;font-weight:700;text-align:center" href="SET_LOOP_MASTER.html"><span style="font-size:20px">🔄</span>SET Loop</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
