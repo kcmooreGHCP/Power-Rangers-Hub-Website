@@ -1,0 +1,84 @@
+===========================================================
+DO THIS RIGHT NOW — 5 minutes to make it live on SharePoint
+===========================================================
+
+GOAL: The presentation opens at vscocorp.sharepoint.com/sites/Co-PilotPowerRangersHub
+      as a real page — not a download popup.
+
+===========================================================
+STEP 1 of 5 — Open your SharePoint site
+===========================================================
+Go to: https://vscocorp.sharepoint.com/sites/Co-PilotPowerRangersHub
+
+===========================================================
+STEP 2 of 5 — Create a new page
+===========================================================
+1. Click "Pages" in the top navigation bar
+   (if you don't see it, click the "..." more menu)
+2. Click "+ New" → "Page"
+3. Choose "Blank" template
+4. Click "Create page"
+
+===========================================================
+STEP 3 of 5 — Set up the full-width layout
+===========================================================
+1. At the top, click the title area and type:
+   SET + SET Loop — VP Presentation
+2. Below the title, click the "+" add section button
+3. Choose "Full-width column" layout
+4. Inside the section, click the "+" to add a web part
+
+===========================================================
+STEP 4 of 5 — Embed the presentation
+===========================================================
+1. In the web part search box, type: Embed
+2. Click the "Embed" web part
+3. In the "Website address or embed code" box, paste:
+
+   https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html
+
+4. Click outside the box — you should see the presentation appear!
+5. Drag the bottom edge of the web part to make it taller
+   (aim for 800px or "stretch to full height")
+
+===========================================================
+STEP 5 of 5 — Publish and set as home page (optional)
+===========================================================
+1. Click "Publish" (top right blue button)
+2. To make it the home page:
+   - Click the "..." menu next to the page in Site Pages
+   - Click "Make homepage"
+   
+The URL will be:
+https://vscocorp.sharepoint.com/sites/Co-PilotPowerRangersHub/SitePages/SET---SET-Loop---VP-Presentation.aspx
+
+===========================================================
+IF THE EMBED WEB PART DOESN'T WORK (IT blocks it)
+===========================================================
+Some IT policies block external URLs in Embed web parts.
+If you see an error or blank space:
+
+Plan B — Upload HTML to Site Assets first:
+1. Go to Site Contents → Site Assets
+2. Upload: vp-presentation.html (from your Desktop/Power-Rangers-Hub-Website)
+3. Repeat steps 2-4 above, but paste this instead:
+   /sites/Co-PilotPowerRangersHub/SiteAssets/vp-presentation.html
+
+Plan C — Just share the GitHub link:
+https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html
+(works for anyone, no login, always available)
+
+===========================================================
+WHAT YOU'LL END UP WITH:
+===========================================================
+SharePoint URL:
+  https://vscocorp.sharepoint.com/sites/Co-PilotPowerRangersHub/SitePages/SET---SET-Loop---VP-Presentation.aspx
+
+GitHub URL (backup / external sharing):
+  https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html
+
+Local file (offline backup):
+  ~/Desktop/Power-Rangers-Hub-Website/vp-presentation.html
+
+All three are separate and independent. ✅
+===========================================================
