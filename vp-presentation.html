@@ -271,6 +271,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <a href="#roi">Business Case</a>
       <a href="#security">Security</a>
       <a href="#pilot">Join the Pilot</a>
+      <a href="#field-experience">Field Experience</a>
       <a href="#more">More Tools</a>
       <a href="#" onclick="sharePresentation();return false" class="nav-cta" id="share-btn">🔗 Share the Loop</a>
     </nav>
@@ -1051,6 +1052,64 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
   <button class="react-btn" onclick="react('pilot','👎 Not Yet',this)">👎 Not yet</button>
 </div></section>
 
+<!-- FIELD EXPERIENCE -->
+<section id="field-experience" class="section" style="background:#f8f7fc">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label label-pink">The field experience</span>
+      <h2>Always know where you are, what matters, and where to go next</h2>
+      <p>Every Store, District, and Region view now carries a persistent return path to the SET Loop starter page, a scoped KPI and readiness snapshot, force refresh, the approved Brand Guide, SET IRL, and the guardrailed SET Agent.</p>
+    </div>
+    <div class="innovation-grid">
+      <div class="inno-card">
+        <div class="inno-icon" style="background:#fce7f3">←</div>
+        <h3>Return to the SET Loop</h3>
+        <p>A persistent location bar identifies the current Store, District, Region, or Home Office screen and always provides one-click return to the SET Loop starter page.</p>
+        <a href="tools/store-ops/SET_LOOP_MASTER.html" target="_blank" class="inno-tag" style="background:#fce7f3;color:#9d174d;text-decoration:none">Open starter page →</a>
+      </div>
+      <div class="inno-card">
+        <div class="inno-icon" style="background:#d1fae5">📊</div>
+        <h3>Live KPI, tasks, and readiness</h3>
+        <p>Role-scoped dashboards keep launch readiness, important tasks, proof due, risk, and escalations together. Teams can force refresh the newest approved connected snapshot.</p>
+        <a href="tools/store-ops/store.html" target="_blank" class="inno-tag" style="background:#d1fae5;color:#065f46;text-decoration:none">Try Store view →</a>
+      </div>
+      <div class="inno-card">
+        <div class="inno-icon" style="background:#fef3c7">📖</div>
+        <h3>Interactive Brand Guide</h3>
+        <p>Open Store 0222's 73-page guide in the same screen or a new window. Its table of contents, full-store map, room and zone direction, and SET IRL actions stay intact.</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+          <button onclick="openFieldGuide(1)" class="inno-tag" style="background:#fef3c7;color:#78350f;border:0;cursor:pointer">Open here</button>
+          <a href="tools/store-ops/resources/STORE_0222_2026_08_19_BRAND_GUIDE_INTERACTIVE.pdf" target="_blank" rel="noopener" class="inno-tag" style="background:#fef3c7;color:#78350f;text-decoration:none">New window ↗</a>
+        </div>
+      </div>
+      <div class="inno-card" style="border-color:#ed2d8b">
+        <div class="inno-icon" style="background:#fff7fb">✨</div>
+        <h3>SET IRL is the return path</h3>
+        <p>SET IRL is highlighted as the moment the field can time the work or tell us what happened in real life — turning every guide into measurable field intelligence.</p>
+        <button onclick="openFieldGuide(2)" class="inno-tag" style="background:#fff7fb;color:#9d174d;border:0;cursor:pointer">Open SET IRL directory →</button>
+      </div>
+      <div class="inno-card">
+        <div class="inno-icon" style="background:#ede9fe">🎙️</div>
+        <h3>SET Agent + voice</h3>
+        <p>Associates can ask for help navigating, sorting, and prioritizing. Team personalities and optional system voice personalize delivery without changing the approved answer.</p>
+        <a href="tools/store-ops/store.html" target="_blank" class="inno-tag" style="background:#ede9fe;color:#5b21b6;text-decoration:none">Try Ask SET Agent →</a>
+      </div>
+      <div class="inno-card">
+        <div class="inno-icon" style="background:#fef2f2">🛡️</div>
+        <h3>Grounded or escalated — never invented</h3>
+        <p>No Google and no guessing. Answers must cite content that passed intake. If no approved answer exists, the Agent asks for refinement or prepares a support request to Store Operations with the accountable partner copied.</p>
+        <span class="inno-tag" style="background:#fef2f2;color:#991b1b">Approval + guardrails required</span>
+      </div>
+    </div>
+  </div>
+  <div class="react-row">
+    <span>What do you think about <strong>Field Experience + SET Agent</strong>?</span>
+    <button class="react-btn" onclick="react('field-experience','👍 Like',this)">👍 Like it</button>
+    <button class="react-btn" onclick="react('field-experience','💡 Learn More',this)">💡 Learn more</button>
+    <button class="react-btn" onclick="react('field-experience','👎 Not Yet',this)">👎 Not yet</button>
+  </div>
+</section>
+
 <!-- MORE TOOLS / INNOVATION SHOWCASE -->
 <section id="more" class="section" style="background:#fff">
   <div class="wrap">
@@ -1105,7 +1164,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <a class="inno-card" href="tools/set-819/resources/SET_AGENT_FACTORY.html" target="_blank">
         <div class="inno-icon" style="background:#fdf4ff">🤖</div>
         <h3>SET Agent Factory</h3>
-        <p>AI-assisted prompt library and agent configuration — Copilot prompts pre-built for partner intake, field summaries, and release QA workflows.</p>
+        <p>AI-assisted prompt library and agent configuration for approved internal sources only — with citations, no-web guardrails, explicit not-found behavior, and partner escalation.</p>
         <span class="inno-tag" style="background:#fdf4ff;color:#7e22ce">AI + Copilot</span>
       </a>
       <a class="inno-card" href="tools/set-819/reports/FIXTURE_FINDER.html" target="_blank">
@@ -1153,6 +1212,18 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
   </div>
 </footer>
 
+<div id="fieldGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.74);z-index:9100;padding:1rem;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;width:min(1180px,100%);height:min(92vh,850px);display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #e5e7eb">
+      <strong style="font-size:14px">Store 0222 · Interactive Brand Guide</strong>
+      <span style="font-size:11px;color:#667085;flex:1">TOC · full-store map · room and zone direction · SET IRL</span>
+      <a href="tools/store-ops/resources/STORE_0222_2026_08_19_BRAND_GUIDE_INTERACTIVE.pdf" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#5b21b6;text-decoration:none">New window ↗</a>
+      <button onclick="closeFieldGuide()" style="background:#fff;border:1px solid #d0d5dd;border-radius:6px;padding:5px 9px;cursor:pointer">Close</button>
+    </div>
+    <iframe id="fieldGuideFrame" title="Store 0222 Interactive Brand Guide" style="border:0;width:100%;flex:1;background:#f2f4f7"></iframe>
+  </div>
+</div>
+
 <script>
 function showDemo(role) {
   document.querySelectorAll('.demo-content').forEach(d => d.classList.remove('active'));
@@ -1166,6 +1237,16 @@ function toggleCheck(id) {
   const el = document.getElementById(id);
   const box = el.querySelector('input');
   el.classList.toggle('checked', box.checked);
+}
+
+function openFieldGuide(page) {
+  document.getElementById('fieldGuideFrame').src = 'tools/store-ops/resources/STORE_0222_2026_08_19_BRAND_GUIDE_INTERACTIVE.pdf#page=' + page;
+  document.getElementById('fieldGuideOverlay').style.display = 'flex';
+}
+
+function closeFieldGuide() {
+  document.getElementById('fieldGuideOverlay').style.display = 'none';
+  document.getElementById('fieldGuideFrame').src = '';
 }
 
 // Init checked state
