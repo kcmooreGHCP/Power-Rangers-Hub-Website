@@ -3,181 +3,340 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Notifications · Store 1392 · SET Loop</title>
+  <title>Business Now · Store 1392 · SET Loop</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
     .topnav{background:#11131a;padding:0 2rem}
     .nav-inner{display:flex;gap:0;flex-wrap:wrap}
     .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
-    .topnav a:hover{color:#ed2d8b;background:#1a1d28}
-    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
-    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
-    .hero h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
-    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.5rem;letter-spacing:.04em}
+    .topnav a:hover,.topnav a.active-nav{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:2.5rem 2rem 2rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.4rem}
+    .hero h1{font-size:2rem;font-weight:700}
+    .hero-sub{color:#aaa;font-size:.88rem;margin-top:.5rem}
     .container{max-width:1200px;margin:0 auto;padding:2rem}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
-    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-bottom:1rem}
+    @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b;margin-top:2rem}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
     .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
     .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
-    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b}
-    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-    .pill-green{background:#e8f5e9;color:#2e7d32}
-    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .65rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
     .pill-red{background:#fce4ec;color:#c62828}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
     .pill-blue{background:#e3f2fd;color:#1565c0}
-    .pill-pink{background:#fce4ec;color:#ad1457}
+    .pill-pink{background:#fce4ec;color:#880e4f}
     .pill-gray{background:#f5f5f5;color:#555}
-    .notif{display:flex;gap:1rem;padding:1rem;border:1px solid #eee;border-radius:8px;margin-bottom:.75rem;align-items:flex-start}
-    .notif-icon{font-size:1.4rem;flex-shrink:0}
+    .notif-row{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid #f5f5f5;cursor:pointer;transition:.12s}
+    .notif-row:last-child{border-bottom:none}
+    .notif-row:hover{background:#fafafa;border-radius:6px;padding-left:.5rem}
+    .notif-icon{font-size:1.4rem;width:38px;flex-shrink:0;margin-top:.1rem;text-align:center}
     .notif-body{flex:1}
-    .notif-title{font-size:.9rem;font-weight:700;color:#11131a}
-    .notif-desc{font-size:.78rem;color:#666;margin-top:.3rem;line-height:1.5}
-    .notif-foot{display:flex;align-items:center;gap:.75rem;margin-top:.6rem}
-    .notif-scope{font-size:.65rem;color:#aaa;letter-spacing:.05em}
-    .tag-vs{background:#11131a;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
-    .tag-pink{background:#ed2d8b;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
-    .tag-all{background:#555;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700}
+    .notif-title{font-size:.88rem;font-weight:700;color:#11131a;margin-bottom:.25rem}
+    .notif-desc{font-size:.8rem;color:#667085;line-height:1.5}
+    .notif-meta{font-size:.72rem;color:#aaa;margin-top:.35rem}
+    .notif-status{flex-shrink:0;margin-top:.1rem}
+    /* Inventory report styles */
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    th{background:#f8f8f8;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#888;padding:.7rem 1rem;text-align:left;border-bottom:2px solid #eee}
+    td{padding:.65rem 1rem;border-bottom:1px solid #f5f5f5;vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+    .dot-green{background:#2e7d32}
+    .dot-yellow{background:#f57c00}
+    .dot-red{background:#c62828}
+    .kpi-strip{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .kpi-sm{background:#fbf7f9;border:1px solid #f2e8ed;border-radius:8px;padding:.85rem 1.2rem;flex:1;min-width:120px;text-align:center}
+    .kpi-sm b{display:block;font-size:1.6rem;font-weight:700;color:#11131a}
+    .kpi-sm small{font-size:.7rem;color:#667085}
+    /* Tab system */
+    .tabs{display:flex;gap:0;border-bottom:2px solid #eee;margin-bottom:1.5rem}
+    .tab-btn{background:none;border:none;padding:.75rem 1.25rem;font-size:.82rem;font-weight:600;color:#888;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.12s}
+    .tab-btn.active{color:#ed2d8b;border-bottom-color:#ed2d8b}
+    .tab-pane{display:none}
+    .tab-pane.active{display:block}
+    /* Feedback bar */
+    .feedback-bar{display:flex;align-items:center;gap:.75rem;padding:.85rem 1.25rem;background:#f8f8f8;border-radius:8px;margin-top:2rem;flex-wrap:wrap}
+    .feedback-bar span{font-size:.78rem;color:#667085;flex:1}
+    .fb-btn{background:#fff;border:1px solid #ddd;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:.12s;color:#11131a}
+    .fb-btn:hover,.fb-btn.active{background:#ed2d8b;color:#fff;border-color:#ed2d8b}
     footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
     footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
   </style>
 </head>
 <body>
-  <nav class="topnav">
-    <div class="nav-inner">
-      <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
-      <a href="district.html">📋 District — 339 West</a>
-      <a href="region.html">🗺️ Region — 400 West</a>
-      <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
-    </div>
-  </nav>
 
-  <div class="hero">
-    <div class="hero-tag">Business Now</div>
-    <h1>Notifications</h1>
-    <div class="hero-sub">Store 1392 · Ontario Mills · All active communications</div>
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="store.html" class="active-nav">🏪 Store — 1392 Ontario Mills</a>
+    <a href="district.html">📋 District — 339 West</a>
+    <a href="region.html">🗺️ Region — 400 West</a>
+    <a href="SET_LOOP_MASTER.html">🏠 Home Office</a>
   </div>
-  <div class="container">
-    <div class="section-title">All Business Now Items (10)</div>
-    <div class="notif">
-      <div class="notif-icon">📣</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Business Now</div>
+  <h1>Notifications + Inventory</h1>
+  <div class="hero-sub">Store 1392 · Ontario Mills · Communications, priorities, and product status in one view</div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi-sm"><b>10</b><small>Active communications</small></div>
+    <div class="kpi-sm"><b style="color:#c62828">8</b><small>Zero on hand items</small></div>
+    <div class="kpi-sm"><b style="color:#f57c00">23</b><small>Low stock SKUs</small></div>
+    <div class="kpi-sm"><b style="color:#2e7d32">184</b><small>In stock SKUs</small></div>
+    <div class="kpi-sm"><b>3</b><small>Action required</small></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('communications')">📣 Communications (10)</button>
+    <button class="tab-btn" onclick="showTab('inventory')">📦 Inventory Report</button>
+    <button class="tab-btn" onclick="showTab('priorities')">✅ My Priorities</button>
+  </div>
+
+  <!-- COMMUNICATIONS TAB -->
+  <div class="tab-pane active" id="tab-communications">
+    <div class="section-title" style="margin-top:0">All Business Now Items (10)</div>
+
+    <div class="notif-row" onclick="location.href='communications.html'">
+      <div class="notif-icon">📅</div>
       <div class="notif-body">
-        <div class="notif-title">2026 Holiday Conference — Columbus</div>
-        <div class="notif-desc">In Person · DMs and field leadership. Conference scheduled for Columbus, OH. Travel and scheduling information to follow.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">All Stores</span>
-          <span class="pill pill-blue">Info</span>
-        </div>
+        <div class="notif-title">2026 Holiday Conference — Columbus, OH</div>
+        <div class="notif-desc">In person · DMs and field leadership · Travel and scheduling information to follow. Register by Aug 28.</div>
+        <div class="notif-meta">All Stores · Posted Aug 19</div>
       </div>
+      <div class="notif-status"><span class="pill pill-blue">INFO</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">🎁</div>
       <div class="notif-body">
-        <div class="notif-title">Free VS Lace Mesh Tote GWP</div>
-        <div class="notif-desc">With qualifying purchase. VS stores must update signage and register prompts immediately. Action required before floorset opens.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">VS Stores</span>
-          <span class="pill pill-red">Action Required</span>
-        </div>
+        <div class="notif-title">Free VS Lace Mesh Tote GWP — Signage Update Required</div>
+        <div class="notif-desc">With qualifying purchase. Update register prompts and place signage immediately. Do not delay — floorset opens Aug 22.</div>
+        <div class="notif-meta">VS Stores · ACTION REQUIRED by Aug 22</div>
       </div>
+      <div class="notif-status"><span class="pill pill-red">ACTION REQUIRED</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">👙</div>
       <div class="notif-body">
-        <div class="notif-title">VS Bra Try-On Event</div>
-        <div class="notif-desc">VS store activation. Ensure fitting specialist coverage is scheduled and fitting rooms are cleaned and ready. Action required.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">VS Stores</span>
-          <span class="pill pill-red">Action Required</span>
-        </div>
+        <div class="notif-title">VS Bra Try-On Event — Fitting Room Readiness</div>
+        <div class="notif-desc">Ensure fitting specialist coverage is scheduled. Clean and prep all fitting rooms before Aug 23 open. DM inspection Aug 24.</div>
+        <div class="notif-meta">VS Stores · ACTION REQUIRED</div>
       </div>
+      <div class="notif-status"><span class="pill pill-red">ACTION REQUIRED</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">🎀</div>
       <div class="notif-body">
-        <div class="notif-title">Very Sexy Anniversary Charm Push-Up Bra Reticket</div>
-        <div class="notif-desc">Affected stores must complete reticket of all units on floor and in backroom. Verify with DM upon completion.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">Affected Stores</span>
-          <span class="pill pill-yellow">Task</span>
-        </div>
+        <div class="notif-title">Very Sexy Anniversary Charm Push-Up Bra — Reticket All Units</div>
+        <div class="notif-desc">All affected stores must reticket every unit on floor and in backroom. Verify with your DM upon completion. Do not sell at old ticket.</div>
+        <div class="notif-meta">Affected Stores · TASK</div>
       </div>
+      <div class="notif-status"><span class="pill pill-yellow">TASK</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">🤫</div>
       <div class="notif-body">
-        <div class="notif-title">PINK Collaboration Strategy</div>
-        <div class="notif-desc">PINK stores — required read. Treat as confidential. Do not share externally.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">PINK Stores</span>
-          <span class="pill pill-pink">Required Read</span>
-        </div>
+        <div class="notif-title">PINK Collaboration Strategy — Required Read</div>
+        <div class="notif-desc">PINK stores required read. Treat as confidential — do not share externally or discuss on sales floor. Review with your SM team only.</div>
+        <div class="notif-meta">PINK Stores · REQUIRED READ · Confidential</div>
       </div>
+      <div class="notif-status"><span class="pill pill-pink">REQUIRED READ</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">🐾</div>
       <div class="notif-body">
-        <div class="notif-title">PINK Friday Mystery Mini Dog GWP</div>
-        <div class="notif-desc">PINK stores — DM inspection required. Verify GWP placement meets standard before Thursday OOB.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">PINK Stores</span>
-          <span class="pill pill-pink">DM Inspection</span>
-        </div>
+        <div class="notif-title">PINK Friday Mystery Mini Dog GWP — Hold Until Setup Complete</div>
+        <div class="notif-desc">Do not place on floor until setup photo is approved by DM. Hold in backroom. Photo confirmation required before Aug 23.</div>
+        <div class="notif-meta">PINK Stores · DM Inspection</div>
       </div>
+      <div class="notif-status"><span class="pill pill-yellow">HOLD</span></div>
     </div>
-    <div class="notif">
-      <div class="notif-icon">💄</div>
-      <div class="notif-body">
-        <div class="notif-title">PINK Beauty Belt Update</div>
-        <div class="notif-desc">PINK Beauty eligible stores — DM inspection. Confirm belt placement and signage alignment.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">PINK Beauty</span>
-          <span class="pill pill-pink">DM Inspection</span>
-        </div>
-      </div>
-    </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='checklist.html'">
       <div class="notif-icon">📋</div>
       <div class="notif-body">
-        <div class="notif-title">Pre-Holiday Roster Review</div>
-        <div class="notif-desc">All stores must complete pre-holiday roster review checklist by Aug 24. Submit to DM for verification.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">All Stores</span>
-          <span class="pill pill-yellow">Checklist Due Aug 24</span>
-        </div>
+        <div class="notif-title">Pre-Holiday Roster Review — Checklist Due Aug 24</div>
+        <div class="notif-desc">Review and confirm your full roster for holiday. Flag any gaps to your DM. All stores and DMs — checklist due by end of day Aug 24.</div>
+        <div class="notif-meta">All Stores · Due Aug 24</div>
       </div>
+      <div class="notif-status"><span class="pill pill-yellow">DUE AUG 24</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
+      <div class="notif-icon">💄</div>
+      <div class="notif-body">
+        <div class="notif-title">PINK Beauty Belt Update — DM Inspection Required</div>
+        <div class="notif-desc">PINK Beauty eligible stores must update the Beauty Belt display. DM will inspect Aug 25. Submit photo confirmation via SET Loop.</div>
+        <div class="notif-meta">PINK Beauty Stores</div>
+      </div>
+      <div class="notif-status"><span class="pill pill-yellow">TASK</span></div>
+    </div>
+
+    <div class="notif-row" onclick="location.href='set-loop-assortment.html'">
       <div class="notif-icon">📊</div>
       <div class="notif-body">
-        <div class="notif-title">RFID Dashboard Update</div>
-        <div class="notif-desc">Field leadership update on RFID reporting dashboard changes. Review new view before next cycle count.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">Field Leadership</span>
-          <span class="pill pill-blue">Info</span>
-        </div>
+        <div class="notif-title">RFID Dashboard Update — New Navigation Available</div>
+        <div class="notif-desc">Updated RFID dashboard is now live. Review the quick how-to guide before your next inventory scan. Link below to access and learn.</div>
+        <div class="notif-meta">Field Leadership · Information</div>
       </div>
+      <div class="notif-status"><span class="pill pill-blue">INFO</span></div>
     </div>
-    <div class="notif">
+
+    <div class="notif-row" onclick="location.href='communications.html'">
       <div class="notif-icon">🎉</div>
       <div class="notif-body">
-        <div class="notif-title">Fall Bonus Card Program</div>
-        <div class="notif-desc">US and Canada stores must activate Fall Bonus Card program. Action required — confirm card stock and register activation.</div>
-        <div class="notif-foot">
-          <span class="notif-scope">US/Canada Stores</span>
-          <span class="pill pill-red">Action Required</span>
+        <div class="notif-title">Fall Bonus Card Program — Action Required by Aug 31</div>
+        <div class="notif-desc">All US and Canada stores must confirm enrollment and distribute bonus cards to eligible associates. See attached guide for details.</div>
+        <div class="notif-meta">US + Canada Stores · Due Aug 31</div>
+      </div>
+      <div class="notif-status"><span class="pill pill-red">ACTION REQUIRED</span></div>
+    </div>
+  </div>
+
+  <!-- INVENTORY TAB -->
+  <div class="tab-pane" id="tab-inventory">
+    <div class="section-title" style="margin-top:0">Inventory Report · Store 1392 · Ontario Mills · August Floorset</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Zero On Hand — Immediate Action</span>
+          <span class="pill pill-red">8 Items</span>
+        </div>
+        <table>
+          <thead><tr><th>Style #</th><th>Description</th><th>Category</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>75543-001</td><td>VSB Luna EDP 50ml</td><td>Fragrance</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>34221-BLK</td><td>Body By Victoria Unlined Demi 34C</td><td>Bra · Core</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>PK-8821-PNK</td><td>PINK Campus Hoodie — Small</td><td>PINK Apparel</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>44190-RED</td><td>Very Sexy Lace Demi Bra 34D</td><td>Bra · Feature</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>22870-WHT</td><td>Dream Angels Balconette 36B</td><td>Bra · Core</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>PK-6612-GRY</td><td>PINK Everyday Legging — XS</td><td>PINK Apparel</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>55022-BLK</td><td>Pure Seduction Rollerball Set</td><td>Body Care</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+            <tr><td>33801-NUD</td><td>T-Shirt Bra Lightly Lined 38C</td><td>Bra · Core</td><td><span class="status-dot dot-red"></span><span class="pill pill-red">ZOH</span></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:1rem;text-align:right">
+          <a href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank" style="display:inline-block;background:#ed2d8b;color:#fff;border-radius:6px;padding:.5rem 1rem;font-size:.78rem;font-weight:700;text-decoration:none">Open MSI Library →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Low Stock — Monitor</span>
+          <span class="pill pill-yellow">23 Items</span>
+        </div>
+        <table>
+          <thead><tr><th>Style #</th><th>Description</th><th>On Hand</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>91022-NUD</td><td>T-Shirt Bra Lightly Lined 36B</td><td>2</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td>66531-WHT</td><td>Pure Seduction Body Lotion 8oz</td><td>4</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td>PK-9900-BLK</td><td>PINK Ultimate Shorts — M</td><td>3</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td>44320-PNK</td><td>VSB Eau de Parfum 30ml</td><td>5</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td>21100-BLK</td><td>Body By Victoria Demi 34B</td><td>2</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td>33241-RED</td><td>Very Sexy Push-Up 36C</td><td>1</td><td><span class="pill pill-yellow">Low</span></td></tr>
+            <tr><td colspan="4" style="text-align:center;color:#aaa;font-size:.78rem;padding:.75rem">+ 17 more low-stock items · <a href="set-loop-assortment.html" style="color:#ed2d8b">View full assortment →</a></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:1rem;text-align:right">
+          <a href="set-loop-assortment.html" style="display:inline-block;background:#11131a;color:#fff;border-radius:6px;padding:.5rem 1rem;font-size:.78rem;font-weight:700;text-decoration:none">Full Assortment View →</a>
         </div>
       </div>
     </div>
-    <div style="margin-top:1.5rem">
-      <a href="store.html" style="display:inline-block;background:#ed2d8b;color:#fff;padding:.65rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.04em">← Back to Store</a>
+
+    <div class="card" style="margin-top:1.5rem">
+      <div class="card-header">
+        <span class="card-title">Floorset Launch Readiness · August 2025</span>
+        <span class="pill pill-green">On Track</span>
+      </div>
+      <table>
+        <thead><tr><th>Zone</th><th>Brand</th><th>Direction</th><th>Photo</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Panty Bars 1–5</td><td>VS</td><td>August Panty Wall</td><td><a href="photo-inspection.html" style="color:#ed2d8b">View →</a></td><td><span class="pill pill-green">Complete</span></td></tr>
+          <tr><td>PINK Room 1–3</td><td>PINK</td><td>Back-to-Campus</td><td><a href="photo-inspection.html" style="color:#ed2d8b">View →</a></td><td><span class="pill pill-green">Complete</span></td></tr>
+          <tr><td>Beauty Mist Bar</td><td>VSB</td><td>Fragrance Feature</td><td><a href="photo-inspection.html" style="color:#ed2d8b">View →</a></td><td><span class="pill pill-yellow">Pending DM</span></td></tr>
+          <tr><td>Fitting Rooms</td><td>All</td><td>Bra Try-On Event</td><td><a href="photo-inspection.html" style="color:#ed2d8b">View →</a></td><td><span class="pill pill-yellow">Due Aug 23</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <footer>
-    <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
-    <div>SET Loop · Victoria's Secret &amp; Co · Field Operations</div>
-  </footer>
+
+  <!-- PRIORITIES TAB -->
+  <div class="tab-pane" id="tab-priorities">
+    <div class="section-title" style="margin-top:0">My Priorities — Store 1392 · This Week</div>
+    <div class="card">
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div style="display:flex;align-items:center;gap:1rem;padding:.85rem;background:#fce4ec;border-radius:8px;border-left:4px solid #c62828">
+          <span style="font-size:1.2rem">🚨</span>
+          <div style="flex:1"><div style="font-weight:700;font-size:.88rem">Reticket Very Sexy Anniversary Charm Push-Up Bra</div><div style="font-size:.78rem;color:#667085;margin-top:.2rem">All units on floor + backroom · Confirm with DM · TODAY</div></div>
+          <a href="checklist.html" style="background:#c62828;color:#fff;border-radius:6px;padding:.4rem .85rem;font-size:.75rem;font-weight:700;text-decoration:none">Start →</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;padding:.85rem;background:#fff8e1;border-radius:8px;border-left:4px solid #f57c00">
+          <span style="font-size:1.2rem">📋</span>
+          <div style="flex:1"><div style="font-weight:700;font-size:.88rem">Pre-Holiday Roster Review Checklist</div><div style="font-size:.78rem;color:#667085;margin-top:.2rem">Due Aug 24 · Route to DM upon completion</div></div>
+          <a href="checklist.html" style="background:#f57c00;color:#fff;border-radius:6px;padding:.4rem .85rem;font-size:.75rem;font-weight:700;text-decoration:none">Open →</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;padding:.85rem;background:#fff8e1;border-radius:8px;border-left:4px solid #f57c00">
+          <span style="font-size:1.2rem">🎁</span>
+          <div style="flex:1"><div style="font-weight:700;font-size:.88rem">GWP Signage + Register Prompts Update</div><div style="font-size:.78rem;color:#667085;margin-top:.2rem">Free Lace Mesh Tote · Before Aug 22 open</div></div>
+          <a href="communications.html" style="background:#f57c00;color:#fff;border-radius:6px;padding:.4rem .85rem;font-size:.75rem;font-weight:700;text-decoration:none">View →</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;padding:.85rem;background:#e8f5e9;border-radius:8px;border-left:4px solid #2e7d32">
+          <span style="font-size:1.2rem">📸</span>
+          <div style="flex:1"><div style="font-weight:700;font-size:.88rem">Submit Floorset Photo — All Zones</div><div style="font-size:.78rem;color:#667085;margin-top:.2rem">August floorset · Photo confirmation due before DM visit</div></div>
+          <a href="photo-inspection.html" style="background:#2e7d32;color:#fff;border-radius:6px;padding:.4rem .85rem;font-size:.75rem;font-weight:700;text-decoration:none">Submit →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK BAR -->
+  <div class="feedback-bar">
+    <span>How is this view working for you?</span>
+    <button class="fb-btn" onclick="react(this,'👍 Helpful')">👍 Helpful</button>
+    <button class="fb-btn" onclick="react(this,'💡 Want More')">💡 Want More</button>
+    <button class="fb-btn" onclick="react(this,'👎 Not Useful')">👎 Not Useful</button>
+    <button class="fb-btn" onclick="shareLoop()">🔗 Share this view</button>
+  </div>
+
+</div>
+
+<footer>
+  <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+  <div>SET Loop · SET the standard. Own the outcome. Put Her First.</div>
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+function react(btn, label) {
+  document.querySelectorAll('.fb-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const key = 'setloop_feedback_notifications';
+  const data = JSON.parse(localStorage.getItem(key) || '{}');
+  data[label] = (data[label] || 0) + 1;
+  localStorage.setItem(key, JSON.stringify(data));
+}
+function shareLoop() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied! Share this with your team to show them the SET Loop in action.');
+  }).catch(() => {
+    prompt('Copy this link to share:', window.location.href);
+  });
+}
+</script>
 </body>
 </html>

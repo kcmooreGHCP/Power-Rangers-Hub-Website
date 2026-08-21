@@ -20,4 +20,20 @@
 <div class="item-row"><div class="item-num">66531-WHT</div><div class="item-name">Pure Seduction Body Lotion 8oz<div class="item-tier">Body Care · Fragrance</div></div><div class="item-qty">4</div><div class="item-status s-low">Low</div></div>
 </div></div>
 <div style="text-align:center;margin-top:8px"><a href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank" style="display:inline-block;background:var(--pink);color:#fff;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:700;text-decoration:none">Open Full MSI Library →</a></div>
-</main></div></body></html>
+</main></div>
+<!-- FEEDBACK + SHARE BAR -->
+<div style="max-width:1200px;margin:0 auto;padding:0 2rem 2rem">
+<div style="display:flex;align-items:center;gap:.75rem;padding:.85rem 1.25rem;background:#f8f8f8;border-radius:8px;flex-wrap:wrap">
+  <span style="font-size:.78rem;color:#667085;flex:1">What do you think about this view?</span>
+  <button onclick="fbReact(this,'👍 Like')" style="background:#fff;border:1px solid #ddd;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:.12s;color:#11131a">👍 Like it</button>
+  <button onclick="fbReact(this,'💡 Learn More')" style="background:#fff;border:1px solid #ddd;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:.12s;color:#11131a">💡 Learn more</button>
+  <button onclick="fbReact(this,'👎 Not Yet')" style="background:#fff;border:1px solid #ddd;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:.12s;color:#11131a">👎 Not yet</button>
+  <button onclick="shareView()" style="background:#11131a;color:#fff;border:none;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer">🔗 Share</button>
+  <a href="../../vp-presentation.html" style="background:#ed2d8b;color:#fff;border:none;border-radius:20px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;text-decoration:none">⚡ Join the Loop</a>
+</div>
+</div>
+<script>
+function fbReact(btn,label){const all=btn.parentNode.querySelectorAll('button');all.forEach(b=>b.style.background='#fff',b=>b.style.color='#11131a');btn.style.background='#ed2d8b';btn.style.color='#fff';btn.style.borderColor='#ed2d8b';const k='setloop_feedback_'+location.pathname.split('/').pop();const d=JSON.parse(localStorage.getItem(k)||'{}')+'';const data=JSON.parse(localStorage.getItem(k)||'{}')+'';try{const obj=JSON.parse(localStorage.getItem(k)||'{}')||{};obj[label]=(obj[label]||0)+1;localStorage.setItem(k,JSON.stringify(obj));}catch(e){}}
+function shareView(){navigator.clipboard.writeText(window.location.href).then(()=>{alert('Link copied! Share this SET Loop view with your team.');}).catch(()=>{prompt('Copy this link:',window.location.href);});}
+</script>
+</body></html>
