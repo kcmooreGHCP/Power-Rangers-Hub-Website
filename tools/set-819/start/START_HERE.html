@@ -486,12 +486,9 @@
               and indexed; empty targets remain visibly disabled.
               RC12_9 remains the workflow authority.
             </p>
-            <a
-              class="button button-primary"
-              href="../00_CONTROL/RESOURCE_CENTER/POC/SET_LOOP_INTERACTIVE_POC_PACKAGE/SET_LOOP_STUDIO.html"
-            >
-              Open SET Loop Studio
-            </a>
+            <span class="button button-primary" aria-disabled="true" title="The Studio package is not included in this hosted build">
+              SET Loop Studio · future connection
+            </span>
           </div>
           <div class="studio-feature-visual" aria-hidden="true">
             <span class="studio-frame frame-still">Still</span>
@@ -556,7 +553,7 @@
           <article>
             <strong>Personal teaser-production prompts</strong>
             <p>Optional prompts Keith can use personally to create synthetic teaser plates, then finish locally in Clipchamp. They are not part of the SET Loop company solution and must not receive restricted company files.</p>
-            <a href="../00_CONTROL/RESOURCE_CENTER/VIDEO/GEMINI_TEASER_PROMPT_PACK.md">Open teaser prompt pack →</a>
+            <span aria-disabled="true">Teaser prompt pack · local package only</span>
           </article>
           <article>
             <strong>What I can build from your files</strong>
@@ -704,9 +701,7 @@
               deliverables—and it does not prove deletion from vendor backups, logs,
               caches, legal holds, or downstream systems.
             </p>
-            <a href="../00_CONTROL/RESOURCE_CENTER/SECURITY/CHAT_UPLOAD_CLEANUP_CANDIDATES_20260725.csv">
-              Open project-close upload cleanup candidates →
-            </a>
+            <span aria-disabled="true">Project-close cleanup register · controlled local file</span>
           </div>
         </div>
       </section>
@@ -1133,7 +1128,8 @@
 #set-spatial-capture-resource{background:linear-gradient(135deg,#17181b,#30202a);color:#fff;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 12px 34px rgba(0,0,0,.12)}
 #set-spatial-capture-resource h2{color:#fff;margin:0 0 7px}#set-spatial-capture-resource p{max-width:920px;color:#e7dfe4}
 #set-spatial-capture-resource .set-spatial-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
-#set-spatial-capture-resource a{display:inline-block;text-decoration:none;border-radius:999px;padding:10px 14px;font-weight:800;background:#fff;color:#71103d;border:1px solid rgba(255,255,255,.25)}
+#set-spatial-capture-resource a,#set-spatial-capture-resource span[aria-disabled]{display:inline-block;text-decoration:none;border-radius:999px;padding:10px 14px;font-weight:800;background:#fff;color:#71103d;border:1px solid rgba(255,255,255,.25)}
+#set-spatial-capture-resource span[aria-disabled]{opacity:.7}
 #set-spatial-capture-resource a.primary{background:#d62b7f;color:#fff;border-color:#d62b7f}
 #set-spatial-capture-resource small{display:block;margin-top:12px;color:#cdbfc7}
 </style>
@@ -1141,9 +1137,9 @@
   <h2>Mock Store Spatial Capture</h2>
   <p>Walk the mock store, retain the timestamp and screenshot, resolve the fixture against the current Blue Yonder registry, link product and marketing IDs, keep mock “onesies” separate from the store full run, and export one SET observation package.</p>
   <div class="set-spatial-actions">
-    <a class="primary" href="../06_INTAKE_TOOL/SET_SPATIAL_CAPTURE/SET_Mock_Store_Intake_v2.html">Open Spatial Capture</a>
-    <a href="../06_INTAKE_TOOL/SET_SPATIAL_CAPTURE/SOURCE_CONNECTION_REPORT.html">Open Source Connection Report</a>
-    <a href="../06_INTAKE_TOOL/SET_SPATIAL_CAPTURE/README_START_HERE.html">Open the Simple Run Guide</a>
+    <a class="primary" href="../intake/SET_Mock_Store_Intake_v2.html">Open Spatial Capture</a>
+    <span aria-disabled="true">Source report · generated with a connected refresh</span>
+    <span aria-disabled="true">Run guide · local package only</span>
   </div>
   <small>The browser link opens the last refreshed snapshot. For current files and live-camera localhost mode, double-click REFRESH_AND_OPEN_SET_SPATIAL_CAPTURE.command in the intake folder.</small>
 </section>
@@ -1156,7 +1152,8 @@
 #set-agent-factory-resource{background:linear-gradient(135deg,#071a3c,#29152c);color:#fff;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 12px 34px rgba(0,0,0,.12)}
 #set-agent-factory-resource h2{color:#fff;margin:0 0 7px}#set-agent-factory-resource p{max-width:960px;color:#e3e9f4}
 #set-agent-factory-resource .set-agent-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
-#set-agent-factory-resource a{display:inline-block;text-decoration:none;border-radius:999px;padding:10px 14px;font-weight:800;background:#fff;color:#071a3c;border:1px solid rgba(255,255,255,.25)}
+#set-agent-factory-resource a,#set-agent-factory-resource span[aria-disabled]{display:inline-block;text-decoration:none;border-radius:999px;padding:10px 14px;font-weight:800;background:#fff;color:#071a3c;border:1px solid rgba(255,255,255,.25)}
+#set-agent-factory-resource span[aria-disabled]{opacity:.7}
 #set-agent-factory-resource a.primary{background:#f10b73;color:#fff;border-color:#f10b73}
 #set-agent-factory-resource small{display:block;margin-top:12px;color:#c7d1e5}
 </style>
@@ -1164,9 +1161,9 @@
   <h2>SET Agent Factory</h2>
   <p>Build one governed Control Tower and the exact domain agents for partner intake, line lists, space, visual assets, marketing, calendar planning, translations, publishing, field roles, SET IRL/VMA and release integrity.</p>
   <div class="set-agent-actions">
-    <a class="primary" href="../07_RESOURCES/SET_AGENT_FACTORY/SET_AGENT_FACTORY.html">Open Agent Factory</a>
-    <a href="../07_RESOURCES/SET_AGENT_FACTORY/00_READ_ME_FIRST/AGENT_ARCHITECTURE.md">Open Architecture</a>
-    <a href="../07_RESOURCES/SET_AGENT_FACTORY/00_READ_ME_FIRST/README_FIRST.txt">Open Build Order</a>
+    <a class="primary" href="../resources/SET_AGENT_FACTORY.html">Open Agent Factory</a>
+    <span aria-disabled="true">Architecture · local package only</span>
+    <span aria-disabled="true">Build order · local package only</span>
   </div>
   <small>This resource provides copy-ready prompts, flows, SharePoint schemas and tests. It does not create tenant agents or alter current SET source files.</small>
 </section>

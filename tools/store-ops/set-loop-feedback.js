@@ -126,17 +126,17 @@
     return url.toString();
   }
 
-  function mailtoUrl(to, subject, body, bcc) {
+  function mailtoUrl(to, subject, body, cc) {
     const query = [
       'subject=' + encodeURIComponent(subject || ''),
       'body=' + encodeURIComponent(String(body || '').replace(/\r?\n/g, '\r\n'))
     ];
-    if (bcc) query.push('bcc=' + encodeURIComponent(bcc));
+    if (cc) query.push('cc=' + encodeURIComponent(cc));
     return 'mailto:' + (to || '') + '?' + query.join('&');
   }
 
-  function mailto(to, subject, body, bcc) {
-    location.href = mailtoUrl(to, subject, body, bcc);
+  function mailto(to, subject, body, cc) {
+    location.href = mailtoUrl(to, subject, body, cc);
   }
 
   function copy(text) {
@@ -209,14 +209,14 @@
       '    <div class="sl-kicker">Invite someone into the Loop</div>',
       '    <h2 id="slShareTitle">Who are you sharing with?</h2>',
       '    <p class="sl-copy">Everything is optional. Add only what feels appropriate; the generated link tracks the department and level, never a person’s name or email.</p>',
-      '    <div class="sl-card-preview"><canvas id="slInviteCard" width="1200" height="630" aria-label="Branded SET + SET Loop invitation image preview"></canvas><div>Branded invitation image · copied when you open Outlook</div></div>',
+      '    <div class="sl-email-preview" id="slEmailPreview" aria-label="Designed email preview"></div><canvas id="slInviteCard" width="1200" height="630" hidden aria-hidden="true"></canvas>',
       '    <div class="sl-section-label">About you</div>',
       '    <div class="sl-grid">',
       '      <label>Your name <span>optional</span><input id="slSenderName" autocomplete="name"></label>',
       '      <label>Your department <span>optional</span><input id="slSenderDepartment"></label>',
       '      <label>Your level / role <span>optional</span><input id="slSenderLevel"></label>',
       '      <label>Your email <span>optional</span><input id="slSenderEmail" type="email" autocomplete="email"></label>',
-      '      <label class="sl-full">Pilot owner email <span>optional; saved only in this browser</span><input id="slOwnerEmail" type="email" placeholder="Where pilot feedback should be routed"></label>',
+      '      <label class="sl-full">Pilot owner email <span>optional; visibly CC’d on invitation emails and saved only in this browser</span><input id="slOwnerEmail" type="email" placeholder="Where direct pilot feedback should be routed"></label>',
       '    </div>',
       '    <div class="sl-section-label">About the recipient</div>',
       '    <div class="sl-grid">',
@@ -226,9 +226,9 @@
       '      <label>Recipient level / role <span>optional</span><input id="slRecipientLevel"></label>',
       '      <label class="sl-full">Personal note <span>optional</span><textarea id="slShareNote" placeholder="I thought you might want to explore..."></textarea></label>',
       '    </div>',
-      '    <div class="sl-note">When a pilot owner email is provided, the email draft copies that address and the recipient can route feedback back to the same owner. Review the draft before sending.</div>',
+      '    <div class="sl-note"><b>Designed email workflow:</b> select the primary action, open the Outlook draft, then paste into the message body. Outlook receives formatted HTML with working buttons; the interactive choices open the secure browser experience because email clients block embedded scripts. If you enter a pilot owner, Outlook adds that address as a visible CC.</div>',
       '    <div class="sl-actions">',
-      '      <button class="sl-primary" type="button" id="slEmailShare">Copy card + open Outlook</button>',
+      '      <button class="sl-primary" type="button" id="slEmailShare">Copy designed email + open Outlook</button>',
       '      <button class="sl-secondary" type="button" id="slDownloadCard">Download invitation image</button>',
       '      <button class="sl-secondary" type="button" id="slCopyShare">Copy trackable link</button>',
       '    </div>',
@@ -246,7 +246,7 @@
       '.sl-kicker{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#ed2d8b;font-weight:800;margin-bottom:7px}.sl-dialog h2{font-size:25px;margin:0 40px 7px 0}.sl-copy{color:#667085;font-size:14px;line-height:1.5;margin:0 0 18px}',
       '.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.sl-grid label{display:grid;gap:5px;font-size:12px;font-weight:800;color:#344054}.sl-grid label span{font-weight:500;color:#98a2b3}.sl-grid input,.sl-grid textarea{width:100%;border:1px solid #d0d5dd;border-radius:9px;padding:10px 11px;font:14px Arial,sans-serif;color:#11131a;background:#fff}.sl-grid textarea{min-height:78px;resize:vertical}.sl-full{grid-column:1/-1}',
       '.sl-section-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6941c6;font-weight:800;margin:20px 0 9px}.sl-note{font-size:12px;line-height:1.45;color:#475467;background:#f8f5ff;border-left:4px solid #7f56d9;padding:10px 12px;border-radius:0 8px 8px 0;margin-top:16px}',
-      '.sl-card-preview{background:#f6f4fb;border:1px solid #e4e0ef;border-radius:13px;padding:10px;margin:4px 0 18px}.sl-card-preview canvas{width:100%;height:auto;display:block;border-radius:9px;box-shadow:0 8px 24px rgba(36,18,74,.18)}.sl-card-preview div{font-size:11px;color:#667085;text-align:center;font-weight:700;margin-top:7px}',
+      '.sl-email-preview{border:1px solid #e4e0ef;border-radius:13px;overflow:hidden;margin:4px 0 18px;background:#fff;box-shadow:0 8px 24px rgba(36,18,74,.10)}.sl-email-hero{background:linear-gradient(135deg,#4c1d95,#312e81 55%,#0f766e);color:#fff;padding:22px}.sl-email-hero small{color:#f9a8d4;font-weight:800;letter-spacing:1px}.sl-email-hero h3{font-size:25px;line-height:1.05;margin:8px 0}.sl-email-hero p{font-size:12px;color:rgba(255,255,255,.8);margin:0}.sl-email-body{padding:16px}.sl-email-body p{font-size:12px;color:#475467;margin:0 0 10px}.sl-email-buttons{display:flex;gap:6px;flex-wrap:wrap}.sl-email-buttons span{background:#f4f3ff;color:#5925dc;border-radius:6px;padding:6px 9px;font-size:10px;font-weight:800}.sl-email-cta{display:inline-block;background:#ed2d8b;color:#fff;border-radius:7px;padding:8px 11px;font-size:11px;font-weight:800}',
       '.sl-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.sl-primary,.sl-secondary{border-radius:9px;padding:11px 16px;font-size:13px;font-weight:800;cursor:pointer}.sl-primary{border:0;background:#ed2d8b;color:#fff}.sl-secondary{border:1px solid #d0d5dd;background:#fff;color:#344054}.sl-results-button{text-decoration:none;display:inline-flex;align-items:center}',
       '.sl-toast{position:fixed;right:20px;bottom:20px;z-index:100001;max-width:360px;background:#11131a;color:#fff;border-radius:11px;padding:12px 16px;font:700 13px/1.4 Arial,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.sl-toast.show{opacity:1;transform:none}',
       '.sl-float{position:fixed;right:18px;bottom:76px;z-index:99990;display:flex;gap:7px;align-items:center}.sl-float button,.sl-float a{border:0;border-radius:999px;padding:10px 13px;font:800 12px Arial,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.2)}.sl-float button{background:#11131a;color:#fff}.sl-float a{background:#ed2d8b;color:#fff}',
@@ -401,6 +401,83 @@
     return canvas;
   }
 
+  function inviteLandingUrl(shareUrl, values, shareId, response) {
+    const landing = location.pathname.includes('/tools/store-ops/')
+      ? new URL('loop-invitation.html', location.href)
+      : new URL('tools/store-ops/loop-invitation.html', location.href);
+    const target = new URL(shareUrl);
+    if (target.hash.startsWith('#route=')) {
+      const anchor = new URLSearchParams(target.hash.slice(1)).get('anchor');
+      target.hash = anchor ? '#' + anchor : '';
+    }
+    landing.searchParams.set('setref', shareId);
+    landing.searchParams.set('target', target.toString());
+    if (values.recipient.department) landing.searchParams.set('dept', values.recipient.department);
+    if (values.recipient.level) landing.searchParams.set('level', values.recipient.level);
+    if (response) landing.searchParams.set('response', response);
+    return landing.toString();
+  }
+
+  function designedEmailHtml(share) {
+    const recipient = share.values.recipient.name ? ' ' + share.values.recipient.name : '';
+    const senderName = share.values.sender.name || 'A colleague';
+    const landing = inviteLandingUrl(share.url, share.values, share.entry.shareId, '');
+    const like = inviteLandingUrl(share.url, share.values, share.entry.shareId, 'Like');
+    const learn = inviteLandingUrl(share.url, share.values, share.entry.shareId, 'Learn More');
+    const notYet = inviteLandingUrl(share.url, share.values, share.entry.shareId, 'Not Yet');
+    const note = share.values.note
+      ? '<tr><td style="padding:0 34px 20px;color:#344054;font:italic 15px/1.5 Arial,sans-serif;border-left:4px solid #ed2d8b">' + escapeHtml(share.values.note) + '</td></tr>'
+      : '';
+    return [
+      '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#ffffff;border:1px solid #e4e7ec;border-radius:18px;overflow:hidden;font-family:Arial,sans-serif">',
+      '<tr><td style="padding:34px;background:#35217a;color:#ffffff">',
+      '<div style="font-size:12px;letter-spacing:1.4px;color:#f9a8d4;font-weight:800">SET + SET LOOP</div>',
+      '<div style="font-size:34px;line-height:1.05;font-weight:800;margin:12px 0">One platform. Every role.<br>Every store. Connected.</div>',
+      '<div style="font-size:15px;line-height:1.5;color:#e9e5ff">Explore the working pilot, react to the ideas, and help shape what comes next.</div>',
+      '</td></tr>',
+      '<tr><td style="padding:28px 34px 10px;color:#101828;font-size:16px">Hi' + escapeHtml(recipient) + ',<br><br>' + escapeHtml(senderName) + ' invited you into the SET Loop.</td></tr>',
+      note,
+      '<tr><td style="padding:10px 34px 18px"><a href="' + escapeHtml(landing) + '" style="display:inline-block;background:#ed2d8b;color:#ffffff;text-decoration:none;border-radius:9px;padding:13px 19px;font-weight:800">Explore the interactive pilot →</a></td></tr>',
+      '<tr><td style="padding:0 34px 8px;color:#667085;font-size:12px;font-weight:700">SHARE A FIRST REACTION</td></tr>',
+      '<tr><td style="padding:0 34px 26px">',
+      '<a href="' + escapeHtml(like) + '" style="display:inline-block;background:#ecfdf3;color:#067647;text-decoration:none;border-radius:8px;padding:9px 12px;margin:0 6px 6px 0;font-weight:700">👍 I like it</a>',
+      '<a href="' + escapeHtml(learn) + '" style="display:inline-block;background:#f4f3ff;color:#5925dc;text-decoration:none;border-radius:8px;padding:9px 12px;margin:0 6px 6px 0;font-weight:700">💡 Learn more</a>',
+      '<a href="' + escapeHtml(notYet) + '" style="display:inline-block;background:#fff4ed;color:#b54708;text-decoration:none;border-radius:8px;padding:9px 12px;margin:0 6px 6px 0;font-weight:700">Not yet</a>',
+      '</td></tr>',
+      '<tr><td style="padding:18px 34px;background:#f9fafb;color:#667085;font-size:11px">Personal details are optional. Pilot reference: ' + escapeHtml(share.entry.shareId) + '</td></tr>',
+      '</table>'
+    ].join('');
+  }
+
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, function (character) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+    });
+  }
+
+  function renderEmailPreview() {
+    const preview = document.getElementById('slEmailPreview');
+    if (!preview) return;
+    const sender = document.getElementById('slSenderName').value.trim() || profile().name || 'A colleague';
+    const recipient = document.getElementById('slRecipientName').value.trim();
+    preview.innerHTML = [
+      '<div class="sl-email-hero"><small>SET + SET LOOP</small><h3>One platform. Every role.<br>Every store. Connected.</h3><p>Explore the working pilot and help shape what comes next.</p></div>',
+      '<div class="sl-email-body"><p>Hi' + (recipient ? ' ' + escapeHtml(recipient) : '') + ', ' + escapeHtml(sender) + ' invited you into the Loop.</p>',
+      '<span class="sl-email-cta">Explore the interactive pilot →</span><div class="sl-email-buttons" style="margin-top:10px"><span>👍 I like it</span><span>💡 Learn more</span><span>Not yet</span></div></div>'
+    ].join('');
+  }
+
+  function copyDesignedEmail(share, plainText) {
+    if (!navigator.clipboard || !window.ClipboardItem) {
+      return Promise.reject(new Error('Rich clipboard is not available'));
+    }
+    const html = designedEmailHtml(share);
+    return navigator.clipboard.write([new ClipboardItem({
+      'text/html': new Blob([html], { type: 'text/html' }),
+      'text/plain': new Blob([plainText], { type: 'text/plain' })
+    })]);
+  }
+
   function copyInviteCard() {
     const canvas = renderInviteCard();
     if (!canvas || !navigator.clipboard || !window.ClipboardItem) {
@@ -441,6 +518,7 @@
       document.getElementById(fieldId).value = '';
     });
     renderInviteCard();
+    renderEmailPreview();
     openModal('setLoopShareModal');
   }
 
@@ -493,6 +571,7 @@
 
   function emailShare() {
     const share = createShare();
+    const landingUrl = inviteLandingUrl(share.url, share.values, share.entry.shareId, '');
     const senderName = share.values.sender.name || 'A colleague';
     const senderContext = [share.values.sender.department, share.values.sender.level].filter(Boolean).join(' · ');
     const note = share.values.note
@@ -514,7 +593,7 @@
       '• Join the Loop if you want to help shape the pilot',
       '',
       'OPEN THE INTERACTIVE EXPERIENCE',
-      share.url,
+      landingUrl,
       '',
       'Your input is welcome, and sharing personal details is always optional.',
       '',
@@ -523,23 +602,24 @@
     ].join('\n');
     updateRecord(share.entry.id, { delivery: 'email-draft' });
     closeModals();
-    copyInviteCard().then(function () {
-      mailto(share.values.recipient.email, 'Invitation: Explore SET + SET Loop', body, share.values.ownerEmail);
-      showToast('Branded card copied. Paste it at the top of the Outlook draft.');
+    copyDesignedEmail(share, body).then(function () {
+      mailto(share.values.recipient.email, 'Invitation: Explore SET + SET Loop', '', share.values.ownerEmail);
+      showToast('Designed HTML email copied. Paste it into the Outlook message body.');
     }).catch(function () {
       mailto(share.values.recipient.email, 'Invitation: Explore SET + SET Loop', body, share.values.ownerEmail);
-      showToast('Outlook opened. Use Download invitation image if image copy is unavailable.');
+      showToast('Outlook opened with the text fallback. Rich HTML copy is unavailable in this browser.');
     });
   }
 
   function copyShare() {
     const share = createShare();
+    const landingUrl = inviteLandingUrl(share.url, share.values, share.entry.shareId, '');
     updateRecord(share.entry.id, { delivery: 'copied-link' });
-    copy(share.url).then(function () {
+    copy(landingUrl).then(function () {
       closeModals();
       showToast('Trackable link copied. Share details saved to this browser.');
     }).catch(function () {
-      window.prompt('Copy this trackable link:', share.url);
+      window.prompt('Copy this trackable link:', landingUrl);
     });
   }
 
@@ -586,12 +666,16 @@
     document.getElementById('slDownloadCard').addEventListener('click', downloadInviteCard);
     document.getElementById('slCopyShare').addEventListener('click', copyShare);
     ['slSenderName', 'slRecipientName'].forEach(function (fieldId) {
-      document.getElementById(fieldId).addEventListener('input', renderInviteCard);
+      document.getElementById(fieldId).addEventListener('input', function () {
+        renderInviteCard();
+        renderEmailPreview();
+      });
     });
     document.getElementById('slViewResults').href = resultsUrl();
     document.querySelectorAll('[data-sl-share]').forEach(function (button) { button.addEventListener('click', openShare); });
     document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeModals(); });
     document.querySelectorAll('a').forEach(function (link) {
+      if (link.target === '_blank') link.rel = 'noopener noreferrer';
       if (link.textContent.includes('Join the Loop') && link.href.includes('vp-presentation.html')) {
         const url = new URL(link.href);
         url.searchParams.set('join', '1');

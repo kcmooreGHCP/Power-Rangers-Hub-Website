@@ -78,6 +78,18 @@
       partner: "Visual Merchandising"
     },
     {
+      keywords: ["marketing", "sign", "placement", "where does", "where should"],
+      answer: "Marketing placement must match the approved Brand Guide or connected campaign manifest. Open Promo + Marketing Operations to verify the product or pack number, placement, required quantity, and current store tally. If the exact element is absent, route the question to Marketing rather than inferring a location.",
+      source: "Approved Brand Guide + Promo and Marketing manifest",
+      partner: "Marketing + Visual Merchandising"
+    },
+    {
+      keywords: ["pack", "vmh", "request my marketing", "order sign"],
+      answer: "Use Promo + Marketing Operations to select only missing items and create the VMH bulk format ProductNumber, Quantity. Review the CSV, then upload it in the authenticated VMH Bulk Cart. The prototype cannot upload or submit an order on your behalf.",
+      source: "SET Loop Promo + Marketing Operations · VMH handoff",
+      partner: "Marketing Operations"
+    },
+    {
       keywords: ["inventory", "assortment", "product"],
       answer: "Inventory and assortment answers must come from the connected approved MSI dossier and SET Loop assortment manifest. This prototype does not infer availability from the web or from unapproved files.",
       source: "SET Loop approved MSI + assortment connection",
@@ -156,6 +168,11 @@
     inner.appendChild(home);
     inner.appendChild(locationLabel);
     inner.appendChild(makeButton("📖 Brand Guide", openGuide));
+    var marketing = document.createElement("a");
+    marketing.className = "slx-action";
+    marketing.href = "marketing-operations.html";
+    marketing.textContent = "🏷️ Marketing Check";
+    inner.appendChild(marketing);
     inner.appendChild(makeButton("✨ SET IRL", function () { openGuide(2); }));
     inner.appendChild(makeButton("🎙️ Ask SET Agent", openAgent));
     inner.appendChild(makeButton("↻ Force refresh", refreshSnapshot));
@@ -310,7 +327,7 @@
     var lower = question.toLowerCase();
     var partner = lower.indexOf("visual") !== -1 || lower.indexOf("fixture") !== -1 ? "Visual Merchandising" :
       lower.indexOf("inventory") !== -1 || lower.indexOf("product") !== -1 ? "Brand Merchandising + Supply Chain" :
-      lower.indexOf("promotion") !== -1 || lower.indexOf("sign") !== -1 ? "Marketing" : "Store Operations";
+      lower.indexOf("promotion") !== -1 || lower.indexOf("sign") !== -1 || lower.indexOf("marketing") !== -1 || lower.indexOf("pack") !== -1 || lower.indexOf("vmh") !== -1 ? "Marketing" : "Store Operations";
     var ticketId = "SET-" + Date.now().toString().slice(-6);
     var requests = JSON.parse(localStorage.getItem("setloop_agent_requests") || "[]");
     requests.push({ id: ticketId, question: question, scope: current.label, owner: "Home Office / Store Operations", copied: partner, created: new Date().toISOString() });

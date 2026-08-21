@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock Store Video Intake + Annotation Builder</title>
+<style>
+  :root{--bg:#0f1115;--panel:#181b22;--panel2:#222632;--ink:#f7f7f8;--muted:#aab0bd;--accent:#ff7ab6;--ok:#67e8a5;--warn:#ffd166;--bad:#ff6b6b;--line:#313645;}
+  *{box-sizing:border-box} body{margin:0;font-family:Aptos,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+  header{padding:18px 22px;border-bottom:1px solid var(--line);background:#12151c;position:sticky;top:0;z-index:5}
+  h1{font-size:28px;margin:0 0 6px}.sub{color:var(--muted);font-size:13px}.wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;padding:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 10px 26px #0004}.card h2{font-size:18px;margin:0 0 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}label{display:block;font-size:12px;color:var(--muted);margin:8px 0 4px}input,select,textarea,button{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);padding:10px;font-size:14px}textarea{min-height:72px;resize:vertical}button{cursor:pointer;background:#2a2f3d;font-weight:700}button.primary{background:linear-gradient(90deg,#ff7ab6,#8b5cf6);border:0}button.ok{background:#174830;border-color:#236842}button.warn{background:#4d3f18;border-color:#735d21}button.bad{background:#4d2020;border-color:#733333}.tiny{font-size:12px;padding:7px;border-radius:8px}.gridbuttons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}video{width:100%;border-radius:12px;background:#000}.pill{display:inline-block;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;margin:2px}.hint{color:var(--muted);font-size:12px;line-height:1.35}.list{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px}.item{border-bottom:1px solid var(--line);padding:8px 0}.item:last-child{border-bottom:0}.time{color:var(--ok);font-family:ui-monospace,Menlo,Consolas,monospace}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}.table th{color:var(--muted);position:sticky;top:0;background:var(--panel)}.right{display:flex;justify-content:flex-end;gap:8px}.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:220px;overflow:auto}.thumb{border:1px solid var(--line);border-radius:10px;padding:6px;background:var(--panel2)}.thumb img{width:100%;border-radius:8px;display:block}.thumb small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}.mark{position:absolute;background:#ffe399;color:#111;padding:8px 10px;border-radius:10px;font-weight:800;max-width:38%;box-shadow:0 8px 18px #0008}.stage{position:relative}.footer{padding:12px 16px;color:var(--muted);font-size:12px}.full{grid-column:1/-1}@media(max-width:980px){.wrap{grid-template-columns:1fr}.row,.row3{grid-template-columns:1fr}.gridbuttons{grid-template-columns:1fr 1fr}.thumbs{grid-template-columns:1fr 1fr}}
+</style>
+
+  <link rel="stylesheet" href="innovation-shell.css">
+  <script src="innovation-shell.js" defer></script>
+</head>
+<body data-boundary="local">
+  <a class="innovation-skip-link" href="#innovation-content">Skip to content</a>
+  <nav class="innovation-shell" data-innovation-shell aria-label="SET network">
+    <a class="innovation-shell__brand" href="index.html">
+      <span class="innovation-shell__mark" aria-hidden="true">S</span>
+      <span class="innovation-shell__brand-text">SET + SET Loop</span>
+    </a>
+    <div class="innovation-shell__links">
+      <a class="innovation-shell__link" href="../../vp-presentation.html">VP presentation</a>
+      <a class="innovation-shell__link" href="../store-ops/SET_LOOP_MASTER.html">SET Loop</a>
+      <a class="innovation-shell__link" href="index.html" data-shell-page>Innovation lab</a>
+    </div>
+    <span class="innovation-shell__boundary" data-shell-boundary></span>
+  </nav>
+
+<header>
+  <h1>Mock Store Video Intake + Annotation Builder</h1>
+  <div class="sub">Offline tool. Nothing uploads anywhere. Build zone timestamps, still-frame captures, Stream callout paste guide, CSV, VTT, and Premiere marker CSV.</div>
+</header>
+<div class="wrap" id="innovation-content">
+  <section class="card">
+    <h2>1. Load Video + Images</h2>
+    <div class="row">
+      <div><label>Project name</label><input id="project" placeholder="Mock Store Walkthrough - July" /></div>
+      <div><label>Owner / reviewer</label><input id="owner" placeholder="Keith Moore" /></div>
+    </div>
+    <label>Drone video file</label><input id="videoFile" type="file" accept="video/*" />
+    <label>Still images, optional</label><input id="imageFiles" type="file" accept="image/*" multiple />
+    <div class="stage" style="margin-top:12px"><video id="vid" controls></video><div id="previewCallout" class="mark" style="display:none"></div></div>
+    <div style="margin-top:10px" class="gridbuttons">
+      <button class="tiny" onclick="skip(-5)">-5 sec</button><button class="tiny" onclick="skip(-1)">-1 sec</button><button class="tiny" onclick="skip(1)">+1 sec</button><button class="tiny" onclick="skip(5)">+5 sec</button>
+    </div>
+    <p class="hint">Tip: pause where the zone starts, click Set Start. Pause where the zone ends, click Set End. Capture a frame if you need a still from the video.</p>
+  </section>
+
+  <section class="card">
+    <h2>2. Zone + Callout Entry</h2>
+    <div class="row3">
+      <div><label>Zone ID</label><input id="zoneId" placeholder="Z01" /></div>
+      <div><label>Zone name</label><input id="zoneName" placeholder="Entry / Decompression" /></div>
+      <div><label>Category</label><select id="category"><option>Overview</option><option>Marketing</option><option>Fixture</option><option>Product</option><option>Opportunity</option><option>Leadership Note</option></select></div>
+    </div>
+    <div class="row3">
+      <div><label>Start time</label><input id="start" placeholder="00:00:00" /></div>
+      <div><label>End time</label><input id="end" placeholder="00:00:08" /></div>
+      <div><label>Screen position</label><select id="pos"><option>Top Left</option><option>Top Right</option><option>Bottom Left</option><option>Bottom Right</option><option>Center</option></select></div>
+    </div>
+    <div class="gridbuttons" style="margin-top:8px">
+      <button class="tiny ok" onclick="setTime('start')">Set Start</button><button class="tiny ok" onclick="setTime('end')">Set End</button><button class="tiny warn" onclick="captureFrame()">Capture Frame PNG</button><button class="tiny" onclick="preview()">Preview Callout</button>
+    </div>
+    <label>Callout title</label><input id="title" placeholder="Front Table - Seasonal Color Flow" />
+    <label>Callout text</label><textarea id="text" placeholder="Review product density, marketing visibility, color flow, or execution note."></textarea>
+    <div class="row">
+      <div><label>Marketing visible?</label><select id="marketingVisible"><option>Yes</option><option>No</option><option>Partial</option><option>N/A</option></select></div>
+      <div><label>Priority</label><select id="priority"><option>Normal</option><option>High</option><option>Urgent</option><option>Reference Only</option></select></div>
+    </div>
+    <label>Marketing text / sign wording</label><input id="marketingText" placeholder="Enter readable campaign or sign text" />
+    <label>Supporting image filename or SharePoint link</label><input id="support" placeholder="Z01_Overview.png or https://..." />
+    <label>Follow-up / owner note</label><input id="follow" placeholder="Confirm sign placement by Friday" />
+    <div class="right" style="margin-top:10px"><button class="bad" onclick="clearForm()">Clear</button><button class="primary" onclick="addRow()">Add Annotation Row</button></div>
+  </section>
+
+  <section class="card full">
+    <h2>3. Supporting Images Loaded</h2>
+    <div id="thumbs" class="thumbs"></div>
+  </section>
+
+  <section class="card full">
+    <h2>4. Annotation Rows</h2>
+    <div class="right" style="margin-bottom:8px"><button class="tiny" onclick="saveLocal()">Save Browser Draft</button><button class="tiny" onclick="loadLocal()">Load Draft</button><button class="tiny bad" onclick="resetAll()">Reset All</button></div>
+    <div style="overflow:auto;max-height:360px"><table class="table" id="rows"><thead><tr><th>#</th><th>Zone</th><th>Time</th><th>Title/Text</th><th>Category</th><th>Position</th><th>Priority</th><th>Image/Link</th><th>Edit</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="card full">
+    <h2>5. Export</h2>
+    <div class="row3">
+      <button class="primary" onclick="downloadCSV()">Download Master CSV</button>
+      <button onclick="downloadStreamGuide()">Download Stream Paste Guide</button>
+      <button onclick="downloadPremiereMarkers()">Download Premiere Marker CSV</button>
+    </div>
+    <div class="row3" style="margin-top:8px">
+      <button onclick="downloadVTT()">Download WebVTT Notes</button>
+      <button onclick="downloadJSON()">Download Project JSON</button>
+      <button onclick="copyGuide()">Copy Paste Guide to Clipboard</button>
+    </div>
+    <p class="hint">Use Master CSV for review. Use Stream Paste Guide if adding callouts manually. Use Premiere Marker CSV or VTT if editing/overlaying outside Stream.</p>
+  </section>
+</div>
+<canvas id="canvas" style="display:none"></canvas>
+<div class="footer">Built for local mock-store intake. No server. No upload. No zip.</div>
+<script>
+let annotations=[]; let imageNames=[]; let captured=[];
+const $=id=>document.getElementById(id);
+function pad(n){return String(Math.floor(n)).padStart(2,'0')}
+function fmt(sec){sec=Math.max(0,sec||0);let h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=Math.floor(sec%60);return `${pad(h)}:${pad(m)}:${pad(s)}`}
+function parseTime(value){const match=String(value||'').trim().match(/^(\d{1,2}):([0-5]\d):([0-5]\d)(?:\.(\d{1,3}))?$/);if(!match)return null;return Number(match[1])*3600+Number(match[2])*60+Number(match[3])+Number((match[4]||'0').padEnd(3,'0'))/1000}
+function vttTime(seconds){const whole=Math.floor(seconds),ms=Math.round((seconds-whole)*1000);return `${pad(whole/3600)}:${pad((whole%3600)/60)}:${pad(whole%60)}.${String(ms).padStart(3,'0')}`}
+$('videoFile').addEventListener('change',e=>{let f=e.target.files[0]; if(f){$('vid').src=URL.createObjectURL(f);}})
+$('imageFiles').addEventListener('change',e=>{imageNames=[...e.target.files].map(f=>f.name); renderThumbs([...e.target.files]);})
+function renderThumbs(files){$('thumbs').innerHTML=''; files.forEach(f=>{let d=document.createElement('button');d.type='button';d.className='thumb';d.setAttribute('aria-label',`Use ${f.name} as supporting image`);let img=document.createElement('img');img.src=URL.createObjectURL(f);img.alt='';let s=document.createElement('small');s.textContent=f.name;d.append(img,s);d.onclick=()=>{$('support').value=f.name};$('thumbs').append(d);});}
+function skip(s){$('vid').currentTime=Math.max(0,$('vid').currentTime+s)}
+function setTime(field){$(field).value=fmt($('vid').currentTime)}
+function posStyle(pos){let p={}; if(pos.includes('Top'))p.top='8%'; if(pos.includes('Bottom'))p.bottom='10%'; if(pos.includes('Left'))p.left='6%'; if(pos.includes('Right'))p.right='6%'; if(pos==='Center'){p.top='45%';p.left='35%'}; return Object.entries(p).map(([k,v])=>`${k}:${v}`).join(';')}
+function preview(){let c=$('previewCallout'); c.textContent=$('title').value||'Callout Preview'; c.style.cssText='display:block;'+posStyle($('pos').value); setTimeout(()=>c.style.display='none',5000)}
+function captureFrame(){let v=$('vid'); if(!v.videoWidth){alert('Load and pause the video first.');return} let c=$('canvas'); c.width=v.videoWidth; c.height=v.videoHeight; c.getContext('2d').drawImage(v,0,0); let zone=$('zoneId').value||'ZONE'; let name=`${zone}_${fmt(v.currentTime).replaceAll(':','-')}.png`; c.toBlob(blob=>{let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); captured.push(name); $('support').value=name;},'image/png');}
+function vals(){return {project:$('project').value,owner:$('owner').value,zone_id:$('zoneId').value,zone_name:$('zoneName').value,start_time:$('start').value,end_time:$('end').value,callout_title:$('title').value,callout_text:$('text').value,category:$('category').value,screen_position:$('pos').value,marketing_visible:$('marketingVisible').value,marketing_text:$('marketingText').value,supporting_image:$('support').value,priority:$('priority').value,follow_up:$('follow').value}}
+function addRow(){let r=vals();if(!r.zone_id||!r.start_time||!r.end_time||!r.callout_title){alert('Need Zone ID, Start, End, and Title.');return}const start=parseTime(r.start_time),end=parseTime(r.end_time);if(start===null||end===null){alert('Use HH:MM:SS or HH:MM:SS.mmm for Start and End.');return}if(end<=start){alert('End time must be later than Start time.');return}r.start_time=vttTime(start);r.end_time=vttTime(end);annotations.push(r);renderRows();clearForm(false)}
+function clearForm(all=true){['title','text','marketingText','support','follow'].forEach(id=>$(id).value=''); if(all){['zoneId','zoneName','start','end'].forEach(id=>$(id).value='')}}
+function renderRows(){let tb=$('rows').querySelector('tbody'); tb.innerHTML=''; annotations.forEach((r,i)=>{let tr=document.createElement('tr'); tr.innerHTML=`<td>${i+1}</td><td>${esc(r.zone_id)}<br>${esc(r.zone_name)}</td><td><span class="time">${esc(r.start_time)} - ${esc(r.end_time)}</span></td><td><b>${esc(r.callout_title)}</b><br>${esc(r.callout_text)}</td><td>${esc(r.category)}</td><td>${esc(r.screen_position)}</td><td>${esc(r.priority)}</td><td>${esc(r.supporting_image)}</td><td><button class="tiny" onclick="editRow(${i})">Edit</button><button class="tiny bad" onclick="delRow(${i})">Del</button></td>`;tb.append(tr);})}
+function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function editRow(i){let r=annotations[i]; Object.entries({zoneId:r.zone_id,zoneName:r.zone_name,start:r.start_time,end:r.end_time,title:r.callout_title,text:r.callout_text,category:r.category,pos:r.screen_position,marketingVisible:r.marketing_visible,marketingText:r.marketing_text,support:r.supporting_image,priority:r.priority,follow:r.follow_up}).forEach(([id,v])=>$(id).value=v||''); annotations.splice(i,1); renderRows();}
+function delRow(i){annotations.splice(i,1);renderRows()}
+function csvEscape(v){v=String(v??'');if(/^\s*[=+\-@]/.test(v))v="'"+v;return /[",\r\n]/.test(v)?'"'+v.replaceAll('"','""')+'"':v}
+function csv(rows){let headers=['project','owner','zone_id','zone_name','start_time','end_time','callout_title','callout_text','category','screen_position','marketing_visible','marketing_text','supporting_image','priority','follow_up']; return headers.join(',')+'\n'+rows.map(r=>headers.map(h=>csvEscape(r[h])).join(',')).join('\n')}
+function dl(name,text,type='text/plain'){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click()}
+function stamp(){return new Date().toISOString().slice(0,10)}
+function downloadCSV(){dl(`mock_store_annotations_${stamp()}.csv`,csv(annotations),'text/csv')}
+function guideText(){return annotations.map((r,i)=>`ROW ${i+1} | ${r.zone_id} ${r.zone_name}\nGo to ${r.start_time}. Interactivity > Add new > Add callout.\nText: ${r.callout_title} - ${r.callout_text}\nPosition: ${r.screen_position}\nStart: ${r.start_time}\nEnd: ${r.end_time}\nLink/Image: ${r.supporting_image||'none'}\nPriority: ${r.priority}\nFollow-up: ${r.follow_up||'none'}\n`).join('\n')}
+function downloadStreamGuide(){dl(`stream_paste_guide_${stamp()}.txt`,guideText())}
+function copyGuide(){window.innovationCopyText(guideText()).then(()=>alert('Paste guide copied.'))}
+function downloadJSON(){dl(`mock_store_project_${stamp()}.json`,JSON.stringify({project:$('project').value,owner:$('owner').value,annotations,captured,imageNames},null,2),'application/json')}
+function downloadPremiereMarkers(){let rows=annotations.map(r=>({Name:r.callout_title,Description:r.callout_text,In:r.start_time,Out:r.end_time,MarkerType:'Comment'})); let headers=['Name','Description','In','Out','MarkerType']; dl(`premiere_markers_${stamp()}.csv`,headers.join(',')+'\n'+rows.map(r=>headers.map(h=>csvEscape(r[h])).join(',')).join('\n'),'text/csv')}
+function vttText(value){return String(value??'').replace(/\r\n?/g,'\n').replace(/\n\s*\n+/g,'\n').trim()}
+function downloadVTT(){let out='WEBVTT\n\n'+annotations.map((r,i)=>`${i+1}\n${r.start_time} --> ${r.end_time}\n${vttText(`${r.zone_id} ${r.callout_title}: ${r.callout_text}`)}\n`).join('\n');dl(`mock_store_notes_${stamp()}.vtt`,out,'text/vtt')}
+function saveLocal(){localStorage.setItem('mockStoreBuilder',JSON.stringify({project:$('project').value,owner:$('owner').value,annotations}));alert('Saved in this browser.')}
+function loadLocal(){let d=JSON.parse(localStorage.getItem('mockStoreBuilder')||'{}');$('project').value=d.project||'';$('owner').value=d.owner||'';annotations=d.annotations||[];renderRows()}
+function resetAll(){if(confirm('Clear all rows and draft?')){annotations=[];localStorage.removeItem('mockStoreBuilder');renderRows()}}
+</script>
+</body>
+</html>

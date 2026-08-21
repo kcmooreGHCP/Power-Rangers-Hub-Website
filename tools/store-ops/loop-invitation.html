@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>You're invited to the SET Loop</title>
+  <style>
+    :root{--ink:#11131a;--muted:#667085;--purple:#5b21b6;--pink:#ed2d8b;--teal:#0d9488;--line:#e6e2ef;--paper:#f8f7fc}
+    *{box-sizing:border-box}body{margin:0;font:15px/1.55 "Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0,#fce7f3,transparent 32rem),radial-gradient(circle at 90% 5%,#ddd6fe,transparent 32rem),var(--paper)}
+    a{color:inherit}.top{background:#11131a;color:#fff}.top-inner{max-width:1120px;margin:auto;padding:13px 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}.mark{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:9px;padding:5px 9px;font-size:12px;font-weight:900}.top strong{margin-right:auto}.top a{font-size:12px;text-decoration:none;color:#ddd;padding:6px 9px;border-radius:7px}.top a:hover{background:#292c38;color:#fff}
+    main{max-width:1120px;margin:auto;padding:34px 22px 70px}.hero{background:linear-gradient(135deg,#4c1d95,#312e81 55%,#0f766e);color:#fff;border-radius:28px;padding:clamp(28px,6vw,64px);box-shadow:0 24px 70px rgba(55,36,120,.22);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-70px;top:-90px;background:rgba(255,255,255,.1)}.kicker{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#f9a8d4;font-weight:900}.hero h1{font-size:clamp(38px,7vw,72px);line-height:.95;letter-spacing:-3px;margin:14px 0 18px;max-width:800px}.hero p{font-size:18px;color:rgba(255,255,255,.82);max-width:720px}.invite{margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.2);font-size:13px;color:rgba(255,255,255,.8)}
+    .section{padding:46px 0 0}.section h2{font-size:30px;letter-spacing:-1px;margin:0 0 8px}.section-lead{color:var(--muted);margin:0 0 22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.choice{appearance:none;text-align:left;background:#fff;border:2px solid var(--line);border-radius:18px;padding:22px;cursor:pointer;transition:.18s;color:var(--ink)}.choice:hover,.choice.selected{border-color:var(--purple);transform:translateY(-2px);box-shadow:0 12px 30px rgba(91,33,182,.12)}.choice.selected{background:#faf8ff}.choice .icon{font-size:27px}.choice b{display:block;font-size:17px;margin:9px 0 5px}.choice span{color:var(--muted);font-size:13px}
+    .interest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.interest{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer}.interest input{width:18px;height:18px;accent-color:var(--pink);margin-top:2px}.interest b{display:block}.interest small{display:block;color:var(--muted);margin-top:2px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:11px;padding:12px 18px;font-weight:800;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center}.primary{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}.status{display:none;margin-top:18px;background:#ecfdf3;border:1px solid #abefc6;color:#067647;border-radius:12px;padding:13px}.status.show{display:block}.privacy{font-size:12px;color:var(--muted);margin-top:14px}
+    @media(max-width:760px){.grid,.interest-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-inner"><span class="mark">SET</span><strong>SET + SET Loop</strong><a href="../../vp-presentation.html">Presentation</a><a href="SET_LOOP_MASTER.html">Enter the Loop</a></div></header>
+  <main>
+    <section class="hero">
+      <div class="kicker">A colleague invited you into the Loop</div>
+      <h1>Explore it. React to it. Help shape what comes next.</h1>
+      <p>See one connected path from governed Home Office direction to role-specific store execution, evidence, questions, and learning.</p>
+      <div class="invite" id="inviteContext">Your participation is optional. Choose only what you want to share.</div>
+    </section>
+    <section class="section">
+      <h2>What is your first reaction?</h2>
+      <p class="section-lead">Your choice is saved in this browser for the pilot demonstration.</p>
+      <div class="grid" id="reactionChoices">
+        <button class="choice" data-reaction="Like"><span class="icon">👍</span><b>I like this direction</b><span>Keep me connected as the pilot develops.</span></button>
+        <button class="choice" data-reaction="Learn More"><span class="icon">💡</span><b>I want to learn more</b><span>Show me the workflow, role views, and pilot proof.</span></button>
+        <button class="choice" data-reaction="Not Yet"><span class="icon">↗</span><b>Not yet</b><span>I have questions or need more evidence first.</span></button>
+      </div>
+    </section>
+    <section class="section">
+      <h2>What would you explore?</h2>
+      <p class="section-lead">Select any topics that matter to you.</p>
+      <div class="interest-grid">
+        <label class="interest"><input type="checkbox" value="Role-specific field views"><span><b>Role-specific field views</b><small>Store, District, Region, and Home Office.</small></span></label>
+        <label class="interest"><input type="checkbox" value="Promo and marketing workflow"><span><b>Promo + marketing</b><small>Intake, placement verification, VMH ordering.</small></span></label>
+        <label class="interest"><input type="checkbox" value="SET Agent"><span><b>Guardrailed SET Agent</b><small>Approved answers, citations, and escalation.</small></span></label>
+        <label class="interest"><input type="checkbox" value="Pilot and measurement"><span><b>Pilot + measurement</b><small>Readiness, completion, proof, and feedback.</small></span></label>
+      </div>
+      <div class="actions"><button class="btn primary" id="saveInterest">Save my choices</button><a class="btn secondary" id="exploreLink" href="../../vp-presentation.html">Explore the interactive pilot</a><a class="btn secondary" href="SET_LOOP_MASTER.html">Open my SET Loop</a></div>
+      <div class="status" id="status" role="status"></div>
+      <p class="privacy">Pilot boundary: this public prototype stores responses only in this browser. Centralized cross-user reporting requires the approved SharePoint/Power Automate production connection.</p>
+    </section>
+  </main>
+  <script>
+    (function(){
+      const params=new URLSearchParams(location.search);
+      const shareId=params.get('setref')||'direct';
+      const department=params.get('dept')||'';
+      const level=params.get('level')||'';
+      function safeTarget(value){
+        try{
+          const url=new URL(value||'../../vp-presentation.html',location.href);
+          return /^https?:$/.test(url.protocol)&&url.origin===location.origin?url.href:new URL('../../vp-presentation.html',location.href).href;
+        }catch(error){
+          return new URL('../../vp-presentation.html',location.href).href;
+        }
+      }
+      const target=safeTarget(params.get('target'));
+      const allowedReactions=new Set(['Like','Learn More','Not Yet']);
+      let entries=[];
+      try{
+        const saved=JSON.parse(localStorage.getItem('setloop_invitation_responses_v1')||'[]');
+        if(Array.isArray(saved))entries=saved;
+      }catch(error){
+        localStorage.removeItem('setloop_invitation_responses_v1');
+      }
+      const existing=entries.find(entry=>entry&&entry.shareId===shareId);
+      const requestedReaction=params.get('response')||'';
+      let reaction=allowedReactions.has(requestedReaction)?requestedReaction:(existing&&allowedReactions.has(existing.reaction)?existing.reaction:'');
+      const context=[department&&('For '+department),level].filter(Boolean).join(' · ');
+      if(context)document.getElementById('inviteContext').textContent=context+'. Personal details remain optional.';
+      document.getElementById('exploreLink').href=target;
+      const choices=[...document.querySelectorAll('[data-reaction]')];
+      function choose(value){reaction=value;choices.forEach(button=>button.classList.toggle('selected',button.dataset.reaction===value));}
+      choices.forEach(button=>button.addEventListener('click',()=>choose(button.dataset.reaction)));
+      if(reaction)choose(reaction);
+      if(existing&&Array.isArray(existing.interests)){
+        document.querySelectorAll('.interest input').forEach(input=>{input.checked=existing.interests.includes(input.value)});
+      }
+      document.getElementById('saveInterest').addEventListener('click',()=>{
+        const interests=[...document.querySelectorAll('.interest input:checked')].map(input=>input.value);
+        const response={shareId,reaction:reaction||'No reaction selected',interests,department,level,timestamp:new Date().toISOString()};
+        const existingIndex=entries.findIndex(entry=>entry&&entry.shareId===shareId);
+        if(existingIndex>=0)entries[existingIndex]=response;
+        else entries.push(response);
+        localStorage.setItem('setloop_invitation_responses_v1',JSON.stringify(entries));
+        const status=document.getElementById('status');
+        status.textContent='Saved in this pilot browser. You can now explore the experience at your own pace.';
+        status.classList.add('show');
+      });
+    }());
+  </script>
+</body>
+</html>

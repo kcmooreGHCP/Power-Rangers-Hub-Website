@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Moment Watch Hub</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --panel: rgba(255,255,255,.08);
+      --panel-strong: rgba(255,255,255,.13);
+      --text: #f7f7fb;
+      --muted: #b8bac7;
+      --accent: #ff4fa3;
+      --accent-2: #7c4dff;
+      --good: #3ee29f;
+      --line: rgba(255,255,255,.16);
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Aptos, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+      background: linear-gradient(135deg, #07070b 0%, #17131e 48%, #07070b 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(9,10,15,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid; place-items: center; box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      font-weight: 900;
+    }
+    .brand h1 { font-size: 18px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    button, .btn {
+      border: 1px solid var(--line); color: var(--text); background: var(--panel);
+      border-radius: 999px; padding: 10px 14px; cursor: pointer; font-weight: 750;
+      text-decoration: none; transition: .15s transform, .15s background, .15s border;
+      display: inline-flex; gap: 8px; align-items: center; justify-content: center;
+    }
+    button:hover, .btn:hover { transform: translateY(-1px); background: var(--panel-strong); border-color: rgba(255,255,255,.28); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: none; box-shadow: 0 14px 34px rgba(0,0,0,.34); }
+    main { padding: 30px 0 70px; }
+    .hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items: stretch; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.06));
+      border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .hero-copy { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; min-height: 390px; }
+    .eyebrow { color: #ffd2ea; font-weight: 850; letter-spacing: .10em; text-transform: uppercase; font-size: 12px; }
+    .hero h2 { font-size: clamp(34px, 6vw, 68px); line-height: .93; margin: 14px 0; letter-spacing: -0.055em; }
+    .hero-copy .lead { color: var(--muted); font-size: 18px; line-height: 1.55; max-width: 62ch; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+    .stat { background: rgba(255,255,255,.08); border: 1px solid var(--line); border-radius: 18px; padding: 14px; }
+    .stat b { display: block; font-size: 20px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .spotlight { position: relative; min-height: 390px; display: flex; flex-direction: column; }
+    .video-shell { position: relative; background: #000; overflow: hidden; flex: 1; min-height: 285px; }
+    .video-shell iframe, .video-shell video {
+      display: block; width: 100%; height: 100%; border: 0; background: #000;
+    }
+    .video-shell video { object-fit: cover; }
+    .video-shell.fit-contain video { object-fit: contain; }
+    .ratio-16x9 { aspect-ratio: 16/9; }
+    .spotlight-info { padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: rgba(62,226,159,.13); color: #bdfadd; border: 1px solid rgba(62,226,159,.28); font-size: 12px; font-weight: 850; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin: 30px 0 14px; }
+    .section-head h3 { margin:0; font-size: 24px; letter-spacing: -.02em; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .video-card { display: flex; flex-direction: column; min-height: 100%; }
+    .thumb { background:#000; aspect-ratio: 16/9; overflow:hidden; }
+    .thumb iframe, .thumb video { width:100%; height:100%; border:0; display:block; }
+    .thumb video { object-fit: cover; }
+    .video-meta { padding: 16px; display:flex; flex-direction:column; gap:10px; flex:1; }
+    .video-meta h4 { margin:0; font-size: 17px; }
+    .video-meta p { margin:0; color: var(--muted); line-height:1.45; font-size: 14px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; margin-top:auto; }
+    .schedule { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .schedule-list { padding: 8px; }
+    .slot { display:grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 14px; border-bottom: 1px solid var(--line); }
+    .slot:last-child { border-bottom: 0; }
+    .slot time { color:#ffd2ea; font-weight:900; }
+    .slot b { display:block; margin-bottom:4px; }
+    .slot span { color: var(--muted); font-size: 14px; }
+    .resource-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .resource { padding: 16px; min-height: 120px; text-decoration:none; }
+    .resource b { display:block; margin-bottom: 8px; }
+    .resource span { color: var(--muted); font-size:14px; line-height:1.4; }
+    .admin {
+      display:none; margin-top:22px; padding:18px; border:1px dashed rgba(255,255,255,.35); background:rgba(0,0,0,.22);
+      border-radius: var(--radius);
+    }
+    .admin.show { display:block; }
+    .form-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    label { display:flex; flex-direction:column; gap:6px; color: var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+    input, textarea, select {
+      width:100%; color:var(--text); background:rgba(255,255,255,.08); border:1px solid var(--line); border-radius:14px;
+      padding:12px; font: inherit; outline:none;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    .wide { grid-column: 1 / -1; }
+    .admin-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .modal { position: fixed; inset:0; z-index:50; display:none; place-items:center; background:rgba(0,0,0,.82); padding:20px; }
+    .modal.show { display:grid; }
+    .modal-inner { width:min(1100px, 100%); background:#000; border-radius:24px; overflow:hidden; border:1px solid var(--line); box-shadow: var(--shadow); }
+    .modal-video { aspect-ratio: 16/9; background:#000; }
+    .modal-video iframe, .modal-video video { width:100%; height:100%; border:0; display:block; }
+    .modal-video video { object-fit: contain; }
+    .modal-bar { padding:12px; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,.08); }
+    footer { color: var(--muted); text-align:center; padding: 18px 0 34px; }
+    @media (max-width: 920px) { .hero, .schedule { grid-template-columns:1fr; } .grid { grid-template-columns: repeat(2,1fr); } .resource-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 620px) { .wrap { width:min(100% - 22px, 1180px); } .nav { align-items:flex-start; flex-direction:column; } .stats,.grid,.resource-grid,.form-grid { grid-template-columns:1fr; } .hero-copy { padding:22px; } .spotlight-info { flex-direction:column; align-items:stretch; } .slot { grid-template-columns:1fr; gap:4px; } }
+  </style>
+
+  <link rel="stylesheet" href="innovation-shell.css">
+  <script src="innovation-shell.js" defer></script>
+</head>
+<body data-boundary="demo">
+  <a class="innovation-skip-link" href="#innovation-content">Skip to content</a>
+  <nav class="innovation-shell" data-innovation-shell aria-label="SET network">
+    <a class="innovation-shell__brand" href="index.html">
+      <span class="innovation-shell__mark" aria-hidden="true">S</span>
+      <span class="innovation-shell__brand-text">SET + SET Loop</span>
+    </a>
+    <div class="innovation-shell__links">
+      <a class="innovation-shell__link" href="../../vp-presentation.html">VP presentation</a>
+      <a class="innovation-shell__link" href="../store-ops/SET_LOOP_MASTER.html">SET Loop</a>
+      <a class="innovation-shell__link" href="index.html" data-shell-page>Innovation lab</a>
+    </div>
+    <span class="innovation-shell__boundary" data-shell-boundary></span>
+  </nav>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo">BM</div>
+        <div>
+          <h1 id="navTitle">Brand Moment Watch Hub</h1>
+          <p id="navSub">Led by Lauren, Director of Store Operations</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a id="liveTop" class="btn btn-primary" href="#live">Watch Live</a>
+        <button id="adminToggle" type="button">Edit Hub</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="innovation-content">
+    <section class="hero">
+      <article class="card hero-copy">
+        <div>
+          <div class="eyebrow" id="eyebrow">Upcoming Brand Moment</div>
+          <h2 id="eventTitle">Everything in one place for the big brand moment.</h2>
+          <p class="lead" id="eventDesc">Use this hub to watch live, replay key creative, and quickly access all support links without searching across multiple channels.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="liveTime">2:00 PM to 10:00 PM</b><span>Live window</span></div>
+          <div class="stat"><b id="eventDate">Event date TBD</b><span>Brand event</span></div>
+          <div class="stat"><b>One link</b><span>For stores and field teams</span></div>
+        </div>
+      </article>
+      <article class="card spotlight" id="live">
+        <div class="video-shell" id="spotlightShell"></div>
+        <div class="spotlight-info">
+          <div>
+            <span class="pill">● TikTok Live Support</span>
+            <h3 style="margin:10px 0 4px" id="liveTitle">Brand Live Stream</h3>
+            <p style="margin:0;color:var(--muted)" id="liveDesc">Live from 2:00 PM to 10:00 PM. If the embed is restricted, use the direct link.</p>
+          </div>
+          <a id="liveDirect" class="btn btn-primary innovation-placeholder-link" aria-disabled="true">Live link · future connection</a>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div><h3>Featured videos and creative</h3><p>Videos are sized to fill the viewing area and maximize subject visibility.</p></div>
+      </div>
+      <div class="grid" id="videoGrid"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div><h3>Event timeline</h3><p>Simple run of show for quick reference.</p></div>
+      </div>
+      <div class="schedule">
+        <article class="card schedule-list" id="scheduleList"></article>
+        <article class="card hero-copy" style="min-height:auto">
+          <div>
+            <div class="eyebrow">Communication Lead</div>
+            <h2 style="font-size:clamp(28px,4vw,46px)" id="laurenTitle">Lauren is leading the communication charge.</h2>
+            <p class="lead" id="laurenCopy">This page is designed to make it easy for store and field partners to watch, revisit creative, and stay aligned during the brand moment.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div><h3>Helpful links</h3><p>Add creative folders, communication documents, talking points, recaps, or brand resources.</p></div>
+      </div>
+      <div class="resource-grid" id="resourceGrid"></div>
+    </section>
+
+    <section class="admin" id="adminPanel">
+      <h3 style="margin:0 0 10px">Edit content</h3>
+      <p style="color:var(--muted);margin-top:0">Paste links below, then select <b>Save Updates</b>. Updates are saved in this browser. Use Export/Import to share a final configured version.</p>
+      <div class="form-grid">
+        <label>Event title<input id="cfgTitle"></label>
+        <label>Event date<input id="cfgDate" placeholder="Example: August 20, 2026"></label>
+        <label>Live window<input id="cfgTime" placeholder="2:00 PM to 10:00 PM"></label>
+        <label>TikTok/live link<input id="cfgLiveUrl" placeholder="https://..."></label>
+        <label class="wide">Short description<textarea id="cfgDesc"></textarea></label>
+        <label class="wide">Featured videos JSON<textarea id="cfgVideos"></textarea></label>
+        <label class="wide">Timeline JSON<textarea id="cfgSchedule"></textarea></label>
+        <label class="wide">Helpful links JSON<textarea id="cfgLinks"></textarea></label>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-primary" id="saveBtn">Save Updates</button>
+        <button id="exportBtn">Export Settings</button>
+        <button id="importBtn">Import Settings</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+        <button id="resetBtn">Reset Demo Content</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-inner" tabindex="-1">
+      <div class="modal-video" id="modalVideo"></div>
+      <div class="modal-bar"><strong id="modalTitle">Video</strong><button id="closeModal">Close</button></div>
+    </div>
+  </div>
+
+  <footer class="wrap">Built as a single-file watch hub for easy sharing, store support, and field alignment.</footer>
+
+<script>
+const DEFAULT = {
+  title: "Everything in one place for the big brand moment.",
+  date: "Event date TBD",
+  time: "2:00 PM to 10:00 PM",
+  liveUrl: "",
+  desc: "Use this hub to watch live, replay key creative, and quickly access all support links without searching across multiple channels.",
+  videos: [
+    {title:"Hero creative", desc:"Add the main launch video or creative cut here.", url:"", type:"link"},
+    {title:"Store team message", desc:"Add a field or store operations message from Lauren or leadership.", url:"", type:"link"},
+    {title:"Social preview", desc:"Add TikTok, creator, or social preview content here.", url:"", type:"link"}
+  ],
+  schedule: [
+    {time:"2:00 PM", title:"Live begins", desc:"Brand moment coverage opens."},
+    {time:"4:00 PM", title:"Creative push", desc:"Key videos and social moments begin cycling."},
+    {time:"6:00 PM", title:"Peak engagement", desc:"Field teams can revisit resources and share reminders."},
+    {time:"10:00 PM", title:"Live concludes", desc:"Use replay links and recap resources after the event."}
+  ],
+  links: [
+    {title:"Communication brief", desc:"Paste the main comms document link.", url:""},
+    {title:"Creative folder", desc:"Paste the creative asset folder link.", url:""},
+    {title:"Talking points", desc:"Paste leader notes or store talking points.", url:""},
+    {title:"Post-event recap", desc:"Paste recap or results link when ready.", url:""}
+  ]
+};
+let cfg = JSON.parse(localStorage.getItem("brandMomentHubConfig") || "null") || DEFAULT;
+function isDirectVideo(url){ return /\.(mp4|webm|ogg)(\?|$)/i.test(url || ""); }
+function esc(value){ return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function safeUrl(value){
+  if(!value) return "";
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch(e) { return ""; }
+}
+function embedUrl(url){
+  if(!url) return "";
+  try {
+    const u = new URL(url);
+    if(u.hostname.includes("youtube.com") && u.searchParams.get("v")) return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
+    if(u.hostname.includes("youtu.be")) return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+    if(u.hostname.includes("vimeo.com")) return `https://player.vimeo.com/video/${u.pathname.split('/').filter(Boolean).pop()}`;
+    return url;
+  } catch(e){ return url; }
+}
+function media(url, title, large=false){
+  url = safeUrl(url);
+  if(!url) return `<div style="height:100%;display:grid;place-items:center;text-align:center;padding:24px;color:#b8bac7;background:linear-gradient(135deg,rgba(255,79,163,.18),rgba(124,77,255,.15))"><div><div style="font-size:42px">▶</div><b>${esc(title)}</b><p style="margin:6px 0 0">Paste a video or live link in Edit Hub.</p></div></div>`;
+  if(isDirectVideo(url)) return `<video src="${url}" controls playsinline preload="metadata"></video>`;
+  const src = embedUrl(url);
+  return `<iframe src="${src}" title="${esc(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+}
+function render(){
+  document.getElementById("eventTitle").textContent = cfg.title;
+  document.getElementById("navTitle").textContent = "Brand Moment Watch Hub";
+  document.getElementById("eventDate").textContent = cfg.date;
+  document.getElementById("liveTime").textContent = cfg.time;
+  document.getElementById("eventDesc").textContent = cfg.desc;
+  document.getElementById("spotlightShell").innerHTML = media(cfg.liveUrl, "Brand Live Stream", true);
+  const liveDirect = document.getElementById("liveDirect");
+  const liveUrl = safeUrl(cfg.liveUrl);
+  if(liveUrl){
+    liveDirect.href = liveUrl;
+    liveDirect.target = "_blank";
+    liveDirect.rel = "noopener";
+    liveDirect.removeAttribute("aria-disabled");
+    liveDirect.classList.remove("innovation-placeholder-link");
+    liveDirect.textContent = "Open Live";
+  } else {
+    liveDirect.removeAttribute("href");
+    liveDirect.removeAttribute("target");
+    liveDirect.removeAttribute("rel");
+    liveDirect.setAttribute("aria-disabled", "true");
+    liveDirect.classList.add("innovation-placeholder-link");
+    liveDirect.textContent = "Live link · future connection";
+  }
+  document.getElementById("liveTop").href = liveUrl || "#live";
+  document.getElementById("videoGrid").innerHTML = cfg.videos.map((v,i)=>{ const url=safeUrl(v.url); return `<article class="card video-card"><div class="thumb">${media(url, v.title)}</div><div class="video-meta"><h4>${esc(v.title)}</h4><p>${esc(v.desc)}</p><div class="row"><button onclick="openVideo(${i})">Expand</button>${url ? `<a class="btn" href="${url}" target="_blank" rel="noopener">Open link</a>` : ""}</div></div></article>`; }).join("");
+  document.getElementById("scheduleList").innerHTML = cfg.schedule.map(s=>`<div class="slot"><time>${esc(s.time)}</time><div><b>${esc(s.title)}</b><span>${esc(s.desc)}</span></div></div>`).join("");
+  document.getElementById("resourceGrid").innerHTML = cfg.links.map(l=>{ const url=safeUrl(l.url); return url?`<a class="card resource" href="${url}" target="_blank" rel="noopener"><b>${esc(l.title)}</b><span>${esc(l.desc)}</span></a>`:`<div class="card resource innovation-placeholder-link" aria-disabled="true"><b>${esc(l.title)}</b><span>${esc(l.desc)}</span><small class="innovation-placeholder-label">Future connection</small></div>`; }).join("");
+  document.getElementById("cfgTitle").value = cfg.title;
+  document.getElementById("cfgDate").value = cfg.date;
+  document.getElementById("cfgTime").value = cfg.time;
+  document.getElementById("cfgLiveUrl").value = cfg.liveUrl;
+  document.getElementById("cfgDesc").value = cfg.desc;
+  document.getElementById("cfgVideos").value = JSON.stringify(cfg.videos, null, 2);
+  document.getElementById("cfgSchedule").value = JSON.stringify(cfg.schedule, null, 2);
+  document.getElementById("cfgLinks").value = JSON.stringify(cfg.links, null, 2);
+}
+function openVideo(i){
+  const v = cfg.videos[i];
+  document.getElementById("modalTitle").textContent = v.title;
+  document.getElementById("modalVideo").innerHTML = media(v.url, v.title, true);
+  document.getElementById("modal").classList.add("show");
+}
+document.getElementById("adminToggle").onclick = () => document.getElementById("adminPanel").classList.toggle("show");
+document.getElementById("closeModal").onclick = () => { document.getElementById("modal").classList.remove("show"); document.getElementById("modalVideo").innerHTML = ""; };
+document.getElementById("modal").onclick = e => { if(e.target.id === "modal") document.getElementById("closeModal").click(); };
+document.addEventListener("keydown", e => { if(e.key === "Escape" && document.getElementById("modal").classList.contains("show")) document.getElementById("closeModal").click(); });
+document.getElementById("saveBtn").onclick = () => {
+  try {
+    cfg = {
+      title: document.getElementById("cfgTitle").value,
+      date: document.getElementById("cfgDate").value,
+      time: document.getElementById("cfgTime").value,
+      liveUrl: document.getElementById("cfgLiveUrl").value,
+      desc: document.getElementById("cfgDesc").value,
+      videos: JSON.parse(document.getElementById("cfgVideos").value),
+      schedule: JSON.parse(document.getElementById("cfgSchedule").value),
+      links: JSON.parse(document.getElementById("cfgLinks").value)
+    };
+    localStorage.setItem("brandMomentHubConfig", JSON.stringify(cfg));
+    render(); alert("Hub updated in this browser.");
+  } catch(e){ alert("Please check the JSON formatting in videos, timeline, or helpful links.\n\n" + e.message); }
+};
+document.getElementById("exportBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(cfg, null, 2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "brand-moment-hub-settings.json"; a.click(); URL.revokeObjectURL(a.href);
+};
+document.getElementById("importBtn").onclick = () => document.getElementById("importFile").click();
+document.getElementById("importFile").onchange = async e => {
+  const file = e.target.files[0]; if(!file) return;
+  cfg = JSON.parse(await file.text()); localStorage.setItem("brandMomentHubConfig", JSON.stringify(cfg)); render();
+};
+document.getElementById("resetBtn").onclick = () => { cfg = DEFAULT; localStorage.removeItem("brandMomentHubConfig"); render(); };
+render();
+</script>
+</body>
+</html>

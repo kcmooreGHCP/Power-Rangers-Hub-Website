@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Co-Pilot Power Rangers | Store Operations Automation Hub</title>
+<style>
+  :root{
+    --ink:#172033; --muted:#596276; --light:#f7f4fb; --card:#ffffff; --line:#e8e2f3;
+    --pink:#f14fa5; --violet:#6b3df4; --blue:#0067c5; --teal:#13b8a6; --gold:#ffb03a;
+    --shadow:0 20px 60px rgba(17,16,15,.14); --radius:26px;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Aptos,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(150deg,#fff 0 44%,#f2eef9 100%);}
+  a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:22px}.hero{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.6);border-radius:34px;padding:34px;box-shadow:var(--shadow);background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,255,255,.72));backdrop-filter:blur(12px)}
+  .hero:before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 140deg,var(--pink),var(--violet),var(--blue),var(--teal),var(--gold),var(--pink));opacity:.12;animation:spin 18s linear infinite}@keyframes spin{to{transform:rotate(1turn)}}
+  .hero>*{position:relative}.eyebrow{display:inline-flex;gap:9px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:#fff;font-weight:800;color:#4b2aa5;font-size:13px;letter-spacing:.02em}.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:stretch}.title{font-size:clamp(36px,5vw,70px);line-height:.95;margin:18px 0 12px;letter-spacing:-.04em}.title span{color:var(--violet)}.hero p{font-size:19px;line-height:1.45;color:#374055;max-width:760px}.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.btn{border:0;border-radius:16px;padding:13px 17px;font-weight:900;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;box-shadow:0 10px 24px rgba(17,16,15,.12);transition:.2s}.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(135deg,var(--pink),var(--violet));color:white}.secondary{background:white;border:1px solid var(--line)}
+  .powercard{display:grid;gap:14px}.metric{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 34px rgba(34,22,72,.09)}.metric b{font-size:28px}.metric small{display:block;color:var(--muted);font-weight:800;margin-top:4px}.section{margin:24px 0;padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.86);box-shadow:0 12px 40px rgba(35,25,70,.07)}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:18px}.section h2{margin:0;font-size:29px;letter-spacing:-.03em}.section p.lead{margin:7px 0 0;color:var(--muted);line-height:1.45}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 8px 20px rgba(38,24,78,.06)}.card .icon{font-size:28px}.card h3{margin:10px 0 6px}.card p{color:var(--muted);line-height:1.4}.links{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.quick{padding:15px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbf9ff);text-decoration:none;min-height:96px}.quick strong{display:block;margin-bottom:6px}.quick small{color:var(--muted)}
+  .prompt-wall{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.prompt{border:1px solid var(--line);border-radius:20px;padding:16px;background:#fff;position:relative;overflow:hidden}.prompt:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--pink),var(--violet))}.prompt code{display:block;white-space:pre-wrap;background:#f8f6ff;border:1px dashed #d8cff4;border-radius:14px;padding:12px;color:#25213a}.copy{margin-top:10px;background:#172033;color:white;border:0;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{font-weight:900;font-size:13px;color:#394154}input,select,textarea{width:100%;border:1px solid #d9d3e7;border-radius:14px;padding:12px 13px;font:inherit;background:#fff}textarea{min-height:118px;resize:vertical}.full{grid-column:1/-1}.ideas{display:grid;gap:10px;margin-top:16px}.idea{border:1px solid var(--line);background:white;border-radius:18px;padding:14px}.idea-meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:13px}.pill{display:inline-flex;border-radius:999px;background:#f1ecff;color:#4c2dae;padding:5px 9px;font-weight:900}.toast{position:fixed;right:18px;bottom:18px;background:#172033;color:white;padding:12px 15px;border-radius:14px;box-shadow:var(--shadow);display:none;z-index:9}.footer{text-align:center;color:var(--muted);padding:28px}.admin-note{background:#fff8e7;border:1px solid #ffe0a3;color:#573b08;border-radius:18px;padding:13px;margin-top:13px;font-size:14px;line-height:1.35}
+  @media(max-width:900px){.grid,.cards,.links,.prompt-wall,.form-grid{grid-template-columns:1fr}.hero{padding:24px}.section-head{display:block}.links{grid-template-columns:1fr 1fr}}@media(max-width:560px){.links{grid-template-columns:1fr}.wrap{padding:12px}.title{font-size:42px}}
+</style>
+
+  <link rel="stylesheet" href="innovation-shell.css">
+  <script src="innovation-shell.js" defer></script>
+</head>
+<body data-boundary="demo">
+  <a class="innovation-skip-link" href="#innovation-content">Skip to content</a>
+  <nav class="innovation-shell" data-innovation-shell aria-label="SET network">
+    <a class="innovation-shell__brand" href="index.html">
+      <span class="innovation-shell__mark" aria-hidden="true">S</span>
+      <span class="innovation-shell__brand-text">SET + SET Loop</span>
+    </a>
+    <div class="innovation-shell__links">
+      <a class="innovation-shell__link" href="../../vp-presentation.html">VP presentation</a>
+      <a class="innovation-shell__link" href="../store-ops/SET_LOOP_MASTER.html">SET Loop</a>
+      <a class="innovation-shell__link" href="index.html" data-shell-page>Innovation lab</a>
+    </div>
+    <span class="innovation-shell__boundary" data-shell-boundary></span>
+  </nav>
+
+<div class="wrap" id="innovation-content">
+  <section class="hero">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">💡 Store Operations Innovation Hub</div>
+        <h1 class="title">Co-Pilot <span>Power Rangers</span></h1>
+        <p>Bring your work stream, friction point, or wild “there has to be a better way” idea. This hub helps associates discover prompts, request automation support, and share wins that can scale across the enterprise.</p>
+        <div class="cta">
+          <a class="btn primary" href="#idea-lab">⚡ Submit an idea</a>
+          <a class="btn secondary" href="#prompt-wall">🧠 Browse prompts</a>
+          <a class="btn secondary" href="#quick-links">🔗 Quick links</a>
+        </div>
+      </div>
+      <div class="powercard">
+        <div class="metric"><b>Ask</b><small>What can Copilot simplify, summarize, draft, compare, organize, or automate?</small></div>
+        <div class="metric"><b>Build</b><small>Turn repeated manual steps into reusable prompts, templates, flows, and checklists.</small></div>
+        <div class="metric"><b>Share</b><small>Spot a scalable win and bring it back to Store Operations.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quick-links">
+    <div class="section-head"><div><h2>Quick Links</h2><p class="lead">Replace these placeholders in the CONFIG block with the resources your teams use most.</p></div></div>
+    <div class="links" id="quickLinks"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><h2>How the Power Rangers Help</h2><p class="lead">Simple entry points for teams that are curious but not sure where to start.</p></div></div>
+    <div class="cards">
+      <div class="card"><div class="icon">🧩</div><h3>Prompt Tune-Up</h3><p>Bring a rough prompt or task. We help sharpen it into a repeatable, high-quality output.</p></div>
+      <div class="card"><div class="icon">🤖</div><h3>Automation Intake</h3><p>Submit a workflow that is repetitive, manual, deadline-driven, or easy to miss.</p></div>
+      <div class="card"><div class="icon">🚀</div><h3>Scale the Win</h3><p>Share successful prompts, templates, and automations so other teams can benefit too.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="prompt-wall">
+    <div class="section-head"><div><h2>Prompt Starter Wall</h2><p class="lead">Copy, customize, and improve. Add your best examples to keep the wall growing.</p></div></div>
+    <div class="prompt-wall" id="promptWall"></div>
+  </section>
+
+  <section class="section" id="idea-lab">
+    <div class="section-head"><div><h2>Idea Lab: “Can Copilot Help Me Automate This?”</h2><p class="lead">Capture the associate, the opportunity, and the work stream so the right follow-up can happen quickly.</p></div></div>
+    <form id="ideaForm">
+      <div class="form-grid">
+        <div><label>Name</label><input name="name" required placeholder="Your name" /></div>
+        <div><label>Email</label><input name="email" required type="email" placeholder="name@company.com" /></div>
+        <div><label>Team / Function</label><input name="team" placeholder="Store Ops, Visual, Field, Brand, etc." /></div>
+        <div><label>Request Type</label><select name="type"><option>Can you help me automate this?</option><option>I know there is a more efficient way to do this</option><option>I have a prompt to share</option><option>I found a Copilot win</option><option>I need help getting started</option></select></div>
+        <div class="full"><label>What are you trying to simplify?</label><textarea name="challenge" required placeholder="Describe the work stream, where time is lost, what repeats, and what a great outcome would look like."></textarea></div>
+        <div class="full"><label>Links, screenshots, files, or context</label><input name="links" placeholder="Paste SharePoint, Teams, file, or reference links" /></div>
+      </div>
+      <div class="cta"><button class="btn primary" type="submit">⚡ Add idea</button><button class="btn secondary" type="button" id="exportCsv">⬇ Export CSV</button><button class="btn secondary" type="button" id="emailIdeas">✉ Email ideas</button></div>
+    </form>
+    <div class="admin-note"><b>Admin note:</b> This version stores submitted ideas in the visitor’s browser until connected to a Microsoft Form, SharePoint List, or Power Automate HTTP trigger. Set <b>CONFIG.powerAutomateWebhookUrl</b> or <b>CONFIG.microsoftFormUrl</b> in the HTML when ready.</div>
+    <div class="ideas" id="ideas"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><h2>Spot the Automation Opportunity</h2><p class="lead">If the work has any of these signals, it is worth bringing to the Power Rangers.</p></div></div>
+    <div class="cards">
+      <div class="card"><div class="icon">🔁</div><h3>Repeated every week</h3><p>Status recaps, bulletin drafts, trackers, follow-ups, file prep, and handoffs.</p></div>
+      <div class="card"><div class="icon">📚</div><h3>Lots of source material</h3><p>Emails, chats, decks, PDFs, store notes, visual direction, and meeting notes.</p></div>
+      <div class="card"><div class="icon">🎯</div><h3>Needs consistency</h3><p>Communication templates, leadership summaries, SOP drafts, QA checklists, and field messaging.</p></div>
+    </div>
+  </section>
+</div>
+<div class="footer">Built for Store Operations by the Co-Pilot Power Rangers ⚡</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const CONFIG = {
+  siteTitle: "Co-Pilot Power Rangers",
+  contactEmail: "",
+  microsoftFormUrl: "",
+  powerAutomateWebhookUrl: "",
+  quickLinks: [
+    {title:"Copilot Prompt Library", note:"Best examples and reusable starters", url:""},
+    {title:"Automation Intake Tracker", note:"Submitted opportunities and statuses", url:""},
+    {title:"Store Ops SharePoint", note:"Team resources and updates", url:""},
+    {title:"Training + Office Hours", note:"Upcoming sessions and recordings", url:""}
+  ],
+  prompts: [
+    {title:"Summarize a long thread", text:"Summarize this thread for a Store Operations leader. Include decisions, risks, owners, deadlines, and recommended next steps. Keep it concise and action-oriented."},
+    {title:"Turn notes into a field update", text:"Turn these notes into a polished field-facing update. Use clear headings, call out who is impacted, what action is needed, timing, and where to go with questions."},
+    {title:"Find automation candidates", text:"Review this workflow and identify repetitive steps, manual handoffs, decision points, inputs, outputs, and the best automation approach."},
+    {title:"Create a checklist", text:"Create a store-ready checklist from this guidance. Make it easy to execute, sequenced by priority, and include a final verification step."}
+  ]
+};
+const $ = s => document.querySelector(s); const toast = m => { const t=$('#toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2400); };
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderLinks(){ $('#quickLinks').innerHTML = CONFIG.quickLinks.map(l=>l.url?`<a class="quick" href="${esc(l.url)}" target="_blank" rel="noopener"><strong>${esc(l.title)}</strong><small>${esc(l.note)}</small></a>`:`<div class="quick innovation-placeholder-link" aria-disabled="true"><strong>${esc(l.title)}</strong><small>${esc(l.note)}</small><small class="innovation-placeholder-label">Future connection</small></div>`).join(''); }
+function renderPrompts(){ $('#promptWall').innerHTML = CONFIG.prompts.map((p,i)=>`<div class="prompt"><h3>${esc(p.title)}</h3><code>${esc(p.text)}</code><button class="copy" data-copy="${i}">Copy prompt</button></div>`).join(''); document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{await window.innovationCopyText(CONFIG.prompts[b.dataset.copy].text);toast('Prompt copied');}); }
+const key='copilotPowerRangersIdeas'; const getIdeas=()=>JSON.parse(localStorage.getItem(key)||'[]'); const saveIdeas=i=>localStorage.setItem(key,JSON.stringify(i));
+function renderIdeas(){ const ideas=getIdeas(); $('#ideas').innerHTML = ideas.length? ideas.slice().reverse().map(x=>`<div class="idea"><div class="idea-meta"><span class="pill">${esc(x.type)}</span><span>${esc(x.name)}</span><span>${esc(x.email)}</span><span>${esc(x.date)}</span></div><h3>${esc(x.team||'Team not listed')}</h3><p>${esc(x.challenge)}</p>${x.links?`<p><b>Links:</b> ${esc(x.links)}</p>`:''}</div>`).join('') : '<div class="idea"><b>No local ideas captured yet.</b><p>Be the first to submit a workflow opportunity.</p></div>'; }
+$('#ideaForm').addEventListener('submit', async e=>{ e.preventDefault(); const f=new FormData(e.target); const idea=Object.fromEntries(f.entries()); idea.date=new Date().toLocaleString(); const ideas=getIdeas(); ideas.push(idea); saveIdeas(ideas); renderIdeas(); e.target.reset(); toast('Idea added'); if(CONFIG.powerAutomateWebhookUrl){ try{ await fetch(CONFIG.powerAutomateWebhookUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(idea)}); toast('Idea sent to workflow'); }catch(err){ toast('Saved locally. Workflow send failed.'); } } if(CONFIG.microsoftFormUrl){ window.open(CONFIG.microsoftFormUrl,'_blank','noopener'); } });
+function csvCell(value){let text=String(value||'');if(/^\s*[=+\-@]/.test(text))text="'"+text;return '"'+text.replaceAll('"','""')+'"'}
+$('#exportCsv').onclick=()=>{ const rows=getIdeas(); if(!rows.length){toast('No ideas to export');return;} const cols=['date','name','email','team','type','challenge','links']; const csv=[cols.join(','),...rows.map(r=>cols.map(c=>csvCell(r[c])).join(','))].join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='copilot-power-rangers-ideas.csv'; a.click(); };
+const emailConfigured = Boolean(CONFIG.contactEmail);
+if(!emailConfigured){ $('#emailIdeas').disabled=true; $('#emailIdeas').textContent='✉ Email ideas — future connection'; $('#emailIdeas').title='Add a team inbox in the CONFIG block to enable email.'; }
+$('#emailIdeas').onclick=()=>{ if(!emailConfigured)return; const body=getIdeas().map(i=>`${i.date}\n${i.name} <${i.email}>\n${i.team} | ${i.type}\n${i.challenge}\n${i.links||''}`).join('\n\n---\n\n'); location.href=`mailto:${CONFIG.contactEmail}?subject=Co-Pilot Power Rangers Ideas&body=${encodeURIComponent(body||'No ideas captured yet.')}`; };
+renderLinks(); renderPrompts(); renderIdeas();
+</script>
+</body>
+</html>
