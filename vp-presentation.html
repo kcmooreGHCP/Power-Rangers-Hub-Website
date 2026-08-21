@@ -995,7 +995,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
     <div class="cta-band" style="margin-top:24px;text-align:left;padding:30px">
       <h2 style="font-size:28px;letter-spacing:-1px">Build first. Connect next. Buy or extend only where the pilot proves the need.</h2>
       <p style="margin:10px 0 20px">Open the revised executive brief for the capability comparison, entitlement matrix, pilot proof, and claim-control language.</p>
-      <div class="btn-group"><a class="btn btn-white" href="tools/store-ops/resources/SET_LOOP_COMPETITOR_LICENSE_BRIEF_20260821.pdf" target="_blank" rel="noopener">Open executive PDF →</a><a class="btn btn-outline" href="tools/store-ops/resources/competitor-license-brief.html" target="_blank" rel="noopener">Open accessible web brief</a></div>
+      <div class="btn-group"><a class="btn btn-white" href="tools/store-ops/resources/SET_LOOP_COMPETITOR_LICENSE_BRIEF_20260821.pdf" download>Download executive PDF ↓</a><a class="btn btn-outline" href="tools/store-ops/resources/competitor-license-brief.html" onclick="openExecutiveBrief();return false">Open accessible web brief here</a></div>
     </div>
   </div>
   <div class="react-row">
@@ -1271,6 +1271,18 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
   </div>
 </div>
 
+<div id="executiveBriefOverlay" role="dialog" aria-modal="true" aria-labelledby="executiveBriefTitle" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9200;padding:1rem;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;width:min(1180px,100%);height:min(92vh,850px);display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #e5e7eb">
+      <strong id="executiveBriefTitle" style="font-size:14px">SET Loop · Accessible Executive Web Brief</strong>
+      <span id="executiveBriefStatus" style="font-size:11px;color:#667085;flex:1">Preview below · use New window for full keyboard navigation</span>
+      <a id="executiveBriefNewWindow" href="tools/store-ops/resources/competitor-license-brief.html" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#5b21b6;text-decoration:none">New window ↗</a>
+      <button id="executiveBriefClose" onclick="closeExecutiveBrief()" style="background:#fff;border:1px solid #d0d5dd;border-radius:6px;padding:5px 9px;cursor:pointer">Close</button>
+    </div>
+    <iframe id="executiveBriefFrame" title="SET Loop executive market and licensing brief preview" tabindex="-1" aria-hidden="true" style="border:0;width:100%;flex:1;background:#f2f4f7"></iframe>
+  </div>
+</div>
+
 <script>
 function showDemo(role) {
   document.querySelectorAll('.demo-content').forEach(d => d.classList.remove('active'));
@@ -1295,6 +1307,74 @@ function closeFieldGuide() {
   document.getElementById('fieldGuideOverlay').style.display = 'none';
   document.getElementById('fieldGuideFrame').src = '';
 }
+
+let executiveBriefTrigger = null;
+
+function setExecutiveBriefBackgroundInert(isInert) {
+  [...document.body.children].forEach(element => {
+    if (element.id === 'executiveBriefOverlay') return;
+    if (isInert) {
+      element.inert = true;
+      element.dataset.executiveBriefInert = 'true';
+    } else if (element.dataset.executiveBriefInert === 'true') {
+      element.inert = false;
+      delete element.dataset.executiveBriefInert;
+    }
+  });
+}
+
+function openExecutiveBrief() {
+  document.getElementById('executiveBriefFrame').src = 'tools/store-ops/resources/competitor-license-brief.html';
+  executiveBriefTrigger = document.activeElement;
+  setExecutiveBriefBackgroundInert(true);
+  document.getElementById('executiveBriefOverlay').style.display = 'flex';
+  document.getElementById('executiveBriefClose').focus();
+}
+
+function closeExecutiveBrief() {
+  if (document.getElementById('executiveBriefOverlay').style.display === 'none') return;
+  document.getElementById('executiveBriefOverlay').style.display = 'none';
+  document.getElementById('executiveBriefFrame').src = '';
+  setExecutiveBriefBackgroundInert(false);
+  if (executiveBriefTrigger && typeof executiveBriefTrigger.focus === 'function') executiveBriefTrigger.focus();
+  executiveBriefTrigger = null;
+}
+
+document.getElementById('executiveBriefOverlay').addEventListener('click', event => {
+  if (event.target.id === 'executiveBriefOverlay') closeExecutiveBrief();
+});
+document.getElementById('executiveBriefFrame').addEventListener('load', event => {
+  try {
+    event.target.contentDocument.addEventListener('keydown', iframeEvent => {
+      if (iframeEvent.key === 'Escape') closeExecutiveBrief();
+      if (iframeEvent.key === 'Tab') {
+        iframeEvent.preventDefault();
+        document.getElementById('executiveBriefNewWindow').focus();
+      }
+    });
+  } catch (error) {
+    document.getElementById('executiveBriefStatus').textContent = 'Preview loaded · use New window for full keyboard navigation';
+  }
+});
+document.addEventListener('keydown', event => {
+  const overlay = document.getElementById('executiveBriefOverlay');
+  if (event.key === 'Tab' && overlay.style.display === 'flex') {
+    const focusable = [...overlay.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')].filter(element => !element.disabled);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+  if (event.key === 'Escape') {
+    closeExecutiveBrief();
+    closeFieldGuide();
+  }
+});
 
 // Init checked state
 document.querySelectorAll('.check-item input[checked]').forEach(i => {

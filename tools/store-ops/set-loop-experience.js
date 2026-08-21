@@ -96,6 +96,44 @@
       partner: "Brand Merchandising + Supply Chain"
     }
   ];
+  var personaProfiles = {
+    store: {
+      label: "Store Operations",
+      leadIn: "Practical answer:",
+      hint: "Direct, calm, and action focused.",
+      rate: 0.98,
+      pitch: 0.94,
+      voiceIndex: 0,
+      preferredVoices: /Samantha|Ava|Jenny|Google US English|Microsoft Aria/i
+    },
+    visual: {
+      label: "Visual",
+      leadIn: "Visual read:",
+      hint: "Measured, spatial, and detail focused.",
+      rate: 0.9,
+      pitch: 1.06,
+      voiceIndex: 1,
+      preferredVoices: /Victoria|Serena|Karen|Moira|Microsoft Sonia/i
+    },
+    pink: {
+      label: "PINK",
+      leadIn: "Quick take:",
+      hint: "Bright, energetic, and concise.",
+      rate: 1.08,
+      pitch: 1.16,
+      voiceIndex: 2,
+      preferredVoices: /Zira|Salli|Joanna|Tessa/i
+    },
+    leadership: {
+      label: "Leadership",
+      leadIn: "Executive summary:",
+      hint: "Steady, concise, and decision oriented.",
+      rate: 0.86,
+      pitch: 0.88,
+      voiceIndex: 3,
+      preferredVoices: /Daniel|Alex|David|Guy|Microsoft Mark/i
+    }
+  };
 
   function addStyles() {
     var style = document.createElement("style");
@@ -130,6 +168,7 @@
       ".slx-guard{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;font-size:11px;color:#166534;line-height:1.45;margin-bottom:12px}",
       ".slx-persona{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}",
       ".slx-persona label{font-size:11px;color:#475467;font-weight:700}.slx-persona select{width:100%;padding:8px;border:1px solid #d0d5dd;border-radius:6px;margin-top:4px}",
+      ".slx-persona-note{grid-column:1/-1;background:#f8f5ff;border-radius:6px;padding:8px 10px;color:#5b21b6;font-size:11px;font-weight:700}",
       ".slx-q{width:100%;min-height:86px;border:1px solid #d0d5dd;border-radius:8px;padding:10px;font:13px/1.4 inherit;resize:vertical}",
       ".slx-submit{background:#ed2d8b;color:#fff;border:0;border-radius:7px;padding:9px 14px;font-weight:700;cursor:pointer;margin-top:8px}",
       ".slx-answer{display:none;margin-top:14px;border:1px solid #eaecf0;border-radius:8px;padding:14px;font-size:13px;line-height:1.55}",
@@ -230,7 +269,7 @@
       "<div class=\"slx-modal-head\"><strong>🎙️ SET Agent · Guardrailed prototype</strong><span>Approved internal sources only</span><button class=\"slx-close\" type=\"button\">Close</button></div>",
       "<div class=\"slx-agent-body\">",
       "<div class=\"slx-guard\"><strong>No guessing. No Google. No unapproved content.</strong><br>Answers must be grounded in SET Loop records and connected partner manifests that passed intake. If the answer is not present, the Agent says so and prepares a support request.</div>",
-      "<div class=\"slx-persona\"><label>Team personality<select id=\"slxPersona\"><option>Store Operations · Clear + practical</option><option>Visual · Spatial + detail focused</option><option>PINK · Energetic + concise</option><option>Leadership · Executive summary</option></select></label><label>Voice<select id=\"slxVoice\"><option>Text only</option><option>Speak answer · system voice</option></select></label></div>",
+      "<div class=\"slx-persona\"><label>Team personality<select id=\"slxPersona\"><option value=\"store\">Store Operations · Clear + practical</option><option value=\"visual\">Visual · Spatial + detail focused</option><option value=\"pink\">PINK · Energetic + concise</option><option value=\"leadership\">Leadership · Executive summary</option></select></label><label>Voice delivery<select id=\"slxVoice\"><option value=\"text\">Text only</option><option value=\"speak\">Speak with selected personality</option></select></label><div class=\"slx-persona-note\" id=\"slxPersonaNote\"></div></div>",
       "<textarea class=\"slx-q\" id=\"slxQuestion\" placeholder=\"Ask about readiness, a priority task, the brand guide, SET IRL, a fixture, or an approved connected manifest...\"></textarea>",
       "<button class=\"slx-submit\" type=\"button\">Ask from approved sources</button>",
       "<div class=\"slx-answer\" id=\"slxAnswer\"><div id=\"slxAnswerText\"></div><div class=\"slx-source\" id=\"slxSource\"></div><button class=\"slx-route\" id=\"slxRoute\" type=\"button\">Submit to Home Office / Store Ops</button><div class=\"slx-ticket\" id=\"slxTicket\"></div></div>",
@@ -239,10 +278,12 @@
     overlay.querySelector(".slx-close").addEventListener("click", function () { overlay.classList.remove("show"); });
     overlay.querySelector(".slx-submit").addEventListener("click", answerQuestion);
     overlay.querySelector("#slxRoute").addEventListener("click", routeQuestion);
+    overlay.querySelector("#slxPersona").addEventListener("change", updatePersonaHint);
     overlay.addEventListener("click", function (event) {
       if (event.target === overlay) overlay.classList.remove("show");
     });
     document.body.appendChild(overlay);
+    updatePersonaHint();
   }
 
   function loadGuidePage(page, label, activeButton) {
@@ -282,6 +323,33 @@
     }, 700);
   }
 
+  function selectedPersona() {
+    var select = document.getElementById("slxPersona");
+    return personaProfiles[select ? select.value : "store"] || personaProfiles.store;
+  }
+
+  function updatePersonaHint() {
+    var profile = selectedPersona();
+    var hint = document.getElementById("slxPersonaNote");
+    if (hint) hint.textContent = profile.label + " voice · " + profile.hint;
+  }
+
+  function speakAnswer(text, profile) {
+    if (!("speechSynthesis" in window)) return false;
+    var utterance = new SpeechSynthesisUtterance(text);
+    var voices = window.speechSynthesis.getVoices().filter(function (voice) {
+      return !voice.lang || /^en(?:-|_)/i.test(voice.lang);
+    });
+    utterance.voice = voices.find(function (voice) {
+      return profile.preferredVoices.test(voice.name);
+    }) || voices[profile.voiceIndex % Math.max(voices.length, 1)] || null;
+    utterance.rate = profile.rate;
+    utterance.pitch = profile.pitch;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+    return true;
+  }
+
   function answerQuestion() {
     var question = document.getElementById("slxQuestion").value.trim();
     var lower = question.toLowerCase();
@@ -305,13 +373,14 @@
     });
 
     if (match) {
+      var profile = selectedPersona();
+      var presentedAnswer = profile.leadIn + " " + match.answer;
       answerText.className = "";
-      answerText.textContent = match.answer;
-      source.textContent = "Grounded in: " + match.source + " · Accountable partner: " + match.partner;
+      answerText.textContent = presentedAnswer;
+      source.textContent = profile.label + " delivery · Grounded in: " + match.source + " · Accountable partner: " + match.partner;
       route.classList.remove("show");
-      if (document.getElementById("slxVoice").value.indexOf("Speak") === 0 && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance(match.answer));
+      if (document.getElementById("slxVoice").value === "speak" && !speakAnswer(presentedAnswer, profile)) {
+        ticket.textContent = "Voice playback is unavailable in this browser. The approved answer remains visible above.";
       }
     } else {
       answerText.className = "slx-notfound";
