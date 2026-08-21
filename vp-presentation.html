@@ -207,11 +207,17 @@ body{font:15px/1.6 "Segoe UI",Arial,sans-serif;color:var(--ink);background:var(-
 .inno-card p{font-size:13px;color:var(--muted);line-height:1.5}
 .inno-card .inno-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px}
 
-/* CTA */
-.cta-band{background:linear-gradient(135deg,var(--brand),#2e1065,#0d9488);color:#fff;border-radius:24px;padding:48px;text-align:center;position:relative;overflow:hidden}
-.cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.08) 0,transparent 60%)}
-.cta-band h2{font-size:38px;font-weight:900;letter-spacing:-2px;position:relative;line-height:1.05}
-.cta-band p{color:rgba(255,255,255,.8);font-size:16px;margin:12px 0 32px;position:relative}
+/* CLOSE + MARKET SUMMARY */
+.market-summary{margin-top:24px;padding:28px 30px;border:1px solid #d9d3e8;border-radius:20px;background:#fff}
+.market-summary h3{margin:0;font-size:25px;letter-spacing:-.7px;line-height:1.1}
+.market-summary p{max-width:850px;margin:10px 0 16px;color:var(--muted);font-size:14px;line-height:1.6}
+.market-summary a{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-size:13px;font-weight:850;text-decoration:none}
+.market-summary a:hover{text-decoration:underline}
+.culture-close{padding:54px 48px;border-radius:24px;background:linear-gradient(135deg,var(--brand),#2e1065 55%,#0f766e);color:#fff;text-align:center}
+.culture-close .culture-code{margin:0;font-size:14px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#f9a8d4}
+.culture-close h2{max-width:820px;margin:16px auto 0;font-size:42px;font-weight:900;letter-spacing:-2px;line-height:1.04}
+.culture-close p{max-width:760px;margin:18px auto 0;color:rgba(255,255,255,.84);font-size:17px;line-height:1.6}
+.culture-close .closing-line{display:block;margin-top:24px;font-size:20px;font-weight:850}
 
 /* CARDS */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -251,6 +257,11 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
   .team-icons{grid-template-columns:repeat(3,1fr)}
   .hero h1{font-size:36px}
   .release-grid{grid-template-columns:1fr}
+  .culture-close{padding:42px 26px}
+  .culture-close h2{font-size:34px;letter-spacing:-1.4px}
+  .culture-close p{font-size:15px}
+  .culture-close .closing-line{font-size:17px}
+  .market-summary{padding:24px}
 }
 </style>
 </head>
@@ -982,9 +993,9 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
 <section id="market-proof" class="section" style="background:var(--paper)">
   <div class="wrap">
     <div class="section-head">
-      <span class="label label-purple">Market pattern + honest boundaries</span>
-      <h2>The value exists across the market. SET Loop connects the pattern with what we have.</h2>
-      <p>Specialized platforms validate localized planning, frontline tasks, photo proof, compliance, and reporting. SET Loop’s pilot distinction is the connected operating thread: structured intake, approved asset identity, role-specific execution, evidence, feedback, and source-owner escalation.</p>
+      <span class="label label-purple">What the market proves</span>
+      <h2>Specialized tools prove the pieces. SET + SET Loop connects the work.</h2>
+      <p>What we see in the market is not one perfect application. Different platforms specialize in space planning, field execution, proof, compliance, or reporting. SET + SET Loop brings those same operating needs into one connected VS&amp;Co workflow using what we have first—without claiming feature-for-feature parity.</p>
     </div>
     <div class="cards cards-4">
       <div class="card"><div class="card-icon" style="background:#ede9fe">📐</div><h3>Planning pattern</h3><p>Blue Yonder and RELEX show the value of localized floor and space planning connected to store-specific outputs.</p><span class="card-tag" style="background:#ede9fe;color:#5b21b6">Market evidence</span></div>
@@ -992,10 +1003,10 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <div class="card"><div class="card-icon" style="background:#d1fae5">↔</div><h3>SET Loop connection</h3><p>The pilot connects upstream intake and asset lineage to downstream role views, execution checks, questions, and learning.</p><span class="card-tag" style="background:#d1fae5;color:#065f46">Working proof</span></div>
       <div class="card"><div class="card-icon" style="background:#fef3c7">🛡️</div><h3>Decision gates</h3><p>No feature parity, production connection, ROI, AI, or license entitlement is assumed until the accountable owner confirms it.</p><span class="card-tag" style="background:#fef3c7;color:#92400e">Verify before promise</span></div>
     </div>
-    <div class="cta-band" style="margin-top:24px;text-align:left;padding:30px">
-      <h2 style="font-size:28px;letter-spacing:-1px">Build first. Connect next. Buy or extend only where the pilot proves the need.</h2>
-      <p style="margin:10px 0 20px">Open the revised executive brief for the capability comparison, entitlement matrix, pilot proof, and claim-control language.</p>
-      <div class="btn-group"><a class="btn btn-white" href="tools/store-ops/resources/SET_LOOP_COMPETITOR_LICENSE_BRIEF_20260821.pdf" download>Download executive PDF ↓</a><a class="btn btn-outline" href="tools/store-ops/resources/competitor-license-brief.html" onclick="openExecutiveBrief();return false">Open accessible web brief here</a></div>
+    <div class="market-summary">
+      <h3>Build what connects us. Extend only where the proof says we should.</h3>
+      <p>The supporting brief shows which capabilities the market validates, what the working SET Loop pilot already demonstrates, and which licensing, security, ownership, and production decisions still need approval.</p>
+      <a href="tools/store-ops/resources/competitor-license-brief.html" target="_blank" rel="noopener">Read the market + capability brief <span aria-hidden="true">↗</span></a>
     </div>
   </div>
   <div class="react-row">
@@ -1133,7 +1144,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
         <div class="inno-icon" style="background:#fff7fb">✨</div>
         <h3>SET IRL is the return path</h3>
         <p>SET IRL is highlighted as the moment the field can time the work or tell us what happened in real life — turning every guide into measurable field intelligence.</p>
-        <button onclick="openFieldGuide(2)" class="inno-tag" style="background:#fff7fb;color:#9d174d;border:0;cursor:pointer">Open SET IRL directory →</button>
+        <a href="tools/store-ops/SET_LOOP_MASTER.html#set-irl" target="_blank" class="inno-tag" style="background:#fff7fb;color:#9d174d;text-decoration:none">Open the field return →</a>
       </div>
       <div class="inno-card">
         <div class="inno-icon" style="background:#ede9fe">🎙️</div>
@@ -1233,15 +1244,11 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
 <!-- CTA -->
 <section id="ask" class="section-sm">
   <div class="wrap">
-    <div class="cta-band">
-      <h2>The field is ready for better.<br>So is the business.</h2>
-      <p>SET + SET Loop gives stores what they need, when they need it — and gives Home Office the visibility, governance, and time to focus on what is next. Start with a bounded 14-day, 5-store proof; validate cost, access, and entitlement before expansion.</p>
-      <div class="btn-group" style="justify-content:center">
-        <a href="#pilot" class="btn btn-white">Choose how to participate →</a>
-        <a href="#roles" class="btn btn-outline">See the role views</a>
-        <a href="#roi" class="btn btn-outline">Business case recap</a>
-        <a href="javascript:window.print()" class="btn btn-outline">🖨️ Save as PDF</a>
-      </div>
+    <div class="culture-close">
+      <p class="culture-code">SET the standard. Own the outcome. Put Her First.</p>
+      <h2>Give our stores a clearer path—and more time for Her.</h2>
+      <p>SET + SET Loop reduces searching, repeat handoffs, and preventable friction while giving every store a stronger voice back into the business.</p>
+      <span class="closing-line">Better direction. Better listening. Better time with Her.</span>
     </div>
   </div>
 </section>
@@ -1271,18 +1278,6 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
   </div>
 </div>
 
-<div id="executiveBriefOverlay" role="dialog" aria-modal="true" aria-labelledby="executiveBriefTitle" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9200;padding:1rem;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:16px;width:min(1180px,100%);height:min(92vh,850px);display:flex;flex-direction:column;overflow:hidden">
-    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #e5e7eb">
-      <strong id="executiveBriefTitle" style="font-size:14px">SET Loop · Accessible Executive Web Brief</strong>
-      <span id="executiveBriefStatus" style="font-size:11px;color:#667085;flex:1">Preview below · use New window for full keyboard navigation</span>
-      <a id="executiveBriefNewWindow" href="tools/store-ops/resources/competitor-license-brief.html" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#5b21b6;text-decoration:none">New window ↗</a>
-      <button id="executiveBriefClose" onclick="closeExecutiveBrief()" style="background:#fff;border:1px solid #d0d5dd;border-radius:6px;padding:5px 9px;cursor:pointer">Close</button>
-    </div>
-    <iframe id="executiveBriefFrame" title="SET Loop executive market and licensing brief preview" tabindex="-1" aria-hidden="true" style="border:0;width:100%;flex:1;background:#f2f4f7"></iframe>
-  </div>
-</div>
-
 <script>
 function showDemo(role) {
   document.querySelectorAll('.demo-content').forEach(d => d.classList.remove('active'));
@@ -1308,70 +1303,8 @@ function closeFieldGuide() {
   document.getElementById('fieldGuideFrame').src = '';
 }
 
-let executiveBriefTrigger = null;
-
-function setExecutiveBriefBackgroundInert(isInert) {
-  [...document.body.children].forEach(element => {
-    if (element.id === 'executiveBriefOverlay') return;
-    if (isInert) {
-      element.inert = true;
-      element.dataset.executiveBriefInert = 'true';
-    } else if (element.dataset.executiveBriefInert === 'true') {
-      element.inert = false;
-      delete element.dataset.executiveBriefInert;
-    }
-  });
-}
-
-function openExecutiveBrief() {
-  document.getElementById('executiveBriefFrame').src = 'tools/store-ops/resources/competitor-license-brief.html';
-  executiveBriefTrigger = document.activeElement;
-  setExecutiveBriefBackgroundInert(true);
-  document.getElementById('executiveBriefOverlay').style.display = 'flex';
-  document.getElementById('executiveBriefClose').focus();
-}
-
-function closeExecutiveBrief() {
-  if (document.getElementById('executiveBriefOverlay').style.display === 'none') return;
-  document.getElementById('executiveBriefOverlay').style.display = 'none';
-  document.getElementById('executiveBriefFrame').src = '';
-  setExecutiveBriefBackgroundInert(false);
-  if (executiveBriefTrigger && typeof executiveBriefTrigger.focus === 'function') executiveBriefTrigger.focus();
-  executiveBriefTrigger = null;
-}
-
-document.getElementById('executiveBriefOverlay').addEventListener('click', event => {
-  if (event.target.id === 'executiveBriefOverlay') closeExecutiveBrief();
-});
-document.getElementById('executiveBriefFrame').addEventListener('load', event => {
-  try {
-    event.target.contentDocument.addEventListener('keydown', iframeEvent => {
-      if (iframeEvent.key === 'Escape') closeExecutiveBrief();
-      if (iframeEvent.key === 'Tab') {
-        iframeEvent.preventDefault();
-        document.getElementById('executiveBriefNewWindow').focus();
-      }
-    });
-  } catch (error) {
-    document.getElementById('executiveBriefStatus').textContent = 'Preview loaded · use New window for full keyboard navigation';
-  }
-});
 document.addEventListener('keydown', event => {
-  const overlay = document.getElementById('executiveBriefOverlay');
-  if (event.key === 'Tab' && overlay.style.display === 'flex') {
-    const focusable = [...overlay.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')].filter(element => !element.disabled);
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
   if (event.key === 'Escape') {
-    closeExecutiveBrief();
     closeFieldGuide();
   }
 });

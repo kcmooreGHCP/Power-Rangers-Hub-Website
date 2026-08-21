@@ -22,7 +22,7 @@
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
     .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
-    @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+    @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:minmax(0,1fr)}.grid-2>*,.grid-3>*,.grid-4>*{min-width:0}.card{overflow-x:auto}}
     .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
     .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
     .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
@@ -175,6 +175,8 @@
         <a class="role-btn" href="publish.html">📤 Publish Queue</a>
         <a class="role-btn" href="asset-prep.html">🔧 Asset Prep</a>
         <a class="role-btn" href="marketing-operations.html">🏷️ Promo + Marketing</a>
+        <a class="role-btn" href="../set-819/start/FLOORSET_FACTORY.html" target="_blank" rel="noopener">📐 Visual + Brand Guide Factory · Pilot</a>
+        <a class="role-btn" href="../innovation/field-visual-deck-studio.html" target="_blank" rel="noopener">🎨 Field Visual Studio</a>
         <a class="role-btn" href="notifications.html">🔔 Notifications</a>
         <a class="role-btn" href="communications.html">💬 Communications</a>
       </div>
@@ -300,6 +302,6 @@ function shareView() {
 }
 </script>
 <script src="set-loop-feedback.js?v=20260821-html-invite"></script>
-<script src="set-loop-experience.js?v=20260821-marketing"></script>
+<script src="set-loop-experience.js?v=20260821-factory-nav"></script>
 </body>
 </html>

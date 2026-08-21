@@ -994,6 +994,39 @@
               </small>
             </label>
           </fieldset>
+
+          <fieldset class="translation-fieldset">
+            <legend>Fixture translation library</legend>
+            <div class="translation-intro">
+              <div>
+                <strong>Preserve the old proportion logic. Connect it to smarter records.</strong>
+                <small data-translation-library-status aria-live="polite"></small>
+              </div>
+              <div class="translation-actions">
+                <button type="button" data-translation-template>Download CSV template</button>
+                <label>
+                  <span>Import reviewed CSV</span>
+                  <input type="file" accept=".csv,text/csv" data-translation-library-file />
+                </label>
+              </div>
+            </div>
+            <div class="translation-table-wrap">
+              <table class="translation-table">
+                <thead>
+                  <tr><th>Known fixture</th><th>SET type</th><th>Legacy X</th><th>Legacy Y</th><th>Evidence state</th></tr>
+                </thead>
+                <tbody data-translation-library-rules></tbody>
+              </table>
+            </div>
+            <div class="translation-findings" aria-label="Historical workbook findings">
+              <p><strong>238 usable proportions</strong><span>from 474 scanned workbook rows</span></p>
+              <p><strong>X 50 dominates</strong><span>with X 100, X 33, Y 80, and Y near 62 recurring</span></p>
+              <p><strong>236 rows blocked</strong><span>mostly macOS <code>._</code> duplicates; one formula row needs correction</span></p>
+            </div>
+            <p class="translation-boundary">
+              Legacy X/Y values reproduce the historical visual-sizing method; they are not inches or approved physical dimensions. Connector geometry supplies the store-map size. Labor remains a planning scenario until an accountable owner approves time-study rules.
+            </p>
+          </fieldset>
         </form>
       </section>
 
@@ -1053,6 +1086,13 @@
             </div>
 
             <div class="visual-map-toolbar" aria-label="Visual fixture tools">
+              <label class="canvas-start-mode">
+                <span>Starting canvas</span>
+                <select id="canvas-start-mode" data-map-start-mode>
+                  <option value="ARCHITECTURE_SHELL">Architecture shell</option>
+                  <option value="BLANK_WORKING_CANVAS">Blank working canvas</option>
+                </select>
+              </label>
               <button
                 type="button"
                 data-map-edit-toggle
@@ -1208,6 +1248,11 @@
                       placeholder="Example: Demi"
                     />
                   </label>
+                </div>
+
+                <div class="translation-match" data-translation-summary>
+                  <strong>No legacy proportion match yet.</strong>
+                  <span>The connector registry will still supply zone and geometry.</span>
                 </div>
 
                 <div class="assignment-registry">
@@ -1688,6 +1733,7 @@
     </footer>
 
     <script src="./data/floorset-factory-registry.js"></script>
+    <script src="./assets/set-fixture-translation-library.js"></script>
     <script src="./assets/floorset-factory.js"></script>
     <script src="./assets/floorset-factory-asset-map.js"></script>
     <script src="./assets/floorset-factory-visual-qa.js"></script>

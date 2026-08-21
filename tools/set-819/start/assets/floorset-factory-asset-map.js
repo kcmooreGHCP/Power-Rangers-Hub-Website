@@ -17273,6 +17273,14 @@
       transitionRequirement: "NEW",
       lineListReference: "",
       marketingReference: "",
+      translationRuleId: "",
+      translationLabel: "",
+      translationSource: "",
+      translationConfidence: "",
+      legacyProportionX: 0,
+      legacyProportionY: 0,
+      dimensionAuthority: "CONNECTOR_GEOMETRY_OR_OWNER_REVIEW_REQUIRED",
+      laborAuthority: "PLANNING_SCENARIO_NOT_PAYROLL_APPROVAL",
       notes: ""
     };
     const mapCanvas = {
@@ -17655,6 +17663,9 @@
       if (/50[_ -]?DETAILS?|\bDETAILS?\b/.test(source)) return "DETAIL";
       return "UNCLASSIFIED";
     }
+    function translationSuggestion(asset) {
+      return window.SET_FIXTURE_TRANSLATION_LIBRARY?.suggest?.(asset) || null;
+    }
     function inferredRoom(asset) {
       const source = `${asset.sourceFolder}/${asset.displayName}`.toUpperCase();
       const rooms = [
@@ -17703,6 +17714,7 @@
       if (!asset) return null;
       if (ui.drafts.has(asset.assetKey)) return ui.drafts.get(asset.assetKey);
       const saved = activeAssignment();
+      const translation = translationSuggestion(asset);
       const draft = {
         ...fieldDefaults,
         ...saved || {},
@@ -17712,7 +17724,13 @@
         sourceFolder: asset.sourceFolder,
         renditions: asset.renditions.map((rendition) => ({ ...rendition })),
         previewRelativePath: asset.previewRelativePath,
-        operatorAssetType: saved?.operatorAssetType || inferredCategory(asset),
+        operatorAssetType: saved?.operatorAssetType || translation?.assetType || inferredCategory(asset),
+        translationRuleId: saved?.translationRuleId || translation?.ruleId || "",
+        translationLabel: saved?.translationLabel || translation?.label || "",
+        translationSource: saved?.translationSource || translation?.source || "",
+        translationConfidence: saved?.translationConfidence || translation?.confidence || "",
+        legacyProportionX: saved?.legacyProportionX || translation?.legacyX || 0,
+        legacyProportionY: saved?.legacyProportionY || translation?.legacyY || 0,
         targetGroupKey: saved?.targetGroupKey || "",
         targetBackboneId: saved?.targetBackboneId || "",
         targetVisualFixtureId: saved?.targetVisualFixtureId || ""
@@ -18915,7 +18933,12 @@
       const selectedRows = ui.snapshot.selectedFixtures.filter(
         (row) => includedRooms.has(row.roomCode)
       );
-      const visualFixtures = buildVisualFixtures(selectedRows, extent);
+      const canvasStartMode = $("[data-map-start-mode]")?.value || "ARCHITECTURE_SHELL";
+      const sourceCanvasRows = canvasStartMode === "BLANK_WORKING_CANVAS" ? [] : selectedRows;
+      const visualFixtures = buildVisualFixtures(
+        sourceCanvasRows,
+        extent
+      );
       const selectedFixture = visualFixtureById(
         ui.selectedVisualFixtureId || draft?.targetVisualFixtureId || fixtureForConnector(ui.selectedConnectorId, visualFixtures)?.visualFixtureId,
         visualFixtures
@@ -18980,7 +19003,7 @@
       const selectedSourceIds = new Set(
         visualFixtures.flatMap((fixture) => fixture.sourceBackboneIds)
       );
-      const contextMarkup = (mapSource ? [] : contextRows.filter((row) => !selectedSourceIds.has(row.backboneId))).map((row) => {
+      const contextMarkup = (mapSource || canvasStartMode === "BLANK_WORKING_CANVAS" ? [] : contextRows.filter((row) => !selectedSourceIds.has(row.backboneId))).map((row) => {
         const geometry = connectorGeometry(row, extent, width, height, pad);
         return `
           <rect
@@ -19008,7 +19031,7 @@
       >
         ${backdropMarkup}
         ${contextMarkup}
-        ${roomLabels(selectedRows, extent, width, height, pad)}
+        ${roomLabels(sourceCanvasRows, extent, width, height, pad)}
         ${visualMarkup}
       </svg>`;
       attachPreviewFallbacks(container);
@@ -19076,6 +19099,7 @@
       const message = $("[data-assignment-message]");
       const save = $("[data-assignment-save]");
       const clear = $("[data-assignment-clear]");
+      const translationSummary = $("[data-translation-summary]");
       if (!asset) {
         preview.innerHTML = `
         <div class="assignment-file-tile">
@@ -19088,6 +19112,10 @@
         message.textContent = "Select an image and connector.";
         save.disabled = true;
         clear.disabled = true;
+        if (translationSummary) {
+          translationSummary.classList.remove("is-matched");
+          translationSummary.innerHTML = "<strong>No legacy proportion match yet.</strong><span>The connector registry will still supply zone and geometry.</span>";
+        }
         return;
       }
       const draft = currentDraft();
@@ -19102,6 +19130,17 @@
         asset.renditions.map((item) => item.name).join(" + ")
       ].filter(Boolean).join(" / ");
       setFieldValues(draft);
+      if (translationSummary) {
+        const matched = Boolean(draft.translationRuleId);
+        const proportion = [
+          draft.legacyProportionX ? `X ${draft.legacyProportionX}` : "",
+          draft.legacyProportionY ? `Y ${draft.legacyProportionY}` : ""
+        ].filter(Boolean).join(" / ");
+        translationSummary.classList.toggle("is-matched", matched);
+        translationSummary.innerHTML = matched
+          ? `<strong>${escapeHtml(draft.translationLabel)} / legacy ${escapeHtml(proportion)}</strong><span>${escapeHtml(draft.translationSource)}. Historical proportion only; the selected connector remains the zone, geometry, and planning-labor source.</span>`
+          : "<strong>No legacy proportion match.</strong><span>Assign the image manually or extend the reviewed translation CSV. The Factory will not guess a fixture identity.</span>";
+      }
       save.disabled = !connector && !visualFixture;
       clear.disabled = !saved && !draft.targetBackboneId && !draft.targetVisualFixtureId;
       message.className = "assignment-message";
@@ -20369,6 +20408,12 @@
         renderMap();
         return;
       }
+      if (event.target.matches("[data-map-start-mode]")) {
+        ui.selectedConnectorId = "";
+        ui.selectedVisualFixtureId = "";
+        renderAll();
+        return;
+      }
       if (event.target.matches("[data-map-add-kind]")) {
         const kind = event.target.value;
         if (kind) addVisualFixture(kind);
@@ -20449,6 +20494,10 @@
     window.addEventListener("set-factory:scope-changed", () => {
       ui.snapshot = api.getSnapshot();
       if (!ui.manualMapFile) refreshMapSource();
+      renderAll();
+    });
+    window.addEventListener("set-factory:translation-library-changed", () => {
+      ui.drafts.clear();
       renderAll();
     });
     window.addEventListener("set-factory:assignment-changed", () => {

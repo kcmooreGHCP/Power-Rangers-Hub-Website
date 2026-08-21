@@ -46,6 +46,7 @@
   };
   var current = roleData[roleKey] || roleData.store;
   var guideUrl = "resources/STORE_0222_2026_08_19_BRAND_GUIDE_INTERACTIVE.pdf";
+  var pilotLedgerKey = "setloop_pilot_ledger_v1";
   var approvedAnswers = [
     {
       keywords: ["brand guide", "store 0222", "cross creek", "guide"],
@@ -55,7 +56,7 @@
     },
     {
       keywords: ["set irl", "time it", "tell us", "feedback"],
-      answer: "SET IRL is the field return path inside the guide. It lets the team time the work or tell Home Office what happened in real life. Open the SET IRL directory from page 2, or use the SET IRL action on a presentation page.",
+      answer: "SET IRL is the field return path inside the guide. Use the SET IRL action to record what worked, what created friction, time spent, and store ideas. The pilot keeps that return in the SET Loop activity ledger; approved production routing will use the governed field-learning list.",
       source: "Store 0222 Brand Guide · pages 2, 5, 13",
       partner: "Store Operations + Visual Merchandising"
     },
@@ -64,6 +65,14 @@
       answer: current.scope + " readiness is shown in the live KPI snapshot above. The current prototype snapshot is sourced only from approved SET Loop launch, task, and readiness records; use Force refresh to request the newest approved snapshot.",
       source: current.label + " · SET Loop KPI snapshot",
       partner: "Store Operations"
+    },
+    {
+      keywords: ["floorset factory", "build a floorset", "field visual", "brand guide team"],
+      answer: "The Floorset Factory is the working SET pilot for turning approved store, fixture, connector, asset, and translation records into a store-specific planning view. Store teams can open the example; Visual, Field Visual, and Brand Guide partners use the same governed workspace with role-appropriate inputs.",
+      source: "SET Resource Center · Floorset Factory working pilot",
+      partner: "Visual Merchandising + Field Visual + Brand Guide + Store Operations",
+      url: "../set-819/start/FLOORSET_FACTORY.html",
+      linkLabel: "Open the Floorset Factory working pilot"
     },
     {
       keywords: ["task", "priority", "due", "checklist"],
@@ -157,6 +166,7 @@
       ".slx-overlay.show{display:flex}",
       ".slx-modal{background:#fff;border-radius:14px;width:min(1100px,100%);height:min(88vh,820px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.35)}",
       ".slx-modal.agent{width:min(720px,100%);height:auto;max-height:88vh}",
+      ".slx-modal.irl{width:min(680px,100%);height:auto;max-height:90vh}",
       ".slx-modal-head{padding:14px 18px;border-bottom:1px solid #eaecf0;display:flex;align-items:center;gap:12px}",
       ".slx-modal-head strong{font-size:15px}.slx-modal-head span{font-size:11px;color:#667085;flex:1}",
       ".slx-close{background:#fff;border:1px solid #d0d5dd;border-radius:6px;padding:6px 10px;cursor:pointer}",
@@ -164,6 +174,19 @@
       ".slx-guide-actions a,.slx-guide-actions button{background:#fff;border:1px solid #ed2d8b;color:#9d174d;border-radius:7px;padding:7px 11px;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer}",
       ".slx-guide-actions button.active{background:#ed2d8b;color:#fff}.slx-guide-status{width:100%;font-size:11px;color:#667085;font-weight:700}",
       ".slx-guide-frame{border:0;width:100%;flex:1;background:#f2f4f7}",
+      ".slx-irl-body{padding:22px;overflow:auto}",
+      ".slx-irl-intro{margin:0 0 16px;color:#344054;font-size:13px;line-height:1.55}",
+      ".slx-irl-promise{margin-bottom:16px;padding:12px 14px;border:1px solid #f4b6d4;border-radius:9px;background:#fff7fb;color:#7a1f50;font-size:12px;line-height:1.5}",
+      ".slx-irl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}",
+      ".slx-irl-grid label{display:grid;gap:5px;color:#344054;font-size:11px;font-weight:800}",
+      ".slx-irl-grid label.full{grid-column:1/-1}",
+      ".slx-irl-grid input,.slx-irl-grid select,.slx-irl-grid textarea{width:100%;padding:10px;border:1px solid #d0d5dd;border-radius:7px;background:#fff;color:#11131a;font:13px/1.4 inherit}",
+      ".slx-irl-grid textarea{min-height:105px;resize:vertical}",
+      ".slx-irl-actions{margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}",
+      ".slx-irl-submit{border:0;border-radius:7px;padding:10px 15px;background:#ed2d8b;color:#fff;font-weight:800;cursor:pointer}",
+      ".slx-irl-note{color:#667085;font-size:10px;line-height:1.45}",
+      ".slx-irl-success{display:none;margin-top:14px;padding:13px;border-radius:8px;background:#ecfdf3;color:#067647;font-size:12px;line-height:1.5}",
+      ".slx-irl-success.show{display:block}.slx-irl-success a{color:#065f46;font-weight:800}",
       ".slx-agent-body{padding:18px;overflow:auto}",
       ".slx-guard{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;font-size:11px;color:#166534;line-height:1.45;margin-bottom:12px}",
       ".slx-persona{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}",
@@ -173,9 +196,10 @@
       ".slx-submit{background:#ed2d8b;color:#fff;border:0;border-radius:7px;padding:9px 14px;font-weight:700;cursor:pointer;margin-top:8px}",
       ".slx-answer{display:none;margin-top:14px;border:1px solid #eaecf0;border-radius:8px;padding:14px;font-size:13px;line-height:1.55}",
       ".slx-answer.show{display:block}.slx-source{font-size:10px;color:#667085;margin-top:9px;padding-top:8px;border-top:1px solid #eaecf0}",
+      ".slx-answer-link{display:none;width:max-content;max-width:100%;margin-top:10px;padding:8px 11px;border-radius:7px;background:#11131a;color:#fff;text-decoration:none;font-size:11px;font-weight:800}.slx-answer-link.show{display:inline-block}.slx-answer-link:hover{background:#ed2d8b;color:#fff;text-decoration:none}",
       ".slx-notfound{color:#b42318}.slx-route{display:none;margin-top:10px;background:#11131a;color:#fff;border:0;border-radius:7px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}",
       ".slx-route.show{display:inline-block}.slx-ticket{font-size:11px;color:#067647;font-weight:700;margin-top:8px}",
-      "@media(max-width:700px){.slx-location{order:3;width:100%}.slx-kpi-inner{grid-template-columns:1fr 1fr}.slx-persona{grid-template-columns:1fr}}"
+      "@media(max-width:700px){.slx-location{order:3;width:100%}.slx-kpi-inner{grid-template-columns:1fr 1fr}.slx-persona,.slx-irl-grid{grid-template-columns:1fr}.slx-irl-grid label.full{grid-column:auto}.slx-overlay{padding:10px}}"
     ].join("");
     document.head.appendChild(style);
   }
@@ -212,7 +236,14 @@
     marketing.href = "marketing-operations.html";
     marketing.textContent = "🏷️ Marketing Check";
     inner.appendChild(marketing);
-    inner.appendChild(makeButton("✨ SET IRL", function () { openGuide(2); }));
+    var factory = document.createElement("a");
+    factory.className = "slx-action";
+    factory.href = "../set-819/start/FLOORSET_FACTORY.html";
+    factory.target = "_blank";
+    factory.rel = "noopener";
+    factory.textContent = "📐 Floorset Factory";
+    inner.appendChild(factory);
+    inner.appendChild(makeButton("✨ SET IRL", openIrl));
     inner.appendChild(makeButton("🎙️ Ask SET Agent", openAgent));
     inner.appendChild(makeButton("↻ Force refresh", refreshSnapshot));
     bar.appendChild(inner);
@@ -244,7 +275,7 @@
     overlay.innerHTML = [
       "<div class=\"slx-modal\" role=\"dialog\" aria-modal=\"true\" aria-label=\"Store 0222 Brand Guide\">",
       "<div class=\"slx-modal-head\"><strong>Store 0222 · Interactive Brand Guide</strong><span>20 rooms/zones · 105 presentations · SET IRL field return path</span><button class=\"slx-close\" type=\"button\">Close</button></div>",
-      "<div class=\"slx-guide-actions\"><button type=\"button\" data-page=\"1\" data-label=\"Guide cover\">Guide cover</button><button type=\"button\" data-page=\"2\" data-label=\"Table of contents\">Table of contents</button><button type=\"button\" data-page=\"3\" data-label=\"Full-store map\">Full-store map</button><button type=\"button\" data-page=\"2\" data-label=\"SET IRL directory\">✨ Highlight SET IRL directory</button><a href=\"" + guideUrl + "\" target=\"_blank\" rel=\"noopener\">Open guide in new window ↗</a><div class=\"slx-guide-status\" aria-live=\"polite\">Showing Guide cover · PDF page 1</div></div>",
+      "<div class=\"slx-guide-actions\"><button type=\"button\" data-page=\"1\" data-label=\"Guide cover\">Guide cover</button><button type=\"button\" data-page=\"2\" data-label=\"Table of contents\">Table of contents</button><button type=\"button\" data-page=\"3\" data-label=\"Full-store map\">Full-store map</button><button type=\"button\" data-page=\"2\" data-label=\"SET IRL directory\">Highlight SET IRL directory</button><button type=\"button\" data-open-irl>Send field insight</button><a href=\"" + guideUrl + "\" target=\"_blank\" rel=\"noopener\">Open guide in new window ↗</a><div class=\"slx-guide-status\" aria-live=\"polite\">Showing Guide cover · PDF page 1</div></div>",
       "<iframe class=\"slx-guide-frame\" title=\"Interactive Store 0222 Brand Guide\" src=\"" + guideUrl + "#page=1\"></iframe>",
       "</div>"
     ].join("");
@@ -254,6 +285,40 @@
         loadGuidePage(Number(button.getAttribute("data-page")), button.getAttribute("data-label"), button);
       });
     });
+    overlay.querySelector("[data-open-irl]").addEventListener("click", function () {
+      overlay.classList.remove("show");
+      openIrl();
+    });
+    overlay.addEventListener("click", function (event) {
+      if (event.target === overlay) overlay.classList.remove("show");
+    });
+    document.body.appendChild(overlay);
+  }
+
+  function buildIrlModal() {
+    var overlay = document.createElement("div");
+    overlay.className = "slx-overlay";
+    overlay.id = "slxIrl";
+    overlay.innerHTML = [
+      "<div class=\"slx-modal irl\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"slxIrlTitle\">",
+      "<div class=\"slx-modal-head\"><strong id=\"slxIrlTitle\">SET IRL · Tell us what happened</strong><span>" + current.label + "</span><button class=\"slx-close\" type=\"button\">Close</button></div>",
+      "<div class=\"slx-irl-body\">",
+      "<p class=\"slx-irl-intro\">The guide gives the direction. SET IRL gives the store a voice back into the Loop—what worked, what got in the way, and what would make the next set better.</p>",
+      "<div class=\"slx-irl-promise\"><strong>SET the standard. Own the outcome. Put Her First.</strong><br>Field insight helps Home Office remove friction and return more time to teams and customers.</div>",
+      "<form id=\"slxIrlForm\">",
+      "<div class=\"slx-irl-grid\">",
+      "<label>What happened?<select id=\"slxIrlCategory\" required><option value=\"\">Choose one</option><option>Worked as planned</option><option>Direction was unclear</option><option>Time or staffing barrier</option><option>Fixture or asset mismatch</option><option>Customer or selling impact</option><option>Better idea from the field</option></select></label>",
+      "<label>Room, zone, or presentation<input id=\"slxIrlLocation\" placeholder=\"Optional\"></label>",
+      "<label>Minutes this took<input id=\"slxIrlMinutes\" type=\"number\" min=\"0\" max=\"1440\" step=\"1\" inputmode=\"numeric\" placeholder=\"Optional\"></label>",
+      "<label>How should this be shared?<select id=\"slxIrlIdentity\"><option value=\"anonymous\">Anonymous</option><option value=\"role\">Share my role / team only</option><option value=\"profile\">Share my saved SET Loop profile</option></select></label>",
+      "<label class=\"full\">What should we know?<textarea id=\"slxIrlMessage\" maxlength=\"1500\" required placeholder=\"What worked, what created friction, or what would make this easier next time?\"></textarea></label>",
+      "</div>",
+      "<div class=\"slx-irl-actions\"><button class=\"slx-irl-submit\" type=\"submit\">Return this insight to the Loop</button><span class=\"slx-irl-note\">Pilot entries stay in this browser. Approved production routing requires the SharePoint + Power Automate connection.</span></div>",
+      "<div class=\"slx-irl-success\" id=\"slxIrlSuccess\" aria-live=\"polite\"></div>",
+      "</form></div></div>"
+    ].join("");
+    overlay.querySelector(".slx-close").addEventListener("click", function () { overlay.classList.remove("show"); });
+    overlay.querySelector("#slxIrlForm").addEventListener("submit", saveIrlInsight);
     overlay.addEventListener("click", function (event) {
       if (event.target === overlay) overlay.classList.remove("show");
     });
@@ -272,7 +337,7 @@
       "<div class=\"slx-persona\"><label>Team personality<select id=\"slxPersona\"><option value=\"store\">Store Operations · Clear + practical</option><option value=\"visual\">Visual · Spatial + detail focused</option><option value=\"pink\">PINK · Energetic + concise</option><option value=\"leadership\">Leadership · Executive summary</option></select></label><label>Voice delivery<select id=\"slxVoice\"><option value=\"text\">Text only</option><option value=\"speak\">Speak with selected personality</option></select></label><div class=\"slx-persona-note\" id=\"slxPersonaNote\"></div></div>",
       "<textarea class=\"slx-q\" id=\"slxQuestion\" placeholder=\"Ask about readiness, a priority task, the brand guide, SET IRL, a fixture, or an approved connected manifest...\"></textarea>",
       "<button class=\"slx-submit\" type=\"button\">Ask from approved sources</button>",
-      "<div class=\"slx-answer\" id=\"slxAnswer\"><div id=\"slxAnswerText\"></div><div class=\"slx-source\" id=\"slxSource\"></div><button class=\"slx-route\" id=\"slxRoute\" type=\"button\">Submit to Home Office / Store Ops</button><div class=\"slx-ticket\" id=\"slxTicket\"></div></div>",
+      "<div class=\"slx-answer\" id=\"slxAnswer\"><div id=\"slxAnswerText\"></div><div class=\"slx-source\" id=\"slxSource\"></div><a class=\"slx-answer-link\" id=\"slxAnswerLink\" target=\"_blank\" rel=\"noopener\"></a><button class=\"slx-route\" id=\"slxRoute\" type=\"button\">Submit to Home Office / Store Ops</button><div class=\"slx-ticket\" id=\"slxTicket\"></div></div>",
       "</div></div>"
     ].join("");
     overlay.querySelector(".slx-close").addEventListener("click", function () { overlay.classList.remove("show"); });
@@ -308,6 +373,68 @@
     var activeButton = overlay.querySelector("[data-label=\"" + label + "\"]");
     loadGuidePage(targetPage, label, activeButton);
     overlay.classList.add("show");
+  }
+
+  function openIrl() {
+    var overlay = document.getElementById("slxIrl");
+    overlay.classList.add("show");
+    setTimeout(function () { document.getElementById("slxIrlCategory").focus(); }, 50);
+  }
+
+  function readPilotLedger() {
+    try {
+      return JSON.parse(localStorage.getItem(pilotLedgerKey) || "[]");
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function savedPilotProfile() {
+    if (!window.SETLoopFeedback || typeof window.SETLoopFeedback.getProfile !== "function") return {};
+    return window.SETLoopFeedback.getProfile() || {};
+  }
+
+  function saveIrlInsight(event) {
+    event.preventDefault();
+    var category = document.getElementById("slxIrlCategory").value;
+    var message = document.getElementById("slxIrlMessage").value.trim();
+    var identity = document.getElementById("slxIrlIdentity").value;
+    var success = document.getElementById("slxIrlSuccess");
+    if (!category || !message) {
+      success.classList.add("show");
+      success.textContent = "Choose what happened and add the field insight before returning it to the Loop.";
+      return;
+    }
+    var profile = savedPilotProfile();
+    var sharedProfile = identity === "profile" ? profile : identity === "role" ? {
+      department: profile.department || current.scope,
+      level: profile.level || ""
+    } : {};
+    var minutesValue = document.getElementById("slxIrlMinutes").value;
+    var entry = {
+      type: "set-irl",
+      timestamp: new Date().toISOString(),
+      page: current.label,
+      scope: current.scope,
+      category: category,
+      location: document.getElementById("slxIrlLocation").value.trim(),
+      minutes: minutesValue === "" ? "" : Number(minutesValue),
+      message: message,
+      profile: sharedProfile,
+      identityChoice: identity,
+      delivery: "local pilot queue"
+    };
+    try {
+      var ledger = readPilotLedger();
+      ledger.push(entry);
+      localStorage.setItem(pilotLedgerKey, JSON.stringify(ledger));
+      success.classList.add("show");
+      success.innerHTML = "<strong>Insight returned to the SET Loop pilot ledger.</strong><br>It is now visible in this browser's <a href=\"feedback-results.html\">Pilot Results</a>. Production deployment will route the same record to the approved field-learning list and accountable owners.";
+      event.target.reset();
+    } catch (error) {
+      success.classList.add("show");
+      success.textContent = "This browser could not save the insight. Copy your note before closing and try again.";
+    }
   }
 
   function openAgent() {
@@ -356,9 +483,13 @@
     var answerBox = document.getElementById("slxAnswer");
     var answerText = document.getElementById("slxAnswerText");
     var source = document.getElementById("slxSource");
+    var answerLink = document.getElementById("slxAnswerLink");
     var route = document.getElementById("slxRoute");
     var ticket = document.getElementById("slxTicket");
     ticket.textContent = "";
+    answerLink.classList.remove("show");
+    answerLink.removeAttribute("href");
+    answerLink.textContent = "";
 
     if (!question) {
       answerText.textContent = "Enter a question so I can search the approved SET Loop sources.";
@@ -368,9 +499,20 @@
       return;
     }
 
-    var match = approvedAnswers.find(function (item) {
-      return item.keywords.some(function (keyword) { return lower.indexOf(keyword) !== -1; });
-    });
+    var match = approvedAnswers.map(function (item, index) {
+      return {
+        item: item,
+        index: index,
+        score: item.keywords.reduce(function (total, keyword) {
+          return total + (lower.indexOf(keyword) !== -1 ? keyword.length : 0);
+        }, 0)
+      };
+    }).filter(function (candidate) {
+      return candidate.score > 0;
+    }).sort(function (left, right) {
+      return right.score - left.score || left.index - right.index;
+    })[0];
+    match = match && match.item;
 
     if (match) {
       var profile = selectedPersona();
@@ -378,6 +520,11 @@
       answerText.className = "";
       answerText.textContent = presentedAnswer;
       source.textContent = profile.label + " delivery · Grounded in: " + match.source + " · Accountable partner: " + match.partner;
+      if (match.url) {
+        answerLink.href = match.url;
+        answerLink.textContent = match.linkLabel || "Open approved SET Loop source";
+        answerLink.classList.add("show");
+      }
       route.classList.remove("show");
       if (document.getElementById("slxVoice").value === "speak" && !speakAnswer(presentedAnswer, profile)) {
         ticket.textContent = "Voice playback is unavailable in this browser. The approved answer remains visible above.";
@@ -407,5 +554,9 @@
   addStyles();
   buildShell();
   buildGuideModal();
+  buildIrlModal();
   buildAgentModal();
+  if (location.hash === "#set-irl") {
+    setTimeout(openIrl, 0);
+  }
 }());

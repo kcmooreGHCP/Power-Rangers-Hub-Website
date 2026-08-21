@@ -48431,6 +48431,14 @@
       transitionRequirement: allowedText(assignment.transitionRequirement, 50) || "UNASSIGNED",
       marketingReference: allowedText(assignment.marketingReference, 1e3),
       lineListReference: allowedText(assignment.lineListReference, 1e3),
+      translationRuleId: allowedText(assignment.translationRuleId, 80),
+      translationLabel: allowedText(assignment.translationLabel, 120),
+      translationSource: allowedText(assignment.translationSource, 255),
+      translationConfidence: allowedText(assignment.translationConfidence, 30),
+      legacyProportionX: clampNumber(assignment.legacyProportionX, 0, 1e3, 0),
+      legacyProportionY: clampNumber(assignment.legacyProportionY, 0, 1e3, 0),
+      dimensionAuthority: allowedText(assignment.dimensionAuthority, 120) || "CONNECTOR_GEOMETRY_OR_OWNER_REVIEW_REQUIRED",
+      laborAuthority: allowedText(assignment.laborAuthority, 120) || "PLANNING_SCENARIO_NOT_PAYROLL_APPROVAL",
       notes: allowedText(assignment.notes, 2e3),
       assignmentStatus: allowedText(assignment.assignmentStatus, 80) || "ASSIGNED_PENDING_REVIEW"
     };
@@ -48475,6 +48483,7 @@
       templateId: template?.templateId || "TEMPLATE_REQUIRED",
       scopeMode: $("#scope-mode")?.value || "SCOPE_REQUIRED",
       laborMode: $("#labor-mode")?.value || "LABOR_MODE_REQUIRED",
+      canvasStartMode: $("#canvas-start-mode")?.value || "ARCHITECTURE_SHELL",
       carryoverEnabled: Boolean($("#carryover-enabled")?.checked),
       previousPackage: state.previousPackageEvidence ? {
         projectId: state.previousPackageEvidence.projectId,
@@ -49915,6 +49924,14 @@
         transitionRequirement: assignment.transitionRequirement,
         marketingReference: assignment.marketingReference,
         lineListReference: assignment.lineListReference,
+        translationRuleId: assignment.translationRuleId,
+        translationLabel: assignment.translationLabel,
+        translationSource: assignment.translationSource,
+        translationConfidence: assignment.translationConfidence,
+        legacyProportionX: assignment.legacyProportionX || "",
+        legacyProportionY: assignment.legacyProportionY || "",
+        dimensionAuthority: assignment.dimensionAuthority,
+        laborAuthority: assignment.laborAuthority,
         notes: assignment.notes,
         assignmentEvidenceState: "OPERATOR_CONFIRMED_IN_BROWSER_OWNER_APPROVAL_PENDING",
         reviewStatus
@@ -50292,6 +50309,7 @@
         previousReceiptSha256: state.previousPackageEvidence?.receiptSha256 || "",
         carryoverExternalTrustAnchor: "NOT_CONFIGURED_REFERENCE_ONLY",
         laborMode: $("#labor-mode").value,
+        canvasStartMode: $("#canvas-start-mode")?.value || "ARCHITECTURE_SHELL",
         authorityState,
         outputRootRecommendation: "03_OUTPUT/FLOORSET_FACTORY"
       },
@@ -50307,6 +50325,9 @@
           presentations.flatMap((item) => item.sourceBackboneIds)
         ).size,
         limitations: registry.source.truthBoundary
+      },
+      fixtureTranslationLibrary: window.SET_FIXTURE_TRANSLATION_LIBRARY?.getState?.() || {
+        authorityState: "NOT_CONNECTED"
       },
       template,
       rooms: selectedRooms,
