@@ -1030,6 +1030,54 @@
   gap: 12px;
 }
 
+.canvas-start-mode {
+  display: inline-grid;
+  gap: 3px;
+}
+
+.canvas-start-mode span {
+  color: #665f69;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.canvas-start-mode select {
+  min-height: 34px;
+  border: 1px solid var(--ff-line);
+  border-radius: 9px;
+  color: var(--ff-ink);
+  background: #fff;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.translation-match {
+  grid-column: 1 / -1;
+  padding: 12px 14px;
+  border: 1px solid #d8d0dc;
+  border-radius: 14px;
+  display: grid;
+  gap: 4px;
+  background: #f7f3f7;
+}
+
+.translation-match strong {
+  font-size: 11px;
+}
+
+.translation-match span {
+  color: var(--ff-gray);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.translation-match.is-matched {
+  border-color: #f1a8cd;
+  background: #fff0f7;
+}
+
 .assignment-registry {
   grid-column: 1 / -1;
   padding: 12px;
