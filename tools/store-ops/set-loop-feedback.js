@@ -126,12 +126,17 @@
     return url.toString();
   }
 
+  function mailtoUrl(to, subject, body, bcc) {
+    const query = [
+      'subject=' + encodeURIComponent(subject || ''),
+      'body=' + encodeURIComponent(String(body || '').replace(/\r?\n/g, '\r\n'))
+    ];
+    if (bcc) query.push('bcc=' + encodeURIComponent(bcc));
+    return 'mailto:' + (to || '') + '?' + query.join('&');
+  }
+
   function mailto(to, subject, body, bcc) {
-    const query = new URLSearchParams();
-    query.set('subject', subject);
-    query.set('body', body);
-    if (bcc) query.set('bcc', bcc);
-    location.href = 'mailto:' + (to || '') + '?' + query.toString();
+    location.href = mailtoUrl(to, subject, body, bcc);
   }
 
   function copy(text) {
@@ -395,22 +400,36 @@
   function emailShare() {
     const share = createShare();
     const senderName = share.values.sender.name || 'A colleague';
-    const note = share.values.note ? share.values.note + '\n\n' : '';
+    const senderContext = [share.values.sender.department, share.values.sender.level].filter(Boolean).join(' · ');
+    const note = share.values.note
+      ? ['A PERSONAL NOTE FROM ' + senderName.toUpperCase(), share.values.note, '']
+      : [];
     const body = [
       'Hi' + (share.values.recipient.name ? ' ' + share.values.recipient.name : '') + ',',
       '',
-      note + senderName + ' invited you to explore the SET + SET Loop pilot.',
+      senderName + ' invited you to explore the SET + SET Loop pilot.',
       '',
-      'Open the interactive experience:',
+      'SET + SET LOOP',
+      'One platform. Every role. Every store. Connected.',
+      '',
+      ...note,
+      'WHAT YOU CAN EXPLORE',
+      '• See the experience through Store, District, Region, and Home Office views',
+      '• React with Like, Learn More, or Not Yet',
+      '• Share questions, interests, and ideas at your own pace',
+      '• Join the Loop if you want to help shape the pilot',
+      '',
+      'OPEN THE INTERACTIVE EXPERIENCE',
       share.url,
       '',
-      'You can react to individual ideas, ask to learn more, and join the Loop. Sharing personal details is optional.',
+      'Your input is welcome, and sharing personal details is always optional.',
       '',
-      'Pilot share ID: ' + share.entry.shareId
+      'Shared by: ' + senderName + (senderContext ? ' · ' + senderContext : ''),
+      'Pilot reference: ' + share.entry.shareId
     ].join('\n');
     updateRecord(share.entry.id, { delivery: 'email-draft' });
     closeModals();
-    mailto(share.values.recipient.email, 'Explore the SET + SET Loop pilot', body, share.values.ownerEmail);
+    mailto(share.values.recipient.email, 'Invitation: Explore SET + SET Loop', body, share.values.ownerEmail);
     showToast(share.values.ownerEmail ? 'Outlook draft opened with the pilot owner copied.' : 'Outlook draft opened. Add recipients and review before sending.');
   }
 
