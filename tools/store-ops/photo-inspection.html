@@ -170,8 +170,25 @@
 </div>
 </div>
 <script>
-function fbReact(btn,label){const all=btn.parentNode.querySelectorAll('button');all.forEach(b=>b.style.background='#fff',b=>b.style.color='#11131a');btn.style.background='#ed2d8b';btn.style.color='#fff';btn.style.borderColor='#ed2d8b';const k='setloop_feedback_'+location.pathname.split('/').pop();const d=JSON.parse(localStorage.getItem(k)||'{}')+'';const data=JSON.parse(localStorage.getItem(k)||'{}')+'';try{const obj=JSON.parse(localStorage.getItem(k)||'{}')||{};obj[label]=(obj[label]||0)+1;localStorage.setItem(k,JSON.stringify(obj));}catch(e){}}
-function shareView(){navigator.clipboard.writeText(window.location.href).then(()=>{alert('Link copied! Share this SET Loop view with your team.');}).catch(()=>{prompt('Copy this link:',window.location.href);});}
+function fbReact(btn, label) {
+  btn.parentNode.querySelectorAll('button').forEach(b => {
+    b.style.background = '#fff'; b.style.color = '#11131a'; b.style.borderColor = '#ddd';
+  });
+  btn.style.background = '#ed2d8b'; btn.style.color = '#fff'; btn.style.borderColor = '#ed2d8b';
+  try {
+    const k = 'setloop_feedback_' + location.pathname.split('/').pop();
+    const obj = JSON.parse(localStorage.getItem(k) || '{}');
+    obj[label] = (obj[label] || 0) + 1;
+    localStorage.setItem(k, JSON.stringify(obj));
+  } catch(e) {}
+}
+function shareView() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    alert('Link copied! Share this SET Loop view with your team.');
+  }).catch(function() {
+    prompt('Copy this link:', window.location.href);
+  });
+}
 </script>
 </body>
 </html>
