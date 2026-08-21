@@ -110,8 +110,9 @@
       ".slx-modal-head{padding:14px 18px;border-bottom:1px solid #eaecf0;display:flex;align-items:center;gap:12px}",
       ".slx-modal-head strong{font-size:15px}.slx-modal-head span{font-size:11px;color:#667085;flex:1}",
       ".slx-close{background:#fff;border:1px solid #d0d5dd;border-radius:6px;padding:6px 10px;cursor:pointer}",
-      ".slx-guide-actions{padding:10px 18px;border-bottom:1px solid #eaecf0;display:flex;gap:8px;flex-wrap:wrap;background:#fff7fb}",
+      ".slx-guide-actions{padding:10px 18px;border-bottom:1px solid #eaecf0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#fff7fb}",
       ".slx-guide-actions a,.slx-guide-actions button{background:#fff;border:1px solid #ed2d8b;color:#9d174d;border-radius:7px;padding:7px 11px;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer}",
+      ".slx-guide-actions button.active{background:#ed2d8b;color:#fff}.slx-guide-status{width:100%;font-size:11px;color:#667085;font-weight:700}",
       ".slx-guide-frame{border:0;width:100%;flex:1;background:#f2f4f7}",
       ".slx-agent-body{padding:18px;overflow:auto}",
       ".slx-guard{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;font-size:11px;color:#166534;line-height:1.45;margin-bottom:12px}",
@@ -187,14 +188,14 @@
     overlay.innerHTML = [
       "<div class=\"slx-modal\" role=\"dialog\" aria-modal=\"true\" aria-label=\"Store 0222 Brand Guide\">",
       "<div class=\"slx-modal-head\"><strong>Store 0222 · Interactive Brand Guide</strong><span>20 rooms/zones · 105 presentations · SET IRL field return path</span><button class=\"slx-close\" type=\"button\">Close</button></div>",
-      "<div class=\"slx-guide-actions\"><button type=\"button\" data-page=\"1\">Guide cover</button><button type=\"button\" data-page=\"2\">Table of contents</button><button type=\"button\" data-page=\"3\">Full-store map</button><button type=\"button\" data-page=\"2\">✨ Highlight SET IRL directory</button><a href=\"" + guideUrl + "\" target=\"_blank\" rel=\"noopener\">Open guide in new window ↗</a></div>",
+      "<div class=\"slx-guide-actions\"><button type=\"button\" data-page=\"1\" data-label=\"Guide cover\">Guide cover</button><button type=\"button\" data-page=\"2\" data-label=\"Table of contents\">Table of contents</button><button type=\"button\" data-page=\"3\" data-label=\"Full-store map\">Full-store map</button><button type=\"button\" data-page=\"2\" data-label=\"SET IRL directory\">✨ Highlight SET IRL directory</button><a href=\"" + guideUrl + "\" target=\"_blank\" rel=\"noopener\">Open guide in new window ↗</a><div class=\"slx-guide-status\" aria-live=\"polite\">Showing Guide cover · PDF page 1</div></div>",
       "<iframe class=\"slx-guide-frame\" title=\"Interactive Store 0222 Brand Guide\" src=\"" + guideUrl + "#page=1\"></iframe>",
       "</div>"
     ].join("");
     overlay.querySelector(".slx-close").addEventListener("click", function () { overlay.classList.remove("show"); });
     overlay.querySelectorAll("[data-page]").forEach(function (button) {
       button.addEventListener("click", function () {
-        overlay.querySelector("iframe").src = guideUrl + "#page=" + button.getAttribute("data-page");
+        loadGuidePage(Number(button.getAttribute("data-page")), button.getAttribute("data-label"), button);
       });
     });
     overlay.addEventListener("click", function (event) {
@@ -227,9 +228,27 @@
     document.body.appendChild(overlay);
   }
 
+  function loadGuidePage(page, label, activeButton) {
+    var overlay = document.getElementById("slxGuide");
+    var currentFrame = overlay.querySelector(".slx-guide-frame");
+    var nextFrame = currentFrame.cloneNode(false);
+    currentFrame.replaceWith(nextFrame);
+    overlay.querySelectorAll("[data-page]").forEach(function (button) {
+      button.classList.toggle("active", button === activeButton);
+    });
+    overlay.querySelector(".slx-guide-status").textContent = "Loading " + label + " · PDF page " + page + "…";
+    requestAnimationFrame(function () {
+      nextFrame.src = guideUrl + "#page=" + page + "&zoom=page-fit";
+      overlay.querySelector(".slx-guide-status").textContent = "Showing " + label + " · PDF page " + page;
+    });
+  }
+
   function openGuide(page) {
     var overlay = document.getElementById("slxGuide");
-    overlay.querySelector("iframe").src = guideUrl + "#page=" + (typeof page === "number" ? page : 1);
+    var targetPage = typeof page === "number" ? page : 1;
+    var label = targetPage === 2 ? "SET IRL directory" : "Guide cover";
+    var activeButton = overlay.querySelector("[data-label=\"" + label + "\"]");
+    loadGuidePage(targetPage, label, activeButton);
     overlay.classList.add("show");
   }
 

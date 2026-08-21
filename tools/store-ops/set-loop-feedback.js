@@ -169,6 +169,12 @@
     window.setLoopToastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3500);
   }
 
+  function resultsUrl() {
+    return location.pathname.includes('/tools/store-ops/')
+      ? 'feedback-results.html'
+      : 'tools/store-ops/feedback-results.html';
+  }
+
   function modalMarkup() {
     return [
       '<div class="sl-overlay" id="setLoopFeedbackModal" aria-hidden="true">',
@@ -184,10 +190,11 @@
       '      <label>Email <span>optional</span><input id="slFeedbackEmail" type="email" autocomplete="email"></label>',
       '      <label class="sl-full">Comments or questions <span>optional</span><textarea id="slFeedbackComment" placeholder="What worked, what did not, or what would you like to explore?"></textarea></label>',
       '    </div>',
-      '    <div class="sl-note" id="slFeedbackRoute">Choose how much to share. When a pilot owner is configured, sending opens an Outlook draft addressed to that owner.</div>',
+      '    <div class="sl-note" id="slFeedbackRoute">Your reaction is tracked in this browser now. Optional details make the result more useful.</div>',
       '    <div class="sl-actions">',
       '      <button class="sl-primary" type="button" id="slSendFeedback">Send to pilot owner</button>',
-      '      <button class="sl-secondary" type="button" id="slSaveFeedback">Keep in this browser</button>',
+      '      <button class="sl-secondary" type="button" id="slSaveFeedback">Save optional details</button>',
+      '      <a class="sl-secondary sl-results-button" id="slViewResults" href="#">View tracked results</a>',
       '    </div>',
       '  </div>',
       '</div>',
@@ -232,7 +239,7 @@
       '.sl-kicker{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#ed2d8b;font-weight:800;margin-bottom:7px}.sl-dialog h2{font-size:25px;margin:0 40px 7px 0}.sl-copy{color:#667085;font-size:14px;line-height:1.5;margin:0 0 18px}',
       '.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.sl-grid label{display:grid;gap:5px;font-size:12px;font-weight:800;color:#344054}.sl-grid label span{font-weight:500;color:#98a2b3}.sl-grid input,.sl-grid textarea{width:100%;border:1px solid #d0d5dd;border-radius:9px;padding:10px 11px;font:14px Arial,sans-serif;color:#11131a;background:#fff}.sl-grid textarea{min-height:78px;resize:vertical}.sl-full{grid-column:1/-1}',
       '.sl-section-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6941c6;font-weight:800;margin:20px 0 9px}.sl-note{font-size:12px;line-height:1.45;color:#475467;background:#f8f5ff;border-left:4px solid #7f56d9;padding:10px 12px;border-radius:0 8px 8px 0;margin-top:16px}',
-      '.sl-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.sl-primary,.sl-secondary{border-radius:9px;padding:11px 16px;font-size:13px;font-weight:800;cursor:pointer}.sl-primary{border:0;background:#ed2d8b;color:#fff}.sl-secondary{border:1px solid #d0d5dd;background:#fff;color:#344054}',
+      '.sl-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.sl-primary,.sl-secondary{border-radius:9px;padding:11px 16px;font-size:13px;font-weight:800;cursor:pointer}.sl-primary{border:0;background:#ed2d8b;color:#fff}.sl-secondary{border:1px solid #d0d5dd;background:#fff;color:#344054}.sl-results-button{text-decoration:none;display:inline-flex;align-items:center}',
       '.sl-toast{position:fixed;right:20px;bottom:20px;z-index:100001;max-width:360px;background:#11131a;color:#fff;border-radius:11px;padding:12px 16px;font:700 13px/1.4 Arial,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.sl-toast.show{opacity:1;transform:none}',
       '.sl-float{position:fixed;right:18px;bottom:76px;z-index:99990;display:flex;gap:7px;align-items:center}.sl-float button,.sl-float a{border:0;border-radius:999px;padding:10px 13px;font:800 12px Arial,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.2)}.sl-float button{background:#11131a;color:#fff}.sl-float a{background:#ed2d8b;color:#fff}',
       '@media(max-width:620px){.sl-grid{grid-template-columns:1fr}.sl-full{grid-column:auto}.sl-dialog{padding:24px 18px}.sl-float{right:10px;bottom:76px}.sl-results-link{display:none}}'
@@ -264,8 +271,9 @@
     document.getElementById('slFeedbackComment').value = '';
     const owner = ownerEmail();
     document.getElementById('slFeedbackRoute').textContent = owner
-      ? 'Sending will open an Outlook draft addressed to ' + owner + '. Review it before sending.'
-      : 'No pilot owner is connected. Your feedback summary can still be copied and shared manually.';
+      ? 'Tracked now in this browser. Sending will open an Outlook draft addressed to ' + owner + '.'
+      : 'Tracked now in this browser. No central pilot owner is connected yet; you can still copy the response summary.';
+    document.getElementById('slSendFeedback').textContent = owner ? 'Send to pilot owner' : 'Copy feedback summary';
     openModal('setLoopFeedbackModal');
   }
 
@@ -458,6 +466,7 @@
     document.getElementById('slSaveFeedback').addEventListener('click', function () { saveFeedback(false); });
     document.getElementById('slEmailShare').addEventListener('click', emailShare);
     document.getElementById('slCopyShare').addEventListener('click', copyShare);
+    document.getElementById('slViewResults').href = resultsUrl();
     document.querySelectorAll('[data-sl-share]').forEach(function (button) { button.addEventListener('click', openShare); });
     document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeModals(); });
     document.querySelectorAll('a').forEach(function (link) {
