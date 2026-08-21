@@ -1,30 +1,269 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SET Loop | Store Operations</title><style>
-:root{--ink:#11131a;--pink:#ed2d8b;--blush:#fff2f7;--line:#eadde3;--muted:#667085;--green:#0f766e;--orange:#b65d00;--red:#b42318}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f2f4;color:var(--ink);font:14px Aptos,"Segoe UI",Arial,sans-serif}.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#0c0d12,#2a1720);color:#fff;padding:22px 16px;display:flex;flex-direction:column}.logo{font:700 25px Georgia,serif;color:#ffc0d7;margin-bottom:18px}.persona{padding:13px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:14px;margin-bottom:14px}.persona small{color:#cfd3dc}.nav{display:grid;gap:3px}.nav a{color:#edf0f5;text-decoration:none;padding:10px;border-radius:10px;font-weight:750}.nav a:hover,.nav a.active{background:var(--pink)}.sidefoot{margin-top:auto;font-size:10px;color:#aeb4c0;line-height:1.5}.work{min-width:0}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 24px;position:sticky;top:0;z-index:10}.crumb{font-size:11px;color:var(--muted);margin-top:4px}.search{background:#f8f4f6;border:1px solid var(--line);border-radius:999px;padding:10px 16px;width:min(390px,42vw);color:#7c8190}.roles{background:#fff;border-bottom:1px solid var(--line);padding:10px 24px;display:flex;gap:8px;position:sticky;top:66px;z-index:9}.roles button{border:1px solid var(--line);background:#fff;padding:8px 13px;border-radius:999px;font-weight:850;cursor:pointer}.roles button.active{background:#111827;color:#fff}.main{max-width:1480px;margin:auto;padding:20px}.hero{background:linear-gradient(115deg,#08090d,#3e1728 65%,#ba3972);color:#fff;border-radius:22px;padding:28px;display:grid;grid-template-columns:1.25fr .75fr;gap:20px;box-shadow:0 18px 42px rgba(0,0,0,.16)}.eyebrow{font-size:11px;letter-spacing:2px;color:#f8a6c6;font-weight:900}.hero h1{font:700 43px Georgia,serif;margin:7px 0}.hero p{color:#e8e9ee;max-width:760px}.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick a{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px;color:#fff;text-decoration:none;font-weight:850}.quick small{display:block;color:#ddd;margin-top:5px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;margin-top:15px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.04)}.card h2,.card h3{font-family:Georgia,serif;margin-top:0}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.kpi{background:var(--blush);border:1px solid var(--line);border-radius:13px;padding:14px}.kpi b{display:block;font-size:25px}.kpi small,.mini{color:var(--muted);font-size:12px}.item{padding:11px 0;border-bottom:1px solid #eee}.item:last-child{border:0}.tag,.flag{display:inline-block;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900;background:#f5e5ec;color:#9d174d}.good{background:#e7f7f1;color:#08705f}.watch{background:#fff3df;color:#985600}.risk{background:#feeceb;color:#b42318}.button{display:inline-block;border:0;border-radius:10px;padding:10px 13px;background:#111827;color:#fff;text-decoration:none;font-weight:850;cursor:pointer}.pink{background:var(--pink)}.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.tool{background:var(--blush);border:1px solid var(--line);border-radius:14px;padding:15px}.tool b{display:block;margin-bottom:6px}.progress{height:11px;background:#eee;border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;background:var(--green)}.task{display:grid;grid-template-columns:28px 1fr 120px 130px;gap:9px;align-items:center;padding:10px 0;border-bottom:1px solid #eee}.task input[type=checkbox]{width:19px;height:19px}.task select,.task input[type=text]{padding:8px;border:1px solid #ddd;border-radius:8px;width:100%}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}.tabs button.active{background:#111827;color:#fff}.roll{width:100%;border-collapse:collapse}.roll th{text-align:left;font-size:11px;color:var(--muted);padding:9px;border-bottom:2px solid #ddd}.roll td{padding:10px 9px;border-bottom:1px solid #eee}.danger{background:#fff8f7}.mail{display:grid;grid-template-columns:.8fr 1.2fr;gap:14px}.mail input,.mail select,.mail textarea,.publish input,.publish select,.publish textarea{width:100%;padding:10px;border:1px solid #d8cbd1;border-radius:9px;margin:5px 0 9px}.preview{background:#f8fafc;border:1px dashed #98a2b3;border-radius:12px;padding:14px;min-height:180px}.line{width:100%;height:610px;border:1px solid var(--line);border-radius:14px;background:#fff}.publish{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}.roleblock{display:none}body.home .homeonly,body.rm .rmonly,body.dm .dmonly,body.store .storeonly{display:block}.watermark{position:relative;overflow:hidden}.watermark:after{content:"CONFIDENTIAL • ASSIGNED USE ONLY";position:absolute;left:-8%;right:-8%;top:50%;text-align:center;transform:rotate(-14deg);font-size:24px;font-weight:1000;color:rgba(157,23,77,.065);pointer-events:none}.section{scroll-margin-top:120px}.footer{text-align:center;padding:26px;color:var(--muted);font-size:11px}@media(max-width:980px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{grid-template-columns:repeat(2,1fr)}.top,.roles{position:relative;top:auto}.hero{grid-template-columns:1fr}.s4,.s5,.s6,.s7,.s8,.s12{grid-column:1/-1}.tools,.kpis,.mail,.publish{grid-template-columns:1fr}.task{grid-template-columns:28px 1fr}.task select,.task input[type=text]{grid-column:2}.search{display:none}}
-/* SET_NAV_KPI_CSS_START */
-.returnbar{position:relative;top:auto;z-index:1;background:#fff9fc;border:1px solid var(--line);border-radius:14px;padding:11px 16px;margin:14px 0;display:flex;justify-content:space-between;align-items:center;gap:18px;width:100%;min-height:48px}.returnbar>div{display:flex;align-items:center;gap:10px}.returnbar .mini{font-size:11px}.returnbar a{white-space:nowrap}.returnbar a{color:#9d174d;font-weight:900;text-decoration:none}.metric-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.metric{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fff}.metric b{display:block;font-size:22px}.metric small{color:var(--muted)}.schedule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.shift{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fff7fb}.shift b{display:block}.shift span{font-size:12px;color:var(--muted)}.partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.partner-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}.partner-card b{display:block;margin-bottom:5px}.partner-card .mini{min-height:45px}.partner-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.partner-actions button{border:0;border-radius:9px;padding:8px 10px;font-weight:850;cursor:pointer;background:#111827;color:#fff}.partner-actions button:first-child{background:var(--pink)}.reminder-list{margin-top:12px}.reminder{padding:10px;border-left:4px solid var(--pink);background:#fff7fb;border-radius:0 10px 10px 0;margin:7px 0}.backlink{position:fixed;right:18px;bottom:18px;z-index:50;background:#ed2d8b;color:#fff;text-decoration:none;font-weight:900;border-radius:999px;padding:11px 15px;box-shadow:0 8px 22px rgba(0,0,0,.2)}@media(max-width:980px){.metric-grid,.schedule-grid,.partner-grid{grid-template-columns:1fr}.returnbar{position:relative;top:auto}}
-/* SET_NAV_KPI_CSS_END */</style></head><body class="home"><div class="shell"><aside class="side"><div class="logo">VS&amp;Co Store Ops</div><div class="persona"><b>SET Loop</b><br><small id="persona">Home Office</small></div><nav class="nav"><a href="#top">Home</a><a href="#calendar">Field Planning Calendar</a><a href="#business">Business Now</a><a href="#tools">My SET Loop Tools</a><a href="#closeopen">Close to Open</a><a href="#readiness">Execution Readiness</a><a href="#photos">Photo Inspection</a><a href="#line">Assortment & Line List</a><a href="#email">Partner Connection</a><a class="homeonly roleblock" href="#publish">Publish & Target</a><a href="#sources">Approved Source Files</a></nav><div class="sidefoot">Leadership Prototype<br>Confidential • Assigned Use</div></aside><div class="work"><header class="top"><div><b>Store Operations Field Connector</b><div class="crumb" id="crumb">SET Loop / Home Office</div></div><div class="search">Search stores, guides, launches, promotions...</div></header><div class="roles"><button data-role="home" class="active">Home Office</button><button data-role="rm">Regional</button><button data-role="dm">District</button><button data-role="store">Store</button></div><main class="main" id="top"><section class="hero"><div><div class="eyebrow">LEADERSHIP-READY OPERATING EXPERIENCE</div><h1 id="heroTitle">Home Office SET Loop</h1><p id="heroCopy">Publish once, target the right audience, monitor execution, and connect every Store, DM, RM, and Home Office partner to one source of truth.</p><span class="tag" id="scope">ENTERPRISE</span></div><div class="quick"><a href="#calendar">Field Planning Calendar<small>Activities, calls, floorsets, promotions</small></a><a href="#business">Business Now<small>Consolidated communication and inventory</small></a><a href="#readiness">Execution Readiness<small>Completion, exceptions, proof, support</small></a><a href="#line">Assortment & Line List<small>Store-specific Library connection</small></a></div></section><section class="grid"><div class="card s12"><div class="kpis" id="kpis"></div></div><!-- SET_NAV_KPI_HTML_START -->
-<div class="returnbar"><div><b id="returnTitle">You are viewing Home Office</b><div class="mini">Use this return point after opening a connected tool or supporting page.</div></div><a id="returnLink" href="#top">Back to Home Office SET Loop</a></div>
-<section class="card s12"><h2>Business & Execution KPIs</h2><div id="roleMetrics" class="metric-grid"></div></section>
-<section id="schedule" class="card s12 section storeonly roleblock"><h2>Today’s Coverage — Store 1033</h2><p class="mini">Prototype schedule view based on the types of role, shift, break, and coverage details a future approved UKG connection could surface.</p><div class="schedule-grid" id="scheduleGrid"></div></section>
-<section id="partners" class="card s12 section"><h2>Partner SET Loop</h2><p class="mini">Operational direction from partner teams arrives in the Store SET Loop as clear actions, owners, due dates, approved files, and reminders. DM, RM, and Home Office retain completion and exception visibility.</p><div class="partner-grid" id="partnerGrid"></div><div class="reminder-list" id="reminderList"></div></section>
-<!-- SET_NAV_KPI_HTML_END --><section id="calendar" class="card s7 section"><h2>My Field Planning Calendar</h2><div id="calendarItems"></div></section><section id="business" class="card s5 section watermark"><h2>Business Now — What Partners Need to Know & Do</h2><div id="businessItems"></div></section><section class="card s7"><h2>Brand Guide Production Milestones</h2><div id="production"></div></section><section class="card s5"><h2>Execution Readiness & Inventory</h2><div id="inventory"></div></section><section id="tools" class="card s12 section"><h2>My SET Loop Tools</h2><div class="tools"><div class="tool"><b>Close to Open</b><span class="mini">Daily and weekly routines, ownership, notes, and completion.</span><br><a class="button pink" href="#closeopen">Open My Checklist</a></div><div class="tool"><b>Floorset Execution Readiness</b><span class="mini">Store actions, Required Proof, DM Inspection, and roll-up.</span><br><a class="button" href="#readiness">View Readiness</a></div><div class="tool"><b>Weekly Photo Inspection</b><span class="mini">Required photo slots, Store upload, and DM review.</span><br><a class="button" href="#photos">Open Inspection</a></div><div class="tool"><b>Partner Connection</b><span class="mini">Store, DM, RM, and Home Office follow-up.</span><br><a class="button" href="#email">Connect</a></div></div></section><section id="closeopen" class="card s7 section storeonly roleblock"><h2>Store 1033 — Close to Open</h2><div class="progress"><span id="dailybar" style="width:0"></span></div><div class="tabs" id="phaseTabs"><button class="active" data-phase="Open">Open</button><button data-phase="All Day">All Day</button><button data-phase="Close">Close</button><button data-phase="Weekly">Weekly</button></div><div id="tasks"></div></section><section id="readiness" class="card s5 section storeonly roleblock"><h2>Floorset Execution Readiness</h2><div class="progress"><span id="readybar" style="width:0"></span></div><div id="readyTasks"></div></section><section id="photos" class="card s12 section storeonly roleblock"><h2>Weekly Photo Inspection — W/E 8.1</h2><p><b>9 Required Photos. Due Thursday by Opening of Business.</b></p><div class="kpis"><div class="kpi"><b id="photoPct">22%</b><small>Completion</small></div><div class="kpi"><b>9</b><small>Required Photo Slots</small></div><div class="kpi"><b>Store</b><small>Upload Required Proof</small></div><div class="kpi"><b>DM</b><small>Review Exceptions</small></div></div><div id="photoslots"></div></section><section class="card s12 dmonly roleblock"><h2>District 145 — Store Execution Roll-Up</h2><div id="dmroll"></div></section><section class="card s12 rmonly roleblock"><h2>Region 200 — District Execution Roll-Up</h2><div id="rmroll"></div></section><section class="card s12 homeonly roleblock"><h2>Home Office — Enterprise Execution Roll-Up</h2><div id="horoll"></div></section><section id="email" class="card s6 section"><h2>Partner Connection Center</h2><div class="mail"><div><select id="mailtype"><option>Store Follow-Up / Check-In</option><option>DM Support Needed</option><option>RM Support Needed</option><option>Home Office Clarification Needed</option><option>Execution Readiness Exception</option></select><input id="mailto" placeholder="To"><input id="subject" placeholder="Subject"><textarea id="body" rows="6"></textarea><button class="button pink" id="previewMail">Preview</button> <button class="button" id="openMail">Open in Email</button></div><div class="preview" id="mailpreview"></div></div></section><section class="card s6"><h2>Connected Store Workspace</h2><p>Store 1033 map, Complement tier, confidential direction, readiness, and assortment.</p><a class="button pink" href="store-assortment/index.html?store=1033" target="_blank">Open Store 1033 SET Loop</a><br><br><a class="button" href="photo-inspection.html" target="_blank">Open Full Photo Inspection</a></section><section id="line" class="card s12 section watermark"><h2>My Assortment & Line List</h2><p class="mini">Live Library connection; existing sign-in and access continue to control content.</p><a class="button pink" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app" target="_blank">Open Full Library</a><br><br><iframe class="line" src="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app"></iframe></section><section id="publish" class="card s12 homeonly roleblock section"><h2>Home Office Publish & Target</h2><div class="publish"><label>Publish Type<select><option>Communication</option><option>Promotion</option><option>Brand Guide</option></select></label><label>Eligible Audience<select><option>All Stores</option><option>Regional Leaders</option><option>District Leaders</option><option>Selected Stores</option></select></label><label class="full">Title<input id="pubtitle"></label><label>Brand<select><option>Megabrand</option><option>VS</option><option>VSB</option><option>PINK</option><option>PINK Beauty</option></select></label><label>Execution / Effective Date<input type="date"></label><label class="full">What Partners Need to Know & Do<textarea id="pubbody" rows="4"></textarea></label><label>Attach Approved PDF, Word File, or Image<input type="file"></label><label>Content Protection<select><option>Internal</option><option>Confidential — Do Not Forward</option><option>Store-Specific Confidential</option></select></label><div class="full"><button class="button pink" id="pubpreviewbtn">Preview SET Loop Format</button></div><div class="preview full watermark" id="pubpreview">Preview appears here.</div></div></section><section id="sources" class="card s12 section"><h2>Approved Source Files</h2><div class="tools"><div class="tool"><b>Field Planning Calendar</b><a class="button" href="documents/2026_Field_Planning_Calendar_7.29.pdf" target="_blank">Open PDF</a></div><div class="tool"><b>Business Now Summary</b><a class="button" href="documents/2026.07.29_Business Now Summary.pdf" target="_blank">Open PDF</a></div><div class="tool"><b>Production Master</b><a class="button" href="documents/VSS_BG_Production_Master_Combo_Workbook_FIXED.xlsx">Open Excel</a></div><div class="tool"><b>Access & Targeting</b><a class="button" href="access.html" target="_blank">Open Model</a></div></div></section></section></main><footer class="footer">SET Loop Leadership Prototype • Confidential • Assigned Use Only</footer></div></div><script>
-const $=x=>document.getElementById(x);let role='home',phase='Open';const ROLES={home:['Home Office SET Loop','Publish once, target the right audience, monitor execution, and connect the enterprise to one source of truth.','ENTERPRISE',[['175','Region 200 Stores'],['19','District Workspaces'],['5','Published Items'],['4','Open Exceptions']]],rm:['RM SET Loop Dashboard','See District readiness, field calendar priorities, Business Now, inventory watchouts, and where additional direction may be needed.','REGION 200',[['19','Districts'],['3','At Risk'],['79%','Execution'],['12','Blocked Actions']]],dm:['DM SET Loop Dashboard','See Store completion, required inspections, proof exceptions, and the actions needing DM follow-up.','DISTRICT 145',[['12','Stores'],['3','Need Follow-Up'],['82%','Execution'],['2','Blocked Actions']]],store:['My Store SET Loop','Store 1033 sees only assigned actions, Complement tier, current map, assortment, direction, and readiness.','STORE 1033',[['8.5','Underwear Day'],['8.12','PINK Floorset'],['9','Required Photos'],['82%','Readiness']]]};
-const CAL=[['Aug 2','Promotion','Fall Bonus Card Issuance begins'],['Aug 5','Promotion','National Underwear Day'],['Aug 6','Floorset','PINK + PINK Beauty Floorset'],['Aug 12','Execution','PINK Floorset + National VMA'],['Aug 13','Field Call','Field Leader Connection'],['Aug 19','Floorset','VS + VSB Floorset'],['Aug 26','DM Inspection','Roster Review Inspection']];const BN=[['ACTION REQUIRED','VS Charm Bra Reticket','Complete and DM inspect by open 7.31'],['ACTION REQUIRED','PINK Full Zip Reticket','Complete RFID tag writing and reticket'],['HOLD','PINK Disco Fleece','Hold off sales floor until 8.12 Floorset'],['PROMOTION','National Underwear Day','Free Panty and 10/$40 Panty Party'],['INVENTORY','VSB Men’s Body Care','Sell down; deployment is off']];const PROD=[['PINK 8.6','Publish 7.23 • Store Mapping 7.29 • Floorset 8.6'],['PINK 8.12','Publish 7.29 • Store Mapping 8.5 • Floorset 8.12'],['VS 8.19','Publish 8.5 • Store Mapping 8.12 • Floorset 8.19'],['PINK 9.2','Review 8.17–8.18 • Publish 8.19'],['VS 9.10','Review 8.19–8.20 • Publish 8.27']];const INV=[['85%','Monthly Packaging Survey completion'],['21 / 369','MPOS no-use outliers'],['WATCH','VSB Lip constraints'],['FLOWING','VS FlexFactor replenishment'],['SELL DOWN','VSB Men’s Body Care']];
-function renderRole(r){role=r;localStorage.setItem('set-loop-active-role',r);document.body.className=r;document.querySelectorAll('[data-role]').forEach(b=>b.classList.toggle('active',b.dataset.role===r));let x=ROLES[r];$('heroTitle').textContent=x[0];$('heroCopy').textContent=x[1];$('scope').textContent=x[2];$('persona').textContent=x[0];$('crumb').textContent='SET Loop / '+x[0];$('kpis').innerHTML=x[3].map(k=>`<div class="kpi"><b>${k[0]}</b><small>${k[1]}</small></div>`).join('');$('calendarItems').innerHTML=CAL.filter((c,i)=>r==='store'?i<5:true).map(c=>`<div class="item"><span class="tag good">${c[1]}</span> <b>${c[0]} — ${c[2]}</b></div>`).join('');$('businessItems').innerHTML=BN.filter((b,i)=>r==='store'?i<4:true).map(b=>`<div class="item"><span class="tag">${b[0]}</span> <b>${b[1]}</b><div class="mini">${b[2]}</div></div>`).join('');$('production').innerHTML=PROD.map(p=>`<div class="item"><b>${p[0]}</b><div class="mini">${p[1]}</div></div>`).join('');$('inventory').innerHTML=INV.map(i=>`<div class="item"><span class="tag ${i[0]==='WATCH'?'watch':i[0]==='SELL DOWN'?'risk':'good'}">${i[0]}</span> ${i[1]}</div>`).join('')}
-document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>renderRole(b.dataset.role));
-const DAILY={Open:['Review Business Now and Critical updates','Review UKG timecards, missed punches, and coverage','Post Daily Plan and flex payroll to the business','Open registers and complete pin-pad check','Confirm current offers, marketing, and cash-wrap direction','Complete opening leader walk'], 'All Day':['Maintain cash wrap, fitting-room, and recovery standards','Complete replenishment and standards pushes','Complete current Promotion and Floorset actions','Monitor inventory exceptions and complete ZOH callouts'],Close:['Recover each room and assigned zone to standard','Close registers and validate end-of-day reporting','Document Close to Open notes for opening SLT','Secure confidential direction and unreleased product information'],Weekly:['Complete supply order and Monthly Packaging Survey','Complete Zero On Hand activity','Complete RFID Cycle Count and address exceptions','Complete Practice Peak follow-up and coaching']};const READY=['Read and acknowledge launch Communication','Confirm Store Map and Complement tier','Review assigned Assortment and Line List','Validate fixture placement and task ownership','Confirm inventory readiness and known constraints','Complete Store Leader execution walk','Complete Floorset / Visual execution','Upload Required Proof','DM Inspection / Corrections','Launch Ready'];function key(k){return 'setloop-'+k+'-1033'}function state(k){try{return JSON.parse(localStorage.getItem(key(k))||'{}')}catch{return {}}}function rendertasks(){let s=state('daily'),a=DAILY[phase];$('tasks').innerHTML=a.map((t,i)=>`<div class="task"><input type="checkbox" data-t="${phase}-${i}" ${s[phase+'-'+i]?'checked':''}><b>${t}</b><select><option>Store Leader</option><option>SLT</option><option>Associate</option></select><input type="text" placeholder="Note"></div>`).join('');document.querySelectorAll('[data-t]').forEach(c=>c.onchange=()=>{let z=state('daily');z[c.dataset.t]=c.checked;localStorage.setItem(key('daily'),JSON.stringify(z));rendertasks()});let pct=Math.round(Object.values(s).filter(Boolean).length/Object.values(DAILY).flat().length*100);$('dailybar').style.width=pct+'%'}document.querySelectorAll('[data-phase]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-phase]').forEach(x=>x.classList.remove('active'));b.classList.add('active');phase=b.dataset.phase;rendertasks()});function renderready(){let s=state('ready');$('readyTasks').innerHTML=READY.map((t,i)=>`<div class="task"><input type="checkbox" data-r="${i}" ${s[i]?'checked':''}><b>${t}</b><select><option>Not Started</option><option>In Progress</option><option>Complete</option><option>Blocked</option></select><input type="text" placeholder="Owner"></div>`).join('');document.querySelectorAll('[data-r]').forEach(c=>c.onchange=()=>{let z=state('ready');z[c.dataset.r]=c.checked;localStorage.setItem(key('ready'),JSON.stringify(z));renderready()});$('readybar').style.width=Math.round(Object.values(s).filter(Boolean).length/READY.length*100)+'%'}const PHOTOS=['Panty Bar Overview 1','Panty Bar Overview 2','Panty Bar Overview 3','Panty Bar Overview 4','Panty Bar Overview 5','PINK Room 1 Overview','PINK Room 2 Overview','PINK Room 3 Overview','VS Room Overview'];$('photoslots').innerHTML=PHOTOS.map((p,i)=>`<div class="task"><input type="checkbox" ${i<2?'checked':''}><b>${p}<br><span class="mini">Photo upload required | Due Thursday by OOB</span></b><input type="file" accept="image/*"><span class="flag ${i<2?'good':'watch'}">${i<2?'Complete':'Required'}</span></div>`).join('');const STORES=[['1021','Easton',96,0],['1033','Polaris',82,0],['1048','Short Pump',74,1],['1062','Tysons',91,0],['1087','Fair Oaks',68,2],['1114','Pentagon City',88,0],['1176','Annapolis',72,1],['1288','King of Prussia',64,2]],DISTS=[['D145','Central Ohio',82,2],['D146','Mid-Atlantic North',91,0],['D147','Mid-Atlantic South',73,4],['D148','Carolinas',87,1],['D149','Virginia',68,5]],REGS=[['R100','Northeast',88,3],['R200','Mid-Atlantic',79,12],['R300','Southeast',91,2],['R400','Central',72,16],['R700','Canada',90,1]];function roll(a,n){return `<table class="roll"><tr><th>${n}</th><th>Completion</th><th>Blocked</th><th>Status</th></tr>${a.map(r=>{let f=r[3]>0||r[2]<70?['risk','At Risk']:r[2]<80?['watch','Watch']:['good','On Track'];return `<tr class="${f[0]==='risk'?'danger':''}"><td><b>${r[0]}</b><br><small>${r[1]}</small></td><td><div class="progress"><span style="width:${r[2]}%"></span></div>${r[2]}%</td><td>${r[3]}</td><td><span class="flag ${f[0]}">${f[1]}</span></td></tr>`}).join('')}</table>`}$('dmroll').innerHTML=roll(STORES,'Store');$('rmroll').innerHTML=roll(DISTS,'District');$('horoll').innerHTML=roll(REGS,'Region');const MAIL={'Store Follow-Up / Check-In':['Store1033@victoria.com','Store 1033 Follow-Up','Please review the open SET Loop actions and confirm completion or support needed.'],'DM Support Needed':['District145@victoria.com','DM Support Needed','A Store execution exception requires DM review and follow-up.'],'RM Support Needed':['Region200@victoria.com','RM Support Needed','A pattern across Stores or Districts may require additional direction or partnership.'],'Home Office Clarification Needed':['StoreOps@victoria.com','Home Office Clarification Needed','Please clarify the attached Communication, Promotion, inventory, or Brand Guide direction.'],'Execution Readiness Exception':['District145@victoria.com','Execution Readiness Exception','Store 1033 has an open or Blocked action requiring support.']};function loadmail(){let m=MAIL[$('mailtype').value];$('mailto').value=m[0];$('subject').value=m[1];$('body').value=m[2];previewmail()}function previewmail(){$('mailpreview').innerHTML=`<b>To:</b> ${$('mailto').value}<br><b>Subject:</b> ${$('subject').value}<hr>${$('body').value}<p class="mini">SET Loop Context: ${$('scope').textContent}</p>`}$('mailtype').onchange=loadmail;$('previewMail').onclick=previewmail;$('openMail').onclick=()=>location.href=`mailto:${$('mailto').value}?subject=${encodeURIComponent($('subject').value)}&body=${encodeURIComponent($('body').value)}`;$('pubpreviewbtn').onclick=()=>$('pubpreview').innerHTML=`<span class="tag">ACTION REQUIRED</span><h3>${$('pubtitle').value||'Untitled Communication'}</h3><p>${$('pubbody').value||'Add What Partners Need to Know & Do.'}</p>`;renderRole('home');rendertasks();renderready();loadmail();/* SET_NAV_KPI_JS_START */
-const KPI={
-home:[['$42.8M','Sales • WTD • 101.2% to Plan'],['31.6%','Conversion • +0.8pp LY'],['$79.40 / 2.7','ADS / UPT • +3.1% LY'],['96.4%','Execution Readiness • 4 exceptions'],['101.8%','Payroll • Plan vs. Actual']],
-rm:[['$6.4M','Region Sales • 100.7% to Plan'],['30.8%','Conversion • +0.5pp LY'],['$77.90 / 2.6','ADS / UPT • +2.4% LY'],['92.1%','District Readiness • 2 Watch'],['7','Stores needing support']],
-dm:[['$1.18M','District Sales • 98.9% to Plan'],['29.9%','Conversion • -0.2pp LY'],['$76.20 / 2.5','ADS / UPT • +1.6% LY'],['87.4%','Store Readiness • 3 follow-ups'],['2','Open DM Inspections']],
-store:[['$48.6K','Sales • WTD • 102.4% to Plan'],['32.7%','Conversion • +1.1pp LY'],['$81.35 / 2.8','ADS / UPT • +4.2% LY'],['3.8pp','VSCC Card Utilization improvement'],['99.2%','Payroll • Plan / Flex / Coverage']]};
-const SHIFTS=[['Store Leader','8:00 AM–5:00 PM','Opening Leader • Business ownership'],['Sales Leader','9:00 AM–6:00 PM','Head Coach • Selling zone'],['Operations Leader','7:00 AM–4:00 PM','Processing • Replenishment • RFID'],['Cash Wrap Lead','10:00 AM–7:00 PM','Cash Wrap • MPOS • Loyalty'],['Fitting Room Lead','11:00 AM–8:00 PM','Fitting Room • Conversion'],['Closing Leader','1:00 PM–10:00 PM','Recovery • Close to Open']];
-const PARTNERS=[['Visual Execution','Floorset direction, Store Map, fixture placement, Required Proof'],['Promotions','Current offers, marketing placement, cash-wrap direction, launch timing'],['Workforce / UKG','Daily coverage, payroll plan, schedule actions, missed-punch follow-up'],['Learning','Required Read, transition training, leader onboarding, Practice Peak'],['Inventory','Shipment readiness, ZOH, RFID exceptions, deployment constraints'],['Store Technology','POS, MPOS, RFID, device health, release actions'],['Assortment','Complement tier, Line List, product stories, sell-down direction'],['Core Operations','Close to Open, packaging survey, safety, supplies, execution escalation']];
-function returnLabel(){return role==='store'?'Back to My Store':role==='dm'?'Back to My District':role==='rm'?'Back to My Region':'Back to Home Office'}
-function renderAdded(){let label=role==='store'?'Store 1033':role==='dm'?'District 145':role==='rm'?'Region 200':'Home Office';$('returnTitle').textContent='You are viewing '+label;$('returnLink').textContent=returnLabel()+' SET Loop';$('returnLink').href='#top';$('roleMetrics').innerHTML=KPI[role].map(x=>`<div class="metric"><b>${x[0]}</b><small>${x[1]}</small></div>`).join('')+'<div class="mini" style="grid-column:1/-1">Illustrative demo KPIs for concept presentation only; production values would come from approved enterprise sources.</div>';$('scheduleGrid').innerHTML=SHIFTS.map(x=>`<div class="shift"><b>${x[0]}</b>${x[1]}<br><span>${x[2]}</span></div>`).join('');document.querySelector('#partners h2').textContent=role==='store'?'My Partner Actions':'Partner SET Loop';$('partnerGrid').innerHTML=PARTNERS.map((x,i)=>`<div class="partner-card"><b>${x[0]}</b><div class="mini">${x[1]}</div><div class="partner-actions"><button onclick="partnerUpload('${x[0]}')">Add Direction</button><button onclick="partnerReminder('${x[0]}')">Assign Task</button></div></div>`).join('');renderReminders()}
-function partnerUpload(name){const input=document.createElement('input');input.type='file';input.accept='.pdf,.doc,.docx,.xlsx,.png,.jpg,.jpeg';input.onchange=()=>{if(input.files[0]){let a=JSON.parse(localStorage.getItem('set-partner-items')||'[]');a.push({partner:name,file:input.files[0].name,scope:$('scope').textContent,when:new Date().toLocaleString()});localStorage.setItem('set-partner-items',JSON.stringify(a));renderReminders()}};input.click()}
-function partnerReminder(name){let due=prompt('Reminder date or timing for '+name+':','Tomorrow');if(!due)return;let note=prompt('Reminder / task:','Review and complete partner deliverable');if(!note)return;let a=JSON.parse(localStorage.getItem('set-partner-reminders')||'[]');a.push({partner:name,due,note,scope:$('scope').textContent});localStorage.setItem('set-partner-reminders',JSON.stringify(a));renderReminders()}
-function renderReminders(){let a=JSON.parse(localStorage.getItem('set-partner-reminders')||'[]'),u=JSON.parse(localStorage.getItem('set-partner-items')||'[]');$('reminderList').innerHTML=[...a.map(x=>`<div class="reminder"><b>${x.partner} • ${x.due}</b><br>${x.note}<div class="mini">Target: ${x.scope}</div></div>`),...u.map(x=>`<div class="reminder"><b>${x.partner} uploaded ${x.file}</b><div class="mini">${x.scope} • ${x.when}</div></div>`)].join('')||'<div class="mini">No partner reminders or uploads added in this demo yet.</div>'}
-const baseRenderRole=renderRole;renderRole=function(r){baseRenderRole(r);renderAdded()};
-/* SET_NAV_KPI_JS_END */renderAdded();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Office · SET Loop</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#11131a}
+    .topnav{background:#11131a;padding:0 2rem}
+    .nav-inner{display:flex;gap:0;flex-wrap:wrap}
+    .topnav a{color:#ccc;text-decoration:none;padding:.75rem 1.25rem;display:inline-block;font-size:.78rem;letter-spacing:.04em;border-right:1px solid #222}
+    .topnav a:hover,.topnav a.active-nav{color:#ed2d8b;background:#1a1d28}
+    .hero{background:#11131a;color:#fff;padding:3rem 2rem 2.5rem}
+    .hero-tag{color:#ed2d8b;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+    .hero h1{font-size:2.2rem;font-weight:700;letter-spacing:-.02em;line-height:1.12}
+    .hero-sub{color:#aaa;font-size:.9rem;margin-top:.6rem;max-width:860px}
+    .hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+    .badge{background:#1e2230;border:1px solid #333;border-radius:4px;padding:.35rem .75rem;font-size:.72rem;color:#ccc;letter-spacing:.06em}
+    .badge span{color:#ed2d8b;font-weight:700}
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+    @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid #f0f0f0}
+    .card-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600}
+    .section-title{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#ed2d8b;font-weight:700;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid #ed2d8b;margin-top:2rem}
+    .pill{display:inline-block;border-radius:20px;padding:.2rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .pill-green{background:#e8f5e9;color:#2e7d32}
+    .pill-yellow{background:#fff8e1;color:#f57c00}
+    .pill-red{background:#fce4ec;color:#c62828}
+    .pill-blue{background:#e3f2fd;color:#1565c0}
+    .pill-gray{background:#f5f5f5;color:#555}
+    .kpi{background:#fbf7f9;border:1px solid #f2e8ed;border-radius:8px;padding:1rem;text-align:center}
+    .kpi b{display:block;font-size:1.9rem;color:#11131a;font-weight:700}
+    .kpi small{font-size:.72rem;color:#667085}
+    .item-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid #f5f5f5}
+    .item-row:last-child{border-bottom:none}
+    .item-icon{width:32px;height:32px;border-radius:6px;background:#f8f8f8;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .item-body{flex:1}
+    .item-title{font-size:.86rem;font-weight:600;color:#11131a}
+    .item-meta{font-size:.74rem;color:#667085;margin-top:.2rem}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    th{background:#f8f8f8;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#888;padding:.7rem 1rem;text-align:left;border-bottom:2px solid #eee}
+    td{padding:.7rem 1rem;border-bottom:1px solid #f5f5f5;color:#11131a;vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    a{color:#ed2d8b;text-decoration:none}
+    a:hover{text-decoration:underline}
+    /* External link rows with dual icons */
+    .tool-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .75rem;border-radius:6px;background:#f8f8f8;border:1px solid #eee;margin-bottom:.4rem}
+    .tool-row:last-child{margin-bottom:0}
+    .tool-name{font-size:.82rem;font-weight:500;color:#11131a;flex:1}
+    .tool-actions{display:flex;gap:.3rem;flex-shrink:0}
+    .link-btn{width:28px;height:28px;border-radius:5px;display:grid;place-items:center;background:#fff;border:1px solid #ddd;text-decoration:none;color:#11131a;font-size:.82rem;font-weight:700;transition:.12s;cursor:pointer;line-height:1}
+    .link-btn:hover{background:#11131a;color:#fff;border-color:#11131a;text-decoration:none}
+    .link-btn[title="Open in new window"]{font-size:.9rem}
+    /* Role launch buttons */
+    .role-btns{display:flex;gap:.55rem;flex-wrap:wrap}
+    .role-btn{display:inline-block;background:#11131a;color:#fff;text-decoration:none;padding:.5rem .85rem;border-radius:5px;font-size:.74rem;font-weight:700;letter-spacing:.03em;transition:.12s;border:none;cursor:pointer}
+    .role-btn:hover{background:#ed2d8b;color:#fff;text-decoration:none}
+    /* Confidential callout */
+    .conf-card{border:1px dashed #ed2d8b;background:#fff7fb;border-radius:8px;padding:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+    .conf-card b{display:block;margin-bottom:.3rem;font-size:.86rem}
+    .conf-card p{font-size:.8rem;color:#555;margin:0}
+    .conf-btn{background:#ed2d8b;color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+    /* Confidential overlay */
+    .conf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;align-items:center;justify-content:center}
+    .conf-overlay.show{display:flex}
+    .conf-modal{background:#fff;border-radius:12px;padding:2.5rem;max-width:720px;width:92%;position:relative;overflow:hidden}
+    .conf-modal::after{content:"CONFIDENTIAL • ASSIGNED USE ONLY";position:absolute;left:-5%;right:-5%;top:50%;transform:rotate(-14deg);text-align:center;font-size:28px;font-weight:900;color:rgba(157,23,77,.07);pointer-events:none;white-space:nowrap}
+    .conf-modal h2{font-size:1.3rem;margin-bottom:.5rem;color:#11131a}
+    .conf-modal p{font-size:.86rem;color:#555;line-height:1.6;margin-bottom:1rem}
+    .conf-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid #ddd;border-radius:5px;padding:.3rem .6rem;cursor:pointer;font-size:.8rem;color:#555}
+    .conf-close:hover{background:#11131a;color:#fff}
+    footer{background:#11131a;color:#555;text-align:center;padding:2rem;font-size:.75rem;letter-spacing:.08em;margin-top:3rem}
+    footer .culture{color:#ed2d8b;font-weight:600;letter-spacing:.1em;font-size:.8rem;margin-bottom:.4rem}
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="store.html">🏪 Store — 1392 Ontario Mills</a>
+    <a href="district.html">📋 District — 339 West</a>
+    <a href="region.html">🗺️ Region — 400 West</a>
+    <a href="SET_LOOP_MASTER.html" class="active-nav">🏠 Home Office</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Home Office View</div>
+  <h1>SET Loop · Home Office</h1>
+  <div class="hero-sub">Publish once, target the right audience, monitor execution, and keep every Store, District, and Region connected to one approved source of truth.</div>
+  <div class="hero-meta">
+    <div class="badge">Program <span>SET Loop</span></div>
+    <div class="badge">Coverage <span>Region 400 West</span></div>
+    <div class="badge">Districts <span>4</span></div>
+    <div class="badge">Active Queue <span>6 Items</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SNAPSHOT KPIS -->
+  <div class="section-title" style="margin-top:0">Enterprise Snapshot</div>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="kpi"><b>6</b><small>Publishing queue items</small></div>
+    <div class="kpi"><b>4</b><small>Region 400 districts in view</small></div>
+    <div class="kpi"><b>3</b><small>Open escalation themes</small></div>
+    <div class="kpi"><b>10</b><small>Business Now communications</small></div>
+  </div>
+
+  <!-- PUBLISHING QUEUE + PARTNER DELIVERABLES -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Publishing Queue</span>
+        <a href="publish.html">View full queue →</a>
+      </div>
+      <table>
+        <thead><tr><th>Item</th><th>Brand</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>August Floorset Launch</td><td>VS</td><td><span class="pill pill-green">Published</span></td><td><a href="publish.html">Open</a></td></tr>
+          <tr><td>Fragrance Feature Event</td><td>VSB</td><td><span class="pill pill-green">Published</span></td><td><a href="publish.html">Open</a></td></tr>
+          <tr><td>Back-to-Campus Floorset</td><td>PINK</td><td><span class="pill pill-green">Published</span></td><td><a href="publish.html">Open</a></td></tr>
+          <tr><td>PINK Beauty Launch Offer</td><td>PINK Beauty</td><td><span class="pill pill-green">Published</span></td><td><a href="publish.html">Open</a></td></tr>
+          <tr><td>Weekend Readiness Update</td><td>All</td><td><span class="pill pill-green">Published</span></td><td><a href="publish.html">Open</a></td></tr>
+          <tr><td>Service Ritual Refresher</td><td>All</td><td><span class="pill pill-blue">Scheduled</span></td><td><a href="publish.html">Open</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Partner Deliverables</span>
+        <a href="partners.html">View all →</a>
+      </div>
+      <div class="item-row"><div class="item-icon">🎨</div><div class="item-body"><div class="item-title">Visual Merchandising · September floorset packet</div><div class="item-meta">Owner: Visual Lead · Next: Store Ops review</div></div><span class="pill pill-yellow">Pending Approval</span></div>
+      <div class="item-row"><div class="item-icon">📣</div><div class="item-body"><div class="item-title">Marketing / CRM · September promo calendar</div><div class="item-meta">Owner: Marketing Lead · Next: Smartsheet refresh</div></div><span class="pill pill-blue">In Progress</span></div>
+      <div class="item-row"><div class="item-icon">🏷️</div><div class="item-body"><div class="item-title">Brand Merchandising · Line list and product stories</div><div class="item-meta">Owner: Brand Lead · <span style="color:#c62828;font-weight:700">Escalate missing inputs</span></div></div><span class="pill pill-red">At Risk</span></div>
+      <div class="item-row"><div class="item-icon">🚚</div><div class="item-body"><div class="item-title">Supply Chain · Launch inventory readiness</div><div class="item-meta">Owner: Supply Lead · Next: Exception report</div></div><span class="pill pill-green">On Track</span></div>
+      <div class="item-row"><div class="item-icon">🎓</div><div class="item-body"><div class="item-title">Field Enablement · Service ritual training</div><div class="item-meta">Owner: Enablement Lead</div></div><span class="pill pill-green">Ready</span></div>
+    </div>
+  </div>
+
+  <!-- BUSINESS NOW + ROLE LAUNCH -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Business Now Priorities</span>
+        <a href="notifications.html">View all 10 →</a>
+      </div>
+      <div class="item-row"><div class="item-icon">📋</div><div class="item-body"><div class="item-title">Pre-Holiday Roster Review</div><div class="item-meta">All stores and District Managers · Checklist due Aug 24</div></div><a href="notifications.html">View →</a></div>
+      <div class="item-row"><div class="item-icon">💄</div><div class="item-body"><div class="item-title">PINK Beauty Belt Update</div><div class="item-meta">PINK Beauty eligible stores · DM Inspection</div></div><a href="communications.html">View →</a></div>
+      <div class="item-row"><div class="item-icon">📊</div><div class="item-body"><div class="item-title">RFID Dashboard Update</div><div class="item-meta">Field leadership · Information</div></div><a href="notifications.html">View →</a></div>
+      <div class="item-row"><div class="item-icon">🎉</div><div class="item-body"><div class="item-title">Fall Bonus Card Program</div><div class="item-meta">US and Canada stores · Action required</div></div><a href="communications.html">View →</a></div>
+      <div class="item-row"><div class="item-icon">🐾</div><div class="item-body"><div class="item-title">PINK Friday Mystery Mini Dog GWP</div><div class="item-meta">PINK Stores · DM Inspection · Hold until setup</div></div><a href="notifications.html">View →</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Open Any View</span></div>
+      <div class="role-btns">
+        <a class="role-btn" href="store.html">🏪 Store 1392</a>
+        <a class="role-btn" href="district.html">📋 District 339</a>
+        <a class="role-btn" href="region.html">🗺️ Region 400</a>
+        <a class="role-btn" href="partners.html">🤝 Partner Intake</a>
+        <a class="role-btn" href="calendar.html">📅 Field Calendar</a>
+        <a class="role-btn" href="checklist.html">✅ Close-to-Open</a>
+        <a class="role-btn" href="photo-inspection.html">📸 Photo Inspection</a>
+        <a class="role-btn" href="set-loop-assortment.html">📦 Assortment View</a>
+        <a class="role-btn" href="publish.html">📤 Publish Queue</a>
+        <a class="role-btn" href="asset-prep.html">🔧 Asset Prep</a>
+        <a class="role-btn" href="notifications.html">🔔 Notifications</a>
+        <a class="role-btn" href="communications.html">💬 Communications</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTERNAL TOOLS WITH DUAL OPEN ICONS -->
+  <div class="section-title">External Tools
+    <span style="font-size:.68rem;color:#888;font-weight:500;text-transform:none;letter-spacing:0;margin-left:.5rem">
+      🧭 = open here &nbsp;·&nbsp; ↗ = open in new window
+    </span>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="tool-row">
+        <span class="tool-name">📦 Supply Catalog</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://vsstoresupplyorder.com/" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://vsstoresupplyorder.com/" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+      <div class="tool-row">
+        <span class="tool-name">🎨 Marketing Catalog</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://vss.archway.com/login" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://vss.archway.com/login" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+      <div class="tool-row">
+        <span class="tool-name">🏢 Field Leadership Intranet</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tool-row">
+        <span class="tool-name">🔵 Blue Day</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://blueday.vscocorp.com/" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://blueday.vscocorp.com/" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+      <div class="tool-row">
+        <span class="tool-name">📈 Intraday Reporting</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://intradayreporting.vscocorp.com/vss" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://intradayreporting.vscocorp.com/vss" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+      <div class="tool-row">
+        <span class="tool-name">📊 KPI + MSI Library</span>
+        <span class="tool-actions">
+          <a class="link-btn" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" title="Open in this window">🧭</a>
+          <a class="link-btn" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank" rel="noopener" title="Open in new window">↗</a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIDENTIAL CALLOUT -->
+  <div class="conf-card">
+    <div>
+      <b>🔒 Confidential Look Idea</b>
+      <p>See how SET Loop can apply a watermark overlay for sensitive, store-specific content. This is off the main leadership flow — click to preview.</p>
+    </div>
+    <button class="conf-btn" onclick="document.getElementById('confOverlay').classList.add('show')">Open Confidential Look Idea</button>
+  </div>
+
+</div>
+
+<!-- CONFIDENTIAL OVERLAY / MODAL -->
+<div class="conf-overlay" id="confOverlay">
+  <div class="conf-modal">
+    <button class="conf-close" onclick="document.getElementById('confOverlay').classList.remove('show')">Close ✕</button>
+    <h2>Confidential Content Treatment</h2>
+    <p>When content is marked <strong>Confidential · Assigned Use Only</strong>, SET Loop can apply a subtle watermark overlay across the page. This discourages screenshots, unauthorized sharing, and forwarding while still allowing the intended user to read and use the content.</p>
+    <p><strong>How it works:</strong> The content owner sets a confidentiality level when publishing — Internal, Confidential, or Store-Specific Confidential. The SET Loop rendering layer applies the appropriate treatment automatically for that audience.</p>
+    <p>This concept sample shows the watermark in place. In production, this would be tied to the user's authenticated role and the publisher's content protection setting.</p>
+    <div style="background:#f8f8f8;border:1px solid #eee;border-radius:8px;padding:1.5rem;margin-top:1rem;position:relative;overflow:hidden;min-height:120px;">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);font-size:20px;font-weight:900;color:rgba(157,23,77,.09);pointer-events:none;text-align:center;padding:1rem">CONFIDENTIAL · ASSIGNED USE ONLY · CONFIDENTIAL · ASSIGNED USE ONLY</div>
+      <p style="font-size:.85rem;color:#333;position:relative;z-index:1"><strong>Store 1392 · Ontario Mills</strong><br>Tier 6b · VS Full + PINK<br>Assortment and qualifier details for this store are visible only to assigned store leadership and their district.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="culture">Plan it. Map it. Set it. Learn from it.</div>
+  <div>SET Loop · SET the standard. Own the outcome. Put Her First.</div>
+</footer>
+</body>
+</html>

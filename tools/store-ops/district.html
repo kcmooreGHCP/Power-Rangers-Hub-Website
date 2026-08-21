@@ -59,7 +59,12 @@
     .tag-pink{background:#ed2d8b;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
     .tag-vsb{background:#8e44ad;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
     .tag-all{background:#555;color:#fff;border-radius:3px;padding:.15rem .5rem;font-size:.6rem;font-weight:700;letter-spacing:.06em}
-  </style>
+      .link-btn{width:26px;height:26px;border-radius:4px;display:inline-grid;place-items:center;background:#fff;border:1px solid #ddd;text-decoration:none;color:#11131a;font-size:.8rem;font-weight:700;transition:.12s;cursor:pointer;vertical-align:middle}
+    .link-btn:hover{background:#11131a;color:#fff;border-color:#11131a;text-decoration:none}
+    .tool-row-wrap{display:flex;align-items:center;justify-content:space-between;padding:.45rem .75rem;background:#f8f8f8;border:1px solid #eee;border-radius:6px;margin-bottom:.4rem}
+    .tool-label{font-size:.8rem;font-weight:500;color:#11131a;flex:1}
+    .dual-icons{display:flex;gap:.25rem;flex-shrink:0}
+</style>
 </head>
 <body>
   <nav class="topnav">
@@ -254,10 +259,12 @@
       </div>
       <div class="card">
         <div class="ext-links">
-          <a class="ext-link" href="https://vsstoresupplyorder.com/" target="_blank">📦 Supply Order</a>
-          <a class="ext-link" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank">📊 MicroStrategy</a>
-          <a class="ext-link" href="https://blueday.vscocorp.com/" target="_blank">🔵 Blue Day</a>
-        </div>
+          <div class="tool-row-wrap"><span class="tool-label">📦 Supply Order</span><span class="dual-icons"><a class="link-btn" href="https://vsstoresupplyorder.com/" title="Open here">🧭</a><a class="link-btn" href="https://vsstoresupplyorder.com/" target="_blank" rel="noopener" title="New window">↗</a></span></div>
+          <div class="tool-row-wrap"><span class="tool-label">📊 MSI Reports</span><span class="dual-icons"><a class="link-btn" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" title="Open here">🧭</a><a class="link-btn" href="https://vsedwmsi.cloud.microstrategy.com/MicroStrategyLibrary/app/1E1519614F2E617176CC408B65E2FCA7/44DC93621D43083ACE487DB2DBDCD0D9/share" target="_blank" rel="noopener" title="New window">↗</a></span></div>
+          <div class="tool-row-wrap"><span class="tool-label">🔵 Blue Day</span><span class="dual-icons"><a class="link-btn" href="https://blueday.vscocorp.com/" title="Open here">🧭</a><a class="link-btn" href="https://blueday.vscocorp.com/" target="_blank" rel="noopener" title="New window">↗</a></span></div>
+          <div class="tool-row-wrap"><span class="tool-label">📈 Intraday</span><span class="dual-icons"><a class="link-btn" href="https://intradayreporting.vscocorp.com/vss" title="Open here">🧭</a><a class="link-btn" href="https://intradayreporting.vscocorp.com/vss" target="_blank" rel="noopener" title="New window">↗</a></span></div>
+          <div class="tool-row-wrap"><span class="tool-label">🏢 DM Intranet</span><span class="dual-icons"><a class="link-btn" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" title="Open here">🧭</a><a class="link-btn" href="https://vscocorp.sharepoint.com/sites/VSCoDM/" target="_blank" rel="noopener" title="New window">↗</a></span></div>
+          </div>
       </div>
       <div class="card">
         <div class="ext-links">
