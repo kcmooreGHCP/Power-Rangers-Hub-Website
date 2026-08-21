@@ -272,7 +272,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <a href="#security">Security</a>
       <a href="#pilot">Join the Pilot</a>
       <a href="#more">More Tools</a>
-      <a href="javascript:void(0)" onclick="copyLink()" class="nav-cta" id="share-btn">📋 Copy link</a>
+      <a href="#" onclick="sharePresentation();return false" class="nav-cta" id="share-btn">🔗 Share the Loop</a>
     </nav>
   </div>
 </header>
@@ -378,7 +378,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <p>Click any role to see the working prototype. Store 1392 · Ontario Mills, District 339 West, Region 400 West — real store names, real data structure.</p>
     </div>
     <div class="role-grid" style="margin-bottom:28px">
-      <div class="role-card role-sm" onclick="showDemo('sm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+      <a class="role-card role-sm" href="tools/store-ops/store.html">
         <span class="role-tag">Store Manager</span>
         <h3 style="margin-top:10px">Your store. Your map. Your plan.</h3>
         <p>Store-specific visual direction, close-to-open checklist, promotions, DM/RM announcements, and MSI assortment access.</p>
@@ -389,9 +389,9 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
           <li>Business Now communications from Home Office</li>
           <li>Ask a question → routed automatically</li>
         </ul>
-        <div style="margin-top:14px"><a href="tools/store-ops/store.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Store 1392 →</a></div>
-      </div>
-      <div class="role-card role-dm" onclick="showDemo('dm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+        <div style="margin-top:14px;display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Open Store 1392 →</div>
+      </a>
+      <a class="role-card role-dm" href="tools/store-ops/district.html">
         <span class="role-tag">District Manager</span>
         <h3 style="margin-top:10px">Know who needs you — now.</h3>
         <p>Live store readiness across all your stores, open support flags, DM Inspection items, and escalation to region without waiting for weekly calls.</p>
@@ -401,9 +401,9 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
           <li>See open qualifier questions by store</li>
           <li>Route escalations upstream with one click</li>
         </ul>
-        <div style="margin-top:14px"><a href="tools/store-ops/district.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open District 339 →</a></div>
-      </div>
-      <div class="role-card role-rm" onclick="showDemo('rm'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+        <div style="margin-top:14px;display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Open District 339 →</div>
+      </a>
+      <a class="role-card role-rm" href="tools/store-ops/region.html">
         <span class="role-tag">Regional Manager</span>
         <h3 style="margin-top:10px">See the whole picture. Act with precision.</h3>
         <p>Region 400 West — all districts, all stores. Field questions categorized by source and owner. No more delayed weekly reports.</p>
@@ -413,9 +413,9 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
           <li>Stores needing DM support — flagged in real time</li>
           <li>Route issues upstream with one click</li>
         </ul>
-        <div style="margin-top:14px"><a href="tools/store-ops/region.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Region 400 →</a></div>
-      </div>
-      <div class="role-card role-hq" onclick="showDemo('ho'); document.getElementById('demo-section').scrollIntoView({behavior:'smooth'})">
+        <div style="margin-top:14px;display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Open Region 400 →</div>
+      </a>
+      <a class="role-card role-hq" href="tools/store-ops/SET_LOOP_MASTER.html">
         <span class="role-tag">Home Office</span>
         <h3 style="margin-top:10px">Build. Govern. Publish.</h3>
         <p>Publishing queue, cross-functional partner intake, approval workflow, and field intelligence — all in one governed hub.</p>
@@ -425,8 +425,8 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
           <li>3 pending approvals: OPS, Merch, Finance</li>
           <li>Business Now communications register</li>
         </ul>
-        <div style="margin-top:14px"><a href="tools/store-ops/SET_LOOP_MASTER.html" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none">Open Home Office →</a></div>
-      </div>
+        <div style="margin-top:14px;display:inline-block;background:rgba(255,255,255,.2);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Open Home Office →</div>
+      </a>
     </div>
 
     <!-- INTERACTIVE DEMO FRAME -->
@@ -1147,7 +1147,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <div>Built by KC Moore · VP of Store Operations Briefing · August 21, 2026</div>
       <div style="display:flex;align-items:center;gap:10px">
         <span>Pilot-ready · M365 · No new licenses</span>
-        <a href="https://kcmooreghcp.github.io/Power-Rangers-Hub-Website/vp-presentation.html" target="_blank" style="color:var(--brand);font-weight:700;font-size:11px;text-decoration:none;background:#ede9fe;padding:4px 9px;border-radius:6px">🔗 Share live link</a>
+        <a href="#" onclick="sharePresentation();return false" style="color:var(--brand);font-weight:700;font-size:11px;text-decoration:none;background:#ede9fe;padding:4px 9px;border-radius:6px">🔗 Share with tracking</a>
       </div>
     </div>
   </div>
@@ -1223,7 +1223,7 @@ window.addEventListener('scroll', () => {
     <button onclick="closeJoin()" style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:.75rem 1rem;font-size:.86rem;font-weight:600;cursor:pointer">Maybe later</button>
   </div>
   <div id="join-success" style="display:none;margin-top:1rem;background:#e8f5e9;border-radius:8px;padding:1rem;color:#2e7d32;font-weight:600;font-size:.86rem">✅ You're in the Loop! We'll reach out with next steps. You can explore freely now.</div>
-  <p style="font-size:.72rem;color:#aaa;margin-top:1rem;text-align:center">Pilot only. No enterprise data collected. Your selections save locally to this browser.</p>
+  <p style="font-size:.72rem;color:#aaa;margin-top:1rem;text-align:center">Pilot only. Your selections save to this browser; sending them to KC is optional.</p>
 </div>
 </div>
 
@@ -1240,7 +1240,7 @@ window.addEventListener('scroll', () => {
 .interest-chip{border:1.5px solid #e8e8e8;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;font-weight:600;cursor:pointer;color:#11131a;transition:.12s;text-align:center}
 .interest-chip:hover{border-color:#ed2d8b;color:#ed2d8b}
 .interest-chip.selected{border-color:#ed2d8b;background:#fff7fb;color:#ed2d8b}
-.react-row{display:flex;align-items:center;gap:.5rem;margin-top:1rem;padding-top:.75rem;border-top:1px solid #f0f0f0;flex-wrap:wrap}
+.react-row{display:flex;align-items:center;gap:.5rem;width:min(1180px,calc(100% - 40px));margin:1rem auto 0;padding-top:.75rem;border-top:1px solid #f0f0f0;flex-wrap:wrap}
 .react-row span{font-size:.74rem;color:#aaa;flex:1}
 .react-btn{background:#f8f8f8;border:1px solid #eee;border-radius:20px;padding:.3rem .75rem;font-size:.74rem;font-weight:600;cursor:pointer;transition:.12s;color:#555}
 .react-btn:hover,.react-btn.reacted{background:#ed2d8b;color:#fff;border-color:#ed2d8b}
@@ -1272,6 +1272,19 @@ function submitJoin() {
   const all = JSON.parse(localStorage.getItem('setloop_joiners') || '[]');
   all.push(data);
   localStorage.setItem('setloop_joiners', JSON.stringify(all));
+  if (window.SETLoopFeedback) {
+    const savedProfile = window.SETLoopFeedback.getProfile();
+    const joinedProfile = window.SETLoopFeedback.saveProfile({
+      name: name || savedProfile.name,
+      email: email || savedProfile.email,
+      department: savedProfile.department,
+      level: savedProfile.level
+    });
+    window.SETLoopFeedback.record('join', {
+      profile: joinedProfile,
+      interests: interests
+    });
+  }
   document.getElementById('join-success').style.display = 'block';
   showToast("Welcome to the Loop!");
   setTimeout(() => { closeJoin(); document.getElementById('join-success').style.display='none'; }, 3000);
@@ -1307,6 +1320,7 @@ function sharePresentation() {
   });
 }
 </script>
+<script src="tools/store-ops/set-loop-feedback.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SET Loop Pilot Results</title>
+<style>
+:root{--ink:#11131a;--muted:#667085;--line:#e4e7ec;--pink:#ed2d8b;--purple:#5926a8;--green:#067647;--paper:#f7f8fb}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 "Helvetica Neue",Arial,sans-serif}.top{background:#11131a;color:#fff;padding:26px 5vw}.top-inner,.wrap{width:min(1180px,90vw);margin:auto}.top-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}.top h1{margin:0;font-size:30px}.top p{margin:5px 0 0;color:#cfd3dc}.back{color:#fff;text-decoration:none;border:1px solid #ffffff40;border-radius:9px;padding:9px 13px;font-weight:800}.wrap{padding:28px 0 50px}.notice{background:#fff7fb;border-left:5px solid var(--pink);border-radius:0 12px 12px 0;padding:14px 17px;margin-bottom:22px;color:#4a2140}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}.kpi,.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 6px 20px rgba(16,24,40,.04)}.kpi b{display:block;font-size:30px;line-height:1;color:var(--purple)}.kpi span{display:block;color:var(--muted);font-weight:700;margin-top:7px}.toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:16px}.toolbar h2{margin:0 auto 0 0}.button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer;text-decoration:none}.button.primary{background:var(--pink);border-color:var(--pink);color:#fff}.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.filters select,.filters input{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:#fff;min-width:170px}.table-wrap{overflow:auto}.empty{padding:44px;text-align:center;color:var(--muted)}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;white-space:nowrap}th{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);background:#f9fafb}.detail{white-space:normal;min-width:250px}.pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800}.reaction{background:#fce7f3;color:#9d174d}.share{background:#ede9fe;color:#5b21b6}.join{background:#d1fae5;color:#065f46}.referral-open{background:#dbeafe;color:#1e40af}.small{color:var(--muted);font-size:12px}.danger{color:#b42318}@media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}.top-inner{align-items:flex-start;flex-direction:column}th,td{padding:9px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-inner"><div><h1>SET Loop Pilot Results</h1><p>Reactions, joins, shares, and referral opens captured in this browser.</p></div><a class="back" href="../../vp-presentation.html">← Back to presentation</a></div></header>
+<main class="wrap">
+  <div class="notice"><strong>What this shows:</strong> this is the pilot ledger for the current browser. Responses emailed to KC are centrally visible in Outlook. Enterprise-wide automatic aggregation will use the existing SharePoint + Power Automate connector when approved.</div>
+  <section class="kpis">
+    <div class="kpi"><b id="reactionCount">0</b><span>Reactions</span></div>
+    <div class="kpi"><b id="joinCount">0</b><span>Loop joins</span></div>
+    <div class="kpi"><b id="shareCount">0</b><span>Shares created</span></div>
+    <div class="kpi"><b id="openCount">0</b><span>Referral opens</span></div>
+  </section>
+  <section class="card">
+    <div class="toolbar">
+      <div><strong>Pilot owner routing</strong><div class="small">Saved only in this browser and added only to links you intentionally create.</div></div>
+      <input id="ownerEmail" type="email" placeholder="Pilot owner email" style="border:1px solid var(--line);border-radius:9px;padding:9px 11px;min-width:260px">
+      <button class="button" type="button" id="saveOwner">Save owner</button>
+    </div>
+  </section>
+  <section class="card" style="margin-top:16px">
+    <div class="toolbar">
+      <h2>Activity ledger</h2>
+      <button class="button primary" type="button" id="emailReport">Email results to KC</button>
+      <button class="button" type="button" id="exportCsv">Export CSV</button>
+      <button class="button" type="button" id="exportJson">Export JSON</button>
+    </div>
+    <div class="filters">
+      <select id="typeFilter"><option value="">All activity</option><option value="reaction">Reactions</option><option value="join">Joins</option><option value="share">Shares</option><option value="referral-open">Referral opens</option></select>
+      <input id="searchFilter" type="search" placeholder="Search person, team, page...">
+      <button class="button danger" type="button" id="clearLedger">Clear this browser</button>
+    </div>
+    <div class="table-wrap" id="resultsTable"></div>
+  </section>
+</main>
+<script>
+(function(){
+  const KEY='setloop_pilot_ledger_v1';
+  const OWNER_KEY='setloop_pilot_owner_email_v1';
+  const $=function(selector){return document.querySelector(selector)};
+  function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(error){return[]}}
+  function text(value){return String(value||'').replace(/[&<>"']/g,function(character){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]})}
+  function person(entry){const p=entry.profile||entry.sender||{};return[p.name||entry.name,p.department,p.level].filter(Boolean).join(' · ')||'Not provided'}
+  function detail(entry){
+    if(entry.type==='reaction')return(entry.reaction||'')+' — '+(entry.section||'')+(entry.comment?' · '+entry.comment:'');
+    if(entry.type==='share'){const r=entry.recipient||{};return'To: '+([r.name,r.department,r.level,r.email].filter(Boolean).join(' · ')||'Not provided')+' · '+(entry.delivery||'saved');}
+    if(entry.type==='join')return(entry.interests||[]).join(', ')||'No interests selected';
+    if(entry.type==='referral-open')return[entry.recipientDepartment,entry.recipientLevel].filter(Boolean).join(' · ')||'Trackable link opened';
+    return entry.type;
+  }
+  function filtered(){
+    const type=$('#typeFilter').value;
+    const query=$('#searchFilter').value.trim().toLowerCase();
+    return read().filter(function(entry){return(!type||entry.type===type)&&(!query||JSON.stringify(entry).toLowerCase().includes(query))}).reverse();
+  }
+  function render(){
+    const all=read();
+    $('#reactionCount').textContent=all.filter(function(x){return x.type==='reaction'}).length;
+    $('#joinCount').textContent=all.filter(function(x){return x.type==='join'}).length;
+    $('#shareCount').textContent=all.filter(function(x){return x.type==='share'}).length;
+    $('#openCount').textContent=all.filter(function(x){return x.type==='referral-open'}).length;
+    const rows=filtered();
+    if(!rows.length){$('#resultsTable').innerHTML='<div class="empty">No matching pilot activity has been recorded in this browser yet.</div>';return}
+    $('#resultsTable').innerHTML='<table><thead><tr><th>When</th><th>Type</th><th>Person / team</th><th>Page</th><th>Detail</th><th>Delivery</th></tr></thead><tbody>'+rows.map(function(entry){return'<tr><td>'+text(new Date(entry.timestamp).toLocaleString())+'</td><td><span class="pill '+text(entry.type)+'">'+text(entry.type)+'</span></td><td>'+text(person(entry))+'</td><td>'+text(entry.page)+'</td><td class="detail">'+text(detail(entry))+'</td><td>'+text(entry.delivery||'local')+'</td></tr>'}).join('')+'</tbody></table>';
+  }
+  function csvValue(value){return'"'+String(value==null?'':value).replace(/"/g,'""')+'"'}
+  function download(name,content,type){const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([content],{type:type}));link.download=name;link.click();setTimeout(function(){URL.revokeObjectURL(link.href)},1000)}
+  $('#typeFilter').addEventListener('change',render);
+  $('#searchFilter').addEventListener('input',render);
+  $('#exportCsv').addEventListener('click',function(){const header=['timestamp','type','page','person','email','department','level','reaction','section','comment','interests','recipientName','recipientEmail','recipientDepartment','recipientLevel','delivery','referralId'];const lines=[header.join(',')].concat(read().map(function(e){const p=e.profile||e.sender||{},r=e.recipient||{};return[e.timestamp,e.type,e.page,p.name||e.name,p.email||e.email,p.department,p.level,e.reaction,e.section,e.comment,(e.interests||[]).join(' | '),r.name,r.email,r.department,r.level,e.delivery,e.referralId||e.shareId].map(csvValue).join(',')}));download('set-loop-pilot-results.csv',lines.join('\n'),'text/csv')});
+  $('#exportJson').addEventListener('click',function(){download('set-loop-pilot-results.json',JSON.stringify(read(),null,2),'application/json')});
+  $('#ownerEmail').value=localStorage.getItem(OWNER_KEY)||'';
+  $('#saveOwner').addEventListener('click',function(){const value=$('#ownerEmail').value.trim();if(value){localStorage.setItem(OWNER_KEY,value);alert('Pilot owner saved in this browser.')}else{localStorage.removeItem(OWNER_KEY);alert('Pilot owner cleared.')}});
+  $('#emailReport').addEventListener('click',function(){const owner=localStorage.getItem(OWNER_KEY)||'';if(!owner){alert('Add and save the pilot owner email first.');return}const all=read();const summary=['SET Loop pilot results from this browser','','Reactions: '+all.filter(function(x){return x.type==='reaction'}).length,'Joins: '+all.filter(function(x){return x.type==='join'}).length,'Shares: '+all.filter(function(x){return x.type==='share'}).length,'Referral opens: '+all.filter(function(x){return x.type==='referral-open'}).length,'','Export the CSV from the Pilot Results page for response-level detail.'].join('\n');location.href='mailto:'+owner+'?'+new URLSearchParams({subject:'SET Loop pilot results',body:summary}).toString()});
+  $('#clearLedger').addEventListener('click',function(){if(confirm('Clear all SET Loop pilot activity saved in this browser?')){localStorage.removeItem(KEY);render()}});
+  window.addEventListener('storage',render);
+  render();
+})();
+</script>
+</body>
+</html>
