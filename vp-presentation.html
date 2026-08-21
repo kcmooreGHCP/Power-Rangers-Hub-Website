@@ -1273,7 +1273,7 @@ function submitJoin() {
   all.push(data);
   localStorage.setItem('setloop_joiners', JSON.stringify(all));
   document.getElementById('join-success').style.display = 'block';
-  showToast('⚡ Welcome to the Loop! Your interests have been saved.');
+  showToast("Welcome to the Loop!");
   setTimeout(() => { closeJoin(); document.getElementById('join-success').style.display='none'; }, 3000);
 }
 
@@ -1287,7 +1287,7 @@ function react(sectionId, reaction, btn) {
   const row = btn.closest('.react-row');
   row.querySelectorAll('.react-btn').forEach(b => b.classList.remove('reacted'));
   btn.classList.add('reacted');
-  const msg = reaction === '👍 Like' ? 'Great! We'll keep building this.' : reaction === '👎 Not Yet' ? 'Noted. We want to hear more.' : 'We'll send you more details on this.';
+  const msg = reaction === "👍 Like" ? "Great! We will keep building this." : reaction === "👎 Not Yet" ? "Noted. We want to hear more." : "We will send you more details on this.";
   showToast(reaction + ' — ' + msg);
 }
 
