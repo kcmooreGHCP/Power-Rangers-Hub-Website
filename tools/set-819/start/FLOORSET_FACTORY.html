@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SET Loop Floorset Factory - source-grounded floorset intake and Adobe production handoff."
+    />
+    <title>SET Loop Floorset Factory</title>
+    <link rel="stylesheet" href="./assets/set-brand-system.css" />
+    <link rel="stylesheet" href="./assets/floorset-factory.css" />
+    <link rel="stylesheet" href="./assets/floorset-factory-asset-map.css" />
+    <style id="set-factory-visual-qa-styles">
+      .visual-qa-section {
+        background:
+          radial-gradient(circle at 88% 10%, rgba(237, 0, 140, 0.09), transparent 28%),
+          linear-gradient(180deg, #fbf9f6 0%, #f2ece4 100%);
+      }
+
+      .qa-intake-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 14px;
+        align-items: center;
+        padding: 22px;
+        border: 1px solid var(--ff-line);
+        border-radius: 22px;
+        background: var(--ff-white);
+        box-shadow: 0 20px 50px rgba(23, 21, 26, 0.06);
+      }
+
+      .qa-intake-copy {
+        display: grid;
+        gap: 7px;
+      }
+
+      .qa-intake-copy strong {
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+
+      .qa-intake-copy p,
+      .qa-intake-copy code {
+        margin: 0;
+        color: var(--ff-gray);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .qa-step {
+        color: var(--ff-pink);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .qa-folder-button,
+      .qa-secondary-button,
+      .qa-export-actions button {
+        min-height: 46px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .qa-folder-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0 20px;
+        color: var(--ff-white);
+        background: var(--ff-pink);
+      }
+
+      .qa-folder-button input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .qa-secondary-button,
+      .qa-export-actions button {
+        padding: 0 17px;
+        border: 1px solid var(--ff-line);
+        color: var(--ff-ink);
+        background: var(--ff-white);
+      }
+
+      .qa-secondary-button:disabled,
+      .qa-export-actions button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+
+      .qa-scan-status {
+        min-height: 24px;
+        margin: 14px 2px 0;
+        color: var(--ff-gray);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .qa-scan-status.is-error {
+        color: var(--ff-red);
+        font-weight: 700;
+      }
+
+      .qa-next-action {
+        margin-top: 14px;
+        padding: 18px 20px;
+        border: 1px solid #e3b1cb;
+        border-radius: 18px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        color: #5c2845;
+        background: #fff1f7;
+      }
+
+      .qa-next-action div {
+        display: grid;
+        gap: 5px;
+      }
+
+      .qa-next-action strong {
+        font-size: 16px;
+      }
+
+      .qa-next-action p {
+        margin: 0;
+        color: #6f5362;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .qa-next-action a {
+        min-height: 44px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: var(--ff-pink);
+        font-size: 12px;
+        font-weight: 900;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .qa-gate {
+        margin-top: 18px;
+        padding: 24px;
+        border: 1px solid;
+        border-radius: 22px;
+        display: grid;
+        grid-template-columns: minmax(240px, 0.45fr) minmax(0, 1fr);
+        gap: 28px;
+        align-items: center;
+      }
+
+      .qa-gate > div {
+        display: grid;
+        gap: 7px;
+      }
+
+      .qa-gate span {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.09em;
+      }
+
+      .qa-gate strong {
+        font-size: clamp(21px, 3vw, 32px);
+        letter-spacing: -0.035em;
+      }
+
+      .qa-gate p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .qa-gate-idle {
+        border-color: #d3ccd5;
+        color: #5a535e;
+        background: #eeeaef;
+      }
+
+      .qa-gate-ready {
+        border-color: #6eb8a7;
+        color: #0c5d55;
+        background: #e2f3ed;
+      }
+
+      .qa-gate-review {
+        border-color: #e3aa59;
+        color: #7b4500;
+        background: #fff1dc;
+      }
+
+      .qa-gate-blocked {
+        border-color: #e09891;
+        color: #8e2118;
+        background: #fee9e7;
+      }
+
+      .qa-kpis {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(8, minmax(100px, 1fr));
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--ff-line);
+        border-radius: 20px;
+        background: var(--ff-line);
+      }
+
+      .qa-kpis article {
+        min-height: 104px;
+        padding: 17px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: var(--ff-white);
+      }
+
+      .qa-kpis span {
+        color: var(--ff-gray);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .qa-kpis strong {
+        font-size: 32px;
+        letter-spacing: -0.05em;
+      }
+
+      .qa-controls {
+        margin-top: 18px;
+        padding: 18px;
+        border: 1px solid var(--ff-line);
+        border-radius: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(140px, 0.6fr)) minmax(210px, 1fr);
+        gap: 12px;
+        align-items: end;
+        background: rgba(255, 255, 255, 0.78);
+      }
+
+      .qa-controls label {
+        min-width: 0;
+        display: grid;
+        gap: 7px;
+      }
+
+      .qa-controls label > span {
+        color: var(--ff-gray);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .qa-controls select,
+      .qa-controls input {
+        width: 100%;
+        min-height: 43px;
+        padding: 0 12px;
+        border: 1px solid var(--ff-line);
+        border-radius: 11px;
+        color: var(--ff-ink);
+        background: var(--ff-white);
+      }
+
+      .qa-export-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+
+      .qa-project-meta {
+        margin-top: 14px;
+        padding: 13px 16px;
+        border-left: 3px solid var(--ff-pink);
+        color: var(--ff-gray);
+        background: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .qa-results {
+        margin-top: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .qa-empty {
+        min-height: 220px;
+        padding: 40px;
+        border: 1px dashed #c7bfc9;
+        border-radius: 22px;
+        display: grid;
+        place-content: center;
+        gap: 9px;
+        text-align: center;
+        color: var(--ff-gray);
+        background: rgba(255, 255, 255, 0.52);
+      }
+
+      .qa-empty strong {
+        color: var(--ff-ink);
+        font-size: 22px;
+      }
+
+      .qa-empty p {
+        max-width: 720px;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .qa-card {
+        overflow: hidden;
+        border: 1px solid var(--ff-line);
+        border-left-width: 7px;
+        border-radius: 22px;
+        display: grid;
+        grid-template-columns: minmax(160px, 0.32fr) minmax(250px, 0.55fr) minmax(0, 1.13fr);
+        background: var(--ff-white);
+        box-shadow: 0 12px 28px rgba(23, 21, 26, 0.045);
+      }
+
+      .qa-card[data-status="READY"] {
+        border-left-color: var(--ff-teal);
+      }
+
+      .qa-card[data-status="REVIEW"] {
+        border-left-color: var(--ff-amber);
+      }
+
+      .qa-card[data-status="BLOCKED"] {
+        border-left-color: var(--ff-red);
+      }
+
+      .qa-card[data-status="OPTIONAL"] {
+        border-left-color: #8a838e;
+      }
+
+      .qa-card-meta,
+      .qa-card-preview,
+      .qa-card-proof {
+        min-width: 0;
+        padding: 22px;
+      }
+
+      .qa-card-meta,
+      .qa-card-preview {
+        border-right: 1px solid var(--ff-line);
+      }
+
+      .qa-card-meta {
+        display: grid;
+        align-content: start;
+        gap: 11px;
+        background: #fbfaf8;
+      }
+
+      .qa-slot-label {
+        color: var(--ff-pink);
+        font-size: 34px;
+        font-weight: 900;
+        letter-spacing: -0.06em;
+      }
+
+      .qa-status-pill {
+        width: fit-content;
+        padding: 7px 10px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .qa-status-ready {
+        color: #0b665b;
+        background: #dff3ec;
+      }
+
+      .qa-status-review {
+        color: #824a00;
+        background: #ffefd7;
+      }
+
+      .qa-status-blocked {
+        color: #942a20;
+        background: #fee6e3;
+      }
+
+      .qa-status-optional {
+        color: #625c65;
+        background: #ece9ed;
+      }
+
+      .qa-meta-list {
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      .qa-meta-list div {
+        display: grid;
+        gap: 2px;
+      }
+
+      .qa-meta-list dt {
+        color: var(--ff-gray);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .qa-meta-list dd {
+        min-width: 0;
+        margin: 0;
+        overflow-wrap: anywhere;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .qa-card-preview {
+        display: grid;
+        gap: 12px;
+        align-content: start;
+      }
+
+      .qa-preview-frame {
+        position: relative;
+        min-height: 210px;
+        overflow: hidden;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(45deg, #eee 25%, transparent 25%) 0 0 / 18px 18px,
+          linear-gradient(-45deg, #eee 25%, transparent 25%) 0 9px / 18px 18px,
+          linear-gradient(45deg, transparent 75%, #eee 75%) 9px -9px / 18px 18px,
+          linear-gradient(-45deg, transparent 75%, #eee 75%) -9px 0 / 18px 18px,
+          #f7f7f7;
+      }
+
+      .qa-preview-frame button {
+        width: 100%;
+        height: 100%;
+        min-height: 210px;
+        padding: 0;
+        border: 0;
+        cursor: zoom-in;
+        background: transparent;
+      }
+
+      .qa-preview-frame img {
+        width: 100%;
+        height: 230px;
+        display: block;
+        object-fit: contain;
+      }
+
+      .qa-preview-placeholder {
+        padding: 24px;
+        color: var(--ff-gray);
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .qa-preview-caption {
+        display: grid;
+        gap: 4px;
+      }
+
+      .qa-preview-caption strong {
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+
+      .qa-preview-caption span {
+        color: var(--ff-gray);
+        font-size: 10px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+
+      .qa-card-proof {
+        display: grid;
+        align-content: start;
+        gap: 14px;
+      }
+
+      .qa-proof-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .qa-proof-item {
+        min-height: 82px;
+        padding: 13px;
+        border: 1px solid var(--ff-line);
+        border-radius: 14px;
+        display: grid;
+        align-content: space-between;
+        gap: 8px;
+      }
+
+      .qa-proof-item span {
+        color: var(--ff-gray);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .qa-proof-item strong {
+        font-size: 12px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+      }
+
+      .qa-reasons {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+        list-style: none;
+      }
+
+      .qa-reasons li {
+        position: relative;
+        padding-left: 16px;
+        color: #5b555e;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .qa-reasons li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.56em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .qa-card[data-status="READY"] .qa-reasons li {
+        color: #176c61;
+      }
+
+      .qa-card[data-status="REVIEW"] .qa-reasons li {
+        color: #8b550e;
+      }
+
+      .qa-card[data-status="BLOCKED"] .qa-reasons li {
+        color: #9b3127;
+      }
+
+      .qa-orphan-panel {
+        margin-top: 18px;
+        overflow: hidden;
+        border: 1px solid var(--ff-line);
+        border-radius: 18px;
+        background: var(--ff-white);
+      }
+
+      .qa-orphan-panel summary {
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .qa-orphan-panel [data-qa-orphan-list] {
+        max-height: 360px;
+        overflow: auto;
+        padding: 0 20px 20px;
+      }
+
+      .qa-orphan-panel ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--ff-gray);
+        font-size: 11px;
+        line-height: 1.65;
+        overflow-wrap: anywhere;
+      }
+
+      .qa-legend {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px 22px;
+        color: var(--ff-gray);
+        font-size: 10px;
+        line-height: 1.5;
+      }
+
+      .qa-legend span {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+      }
+
+      .qa-dot {
+        flex: 0 0 auto;
+        width: 9px;
+        height: 9px;
+        margin-top: 3px;
+        border-radius: 50%;
+      }
+
+      .qa-dot-ready {
+        background: var(--ff-teal);
+      }
+
+      .qa-dot-review {
+        background: var(--ff-amber);
+      }
+
+      .qa-dot-blocked {
+        background: var(--ff-red);
+      }
+
+      .qa-dot-optional {
+        background: #8a838e;
+      }
+
+      .qa-preview-dialog {
+        width: min(1000px, calc(100vw - 32px));
+        max-height: calc(100vh - 32px);
+        padding: 18px;
+        border: 0;
+        border-radius: 22px;
+        color: var(--ff-ink);
+        background: var(--ff-white);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+      }
+
+      .qa-preview-dialog::backdrop {
+        background: rgba(16, 14, 18, 0.82);
+      }
+
+      .qa-preview-dialog > button {
+        margin-left: auto;
+        padding: 8px 13px;
+        border: 1px solid var(--ff-line);
+        border-radius: 999px;
+        display: block;
+        color: var(--ff-ink);
+        background: var(--ff-white);
+        cursor: pointer;
+      }
+
+      .qa-preview-dialog img {
+        width: 100%;
+        max-height: calc(100vh - 190px);
+        margin-top: 12px;
+        object-fit: contain;
+        background: #f3f1f3;
+      }
+
+      .qa-preview-dialog [data-qa-dialog-copy] {
+        padding: 14px 2px 2px;
+        color: var(--ff-gray);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 1180px) {
+        .qa-kpis {
+          grid-template-columns: repeat(4, minmax(110px, 1fr));
+        }
+
+        .qa-card {
+          grid-template-columns: minmax(150px, 0.35fr) minmax(230px, 0.65fr);
+        }
+
+        .qa-card-proof {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--ff-line);
+        }
+
+        .qa-card-preview {
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 840px) {
+        .qa-intake-panel,
+        .qa-gate,
+        .qa-next-action {
+          grid-template-columns: 1fr;
+        }
+
+        .qa-folder-button,
+        .qa-secondary-button,
+        .qa-next-action a {
+          width: 100%;
+        }
+
+        .qa-controls {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .qa-search {
+          grid-column: 1 / -1;
+        }
+
+        .qa-card {
+          grid-template-columns: 1fr;
+        }
+
+        .qa-card-meta,
+        .qa-card-preview {
+          border-right: 0;
+          border-bottom: 1px solid var(--ff-line);
+        }
+
+        .qa-card-proof {
+          grid-column: auto;
+          border-top: 0;
+        }
+
+        .qa-legend {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .qa-kpis {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .qa-controls,
+        .qa-proof-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .qa-search {
+          grid-column: auto;
+        }
+
+        .qa-export-actions {
+          display: grid;
+        }
+
+        .qa-export-actions button {
+          width: 100%;
+        }
+      }
+
+      @media print {
+        .factory-header,
+        .factory-truth,
+        .qa-intake-panel,
+        .qa-controls,
+        .qa-preview-dialog,
+        #setup,
+        #scope,
+        #evidence,
+        #handoff {
+          display: none !important;
+        }
+
+        .visual-qa-section {
+          padding: 20px;
+          background: #fff;
+        }
+
+        .qa-card {
+          break-inside: avoid;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-brand="set">
+    <a class="skip-link" href="#factory-main">Skip to Factory setup</a>
+
+    <header class="factory-header">
+      <a class="factory-brand" href="./START_HERE.html" aria-label="Return to SET Resource Center">
+        <span class="factory-mark">SET</span>
+        <span>
+          <strong>Floorset Factory</strong>
+          <small>Prototype intake / crop / place / check</small>
+        </span>
+      </a>
+      <nav aria-label="Floorset Factory navigation">
+        <a href="./START_HERE.html">Resource Center</a>
+        <a href="#setup">1 Set up</a>
+        <a href="#scope">2 Map assets</a>
+        <a href="#handoff">3 Prepare BG</a>
+        <a href="#visual-qa">4 Review &amp; release</a>
+      </nav>
+      <span class="local-chip"><i></i> Offline / local</span>
+    </header>
+
+    <aside class="factory-truth" aria-label="Factory evidence boundary">
+      <strong>RC12_9 and locked prototypes stay untouched.</strong>
+      <span>VS + VSB pilot-enabled</span>
+      <span>PINK modes are discovery-only</span>
+      <span>AI cannot approve or invent missing data</span>
+    </aside>
+
+    <main id="factory-main">
+      <section class="factory-hero">
+        <div>
+          <p class="eyebrow">SET Loop / deterministic production layer</p>
+          <h1>Load once. Map visually.<br /><em>Know the next action.</em></h1>
+          <p class="hero-copy">
+            Load the current project folder, keep every simple image name, and
+            click the matching connector on the real space-planning map. The
+            Factory keeps the technical IDs, source lineage, Adobe handoff, QA,
+            and release controls underneath the easy path.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#setup">Start the floorset</a>
+            <a class="button button-outline" href="#roles">See who sees what</a>
+          </div>
+        </div>
+        <aside class="hero-proof">
+          <div>
+            <span>Fixture records</span>
+            <strong data-source-records>1,838</strong>
+            <small>April 8 structural snapshot</small>
+          </div>
+          <div>
+            <span>Store configurations</span>
+            <strong>6</strong>
+            <small>Not approved tiers</small>
+          </div>
+          <div>
+            <span>Template cap</span>
+            <strong>6</strong>
+            <small>Per brand / never forced</small>
+          </div>
+          <div>
+            <span>Current asset matches</span>
+            <strong>0</strong>
+            <small>Authority still required</small>
+          </div>
+        </aside>
+      </section>
+
+      <section class="step-section" id="setup">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 01 / project definition</p>
+            <h2>Tell the Factory what this floorset actually is.</h2>
+          </div>
+          <p>
+            Pink fields are operator-controlled. Source-derived fields show
+            their evidence state and never promote themselves to “approved.”
+          </p>
+        </div>
+
+        <form class="setup-grid" id="factory-form">
+          <label>
+            <span>Floorset date</span>
+            <input id="floorset-date" name="floorsetDate" type="date" value="2026-08-19" required />
+          </label>
+
+          <label>
+            <span>Project revision</span>
+            <input id="project-revision" name="projectRevision" type="number" value="1" min="1" max="999" required />
+            <small>Increment for a new project configuration or handoff.</small>
+          </label>
+
+          <label>
+            <span>Brand</span>
+            <select id="brand-select" name="brand" required></select>
+            <small data-brand-state></small>
+          </label>
+
+          <label>
+            <span>Prototype / tier</span>
+            <select id="tier-select" name="tier" required>
+              <option value="T1_FOS">T1 / FOS</option>
+              <option value="T2">Tier 2</option>
+              <option value="T3">Tier 3</option>
+              <option value="T4">Tier 4</option>
+              <option value="T5">Tier 5</option>
+              <option value="T6">Tier 6</option>
+              <option value="TIER_UNASSIGNED" selected>Tier not assigned</option>
+            </select>
+            <small>Team-controlled; not inferred from source data.</small>
+          </label>
+
+          <label>
+            <span>Source-derived template candidate</span>
+            <select id="template-select" name="template" required></select>
+            <small data-template-state></small>
+          </label>
+
+          <label>
+            <span>Scope mode</span>
+            <select id="scope-mode" name="scopeMode">
+              <option value="PRESENTATION_INTAKE" selected>Presentation intake</option>
+              <option value="CONNECTOR_DETAIL">Connector detail</option>
+            </select>
+            <small>Presentation intake groups only matching room, family, code and dimensions; connector detail keeps every row.</small>
+          </label>
+
+          <label>
+            <span>Labor scenario</span>
+            <select id="labor-mode" name="laborMode">
+              <option value="PER_PRESENTATION_BASE" selected>Base once per presentation</option>
+              <option value="PER_CONNECTOR_BASE">Base per physical connector</option>
+            </select>
+            <small>Planning range only; not payroll approval.</small>
+          </label>
+
+          <fieldset class="carryover-fieldset">
+            <legend>Carryover</legend>
+            <label class="toggle-row">
+              <input id="carryover-enabled" type="checkbox" />
+              <span>Review stable prior-slot references</span>
+            </label>
+            <label>
+              <span>Previous Factory package</span>
+              <input
+                id="previous-manifest"
+                type="file"
+                accept=".zip,application/zip,.json,application/json"
+                disabled
+              />
+              <small data-carryover-status>
+                Supply the prior Factory ZIP so its receipt, manifest, approval record, and actual asset bytes can be verified. A JSON manifest is reference-only.
+              </small>
+            </label>
+          </fieldset>
+
+          <fieldset class="mock-fieldset">
+            <legend>Load the current project/store folder</legend>
+            <label>
+              <span>Select once: images plus the approved space-planning map</span>
+              <input
+                id="mock-folder"
+                type="file"
+                webkitdirectory
+                directory
+                multiple
+                accept=".psd,.png,.jpg,.jpeg,.svg,.webp,.pdf,.tif,.tiff,.heic,.mov,.mp4"
+              />
+              <small data-mock-status>
+                Original names stay exactly as provided. The Factory finds the
+                images and an approved space-planning map anywhere in this folder tree.
+              </small>
+            </label>
+          </fieldset>
+
+          <fieldset class="mock-fieldset reference-fieldset">
+            <legend>Optional: add an older-image reference folder</legend>
+            <label>
+              <span>Choose a prior image repository for visual reference</span>
+              <input
+                id="reference-folder"
+                type="file"
+                webkitdirectory
+                directory
+                multiple
+                accept=".psd,.png,.jpg,.jpeg,.svg,.webp,.tif,.tiff,.heic"
+              />
+              <small data-reference-status>
+                Prior images appear in the same visual tray with a “Prior reference”
+                label. Matching one does not approve or overwrite the current asset.
+              </small>
+            </label>
+          </fieldset>
+        </form>
+      </section>
+
+      <section class="step-section section-soft" id="scope">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 02 / map assets</p>
+            <h2>Load the images. Click where they belong.</h2>
+          </div>
+          <p>
+            Your original filename stays visible. Choose an image, click the
+            cabinet, surface, table, form, or fixture where it belongs, and
+            move to the next one. Stable IDs and source lineage stay underneath.
+          </p>
+        </div>
+
+        <div class="asset-mapper-shell" data-asset-mapper>
+          <aside class="asset-map-panel">
+            <div class="asset-map-heading">
+              <div>
+                <span data-map-kind>Space-planning map</span>
+                <strong data-map-store>Select a template</strong>
+                <small data-map-source-name>Load the current project folder or choose a map</small>
+              </div>
+              <div class="asset-map-actions">
+                <label class="asset-map-file-button">
+                  <span>Choose map</span>
+                  <input
+                    type="file"
+                    data-space-map-file
+                    accept=".png,.jpg,.jpeg,.webp,.pdf"
+                  />
+                </label>
+                <button type="button" data-map-auto>Use folder map</button>
+                <button type="button" data-map-reset>Reset view</button>
+              </div>
+            </div>
+
+            <div class="asset-map-filters">
+              <label>
+                <span>Room shown</span>
+                <select data-map-room>
+                  <option value="">All included rooms</option>
+                </select>
+              </label>
+              <label>
+                <span>Connector type</span>
+                <select data-map-category>
+                  <option value="">All types</option>
+                  <option value="SURFACE">Surface</option>
+                  <option value="CABINET">Cabinet</option>
+                  <option value="FLOOR_FIXTURE">Floor fixture</option>
+                  <option value="FORM">Form</option>
+                  <option value="OTHER_FIXTURE">Other fixture</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="visual-map-toolbar" aria-label="Visual fixture tools">
+              <button
+                type="button"
+                data-map-edit-toggle
+                aria-pressed="false"
+              >Arrange fixtures</button>
+              <label>
+                <span class="sr-only">Add a fixture</span>
+                <select data-map-add-kind>
+                  <option value="">+ Add fixture</option>
+                  <option value="CABINET">Cabinet</option>
+                  <option value="SURFACE">Surface</option>
+                  <option value="ROUND_TABLE">Round table</option>
+                  <option value="PARSONS_TABLE">Parsons table</option>
+                  <option value="BUNK">Bunk</option>
+                  <option value="FORM">Form</option>
+                  <option value="FLOOR_FIXTURE">Floor fixture</option>
+                </select>
+              </label>
+              <label class="visual-fixture-name">
+                <span class="sr-only">Simple fixture name</span>
+                <input
+                  data-map-simple-name
+                  placeholder="Cabinet 1"
+                  aria-label="Simple fixture name"
+                  disabled
+                />
+              </label>
+              <button type="button" data-map-rotate disabled>Rotate 90°</button>
+              <button type="button" data-map-reset-fixture disabled>Reset fixture</button>
+              <small data-map-edit-status>
+                Source groups are suggestions until confirmed.
+              </small>
+            </div>
+
+            <div class="connector-map" data-connector-map>
+              <div class="connector-map-empty">
+                Choose a prototype candidate to load its connectors.
+              </div>
+            </div>
+
+            <div class="map-legend" aria-label="Fixture map status">
+              <span><i class="map-dot map-dot-available"></i>Exact fixture</span>
+              <span><i class="map-dot map-dot-selected"></i>Selected</span>
+              <span><i class="map-dot map-dot-assigned"></i>Assigned</span>
+              <span><i class="map-dot map-dot-suggestion"></i>Suggested neighbors</span>
+            </div>
+
+            <div class="selected-connector-card" data-selected-connector>
+              <span>No fixture selected</span>
+              <strong>Select an image, then click a visual fixture.</strong>
+              <small>
+                The chosen area automatically zooms into view. Arrange fixtures
+                lets the owner align, resize, and rotate them on the approved map.
+              </small>
+            </div>
+          </aside>
+
+          <div class="asset-workspace">
+            <div class="asset-workspace-kpis">
+              <article>
+                <span>Images loaded</span>
+                <strong data-asset-kpi="loaded">0</strong>
+              </article>
+              <article>
+                <span>Assigned</span>
+                <strong data-asset-kpi="assigned">0</strong>
+              </article>
+              <article>
+                <span>Need placement</span>
+                <strong data-asset-kpi="unassigned">0</strong>
+              </article>
+              <article>
+                <span>Need review</span>
+                <strong data-asset-kpi="review">0</strong>
+              </article>
+            </div>
+
+            <div class="asset-empty-state" data-asset-empty-state>
+              <strong>Load the asset folder in Step 1.</strong>
+              <p>
+                JPG, PNG, and supported PSD files show local thumbnails. HEIC
+                remains available with its original name if this browser cannot preview it.
+              </p>
+              <a href="#mock-folder">Go to asset loader</a>
+            </div>
+
+            <div class="asset-assignment-workspace" data-asset-assignment-workspace hidden>
+              <section class="asset-queue" aria-label="Loaded assets">
+                <div class="asset-queue-heading">
+                  <div>
+                    <span>Asset tray</span>
+                    <strong data-asset-queue-summary>0 images</strong>
+                    <small data-preview-status>Load images to create local previews.</small>
+                  </div>
+                  <label>
+                    <span class="sr-only">Find an asset</span>
+                    <input
+                      type="search"
+                      data-asset-search
+                      placeholder="Find 1a, IMG_3719, room..."
+                    />
+                  </label>
+                </div>
+                <div class="asset-card-grid" data-asset-card-grid></div>
+              </section>
+
+              <section class="assignment-inspector" data-assignment-inspector>
+                <div class="assignment-preview" data-assignment-preview>
+                  <div class="assignment-file-tile">
+                    <span>SELECT</span>
+                    <strong>Choose an image above</strong>
+                  </div>
+                </div>
+
+                <div class="assignment-title">
+                  <span>Selected asset</span>
+                  <strong data-assignment-name>Nothing selected</strong>
+                  <small data-assignment-path></small>
+                </div>
+
+                <div class="assignment-primary-fields">
+                  <label>
+                    <span>Image type</span>
+                    <select data-assignment-field="operatorAssetType">
+                      <option value="SURFACE">Surface</option>
+                      <option value="CABINET">Cabinet</option>
+                      <option value="FLOOR_FIXTURE">Floor fixture</option>
+                      <option value="FORM">Form</option>
+                      <option value="FIXTURE">Fixture</option>
+                      <option value="HANGING">Hanging</option>
+                      <option value="PANTY_BAR">Panty bar</option>
+                      <option value="IMPULSE">Impulse</option>
+                      <option value="DETAIL">Detail</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Template slot</span>
+                    <select data-assignment-field="slotPreference">
+                      <option value="AUTO">Auto from simple name</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Collection / story</span>
+                    <input
+                      data-assignment-field="collectionName"
+                      placeholder="Example: BBV"
+                    />
+                  </label>
+                  <label>
+                    <span>Style family</span>
+                    <input
+                      data-assignment-field="styleFamily"
+                      placeholder="Example: Demi"
+                    />
+                  </label>
+                </div>
+
+                <div class="assignment-registry">
+                  <div>
+                    <span>Registry</span>
+                    <small data-registry-status>
+                      Registry not connected. Add a line-list or marketing CSV
+                      to the selected folder, or type a reference.
+                    </small>
+                  </div>
+                  <label>
+                    <span>Line list</span>
+                    <input
+                      type="search"
+                      list="set-line-list-registry"
+                      data-assignment-field="lineListReference"
+                      placeholder="Search or type line-list reference"
+                    />
+                    <datalist id="set-line-list-registry"></datalist>
+                  </label>
+                  <label>
+                    <span>Marketing</span>
+                    <input
+                      type="search"
+                      list="set-marketing-registry"
+                      data-assignment-field="marketingReference"
+                      placeholder="Search or type marketing reference"
+                    />
+                    <datalist id="set-marketing-registry"></datalist>
+                  </label>
+                </div>
+
+                <details class="assignment-more">
+                  <summary>More details</summary>
+                  <div>
+                    <label>
+                      <span>Placement role</span>
+                      <select data-assignment-field="placementRole">
+                        <option value="UNASSIGNED">Not assigned</option>
+                        <option value="PRIMARY">Primary</option>
+                        <option value="SECONDARY">Secondary</option>
+                        <option value="ALTERNATE">Alternate</option>
+                        <option value="DETAIL">Detail</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Stock role</span>
+                      <select data-assignment-field="stockRole">
+                        <option value="UNASSIGNED">Not assigned</option>
+                        <option value="DISPLAY">Display</option>
+                        <option value="UNDERSTOCK">Understock</option>
+                        <option value="BOTH">Display + understock</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Assortment</span>
+                      <select data-assignment-field="assortmentScope">
+                        <option value="UNASSIGNED">Not assigned</option>
+                        <option value="FULL_COLLECTION">Full collection</option>
+                        <option value="SELECTED_STYLES">Selected styles</option>
+                        <option value="OWNER_DEFINED">Owner defined</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Transition</span>
+                      <select data-assignment-field="transitionRequirement">
+                        <option value="NEW">New</option>
+                        <option value="CARRYOVER">Carryover</option>
+                        <option value="REVISED">Revised</option>
+                        <option value="LATE">Late</option>
+                        <option value="ALTERNATE">Alternate</option>
+                        <option value="EXCEPTION">Exception</option>
+                        <option value="UNASSIGNED">Not assigned</option>
+                      </select>
+                    </label>
+                    <label class="assignment-notes">
+                      <span>Notes</span>
+                      <textarea
+                        data-assignment-field="notes"
+                        rows="3"
+                        placeholder="Only what the team needs to know"
+                      ></textarea>
+                    </label>
+                  </div>
+                </details>
+
+                <div class="assignment-message" data-assignment-message>
+                  Select an image and connector.
+                </div>
+
+                <div class="assignment-actions">
+                  <button type="button" data-assignment-clear disabled>
+                    Clear connection
+                  </button>
+                  <button type="button" class="assignment-save" data-assignment-save disabled>
+                    Assign &amp; next
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <div class="mapping-next">
+          <div data-mapping-next>
+            <strong>Next: load the current project folder.</strong>
+            <span>The Factory will find its images and approved map.</span>
+          </div>
+          <a class="button" data-map-continue href="#scope" aria-disabled="true">
+            Finish mapping first
+          </a>
+        </div>
+
+        <details class="advanced-scope">
+          <summary>
+            <span>
+              <strong>Advanced connection details</strong>
+              Rooms, multiple views, physical runs, source bindings, and evidence
+            </span>
+            <small data-room-count>0 selected</small>
+          </summary>
+
+          <div class="scope-layout">
+            <aside class="room-panel">
+              <div class="panel-heading">
+                <div>
+                  <span>Rooms in project</span>
+                  <strong>Change scope</strong>
+                </div>
+                <div class="mini-actions">
+                  <button type="button" data-select-all-rooms>Select all</button>
+                  <button type="button" data-clear-rooms>Clear</button>
+                </div>
+              </div>
+              <div class="room-list" data-room-list></div>
+            </aside>
+
+            <div class="scope-panel">
+              <div class="scope-kpis">
+                <article>
+                  <span>Presentations</span>
+                  <strong data-presentation-count>0</strong>
+                </article>
+                <article>
+                  <span>Expected assets</span>
+                  <strong data-asset-count>0</strong>
+                </article>
+                <article>
+                  <span>Physical records</span>
+                  <strong data-physical-count>0</strong>
+                </article>
+                <article>
+                  <span>Scenario minutes</span>
+                  <strong data-minute-count>0</strong>
+                </article>
+              </div>
+
+              <div class="scope-table-wrap">
+                <table class="scope-table">
+                  <thead>
+                    <tr>
+                      <th>Priority</th>
+                      <th>Room / zone</th>
+                      <th>Category</th>
+                      <th>Physical</th>
+                      <th>Meaning</th>
+                      <th>Assets</th>
+                      <th>Evidence</th>
+                    </tr>
+                  </thead>
+                  <tbody data-scope-rows></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="step-section visual-qa-section" id="visual-qa">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 04 / review &amp; release</p>
+            <h2>Check the real images. Release only what is approved.</h2>
+          </div>
+          <p>
+            Select one unzipped Floorset Factory project. This page reconciles
+            every expected slot with its exact registered crop, PNG preview,
+            latest placement log, runtime hash index, and asset-version approval.
+            Files stay local and are never changed or uploaded.
+          </p>
+        </div>
+
+        <div class="qa-intake-panel">
+          <div class="qa-intake-copy">
+            <span class="qa-step">Completed floorset folder</span>
+            <strong>Select the project folder that contains <code>00_SET_DATA</code>.</strong>
+            <p>
+              You may reselect the folder at any point. The scan is read-only.
+              Run <code>SCAN_FLOORSET_FACTORY_PROJECT.command</code> first when
+              exact post-export hashes are required.
+            </p>
+          </div>
+          <label class="qa-folder-button">
+            <span>Select completed project</span>
+            <input
+              id="qa-project-folder"
+              type="file"
+              webkitdirectory
+              directory
+              multiple
+            />
+          </label>
+          <button class="qa-secondary-button" type="button" data-qa-clear disabled>
+            Clear recheck
+          </button>
+        </div>
+
+        <div class="qa-scan-status" data-qa-scan-status role="status" aria-live="polite">
+          No completed project selected.
+        </div>
+
+        <div class="qa-next-action">
+          <div>
+            <strong>Already cropped the PSDs? They are not lost.</strong>
+            <p>
+              Run the batch registrar once in Photoshop, then select this project
+              again. It registers only safe matches. When a choice is unclear,
+              it creates a same-folder assignment sheet and leaves the PSD untouched.
+            </p>
+          </div>
+          <a href="./RUN_IN_PHOTOSHOP__BATCH_REGISTER_EXISTING_CROPS.jsx" download>
+            Download Photoshop registrar
+          </a>
+        </div>
+
+        <div class="qa-gate qa-gate-idle" data-qa-gate>
+          <div>
+            <span data-qa-gate-label>VISUAL GATE NOT RUN</span>
+            <strong data-qa-gate-title>Select a completed floorset project.</strong>
+          </div>
+          <p data-qa-gate-detail>
+            Expected slots remain available in the generated package. This recheck
+            only evaluates the project folder you explicitly select.
+          </p>
+        </div>
+
+        <div class="qa-kpis" aria-label="Visual QA totals">
+          <article>
+            <span>Expected</span>
+            <strong data-qa-kpi="expected">0</strong>
+          </article>
+          <article>
+            <span>Images found</span>
+            <strong data-qa-kpi="found">0</strong>
+          </article>
+          <article>
+            <span>Needs assignment</span>
+            <strong data-qa-kpi="unassigned">0</strong>
+          </article>
+          <article>
+            <span>Registered</span>
+            <strong data-qa-kpi="registered">0</strong>
+          </article>
+          <article>
+            <span>Placed</span>
+            <strong data-qa-kpi="placed">0</strong>
+          </article>
+          <article>
+            <span>Approved</span>
+            <strong data-qa-kpi="approved">0</strong>
+          </article>
+          <article>
+            <span>Minimum still needed</span>
+            <strong data-qa-kpi="missing">0</strong>
+          </article>
+          <article>
+            <span>File exceptions</span>
+            <strong data-qa-kpi="exceptions">0</strong>
+          </article>
+        </div>
+
+        <div class="qa-controls" data-qa-controls hidden>
+          <label>
+            <span>Room</span>
+            <select data-qa-filter="room">
+              <option value="">All rooms</option>
+            </select>
+          </label>
+          <label>
+            <span>Category</span>
+            <select data-qa-filter="category">
+              <option value="">All categories</option>
+            </select>
+          </label>
+          <label>
+            <span>Status</span>
+            <select data-qa-filter="status">
+              <option value="">All statuses</option>
+              <option value="READY">Matched + approved</option>
+              <option value="REVIEW">Review required</option>
+              <option value="BLOCKED">Blocked</option>
+              <option value="OPTIONAL">Optional / not provided</option>
+            </select>
+          </label>
+          <label class="qa-search">
+            <span>Find</span>
+            <input data-qa-filter="search" type="search" placeholder="1a, room, collection, style..." />
+          </label>
+          <div class="qa-export-actions">
+            <button type="button" data-qa-export="csv">Download QA CSV</button>
+            <button type="button" data-qa-export="json">Download QA JSON</button>
+            <button type="button" data-qa-export="approval">Download approval template</button>
+          </div>
+        </div>
+
+        <div class="qa-project-meta" data-qa-project-meta hidden></div>
+
+        <div class="qa-results" data-qa-results>
+          <div class="qa-empty">
+            <strong>Expected versus actual will appear here.</strong>
+            <p>
+              Each card will show the expected slot, source candidate, active PNG
+              preview, registration chain, placement status, approval status, and
+              the reason for every amber or red gate.
+            </p>
+          </div>
+        </div>
+
+        <details class="qa-orphan-panel" data-qa-orphan-panel hidden>
+          <summary>
+            <span>Existing crops and file exceptions</span>
+            <strong data-qa-orphan-count>0</strong>
+          </summary>
+          <div data-qa-orphan-list></div>
+        </details>
+
+        <div class="qa-legend" aria-label="Visual QA status key">
+          <span><i class="qa-dot qa-dot-ready"></i>Exact active asset, rehashed sidecar/PSD/PNG, current indexed placement, byte-bound approval</span>
+          <span><i class="qa-dot qa-dot-review"></i>Valid work exists, but evidence, hash, metadata, or approval is pending</span>
+          <span><i class="qa-dot qa-dot-blocked"></i>Missing, conflicting, stale, unsafe, or incorrectly placed</span>
+          <span><i class="qa-dot qa-dot-optional"></i>Optional slot intentionally not provided</span>
+        </div>
+
+        <dialog class="qa-preview-dialog" data-qa-preview-dialog>
+          <button type="button" data-qa-dialog-close aria-label="Close preview">Close</button>
+          <img data-qa-dialog-image alt="" />
+          <div data-qa-dialog-copy></div>
+        </dialog>
+      </section>
+
+      <section class="evidence-section" id="evidence">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Evidence boundary / April 8 snapshot</p>
+            <h2>Useful structural truth. Visible gaps.</h2>
+          </div>
+          <p>
+            The Factory can generate a disciplined intake now. It cannot call
+            blank tiers, unmatched assets, zero unit minutes, or undocumented
+            Fixture Value an approved operating rule.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          <article class="evidence-card is-usable">
+            <span>Usable now</span>
+            <h3>Store, room, fixture, geometry</h3>
+            <p>Six store snapshots with room codes, fixture categories, codes, dimensions, X/Y, and source dates.</p>
+          </article>
+          <article class="evidence-card is-review">
+            <span>Owner review</span>
+            <h3>Prototype assignment</h3>
+            <p>Candidate configurations exist. Their actual tier and prototype authority do not.</p>
+          </article>
+          <article class="evidence-card is-blocked">
+            <span>Not connected</span>
+            <h3>Assets, inventory, ECAB, unit labor</h3>
+            <p>Every asset is unmatched, inventory is absent, ECAB units are undefined, and unit minutes are zero.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="step-section handoff-section" id="handoff">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 03 / prepare Brand Guide</p>
+            <h2>Prepare the project-scoped Brand Guide working draft.</h2>
+          </div>
+          <p>
+            The HTML downloads the working package. InDesign creates a new
+            project draft from its included script; it does not alter RC12_9 or
+            claim a final Brand Guide before review.
+          </p>
+        </div>
+
+        <div class="handoff-grid">
+          <article>
+            <span>Excel</span>
+            <strong>19-sheet Prototype Intake</strong>
+            <p>Formulas, validations, attestations, carryover review, capacity, labor, token-similarity discovery, QA and lineage.</p>
+          </article>
+          <article>
+            <span>Adobe</span>
+            <strong>Populated Brand Guide draft</strong>
+            <p>Build the placement map and store-facing 11x17 pages with the mapped PSD, PNG, JPG, or TIFF already placed. Unready items stay in the Home Office exception summary.</p>
+          </article>
+          <article>
+            <span>Machine truth</span>
+            <strong>JSON + CSV graph</strong>
+            <p>Stable IDs, source hashes, build receipt, carryover lineage and evidence-bound token comparisons.</p>
+          </article>
+          <article>
+            <span>Team intake</span>
+            <strong>Simple room folders</strong>
+            <p>Overviews, surfaces, fixtures, forms, cabinets, details and videos—ready for 1a, 1b, 1c.</p>
+          </article>
+        </div>
+
+        <div class="generate-panel">
+          <div>
+            <span class="generate-state" data-generate-state>Ready for setup review</span>
+            <p data-generate-summary>Select a valid project scope to generate.</p>
+          </div>
+          <button class="generate-button" type="button" data-generate>
+            Generate working package
+          </button>
+        </div>
+
+        <ol class="handoff-path" aria-label="Brand Guide working path">
+          <li><span>1</span><strong>Generate package</strong><small>Download and unzip the project.</small></li>
+          <li><span>2</span><strong>Check populated preview</strong><small>Open <code>STORE_FACING_BRAND_GUIDE_PREVIEW.html</code>; the mapped images and fixture map are already visible.</small></li>
+          <li><span>3</span><strong>Prepare BG draft</strong><small>Run <code>01_PREPARE_BRAND_GUIDE_WORKING_DRAFT.jsx</code> in InDesign; mapped files place automatically.</small></li>
+          <li><span>4</span><strong>Review &amp; release</strong><small>Resolve Home Office exceptions, visually recheck, approve, then publish.</small></li>
+        </ol>
+
+        <div class="generation-log" data-generation-log hidden aria-live="polite"></div>
+      </section>
+
+      <section class="role-section" id="roles">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">One system / two clear views</p>
+            <h2>Store teams see execution. Home Office sees control.</h2>
+          </div>
+          <p>
+            Both views use the same approved map, images, and version history.
+            The technical controls do not need to sit in front of store users.
+          </p>
+        </div>
+        <div class="role-grid">
+          <article>
+            <span>Store-facing</span>
+            <h3>Clean, approved execution view</h3>
+            <ul>
+              <li>Approved store map with selected-area zoom</li>
+              <li>Final image, simple name, placement, and instruction</li>
+              <li>Completion, proof photo, feedback, and approved alternate</li>
+              <li>No source IDs, draft group controls, or publishing tools</li>
+            </ul>
+          </article>
+          <article>
+            <span>Home Office / Brand Guide admin</span>
+            <h3>Intake, build, approval, and fleet control</h3>
+            <ul>
+              <li>Map registration, spatial grouping, metadata, and exceptions</li>
+              <li>Current and prior-reference image repository intake</li>
+              <li>Brand Guide working draft, placement, QA, and approvals</li>
+              <li>Prototype-to-fleet coverage, version history, and audit trail</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="factory-footer">
+      <p><strong>SET Loop Floorset Factory v1.5.5</strong> / visual layout + populated Brand Guide workflow</p>
+      <p>Deterministic first. Human approved. AI evidence-bound.</p>
+    </footer>
+
+    <script src="./data/floorset-factory-registry.js"></script>
+    <script src="./assets/floorset-factory.js"></script>
+    <script src="./assets/floorset-factory-asset-map.js"></script>
+    <script src="./assets/floorset-factory-visual-qa.js"></script>
+  </body>
+</html>
