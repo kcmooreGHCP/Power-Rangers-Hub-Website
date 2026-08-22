@@ -21,10 +21,10 @@
       candidate: "Assortment and prototype align; the exact surface connector still needs confirmation.",
       blockedLabel: "Different prototype · excluded",
       blocked: "This store does not share the required 3-room launch prototype or Parsons surface.",
-      image: "../shared-assets/real-world/store-0222-color-map.png",
-      imageAlt: "Store 0222 approved color map showing real rooms, fixtures, Parsons tables, wall cabinets, and assortment zones",
+      image: "../shared-assets/real-world/store-0222-brand-guide-map.png",
+      imageAlt: "Cropped Store 0222 Brand Guide map showing only the full store plan, fixtures, presentations, cabinets, and connected zones",
       imageFit: "contain",
-      imageSource: "Store 0222 · approved color map"
+      imageSource: "Brand Guide · Store 0222 full-store map"
     },
     promotion: {
       brand: "PINK",
