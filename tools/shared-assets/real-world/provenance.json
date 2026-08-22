@@ -1,0 +1,42 @@
+{
+  "purpose": "Real-world visual evidence used by SET prototype surfaces",
+  "handling": "Internal project references. Preserve source labels and do not reuse in a company-neutral package.",
+  "assets": [
+    {
+      "file": "store-0222-color-map.png",
+      "source": "SET_FULL_ANALYSIS/incoming-pilot-input/SET_819/04_REPORTS/06_REFERENCE/STORE_0222_COLOR_MAP.png",
+      "label": "Store 0222 approved color map - reference only",
+      "use": "Store template, fixture, room, and assortment context"
+    },
+    {
+      "file": "set-map-mode-proof.jpg",
+      "source": "SET_FULL_ANALYSIS/incoming-pilot-input/SET_819/04_REPORTS/06_REFERENCE/MAP_MODE_PROOF.jpeg",
+      "label": "SET map-mode working reference",
+      "use": "Real asset-to-map placement workflow"
+    },
+    {
+      "file": "set-irl-cabinet-proof.jpg",
+      "source": "SET_FULL_ANALYSIS/incoming-pilot-input/SET_819/05_SET_IRL/01_INPUTS/PHOTOS/SAMPLE_CABINETpng.png",
+      "label": "SET IRL cabinet proof image",
+      "use": "Real cabinet and product context"
+    },
+    {
+      "file": "pink-wall-marketing.jpg",
+      "source": "SET_FULL_ANALYSIS/data/bg-linked-intake/links/PINK_SOURCE/2025/02_Tests/09_September/9.10 2 For Sports Bras Cabinet Test/Combo Cabs w Marketing.png",
+      "label": "PINK in-store test reference - wall and marketing",
+      "use": "Real wall presentation, product, fixtures, and marketing"
+    },
+    {
+      "file": "pink-body-care-cabinet.jpg",
+      "source": "SET_FULL_ANALYSIS/data/bg-linked-intake/links/PINK_SOURCE/2025/02_Tests/07_July/7.9 Super Berry Removal Test/01_Assets/7.9 Test_T2 Body Care Cabs.jpg",
+      "label": "PINK in-store test reference - body care cabinet",
+      "use": "Real product and five-channel cabinet context"
+    },
+    {
+      "file": "pink-front-presentation.jpg",
+      "source": "SET_FULL_ANALYSIS/data/bg-linked-intake/links/PINK_SOURCE/2025/02_Tests/04_April/4.16 WEW New & Improved/Images/zJPGs/IMG_1116.jpeg",
+      "label": "PINK in-store test reference - front presentation",
+      "use": "Real forms, product, campaign imagery, and front-of-store presentation"
+    }
+  ]
+}

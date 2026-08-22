@@ -14,7 +14,10 @@
       selected: "3-room launch · chain assortment · front-of-store Parsons connector",
       candidate: "Assortment and prototype align; the exact surface connector still needs confirmation.",
       blocked: "This store does not share the required 3-room launch prototype or Parsons surface.",
-      svg: '<svg viewBox="0 0 520 320" role="img" aria-label="Illustrative front-of-store Parsons table presentation"><rect x="40" y="34" width="440" height="252" fill="#fffdf9" stroke="#92b7ff" stroke-width="7"/><path d="M76 90h368" stroke="#ff4f87" stroke-width="8"/><rect x="150" y="145" width="220" height="70" fill="#c7f36b" stroke="#141211" stroke-width="7"/><path d="M172 215v48M348 215v48" stroke="#141211" stroke-width="12"/><circle cx="205" cy="180" r="22" fill="#92b7ff"/><circle cx="260" cy="180" r="22" fill="#ff4f87"/><circle cx="315" cy="180" r="22" fill="#92b7ff"/><text x="260" y="72" text-anchor="middle" font-family="Aptos,Segoe UI,sans-serif" font-size="18" font-weight="800" fill="#141211">FRONT OF STORE</text></svg>'
+      image: "../shared-assets/real-world/store-0222-color-map.png",
+      imageAlt: "Store 0222 approved color map showing real rooms, fixtures, Parsons tables, wall cabinets, and assortment zones",
+      imageFit: "contain",
+      imageSource: "Store 0222 approved color map · reference only"
     },
     promotion: {
       name: "Fragrance feature promotion",
@@ -28,7 +31,10 @@
       selected: "VSB eligible · campaign pack 4471 · front-room 5-channel cabinet",
       candidate: "Promotion eligibility aligns; sign quantity awaits the connected cabinet count.",
       blocked: "This store is not eligible for the VSB campaign pack and is excluded.",
-      svg: '<svg viewBox="0 0 520 320" role="img" aria-label="Illustrative fragrance promotion on a five-channel cabinet"><rect x="55" y="42" width="410" height="236" rx="3" fill="#fffdf9" stroke="#92b7ff" stroke-width="7"/><path d="M137 42v236M219 42v236M301 42v236M383 42v236" stroke="#141211" stroke-width="6"/><path d="M55 120h410M55 202h410" stroke="#ff4f87" stroke-width="5"/><rect x="198" y="65" width="124" height="34" fill="#c7f36b"/><text x="260" y="88" text-anchor="middle" font-family="Aptos,Segoe UI,sans-serif" font-size="16" font-weight="900" fill="#141211">PACK 4471</text></svg>'
+      image: "../shared-assets/real-world/pink-wall-marketing.jpg",
+      imageAlt: "Real PINK wall presentation with sports bras, bralettes, product drawers, fixtures, and promotional marketing",
+      imageFit: "cover",
+      imageSource: "PINK in-store test reference · wall + marketing"
     },
     communication: {
       name: "Weekend readiness communication",
@@ -42,7 +48,10 @@
       selected: "Active launch store · Store Leader role · weekend action required",
       candidate: "The store is active, but accountable-role data needs confirmation.",
       blocked: "This location is outside the active launch audience and does not receive the message.",
-      svg: '<svg viewBox="0 0 520 320" role="img" aria-label="Illustrative targeted readiness communication"><rect x="78" y="42" width="364" height="236" rx="10" fill="#fffdf9" stroke="#92b7ff" stroke-width="7"/><rect x="78" y="42" width="364" height="58" rx="10" fill="#c7f36b"/><path d="M118 138h284M118 174h230M118 210h260" stroke="#141211" stroke-width="9"/><circle cx="390" cy="242" r="24" fill="#ff4f87"/><path d="M379 242l8 8 15-18" fill="none" stroke="#fff" stroke-width="6"/></svg>'
+      image: "../shared-assets/real-world/set-map-mode-proof.jpg",
+      imageAlt: "Real SET map-mode proof showing fixture presentation assets positioned against store map connectors",
+      imageFit: "cover",
+      imageSource: "SET map-mode working reference · asset-to-store context"
     }
   };
 
@@ -50,7 +59,12 @@
 
   function renderSample(key) {
     const sample = samples[key];
-    $("[data-fixture-image]").innerHTML = sample.svg;
+    const image = document.createElement("img");
+    image.src = sample.image;
+    image.alt = sample.imageAlt;
+    image.className = sample.imageFit === "contain" ? "contain" : "";
+    $("[data-fixture-image]").replaceChildren(image);
+    $("[data-fixture-source]").textContent = sample.imageSource;
     $("[data-asset-name]").textContent = sample.name;
     $("[data-content-type]").textContent = sample.type;
     $("[data-identifier-list]").innerHTML = sample.identifiers.map((identifier) => `<span>${identifier}</span>`).join("");
