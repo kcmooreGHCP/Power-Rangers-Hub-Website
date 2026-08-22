@@ -23,6 +23,38 @@
     });
   }
 
+  function buildMenu(shell) {
+    const links = shell.querySelector(".innovation-shell__links");
+    if (!links || links.closest(".innovation-shell__menu")) return;
+    const menu = document.createElement("details");
+    menu.className = "innovation-shell__menu";
+    const summary = document.createElement("summary");
+    summary.textContent = "Explore SET";
+    menu.append(summary, links);
+    shell.insertBefore(menu, shell.querySelector(".innovation-shell__boundary"));
+    links.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => menu.removeAttribute("open"));
+    });
+    document.addEventListener("click", (event) => {
+      if (menu.open && !menu.contains(event.target)) menu.removeAttribute("open");
+    });
+  }
+
+  function loadExpert() {
+    if (!document.querySelector('link[href$="set-expert.css"]')) {
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = "set-expert.css";
+      document.head.append(stylesheet);
+    }
+    if (!document.querySelector('script[src$="set-expert.js"]')) {
+      const script = document.createElement("script");
+      script.src = "set-expert.js";
+      script.defer = true;
+      document.head.append(script);
+    }
+  }
+
   function labelPlaceholderLinks(root) {
     const links = [
       ...(root.matches?.('a[href="#"]') ? [root] : []),
@@ -61,6 +93,7 @@
     const shell = document.querySelector("[data-innovation-shell]");
     if (!shell) return;
 
+    buildMenu(shell);
     markCurrentPage(shell);
     setShellHeight(shell);
     const boundary = shell.querySelector("[data-shell-boundary]");
@@ -87,6 +120,7 @@
     } else {
       window.addEventListener("resize", () => setShellHeight(shell), { passive: true });
     }
+    loadExpert();
   }
 
   window.innovationCopyText = async function (text) {

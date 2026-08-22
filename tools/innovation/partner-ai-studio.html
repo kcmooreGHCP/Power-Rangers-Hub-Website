@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A working SET pilot for structuring partner AI, automation, and workflow ideas.">
+  <title>Partner AI + Automation Studio | SET</title>
+  <link rel="stylesheet" href="innovation-shell.css">
+  <link rel="stylesheet" href="partner-ai-studio.css">
+  <script src="innovation-shell.js" defer></script>
+  <script src="partner-ai-studio.js" defer></script>
+</head>
+<body class="partner-studio" data-boundary="demo">
+  <!--
+    THESIS: Treat partner help as an operating role and intake path, not a small chatbot feature.
+    OWN-WORLD: A bright working table with SET pink, blueprint blue, black rules, and visible routing receipts.
+    STORY: A partner understands the offer, contributes only chosen context, receives a structured brief, and sees exactly where it goes.
+    FIRST VIEWPORT: The role proposition and five-step help model dominate; the working intake begins within the first scroll.
+    FORM: A partner service studio with an intake bench, receipt, and local request queue.
+  -->
+  <a class="innovation-skip-link" href="#innovation-content">Skip to Partner AI Studio</a>
+  <nav class="innovation-shell" data-innovation-shell aria-label="SET network">
+    <a class="innovation-shell__brand" href="index.html">
+      <span class="innovation-shell__mark" aria-hidden="true">S</span>
+      <span class="innovation-shell__brand-text">SET + SET Loop</span>
+    </a>
+    <div class="innovation-shell__links">
+      <a class="innovation-shell__link" href="../../vp-presentation.html">VP presentation</a>
+      <a class="innovation-shell__link" href="../store-ops/SET_LOOP_MASTER.html">SET Loop</a>
+      <a class="innovation-shell__link" href="index.html">Innovation lab</a>
+      <a class="innovation-shell__link" href="set-connection-lab.html">Routing lab</a>
+      <a class="innovation-shell__link" href="partner-ai-studio.html" data-shell-page>Partner AI studio</a>
+    </div>
+    <span class="innovation-shell__boundary" data-shell-boundary></span>
+  </nav>
+
+  <main id="innovation-content">
+    <section class="studio-hero">
+      <div class="hero-copy">
+        <p class="studio-kicker">AI + Automation Enablement · working role concept</p>
+        <h1>Bring the idea.<br>We’ll help make it useful.</h1>
+        <p>For partners trying to improve an app, automate a repetitive process, structure an agent, or connect better information to the field. KC can help translate the thought into a clear outcome, grounded sources, an efficient workflow, and a bounded prototype.</p>
+        <a href="#partner-intake" class="hero-action">Start with what you are trying to do ↓</a>
+      </div>
+      <div class="role-manifesto">
+        <strong>What this role could provide</strong>
+        <ol>
+          <li><span>Listen</span>Find the real action or decision behind the request.</li>
+          <li><span>Structure</span>Turn back-and-forth into requirements, owners, and exceptions.</li>
+          <li><span>Ground</span>Name the approved data, imagery, and source authority.</li>
+          <li><span>Prototype</span>Build a safe proof before asking for production investment.</li>
+          <li><span>Connect</span>Return useful learning to SET Loop, SOPs, and future enhancements.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="studio-offer">
+      <div><strong>Maintenance</strong><p>Location, image, urgency, ownership, status, and exception routing.</p></div>
+      <div><strong>Zero on Hand</strong><p>Approved inventory sources, investigation steps, exception reasons, and handoffs.</p></div>
+      <div><strong>Structured agents</strong><p>Grounded knowledge, allowed actions, escalation, testing, and human review.</p></div>
+      <div><strong>Any partner workflow</strong><p>Reduce repetition while making the right data more useful to stores and Home Office.</p></div>
+    </section>
+
+    <section class="intake-layout" id="partner-intake">
+      <div class="intake-intro">
+        <p class="studio-kicker">Something you are trying to do?</p>
+        <h2>Not getting the details, images, or outcome you intended?</h2>
+        <p>Share only what you choose. You may paste the useful part of an AI conversation, but this prototype cannot open or read anyone’s private chat automatically.</p>
+        <div class="example-asks">
+          <button type="button" data-example="maintenance">Maintenance app idea</button>
+          <button type="button" data-example="zero">Zero-on-hand workflow</button>
+          <button type="button" data-example="agent">Structured agent idea</button>
+          <button type="button" data-example="other">Another partner idea</button>
+        </div>
+        <div class="where-it-goes">
+          <h3>Where does this information go?</h3>
+          <div><span>Now</span><p>Saved only in this browser’s Partner Help Queue. You can copy/download the brief or prepare an Outlook handoff.</p></div>
+          <div><span>With approval</span><p>A SharePoint Partner Idea Intake list and Power Automate flow can route it to KC, the requesting partner, and the accountable system owner.</p></div>
+          <div><span>Learning loop</span><p>Questions and patterns can become SOP clarifications, SET Expert knowledge, or a prioritized enhancement—not silent chat history.</p></div>
+        </div>
+      </div>
+
+      <form class="idea-form" id="ideaForm">
+        <div class="form-pair">
+          <label>
+            <span>Your name or team</span>
+            <input id="ideaPartner" maxlength="180" placeholder="Optional">
+          </label>
+          <label>
+            <span>Department / function</span>
+            <input id="ideaDepartment" maxlength="180" placeholder="Optional">
+          </label>
+        </div>
+        <label>
+          <span>What are you trying to make happen?</span>
+          <textarea id="ideaOutcome" required maxlength="1500" placeholder="Describe the action or outcome—not just the screen."></textarea>
+        </label>
+        <div class="form-pair">
+          <label>
+            <span>Who needs it?</span>
+            <input id="ideaAudience" required maxlength="180" placeholder="Store team, DM, Home Office partner...">
+          </label>
+          <label>
+            <span>Current tool or process</span>
+            <input id="ideaCurrent" maxlength="220" placeholder="Optional">
+          </label>
+        </div>
+        <label>
+          <span>What is missing, unclear, or failing?</span>
+          <textarea id="ideaGap" required maxlength="1500" placeholder="What did you ask for, and what did you not receive?"></textarea>
+        </label>
+        <label>
+          <span>Paste the useful AI back-and-forth</span>
+          <textarea id="ideaChat" maxlength="6000" placeholder="Optional. Remove confidential, customer, employee, or sensitive business information before pasting."></textarea>
+        </label>
+        <label class="file-field">
+          <span>Add reference images or documents</span>
+          <input id="ideaFiles" type="file" multiple accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.doc,.docx,.ppt,.pptx">
+          <small>Files stay in this browser prototype. Only filenames and sizes appear in the generated brief.</small>
+        </label>
+        <div class="form-pair">
+          <label>
+            <span>What must stay true?</span>
+            <input id="ideaConstraints" maxlength="500" placeholder="Approvals, source systems, audience, timing...">
+          </label>
+          <label>
+            <span>Best next proof</span>
+            <select id="ideaProof">
+              <option>Clickable browser prototype</option>
+              <option>Workflow and ownership map</option>
+              <option>Data and connection requirements</option>
+              <option>Visual concept with sample images</option>
+              <option>Partner-ready decision brief</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="build-brief">Build + save the action brief</button>
+          <button type="button" class="quiet-action" id="clearIdea">Clear</button>
+        </div>
+        <p class="form-boundary">No web search. No automatic access to Copilot, ChatGPT, email, Teams, SharePoint, or another app. Production intake and routing require approved connections, retention, and owners.</p>
+      </form>
+    </section>
+
+    <section class="brief-output" id="briefOutput" hidden aria-live="polite">
+      <div class="brief-head">
+        <div><span id="briefReceipt">Saved locally</span><h3>Partner Idea Action Brief</h3></div>
+        <div class="brief-actions">
+          <button type="button" id="copyBrief">Copy brief</button>
+          <button type="button" id="downloadBrief">Download .txt</button>
+          <a id="emailBrief" href="mailto:?">Prepare Outlook handoff</a>
+        </div>
+      </div>
+      <pre id="briefText"></pre>
+    </section>
+
+    <section class="request-queue" aria-labelledby="queue-title">
+      <div class="queue-head">
+        <div><p class="studio-kicker">This browser only</p><h2 id="queue-title">Partner Help Queue</h2></div>
+        <span><b id="queueCount">0</b> saved requests</span>
+      </div>
+      <div id="queueList" class="queue-list"></div>
+    </section>
+  </main>
+</body>
+</html>
