@@ -76,11 +76,11 @@
     },
     {
       keywords: ["trying to do", "idea help", "maintenance app", "zero on hand", "ai conversation", "details and images"],
-      answer: "The SET Connection Lab helps a partner explain the intended outcome, audience, current process, missing details or imagery, constraints, and desired proof. A partner may voluntarily paste useful AI back-and-forth; the browser pilot structures only what they provide and never reads private chats automatically.",
-      source: "SET Innovation Lab · Connection Lab working browser pilot",
+      answer: "Partner AI + Automation Studio helps a partner explain the intended outcome, audience, current process, missing details or imagery, approved sources, constraints, and desired proof. A partner may voluntarily paste useful AI back-and-forth; the browser pilot structures only what they provide and never reads private chats automatically.",
+      source: "SET Innovation Lab · Partner AI + Automation Studio working browser pilot",
       partner: "Store Operations + requesting partner + accountable system owner",
-      url: "../innovation/set-connection-lab.html#idea-help",
-      linkLabel: "Open Idea-to-Action Help"
+      url: "../innovation/partner-ai-studio.html",
+      linkLabel: "Open Partner AI + Automation Studio"
     },
     {
       keywords: ["task", "priority", "due", "checklist"],
@@ -258,10 +258,10 @@
     inner.appendChild(activity);
     var ideaHelp = document.createElement("a");
     ideaHelp.className = "slx-action";
-    ideaHelp.href = "../innovation/set-connection-lab.html#idea-help";
+    ideaHelp.href = "../innovation/partner-ai-studio.html";
     ideaHelp.target = "_blank";
     ideaHelp.rel = "noopener";
-    ideaHelp.textContent = "💡 Idea Help";
+    ideaHelp.textContent = "💡 Partner AI Help";
     inner.appendChild(ideaHelp);
     inner.appendChild(makeButton("✨ SET IRL", openIrl));
     inner.appendChild(makeButton("🎙️ Ask SET Agent", openAgent));

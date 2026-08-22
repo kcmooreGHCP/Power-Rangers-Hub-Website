@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SET + SET Loop | VP Presentation — Store Operations Intelligence Platform</title>
+<link rel="stylesheet" href="tools/innovation/set-expert.css">
 <style>
 :root{
   --ink:#0d0f1a;--muted:#5a6178;--brand:#5b21b6;--brand2:#7c3aed;
@@ -16,12 +17,15 @@ html{scroll-behavior:smooth}
 body{font:15px/1.6 "Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper)}
 
 /* NAV */
-.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--brand);box-shadow:0 2px 16px rgba(91,33,182,.08)}
-.nav{height:60px;display:flex;align-items:center;gap:12px;max-width:1320px;margin:auto;padding:0 24px;overflow-x:auto}
+.topbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--brand);box-shadow:0 3px 14px rgba(13,15,26,.08)}
+.nav{min-height:60px;display:flex;align-items:center;gap:12px;max-width:1320px;margin:auto;padding:8px 24px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;letter-spacing:-.5px;text-decoration:none;color:var(--ink);flex-shrink:0}
 .logo-badge{background:linear-gradient(135deg,var(--brand),var(--pink));color:#fff;border-radius:10px;padding:5px 10px;font-size:12px;font-weight:900;letter-spacing:.5px}
-.nav-links{display:flex;gap:2px;margin-left:auto;flex-shrink:0}
-.nav-links a{text-decoration:none;color:var(--muted);font-weight:600;font-size:12px;padding:6px 11px;border-radius:8px;transition:.15s;white-space:nowrap}
+.site-menu{position:relative;margin-left:auto}
+.site-menu summary{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid #d0d5dd;border-radius:9px;background:#fff;color:var(--ink);font-size:13px;font-weight:800;cursor:pointer;list-style:none}
+.site-menu summary::-webkit-details-marker{display:none}.site-menu summary::after{content:"⌄";font-size:16px}.site-menu[open] summary{border-color:var(--brand);background:#ede9fe;color:var(--brand)}
+.nav-links{position:absolute;top:calc(100% + 8px);right:0;display:grid;width:min(320px,calc(100vw - 32px));padding:8px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 16px 40px rgba(13,15,26,.18)}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:700;font-size:13px;padding:9px 11px;border-radius:7px;transition:.15s}
 .nav-links a:hover,.nav-links a.active{background:#ede9fe;color:var(--brand)}
 .nav-cta{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff!important;border-radius:9px;padding:7px 14px!important;font-weight:700!important}
 
@@ -274,19 +278,22 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       <span class="logo-badge">SET</span>
       <span>SET + SET Loop</span>
     </a>
-    <nav class="nav-links">
-      <a href="#concept">What Is It</a>
-      <a href="#roles">Role Views</a>
-      <a href="#process">Today's Process</a>
-      <a href="#production">Production Flow</a>
-      <a href="#roi">Business Case</a>
-      <a href="#security">Security</a>
-      <a href="#market-proof">Market Proof</a>
-      <a href="#pilot">Join the Pilot</a>
-      <a href="#field-experience">Field Experience</a>
-      <a href="#more">More Tools</a>
-      <a href="#" onclick="sharePresentation();return false" class="nav-cta" id="share-btn">🔗 Share the Loop</a>
-    </nav>
+    <details class="site-menu">
+      <summary>Explore SET + SET Loop</summary>
+      <nav class="nav-links">
+        <a href="#concept">What It Is</a>
+        <a href="#roles">Role Views</a>
+        <a href="#production">Production Flow</a>
+        <a href="tools/innovation/set-connection-lab.html">How SET Routes Content</a>
+        <a href="tools/innovation/partner-ai-studio.html">Partner AI + Automation Studio</a>
+        <a href="tools/store-ops/SET_LOOP_MASTER.html">Home Office Hub</a>
+        <a href="tools/innovation/index.html">Innovation Lab</a>
+        <a href="#roi">Business Case</a>
+        <a href="#market-proof">Market Proof</a>
+        <a href="#pilot">Join the Pilot</a>
+      </nav>
+    </details>
+    <a href="#" onclick="sharePresentation();return false" class="nav-cta" id="share-btn">🔗 Share</a>
   </div>
 </header>
 
@@ -1121,9 +1128,15 @@ footer{padding:28px 0;border-top:1px solid var(--line);margin-top:56px}
       </a>
       <a class="inno-card" href="tools/innovation/set-connection-lab.html" target="_blank">
         <div class="inno-icon" style="background:#dbeafe">🧭</div>
-        <h3>Prototype Match + Idea Help</h3>
-        <p>A live visual example shows how store, prototype, connector, zone, and X/Y evidence converge. Partners can also turn an unfinished idea or voluntarily shared AI exchange into a structured action brief.</p>
+        <h3>How SET Routes the Right Work</h3>
+        <p>A live visual example shows how direction tags align with store profiles, template shells, assortment rules, and relevant Blue Yonder space-planning information.</p>
         <span class="inno-tag" style="background:#dbeafe;color:#1e40af">Working browser pilot</span>
+      </a>
+      <a class="inno-card" href="tools/innovation/partner-ai-studio.html" target="_blank" style="border-color:#ed2d8b">
+        <div class="inno-icon" style="background:#fff7fb">💡</div>
+        <h3>Partner AI + Automation Studio</h3>
+        <p>A dedicated role concept for helping partners structure app, automation, agent, and workflow ideas—then connect useful learning back to SET Loop.</p>
+        <span class="inno-tag" style="background:#fff7fb;color:#9d174d">Partner enablement</span>
       </a>
       <div class="inno-card">
         <div class="inno-icon" style="background:#fce7f3">←</div>
@@ -1333,6 +1346,11 @@ function copyLink() {
 // Active nav on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const siteMenu = document.querySelector('.site-menu');
+document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => siteMenu.removeAttribute('open')));
+document.addEventListener('click', event => {
+  if (siteMenu.open && !siteMenu.contains(event.target)) siteMenu.removeAttribute('open');
+});
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) current = s.id; });
@@ -1468,6 +1486,7 @@ function sharePresentation() {
 }
 </script>
 <script src="tools/store-ops/set-loop-feedback.js?v=20260821-html-invite"></script>
+<script src="tools/innovation/set-expert.js" defer></script>
 
 </body>
 </html>

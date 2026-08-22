@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A working SET demonstration of fixture-to-store prototype matching and partner idea intake.">
-  <title>SET Connection Lab | Prototype Match + Idea Help</title>
+  <meta name="description" content="A working SET demonstration of how presentations, promotions, and communications are matched to eligible stores.">
+  <title>SET Routing Lab | Right Work, Right Store</title>
   <link rel="stylesheet" href="innovation-shell.css">
   <link rel="stylesheet" href="set-connection-lab.css">
   <script src="innovation-shell.js" defer></script>
@@ -12,11 +12,11 @@
 </head>
 <body class="connection-lab" data-boundary="demo">
   <!--
-    THESIS: Show the evidence chain, not a magic match; refuse the generic dashboard grid.
+    THESIS: Show the full content-to-store evidence chain, not a magic match; refuse the generic dashboard grid.
     OWN-WORLD: A black working board, paper-white evidence strips, SET pink, blueprint blue, and review lime.
-    STORY: A partner tests three fixture examples, sees why a store prototype is selected, then turns an unfinished idea or AI exchange into a useful action brief.
-    FIRST VIEWPORT: The fixture image and X/Y clue sit left; the five-gate match chain and selected prototype run across the right.
-    FORM: An evidence wall followed by a working intake bench; a narrow extension of the established Innovation Lab.
+    STORY: A partner tests a presentation, promotion, and communication and sees which shared identifiers make each store eligible.
+    FIRST VIEWPORT: The tagged direction package sits left; the five-source comparison and selected store run across the right.
+    FORM: An evidence wall and routing board; a narrow extension of the established Innovation Lab.
   -->
   <a class="innovation-skip-link" href="#innovation-content">Skip to connection lab</a>
   <nav class="innovation-shell" data-innovation-shell aria-label="SET network">
@@ -28,7 +28,8 @@
       <a class="innovation-shell__link" href="../../vp-presentation.html">VP presentation</a>
       <a class="innovation-shell__link" href="../store-ops/SET_LOOP_MASTER.html">SET Loop</a>
       <a class="innovation-shell__link" href="index.html">Innovation lab</a>
-      <a class="innovation-shell__link" href="set-connection-lab.html" data-shell-page>Connection lab</a>
+      <a class="innovation-shell__link" href="set-connection-lab.html" data-shell-page>Routing lab</a>
+      <a class="innovation-shell__link" href="partner-ai-studio.html">Partner AI studio</a>
     </div>
     <span class="innovation-shell__boundary" data-shell-boundary></span>
   </nav>
@@ -36,13 +37,13 @@
   <main id="innovation-content">
     <section class="match-stage" aria-labelledby="match-title">
       <div class="stage-intro">
-        <p class="stage-note">Working demonstration · illustrative store evidence</p>
-        <h1 id="match-title">How SET knows where an asset belongs.</h1>
-        <p class="stage-lede">It does not guess from one number. SET combines the asset image and label with a historical X/Y proportion, the store registry, prototype and tier, then the exact fixture connector and zone.</p>
-        <div class="sample-switcher" role="group" aria-label="Choose a fixture example">
-          <button type="button" class="sample-button active" data-sample="cabinet" aria-pressed="true">5-channel cabinet</button>
-          <button type="button" class="sample-button" data-sample="floor" aria-pressed="false">Tree stand</button>
-          <button type="button" class="sample-button" data-sample="form" aria-pressed="false">Ground form</button>
+        <p class="stage-note">SET production · working routing demonstration</p>
+        <h1 id="match-title">How the right work finds the right store.</h1>
+        <p class="stage-lede">Every presentation, promotion, and communication carries a small set of identifiers. SET compares them with the approved store profile, template shell, assortment eligibility, and imported Blue Yonder space-planning record before a store is included.</p>
+        <div class="sample-switcher" role="group" aria-label="Choose a content example">
+          <button type="button" class="sample-button active" data-sample="presentation" aria-pressed="true">Presentation</button>
+          <button type="button" class="sample-button" data-sample="promotion" aria-pressed="false">Promotion</button>
+          <button type="button" class="sample-button" data-sample="communication" aria-pressed="false">Communication</button>
         </div>
       </div>
 
@@ -50,31 +51,32 @@
         <article class="fixture-proof" aria-live="polite">
           <div class="fixture-image" data-fixture-image></div>
           <div class="fixture-caption">
-            <span data-asset-name>5-channel cabinet direction</span>
-            <strong data-legacy-value>Historical clue · X = 50</strong>
+            <span data-asset-name>Front-of-store chain presentation</span>
+            <strong data-content-type>Presentation direction</strong>
           </div>
+          <div class="identifier-list" data-identifier-list></div>
         </article>
 
         <div class="match-chain" aria-label="Prototype matching evidence">
           <div class="chain-step">
             <span>1</span>
-            <div><strong>Recognize the asset</strong><p data-chain-asset>Image + filename suggest a 5-channel cabinet.</p></div>
+            <div><strong>Tag the direction once</strong><p data-chain-direction>The mock-store direction says: chain assortment, front of store, Parsons table, 3-room launch prototype.</p></div>
           </div>
           <div class="chain-step">
             <span>2</span>
-            <div><strong>Read the old proportion</strong><p data-chain-translation>X=50 recreates the known cabinet proportion. It is not inches.</p></div>
+            <div><strong>Read the approved store profile</strong><p data-chain-profile>Store registry confirms brand, prototype, tier, launch group, and assortment eligibility.</p></div>
           </div>
           <div class="chain-step">
             <span>3</span>
-            <div><strong>Locate the store profile</strong><p>Store ID, brand, tier, and prototype come from the approved store registry—not X/Y.</p></div>
+            <div><strong>Inspect the template shell</strong><p data-chain-template>The store template must contain the same room, surface, and fixture connector.</p></div>
           </div>
           <div class="chain-step">
             <span>4</span>
-            <div><strong>Find an eligible connector</strong><p data-chain-connector>The store map must contain the right cabinet connector in an included room and zone.</p></div>
+            <div><strong>Confirm the space plan</strong><p data-chain-space>Imported Blue Yonder information confirms that the fixture exists and where it lives in that store.</p></div>
           </div>
           <div class="chain-step chain-decision">
             <span>5</span>
-            <div><strong>Associate, then review</strong><p>SET proposes the prototype placement with its evidence. A person resolves ambiguity before release.</p></div>
+            <div><strong>Build the eligible audience</strong><p data-chain-result>Only stores where the required identifiers align receive the store-specific presentation. Exceptions remain visible for review.</p></div>
           </div>
         </div>
       </div>
@@ -82,101 +84,31 @@
       <div class="candidate-strip" aria-label="Store prototype candidates">
         <article class="store-candidate selected">
           <div class="store-id">0222</div>
-          <div><strong>Cross Creek · selected example</strong><p data-selected-reason>VS Full prototype · eligible cabinet connector · Beauty zone B-04</p></div>
-          <span>Evidence aligns</span>
+          <div><strong>Cross Creek · included</strong><p data-selected-reason>3-room launch · chain assortment · front-of-store Parsons connector</p></div>
+          <span>All required identifiers align</span>
         </article>
         <article class="store-candidate candidate">
           <div class="store-id">1392</div>
-          <div><strong>Ontario Mills · possible candidate</strong><p data-candidate-reason>Same X clue exists, but SET still checks its own prototype and connector inventory.</p></div>
-          <span>Needs store evidence</span>
+          <div><strong>Ontario Mills · review</strong><p data-candidate-reason>Assortment and prototype align; the exact surface connector still needs confirmation.</p></div>
+          <span>One identifier unresolved</span>
         </article>
         <article class="store-candidate blocked">
-          <div class="store-id">X/Y</div>
-          <div><strong>A number alone cannot select a store</strong><p>Matching X or Y only narrows the fixture family. It never overrides store identity, map geometry, or approval.</p></div>
-          <span>Blocked by design</span>
+          <div class="store-id">0819</div>
+          <div><strong>Different prototype · excluded</strong><p data-blocked-reason>The store does not share the required 3-room launch prototype or Parsons surface.</p></div>
+          <span>Does not receive this work</span>
         </article>
       </div>
-      <p class="truth-line"><strong>What is authoritative?</strong> Store registry + prototype/tier + connector geometry + room/zone. Historical X/Y is supporting translation evidence.</p>
-    </section>
-
-    <section class="help-bench" id="idea-help" aria-labelledby="help-title">
-      <div class="help-intro">
-        <p class="stage-note">Something you are trying to do?</p>
-        <h2 id="help-title">Having trouble getting AI to provide the details or images you requested?</h2>
-        <p>We would love to help. Bring the idea, the intended outcome, and—only if you choose—the useful parts of an AI conversation. The pilot organizes that context into a brief KC can use to refine the workflow, prototype, or partner request.</p>
-        <div class="help-promises">
-          <span>No automatic access to private chats</span>
-          <span>No web search or invented evidence</span>
-          <span>You choose what to paste or attach</span>
-        </div>
-        <div class="example-asks">
-          <button type="button" data-example="maintenance">Maintenance app idea</button>
-          <button type="button" data-example="zero">Zero-on-hand workflow</button>
-          <button type="button" data-example="other">Another partner idea</button>
-        </div>
+      <div class="source-rail">
+        <span>Direction package</span><b>compares with</b><span>Store registry</span><span>Template shell</span><span>Assortment rules</span><span>Blue Yonder space plan</span><b>to create</b><span>Eligible store audience</span>
       </div>
-
-      <form class="idea-form" id="ideaForm">
-        <label>
-          <span>What are you trying to make happen?</span>
-          <textarea id="ideaOutcome" required maxlength="1500" placeholder="Describe the action or outcome—not just the screen."></textarea>
-        </label>
-        <div class="form-pair">
-          <label>
-            <span>Who needs it?</span>
-            <input id="ideaAudience" required maxlength="180" placeholder="Store team, DM, Home Office partner...">
-          </label>
-          <label>
-            <span>Current tool or process</span>
-            <input id="ideaCurrent" maxlength="220" placeholder="Optional">
-          </label>
-        </div>
-        <label>
-          <span>What is missing, unclear, or failing?</span>
-          <textarea id="ideaGap" required maxlength="1500" placeholder="What did you ask for, and what did you not receive?"></textarea>
-        </label>
-        <label>
-          <span>Paste the useful AI back-and-forth</span>
-          <textarea id="ideaChat" maxlength="6000" placeholder="Optional. Remove confidential, customer, employee, or sensitive business information before pasting."></textarea>
-        </label>
-        <label class="file-field">
-          <span>Add reference images or documents</span>
-          <input id="ideaFiles" type="file" multiple accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.doc,.docx,.ppt,.pptx">
-          <small>Files stay in this browser prototype. Only filenames and sizes appear in the generated brief.</small>
-        </label>
-        <div class="form-pair">
-          <label>
-            <span>What must stay true?</span>
-            <input id="ideaConstraints" maxlength="500" placeholder="Approvals, source systems, audience, timing...">
-          </label>
-          <label>
-            <span>Best next proof</span>
-            <select id="ideaProof">
-              <option>Clickable browser prototype</option>
-              <option>Workflow and ownership map</option>
-              <option>Data and connection requirements</option>
-              <option>Visual concept with sample images</option>
-              <option>Partner-ready decision brief</option>
-            </select>
-          </label>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="build-brief">Build the action brief</button>
-          <button type="button" class="quiet-action" id="clearIdea">Clear</button>
-        </div>
-        <p class="form-boundary">This pilot structures information you provide. It does not read Copilot, ChatGPT, email, Teams, SharePoint, or another app automatically. Production intake and routing require approved connections and owners.</p>
-      </form>
-
-      <section class="brief-output" id="briefOutput" hidden aria-live="polite">
-        <div class="brief-head">
-          <div><span>Generated locally</span><h3>Partner Idea Action Brief</h3></div>
-          <div>
-            <button type="button" id="copyBrief">Copy brief</button>
-            <button type="button" id="downloadBrief">Download .txt</button>
-          </div>
-        </div>
-        <pre id="briefText"></pre>
-      </section>
+      <div class="plain-language">
+        <strong>In plain language:</strong>
+        <p>SET looks for stores that describe themselves the same way the work was described. If the direction says “chain product, front-of-store Parsons table, 3-room launch,” SET finds stores with that same approved combination. X/Y helps size a known fixture after the match; it does not decide who receives the work.</p>
+      </div>
+      <div class="next-lab">
+        <div><strong>Trying to build or improve another workflow?</strong><p>Partner AI + Automation Help now has its own dedicated studio.</p></div>
+        <a href="partner-ai-studio.html">Open Partner AI Studio →</a>
+      </div>
     </section>
   </main>
 </body>
