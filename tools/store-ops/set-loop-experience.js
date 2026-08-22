@@ -243,6 +243,11 @@
     factory.rel = "noopener";
     factory.textContent = "📐 Floorset Factory";
     inner.appendChild(factory);
+    var activity = document.createElement("a");
+    activity.className = "slx-action";
+    activity.href = "feedback-results.html";
+    activity.textContent = "📈 Activity";
+    inner.appendChild(activity);
     inner.appendChild(makeButton("✨ SET IRL", openIrl));
     inner.appendChild(makeButton("🎙️ Ask SET Agent", openAgent));
     inner.appendChild(makeButton("↻ Force refresh", refreshSnapshot));
