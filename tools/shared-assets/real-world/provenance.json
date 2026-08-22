@@ -9,6 +9,12 @@
       "use": "Store template, fixture, room, and assortment context"
     },
     {
+      "file": "store-0222-brand-guide-map.png",
+      "source": "tools/store-ops/resources/STORE_0222_2026_08_19_BRAND_GUIDE_INTERACTIVE.pdf#page=3",
+      "label": "Store 0222 Brand Guide full-store map - tightly cropped map only",
+      "use": "Routing Lab presentation evidence showing the actual mapped fixture and presentation context"
+    },
+    {
       "file": "set-map-mode-proof.jpg",
       "source": "SET_FULL_ANALYSIS/incoming-pilot-input/SET_819/04_REPORTS/06_REFERENCE/MAP_MODE_PROOF.jpeg",
       "label": "SET map-mode working reference",
