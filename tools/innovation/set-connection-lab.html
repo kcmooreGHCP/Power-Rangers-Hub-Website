@@ -6,9 +6,9 @@
   <meta name="description" content="A working SET demonstration of how presentations, promotions, and communications are matched to eligible stores.">
   <title>SET Routing Lab | Right Work, Right Store</title>
   <link rel="stylesheet" href="innovation-shell.css">
-  <link rel="stylesheet" href="set-connection-lab.css?v=20260822-real-evidence">
+  <link rel="stylesheet" href="set-connection-lab.css?v=20260822-brand-refine">
   <script src="innovation-shell.js" defer></script>
-  <script src="set-connection-lab.js?v=20260822-real-evidence" defer></script>
+  <script src="set-connection-lab.js?v=20260822-brand-refine" defer></script>
 </head>
 <body class="connection-lab" data-boundary="demo">
   <!--
@@ -39,7 +39,7 @@
       <div class="stage-intro">
         <p class="stage-note">SET production · working routing demonstration</p>
         <h1 id="match-title">How the right work finds the right store.</h1>
-        <p class="stage-lede">Every presentation, promotion, and communication carries a small set of identifiers. SET compares them with the approved store profile, template shell, assortment eligibility, and imported Blue Yonder space-planning record before a store is included.</p>
+        <p class="stage-lede">Every presentation, promotion, and communication carries a small set of identifiers. SET compares them with the approved store profile and only the operational evidence relevant to that work before a store is included.</p>
         <div class="sample-switcher" role="group" aria-label="Choose a content example">
           <button type="button" class="sample-button active" data-sample="presentation" aria-pressed="true">Presentation</button>
           <button type="button" class="sample-button" data-sample="promotion" aria-pressed="false">Promotion</button>
@@ -49,8 +49,11 @@
 
       <div class="evidence-board">
         <article class="fixture-proof" aria-live="polite">
-          <div class="fixture-image" data-fixture-image></div>
-          <div class="fixture-source" data-fixture-source>Approved project reference</div>
+          <div class="fixture-image-wrap">
+            <div class="fixture-image" data-fixture-image></div>
+            <span class="fixture-brand" data-fixture-brand>VS</span>
+          </div>
+          <div class="fixture-source"><span>Real project evidence</span><strong data-fixture-source>Approved store reference</strong></div>
           <div class="fixture-caption">
             <span data-asset-name>Front-of-store chain presentation</span>
             <strong data-content-type>Presentation direction</strong>
@@ -69,11 +72,11 @@
           </div>
           <div class="chain-step">
             <span>3</span>
-            <div><strong>Inspect the template shell</strong><p data-chain-template>The store template must contain the same room, surface, and fixture connector.</p></div>
+            <div><strong data-chain-template-title>Inspect the template shell</strong><p data-chain-template>The store template must contain the same room, surface, and fixture connector.</p></div>
           </div>
           <div class="chain-step">
             <span>4</span>
-            <div><strong>Confirm the space plan</strong><p data-chain-space>Imported Blue Yonder information confirms that the fixture exists and where it lives in that store.</p></div>
+            <div><strong data-chain-space-title>Confirm the space plan</strong><p data-chain-space>Imported Blue Yonder information confirms that the fixture exists and where it lives in that store.</p></div>
           </div>
           <div class="chain-step chain-decision">
             <span>5</span>
@@ -95,17 +98,25 @@
         </article>
         <article class="store-candidate blocked">
           <div class="store-id">0819</div>
-          <div><strong>Different prototype · excluded</strong><p data-blocked-reason>The store does not share the required 3-room launch prototype or Parsons surface.</p></div>
+          <div><strong data-blocked-label>Different prototype · excluded</strong><p data-blocked-reason>The store does not share the required 3-room launch prototype or Parsons surface.</p></div>
           <span>Does not receive this work</span>
         </article>
       </div>
-      <div class="source-rail">
+      <div class="source-rail" data-source-rail>
         <span>Direction package</span><b>compares with</b><span>Store registry</span><span>Template shell</span><span>Assortment rules</span><span>Blue Yonder space plan</span><b>to create</b><span>Eligible store audience</span>
       </div>
       <div class="plain-language">
         <strong>In plain language:</strong>
-        <p>SET looks for stores that describe themselves the same way the work was described. If the direction says “chain product, front-of-store Parsons table, 3-room launch,” SET finds stores with that same approved combination. X/Y helps size a known fixture after the match; it does not decide who receives the work.</p>
+        <p data-plain-language>SET looks for stores that describe themselves the same way the work was described. If the direction says “chain product, front-of-store Parsons table, 3-room launch,” SET finds stores with that same approved combination. X/Y helps size a known fixture after the match; it does not decide who receives the work.</p>
       </div>
+      <aside class="built-from-experience" aria-labelledby="experience-title">
+        <p class="experience-kicker">Field-built · Home Office connected</p>
+        <div>
+          <h2 id="experience-title">Built from every path.</h2>
+          <p>SET + SET Loop was built for our field and Home Office by someone who has walked both—creating the tool he wished he’d had along the way. From part-time associate, to store manager, to Home Office visual merchandiser, each role shaped what this system has become.</p>
+          <p><strong>Every question, field insight, and partner idea will make it better—for her, for our teams, and for everyone who comes next.</strong></p>
+        </div>
+      </aside>
       <div class="next-lab">
         <div><strong>Trying to build or improve another workflow?</strong><p>Partner AI + Automation Help now has its own dedicated studio.</p></div>
         <a href="partner-ai-studio.html">Open Partner AI Studio →</a>
