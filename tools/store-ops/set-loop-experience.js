@@ -75,6 +75,14 @@
       linkLabel: "Open the Floorset Factory working pilot"
     },
     {
+      keywords: ["trying to do", "idea help", "maintenance app", "zero on hand", "ai conversation", "details and images"],
+      answer: "The SET Connection Lab helps a partner explain the intended outcome, audience, current process, missing details or imagery, constraints, and desired proof. A partner may voluntarily paste useful AI back-and-forth; the browser pilot structures only what they provide and never reads private chats automatically.",
+      source: "SET Innovation Lab · Connection Lab working browser pilot",
+      partner: "Store Operations + requesting partner + accountable system owner",
+      url: "../innovation/set-connection-lab.html#idea-help",
+      linkLabel: "Open Idea-to-Action Help"
+    },
+    {
       keywords: ["task", "priority", "due", "checklist"],
       answer: "Priority tasks are ranked by launch risk, due date, customer impact, and role ownership. The dashboard keeps required actions and readiness together so teams can act without searching across screens.",
       source: current.label + " · Business Now + readiness records",
@@ -248,6 +256,13 @@
     activity.href = "feedback-results.html";
     activity.textContent = "📈 Activity";
     inner.appendChild(activity);
+    var ideaHelp = document.createElement("a");
+    ideaHelp.className = "slx-action";
+    ideaHelp.href = "../innovation/set-connection-lab.html#idea-help";
+    ideaHelp.target = "_blank";
+    ideaHelp.rel = "noopener";
+    ideaHelp.textContent = "💡 Idea Help";
+    inner.appendChild(ideaHelp);
     inner.appendChild(makeButton("✨ SET IRL", openIrl));
     inner.appendChild(makeButton("🎙️ Ask SET Agent", openAgent));
     inner.appendChild(makeButton("↻ Force refresh", refreshSnapshot));
