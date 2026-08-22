@@ -62,37 +62,46 @@
       guidePage: 13,
       domain: "visual-merchandising",
       route: "Visual Merchandising · Field Visual · Brand Guide",
-      shape: "table"
+      image: "../shared-assets/real-world/store-0222-color-map.png",
+      imageAlt: "Store 0222 approved color map showing the real store template, fixture locations, rooms, and assortment zones",
+      imageFit: "contain",
+      imageSource: "Store 0222 approved color map · reference only"
     },
     {
-      id: "BG-PINK-R2-MF02",
+      id: "BG-PINK-FRONT-FORMS",
       source: "Brand Guide",
       brand: "PINK",
-      area: "PINK Room 2",
-      name: "New Panty front presentation",
-      presentation: "Back-to-campus floor presentation",
-      assetType: "Medium Feast",
-      connector: "PINK-R2-MF02 · top deck",
-      detail: "Folded-stack presentation · approved fixture and surface association",
+      area: "Front of Store",
+      name: "PINK front-of-store form presentation",
+      presentation: "WEW New & Improved test reference",
+      assetType: "Floor forms + campaign visual",
+      connector: "Front of Store · floor-form presentation group",
+      detail: "Real store presentation with forms, product, campaign imagery, and adjacent fixtures",
       guidePage: 38,
       domain: "visual-merchandising",
       route: "Visual Merchandising · PINK Field Visual · Brand Guide",
-      shape: "round"
+      image: "../shared-assets/real-world/pink-front-presentation.jpg",
+      imageAlt: "Real PINK front-of-store presentation with floor forms, product, campaign imagery, and adjacent wall fixtures",
+      imageFit: "cover",
+      imageSource: "PINK in-store test reference · front presentation"
     },
     {
-      id: "BG-VSB-FRAGRANCE-5CH",
+      id: "BG-PINK-BODYCARE-5CH",
       source: "Brand Guide",
-      brand: "VSB",
-      area: "Front Room",
-      name: "Fragrance feature cabinet",
-      presentation: "VSB fragrance feature event",
+      brand: "PINK Beauty",
+      area: "Beauty Zone",
+      name: "PINK body-care cabinet",
+      presentation: "Body-care cabinet test reference",
       assetType: "5-channel cabinet",
-      connector: "Front Room · beauty cabinet run",
-      detail: "Tester, signage, product story, and placement direction",
+      connector: "Beauty Zone · body-care cabinet run",
+      detail: "Real five-channel cabinet with product families, risers, shelf communication, and drawer base",
       guidePage: 52,
       domain: "marketing",
       route: "Marketing · Marketing Operations · Visual Merchandising",
-      shape: "cabinet"
+      image: "../shared-assets/real-world/pink-body-care-cabinet.jpg",
+      imageAlt: "Real PINK body-care five-channel cabinet with product families, risers, shelves, and drawer base",
+      imageFit: "contain",
+      imageSource: "PINK in-store test reference · body-care cabinet"
     },
     {
       id: "MKT-PINK-4821",
@@ -107,7 +116,10 @@
       guidePage: 38,
       domain: "marketing",
       route: "Marketing Operations · PINK Visual Merchandising",
-      shape: "sign"
+      image: "../shared-assets/real-world/pink-wall-marketing.jpg",
+      imageAlt: "Real PINK wall with sports bras, bralettes, fixtures, product drawers, and promotional sign",
+      imageFit: "cover",
+      imageSource: "PINK in-store test reference · wall + marketing"
     },
     {
       id: "OPS-CASHWRAP-CLOSE",
@@ -122,7 +134,10 @@
       guidePage: 0,
       domain: "time-study",
       route: "Store Operations · Labor Planning · Field Test",
-      shape: "task"
+      image: "../shared-assets/real-world/set-map-mode-proof.jpg",
+      imageAlt: "Real SET map-mode workflow showing presentation imagery associated with store map fixture connectors",
+      imageFit: "cover",
+      imageSource: "SET map-mode working reference · asset placement"
     },
     {
       id: "MSI-PINK-BEAUTY-5CH",
@@ -137,7 +152,10 @@
       guidePage: 0,
       domain: "inventory",
       route: "Brand Merchandising · Inventory · Supply Chain",
-      shape: "cabinet"
+      image: "../shared-assets/real-world/set-irl-cabinet-proof.jpg",
+      imageAlt: "Real SET IRL cabinet proof showing product, hanging presentation, fixture shelves, and base",
+      imageFit: "cover",
+      imageSource: "SET IRL cabinet proof · project reference"
     }
   ];
   var irlRoutes = {
@@ -295,8 +313,9 @@
       ".slx-context-grid label.wide{grid-column:1/-1}",
       ".slx-context-grid input,.slx-context-grid select{width:100%;padding:9px 10px;border:1px solid #d0d5dd;border-radius:7px;background:#fff;color:#11131a;font:12px/1.4 inherit}",
       ".slx-asset-card{margin-top:12px;border:1px solid #d0d5dd;border-radius:10px;overflow:hidden}",
-      ".slx-asset-visual{min-height:142px;background:#15171d;color:#fff;display:grid;place-items:center;padding:18px}",
-      ".slx-asset-visual svg{width:100%;height:112px;display:block}.slx-asset-visual .fill{fill:#ed2d8b}.slx-asset-visual .line{stroke:#fff;stroke-width:2;fill:none}",
+      ".slx-asset-visual{position:relative;min-height:220px;max-height:320px;overflow:hidden;background:#15171d;color:#fff;display:grid;place-items:center}",
+      ".slx-asset-visual img{width:100%;height:100%;min-height:220px;max-height:320px;display:block;object-fit:cover}.slx-asset-visual img.contain{padding:10px;object-fit:contain;background:#fff}",
+      ".slx-asset-source{position:absolute;right:9px;bottom:9px;max-width:calc(100% - 18px);padding:5px 7px;background:rgba(17,19,26,.86);color:#fff;font-size:9px;font-weight:800}",
       ".slx-asset-copy{padding:13px 14px}.slx-asset-copy strong{display:block;font-size:14px}.slx-asset-copy p{margin:5px 0 0;font-size:11px;line-height:1.5;color:#667085}",
       ".slx-asset-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.slx-asset-tags span{border-radius:999px;background:#f2f4f7;padding:4px 7px;font-size:9px;font-weight:800;color:#475467}",
       ".slx-asset-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.slx-asset-meta div{background:#f8f8fa;padding:8px;border-radius:7px;font-size:10px;color:#667085}.slx-asset-meta b{display:block;color:#11131a;font-size:11px;margin-bottom:2px}",
@@ -559,22 +578,6 @@
     overlay.classList.add("show");
   }
 
-  function assetPreviewSvg(shape) {
-    var body;
-    if (shape === "table") {
-      body = "<path class=\"line\" d=\"M60 30h200v44H60zM82 74v54m156-54v54M46 128h228\"/><rect class=\"fill\" x=\"100\" y=\"40\" width=\"120\" height=\"24\" rx=\"3\"/>";
-    } else if (shape === "round") {
-      body = "<ellipse class=\"line\" cx=\"160\" cy=\"48\" rx=\"92\" ry=\"28\"/><path class=\"line\" d=\"M68 48v42c0 16 41 29 92 29s92-13 92-29V48M160 76v52\"/><ellipse class=\"fill\" cx=\"160\" cy=\"48\" rx=\"52\" ry=\"15\"/>";
-    } else if (shape === "cabinet") {
-      body = "<path class=\"line\" d=\"M78 18h164v112H78zM90 36h140M90 58h140M90 80h140M90 102h140\"/><rect class=\"fill\" x=\"98\" y=\"42\" width=\"124\" height=\"10\" rx=\"2\"/>";
-    } else if (shape === "sign") {
-      body = "<path class=\"line\" d=\"M94 16h132v92H94zM160 108v26M116 134h88\"/><rect class=\"fill\" x=\"111\" y=\"34\" width=\"98\" height=\"42\" rx=\"3\"/>";
-    } else {
-      body = "<path class=\"line\" d=\"M90 18h140v112H90zM112 46l12 12 25-27M112 78l12 12 25-27M112 110l12 12 25-27M170 48h38M170 80h38M170 112h38\"/><circle class=\"fill\" cx=\"124\" cy=\"58\" r=\"5\"/>";
-    }
-    return "<svg viewBox=\"0 0 320 145\" role=\"img\" aria-label=\"Connected asset prototype preview\">" + body + "</svg>";
-  }
-
   function populateIrlAreas() {
     var select = document.getElementById("slxIrlArea");
     var areas = irlAssets.map(function (asset) { return asset.area; }).filter(function (area, index, all) {
@@ -640,7 +643,14 @@
       jump.classList.remove("show");
       return;
     }
-    visual.innerHTML = assetPreviewSvg(asset.shape);
+    var image = document.createElement("img");
+    image.src = asset.image;
+    image.alt = asset.imageAlt;
+    if (asset.imageFit === "contain") image.className = "contain";
+    var sourceLabel = document.createElement("span");
+    sourceLabel.className = "slx-asset-source";
+    sourceLabel.textContent = asset.imageSource;
+    visual.replaceChildren(image, sourceLabel);
     document.getElementById("slxAssetName").textContent = asset.name;
     document.getElementById("slxAssetDetail").textContent = asset.detail;
     document.getElementById("slxAssetTags").innerHTML = [asset.source, asset.brand, asset.area, asset.assetType].map(function (tag) {
