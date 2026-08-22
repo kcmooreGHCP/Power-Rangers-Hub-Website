@@ -29,26 +29,49 @@
     promotion: {
       brand: "PINK",
       brandKey: "pink",
-      name: "PINK wall marketing update",
-      type: "Promotion + marketing package",
-      identifiers: ["PINK", "Wall eligible", "Room 2", "Wall + drawer fixture", "Approved campaign pack"],
-      direction: "Marketing tags the update with brand, campaign pack, eligibility, intended room, and fixture family.",
-      profile: "The store profile confirms PINK assortment and promotional eligibility.",
+      name: "PINK Intimates · Tier 1",
+      type: "Mapped promotional direction",
+      identifiers: ["PINK", "Intimates Tier 1", "C1 → C2 → C3", "Wear Everywhere", "Marketing included"],
+      direction: "The Brand Guide defines the Tier 1 story, cabinet priorities, product families, and the marketing that belongs with each presentation.",
+      profile: "The store profile confirms PINK Intimates Tier 1 eligibility and the mapped cabinet sequence.",
       templateTitle: "Inspect the template shell",
-      template: "The store template shell contains the required Room 2 wall-and-drawer connector.",
+      template: "The store template shell locates C1, C2, and C3 so the direction can resolve to each real cabinet in order.",
       spaceTitle: "Confirm the space plan",
-      space: "Imported Blue Yonder information confirms the wall run and its store-specific zone.",
-      result: "Eligible PINK stores receive the correct imagery, product story, placement, and communication; missing evidence is held.",
-      sources: ["Store registry", "Template shell", "Promotion eligibility", "Blue Yonder space plan"],
-      plainLanguage: "SET compares the PINK campaign requirements with each store’s approved brand, room, fixture, and promotion eligibility. Stores with the right Room 2 wall receive the complete package; stores with missing evidence stay visible for review instead of receiving a best guess.",
-      selected: "PINK eligible · approved campaign pack · Room 2 wall connector",
-      candidate: "Brand and promotion eligibility align; the exact wall run still needs confirmation.",
+      space: "The mapped cabinet assets and imported space-planning evidence confirm where each C1–C3 presentation lives in this store.",
+      result: "The store receives one connected package: overview direction, ordered cabinet images, product story, and the associated marketing proof.",
+      sources: ["Store registry", "Brand Guide direction", "Mapped cabinet assets", "Marketing proof"],
+      plainLanguage: "The promotional overview should not live separately from the cabinet details. SET connects the Tier 1 direction to the store’s C1, C2, and C3 assets, then delivers the three actual cabinet images in order with their product and marketing context.",
+      selected: "PINK Tier 1 · C1–C3 mapped · promotional direction connected",
+      candidate: "Tier and product story align; one cabinet connector still needs confirmation.",
       blockedLabel: "Not promotion eligible · excluded",
-      blocked: "This store is not eligible for the PINK campaign package and is excluded.",
-      image: "../shared-assets/real-world/pink-wall-marketing.jpg",
-      imageAlt: "Real PINK wall presentation with sports bras, bralettes, product drawers, fixtures, and promotional marketing",
-      imageFit: "cover",
-      imageSource: "PINK · in-store wall + marketing test"
+      blocked: "This store does not have the Tier 1 cabinet sequence and receives its approved alternate direction instead.",
+      image: "../shared-assets/real-world/pink-tier-1-promo-direction.png",
+      imageAlt: "PINK Intimates Tier 1 promotional direction showing cabinet priorities, product presentations, and associated marketing",
+      imageFit: "contain",
+      imageSource: "PINK Brand Guide · Intimates Tier 1 direction",
+      sequence: [
+        {
+          step: "C1 · Priority 1",
+          title: "Lightly Lined Wireless",
+          detail: "Product, category message, tray, and cabinet architecture",
+          image: "../shared-assets/real-world/pink-c1-lightly-lined-wireless.jpg",
+          alt: "PINK C1 Lightly Lined Wireless cabinet with product, category sign, tray, and drawers"
+        },
+        {
+          step: "C2 · Priority 2",
+          title: "Lightly Lined T-Shirt",
+          detail: "Product, category message, tray, and connected proof",
+          image: "../shared-assets/real-world/pink-c2-lightly-lined-tshirt.jpg",
+          alt: "PINK C2 Lightly Lined T-Shirt cabinet with product, category sign, tray, and drawers"
+        },
+        {
+          step: "C3 · Priority 3",
+          title: "Wear Everywhere Push-Up",
+          detail: "Product, promotional marketing, tray, and cabinet architecture",
+          image: "../shared-assets/real-world/pink-c3-wear-everywhere-pushup.jpg",
+          alt: "PINK C3 Wear Everywhere Push-Up cabinet with product, promotional signs, tray, and drawers"
+        }
+      ]
     },
     communication: {
       brand: "SET",
@@ -109,6 +132,26 @@
     $("[data-candidate-reason]").textContent = sample.candidate;
     $("[data-blocked-label]").textContent = sample.blockedLabel;
     $("[data-blocked-reason]").textContent = sample.blocked;
+    const sequence = $("[data-evidence-sequence]");
+    if (sample.sequence) {
+      sequence.hidden = false;
+      sequence.innerHTML = `
+        <div class="promotion-sequence__head">
+          <div><p>Mapped cabinet sequence</p><h2>Direction becomes store-ready proof.</h2></div>
+          <span>Each cabinet stays connected to its Brand Guide priority, product story, and marketing context.</span>
+        </div>
+        <div class="promotion-sequence__grid">
+          ${sample.sequence.map((item) => `
+            <article class="promotion-sequence__card">
+              <img src="${item.image}" alt="${item.alt}">
+              <footer><small>${item.step}</small><strong>${item.title}</strong><span>${item.detail}</span></footer>
+            </article>
+          `).join("")}
+        </div>`;
+    } else {
+      sequence.hidden = true;
+      sequence.replaceChildren();
+    }
     document.querySelectorAll("[data-sample]").forEach((button) => {
       const active = button.dataset.sample === key;
       button.classList.toggle("active", active);

@@ -43,6 +43,30 @@
       "source": "SET_FULL_ANALYSIS/data/bg-linked-intake/links/PINK_SOURCE/2025/02_Tests/04_April/4.16 WEW New & Improved/Images/zJPGs/IMG_1116.jpeg",
       "label": "PINK in-store test reference - front presentation",
       "use": "Real forms, product, campaign imagery, and front-of-store presentation"
+    },
+    {
+      "file": "pink-tier-1-promo-direction.png",
+      "source": "User-provided attachment: 05_9.2 Bras2.png",
+      "label": "PINK Intimates Tier 1 promotional direction",
+      "use": "Promotion routing overview connecting cabinet priorities, product stories, and marketing"
+    },
+    {
+      "file": "pink-c1-lightly-lined-wireless.jpg",
+      "source": "User-provided attachment: C_C1_WEW_LL_Wireless.png",
+      "label": "PINK C1 Lightly Lined Wireless cabinet",
+      "use": "First mapped cabinet in the promotional execution sequence"
+    },
+    {
+      "file": "pink-c2-lightly-lined-tshirt.jpg",
+      "source": "User-provided attachment: C_C2_WEW_T-Shirt.png",
+      "label": "PINK C2 Lightly Lined T-Shirt cabinet",
+      "use": "Second mapped cabinet in the promotional execution sequence"
+    },
+    {
+      "file": "pink-c3-wear-everywhere-pushup.jpg",
+      "source": "User-provided attachment: C_C3_WEW_PU.png",
+      "label": "PINK C3 Wear Everywhere Push-Up cabinet",
+      "use": "Third mapped cabinet with promotional marketing in the execution sequence"
     }
   ]
 }

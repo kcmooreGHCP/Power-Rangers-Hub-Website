@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Promotion Factory Source Intake</title>
+  <style>
+    :root{--ink:#17131a;--pink:#ed2d8b;--purple:#5b21b6;--paper:#f7f3f8;--line:#ddd3df;--muted:#6f6571}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:15px/1.55 Aptos,"Segoe UI",sans-serif}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}.top{padding:18px 0;color:#fff;background:var(--ink)}.top a{color:#fff;font-weight:900;text-decoration:none}.hero{padding:64px 0 42px;background:linear-gradient(135deg,#fff 0%,#fbe5f1 100%)}.eyebrow{color:var(--purple);font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}h1{max-width:800px;margin:9px 0 14px;font-size:clamp(40px,7vw,78px);line-height:.92;letter-spacing:-.05em}.hero p{max-width:700px;color:var(--muted);font-size:18px}.boundary{display:inline-flex;padding:8px 10px;border:1px solid #e2bfd2;color:#7d2855;background:#fff;font-size:11px;font-weight:900}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:34px 0}.card{padding:22px;border:1px solid var(--line);background:#fff}.card b{display:block;margin-bottom:5px;font-size:18px}.card p{margin:0;color:var(--muted)}.drop{grid-column:1/-1;padding:30px;border:2px dashed #b394b5;text-align:center;background:#fff}.drop label{display:inline-flex;margin-top:12px;padding:11px 16px;color:#fff;background:var(--pink);font-weight:900;cursor:pointer}.drop input{position:absolute;width:1px;height:1px;opacity:0}.files{display:grid;gap:7px;margin-top:18px;text-align:left}.file{display:flex;justify-content:space-between;gap:16px;padding:10px 12px;background:#f6f1f7}.file span:last-child{color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:56px}.actions a{padding:11px 14px;border:1px solid var(--ink);color:var(--ink);background:#fff;font-weight:900;text-decoration:none}.actions a.primary{color:#fff;background:var(--ink)}@media(max-width:700px){.grid{grid-template-columns:1fr}.drop{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap"><a href="../../marketing-operations.html">← Promo + Marketing Operations</a></div></header>
+  <main>
+    <section class="hero"><div class="wrap"><span class="eyebrow">Promotion Factory · source intake</span><h1>Bring the source once. Stop hunting for it later.</h1><p>This intake organizes the approved standards, campaign history, Brand Guides, MRF records, and proofs SET will eventually connect. It does not upload files or infer missing direction.</p><span class="boundary">BROWSER-LOCAL REVIEW · FILES STAY ON THIS DEVICE</span></div></section>
+    <div class="wrap">
+      <section class="grid">
+        <article class="card"><b>Marketing standards</b><p>The general rules for promotional, everyday, pulsed, navigational, and creative marketing.</p></article>
+        <article class="card"><b>Promotional Brand Guides</b><p>Two or three examples that show how direction, mapped cabinets, signs, product, and timing relate.</p></article>
+        <article class="card"><b>Campaign history CSV</b><p>January 2025 through July 2026 if available, preserving original columns and identifiers.</p></article>
+        <article class="card"><b>MRF / Smartsheet export</b><p>Request IDs, owners, approval states, quantities, markets, dates, proof references, and final status.</p></article>
+        <article class="card"><b>Approved proofs</b><p>PDF, PNG, or JPG exports are safer and easier to govern than connecting a mailbox during prototype work.</p></article>
+        <article class="card"><b>Source-location pattern</b><p>The approved server path and naming structure—not a copy of the internal server or credentials.</p></article>
+        <section class="drop">
+          <strong>Review a source bundle on this device</strong>
+          <p>Select files to confirm what you have. Only names and sizes appear here; nothing is uploaded.</p>
+          <label>Add source files<input id="files" type="file" multiple accept=".pdf,.csv,.xlsx,.xls,.png,.jpg,.jpeg"></label>
+          <div class="files" id="fileList" aria-live="polite"></div>
+        </section>
+      </section>
+      <div class="actions"><a class="primary" href="promotion-intake-template.csv" download>Download starter CSV</a><a href="../../marketing-operations.html">Return to Promotion Factory</a></div>
+    </div>
+  </main>
+  <script>
+    document.getElementById('files').addEventListener('change',event=>{
+      const files=[...event.target.files];
+      document.getElementById('fileList').innerHTML=files.length?files.map(file=>`<div class="file"><span>${file.name.replace(/[&<>"']/g,'')}</span><span>${Math.max(1,Math.round(file.size/1024)).toLocaleString()} KB</span></div>`).join(''):'';
+    });
+  </script>
+</body>
+</html>
